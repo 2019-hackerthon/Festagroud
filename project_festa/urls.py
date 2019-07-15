@@ -16,9 +16,13 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path
 import app_festa.views
+from django.conf import settings
+from django.conf.urls.static import static
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', app_festa.views.home, name="home"),
     path('new/', app_festa.views.new, name="new"),
-]
+    path('create/', app_festa.views.create, name="create"),
+    path('<int:festa_id>/', app_festa.views.detail, name="detail"),
+] + static(settings.MEDIA_URL, document_root = settings.MEDIA_ROOT)
