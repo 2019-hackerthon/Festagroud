@@ -22,9 +22,14 @@ def create(request) :
         festa.save()
     return redirect('/' + str(festa.id))
 
-def detail(request, festa_id) :
+def now_detail(request, festa_id) :
     festa_detail = get_object_or_404(Festa, pk = festa_id)
-    return render(request, 'festa_home/detail.html', {'festa': festa_detail})
+    return render(request, 'festa_now/detail.html', {'festa': festa_detail})
+
+def ready_detail(request, festa_id) :
+    festa_detail = get_object_or_404(Festa, pk = festa_id)
+    return render(request, 'festa_ready/detail.html', {'festa': festa_detail})
+
 
 def delete(request, festa_id) :
     delete_festa = Festa.objects.get(id = festa_id)

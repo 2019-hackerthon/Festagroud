@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+<!-- 
+[base.html]
+<head>
+</head>
+
+<body>
+ -->
+ {% block content %}
+    <div class="container">
+        <h1>여기 나우임</h1>
+        <h1>공연 이름 :{{ festa.name }}</h1>
+        <p>공연 날짜 : {{ festa.schedule|date:"Y"}}년 {{ festa.schedule|date:"m"}}월 {{ festa.schedule|date:"d"}}일</p>
+        <p>공연 장소 : {{ festa.space }}</p>
+        <img src="{{ festa.image.url }}">
+        <br>
+        <a href="{% url 'home' %}">목록 보러가기</a>
+        <a href="{% url 'edit' festa.id %}">수정하기</a>
+        <a href="{% url 'delete' festa.id %}">삭제하기</a>
+    </div>
+    
+</body>
+{% endblock %}

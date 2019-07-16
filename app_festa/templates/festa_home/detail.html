@@ -9,7 +9,7 @@
  {% block content %}
     <div class="container">
         <h1>공연 이름 :{{ festa.name }}</h1>
-        <p>공연 날짜 : {{ festa.schedule }}</p>
+        <p>공연 날짜 : {{ festa.schedule|date:"Y"}}년 {{ festa.schedule|date:"m"}}월 {{ festa.schedule|date:"d"}}일</p>
         <p>공연 장소 : {{ festa.space }}</p>
         <img src="{{ festa.image.url }}">
         <br>
