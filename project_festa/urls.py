@@ -25,4 +25,7 @@ urlpatterns = [
     path('new/', app_festa.views.new, name="new"),
     path('create/', app_festa.views.create, name="create"),
     path('<int:festa_id>/', app_festa.views.detail, name="detail"),
+    path('<int:festa_id>/delete/', app_festa.views.delete, name="delete"),
+    path('<int:festa_id>/edit/', app_festa.views.edit, name="edit"),
+    path('<int:festa_id>/update/', app_festa.views.update, name="update"),
 ] + static(settings.MEDIA_URL, document_root = settings.MEDIA_ROOT)
