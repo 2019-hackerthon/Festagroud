@@ -1,12 +1,13 @@
 from django.shortcuts import render, get_object_or_404, redirect
 from .models import Festa
-
+import datetime
 
 # Create your views here.
 
 def home(request) :
-    festas = Festa.objects
-    return render(request, 'festa_home/home.html', {'festas' : festas})
+    festas = Festa.objects # Festa객체 받기
+    today = datetime.datetime.now() #오늘 날짜 today 변수에 담음
+    return render(request, 'festa_home/home.html', {'festas' : festas, 'today':today})
 
 def new(request) :
     return render(request, 'festa_home/new.html')
