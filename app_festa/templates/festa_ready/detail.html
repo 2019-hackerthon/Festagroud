@@ -12,6 +12,7 @@
         <h1>공연 이름 :{{ festa.name }}</h1>
         <p>공연 날짜 : {{ festa.schedule|date:"Y"}}년 {{ festa.schedule|date:"m"}}월 {{ festa.schedule|date:"d"}}일</p>
         <p>공연 장소 : {{ festa.space }}</p>
+        <p>공연 상세정보 : {{ festa.info }}</p>
         <img src="{{ festa.image.url }}">
         <br>
         <a href="{% url 'home' %}">목록 보러가기</a>

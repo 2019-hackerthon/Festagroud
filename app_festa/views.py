@@ -14,14 +14,19 @@ def new(request) :
 
 def create(request) :
     if request.method == 'POST' and request.FILES['image']:
+        # today = datetime.datetime.now().strftime('%Y-%m-%d')
         festa = Festa()
         festa.name= request.POST['name']
         festa.schedule = request.POST['schedule']
         festa.space = request.POST['space']
+        festa.info = request.POST['info']
         festa.image = request.FILES['image']
         festa.save()
-    return redirect('/' + str(festa.id))
-
+        # if festa.schedule == today :
+        #     return redirect('festa_now/' + str(festa.id))
+        # else :
+        #     return redirect('festa_ready/' + str(festa.id))
+        return redirect('home')
 def now_detail(request, festa_id) :
     festa_detail = get_object_or_404(Festa, pk = festa_id)
     return render(request, 'festa_now/detail.html', {'festa': festa_detail})

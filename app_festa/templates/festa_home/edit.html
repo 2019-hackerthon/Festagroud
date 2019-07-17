@@ -13,6 +13,7 @@
         <h1>공연 이름 : <input type="text" name="name" value={{festa.name}}></h1>
         <p>공연 날짜 : <input type="date" name="schedule" value="{{festa.schedule}}"></p>
         <p>공연 장소 : <input type="tesxt" name="space" value="{{festa.space}}"></p>
+        <p>공연 상세정보 : <textarea name="info" cols=70 rows=10>{{festa.info}}</textarea></p>
         <img src="{{ festa.image.url }}">
         <p>: <input type="file" name="image" vlaue="찾아보기"></p>
             

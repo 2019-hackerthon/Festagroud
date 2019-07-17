@@ -16,17 +16,24 @@
         festa_now에 게시
          -->
         {% for festa_now in festas.all %} 
-            {% if festa_now.schedule|date:"Y m d" == today|date:"Y m d" %}
-                <!-- 각 festa별 로그인 후 festa_now게시판으로 이동 -->
-                <a href="{% url 'now_detail' festa_now.id %}"><img src="{{ festa_now.image.url }}"></a>
-            {% endif %}
+        {% if festa_now.schedule|date:"Y m d" == today|date:"Y m d" %}
+            <!-- 각 festa별 로그인 후 festa_now게시판으로 이동 -->
+            <a href="{% url 'now_detail' festa_now.id %}"><img src="{{ festa_now.image.url }}"></a>
+        {% endif %}
         {% endfor %}
     </div>
     <h1>Festa READY</h1>
     <div class="festa_ready">
+        <!-- 
+        Festa 객체들 중에서
+        공연 날짜 != 오늘 날짜 이면
+        festa_ready에 게시
+         -->
         {% for festa_ready in festas.all %}
+        {% if festa_ready.schedule|date:"Y m d" != today|date:"Y m d" %}
             <!-- 각 festa별 festa_ready게시판으로 이동 -->
             <a href="{% url 'ready_detail' festa_ready.id %}"><img src="{{ festa_ready.image.url }}"></a>
+        {% endif %}
         {% endfor %}
     </div>
 </div>
