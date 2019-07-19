@@ -13,17 +13,19 @@
         <div class="container">
             <form action="{% url 'create' %}" method="POST" enctype="multipart/form-data">
                 {% csrf_token %}
-                <h4>공연 제목</h4>
+                <p>공연 제목</p>
                 <input type="text" name="name">
-                <h4>공연 날짜</h4>
+                <p>공연 날짜</p>
                 <input type="date" name="schedule">
-                <h4>공연 장소</h4>
+                <p>공연 장소</p>
                 <input type="text" name="space">
-                <h4>공식 티켓판매처 링크</h4>
+                <p>공식 티켓판매처 링크</p>
                 <input type="text" name="purchase_link">
-                <h4>공연 주최/기획사</h4>
+                <p>공연 주최/기획사</p>
                 <input type="text" name="host">
-                <!-- <h4>고객 문의처: <input type="text" name="contact"></h4> -->
+                <p>고객 문의처</p>
+                <input type="text" name="contact">
+                <!-- <h4>지도</h4> -->
                 <p>유의사항</p>
                 <textarea name="precautions" cols=70 rows=10></textarea>
                 <p>공지사항</p>
@@ -36,4 +38,8 @@
         </div>
     </div>
 </body>
+
+<style>
+
+</style>
 {% endblock %}

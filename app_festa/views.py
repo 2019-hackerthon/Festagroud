@@ -13,20 +13,22 @@ def new(request) :
     return render(request, 'festa_home/new.html')
 
 def create(request) :
-    if request.method == 'POST' and request.FILES['image']:
-        # today = datetime.datetime.now().strftime('%Y-%m-%d')
+    if request.method == 'POST' and request.FILES['poster']:
         festa = Festa()
         festa.name= request.POST['name']
         festa.schedule = request.POST['schedule']
         festa.space = request.POST['space']
-        festa.info = request.POST['info']
-        festa.image = request.FILES['image']
+        festa.purchase_link= request.POST['purchase_link']
+        festa.host= request.POST['host']
+        festa.contact= request.POST['contact']
+        festa.precautions= request.POST['precautions']
+        festa.notice = request.POST['notice']
+        festa.poster = request.FILES['poster']
         festa.save()
-        # if festa.schedule == today :
-        #     return redirect('festa_now/' + str(festa.id))
-        # else :
-        #     return redirect('festa_ready/' + str(festa.id))
-        return redirect('/basic_info/host_info/')
+        return redirect('success_create')
+
+def success_create(request) :
+    return render(request, 'festa_home/success_create.html')
 
 def host_info(request) :
     return render(request, 'festa_home/new/02host_info.html')

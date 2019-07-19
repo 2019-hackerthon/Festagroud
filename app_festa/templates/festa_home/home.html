@@ -9,6 +9,7 @@
 {% block content %}
 <div class="container">
     <div class="main">
+        <h1>메인입니다</h1>
         <form action="{% url 'search' %}" method ="GET">
             <input type="text" name="search_bar" value="{{keyword}}">
             <input type="submit" value="검색">
@@ -24,7 +25,7 @@
         {% for festa_now in festas.all %} 
         {% if festa_now.schedule|date:"Y m d" == today|date:"Y m d" %}
             <!-- 각 festa별 로그인 후 festa_now게시판으로 이동 -->
-            <a href="{% url 'now_detail' festa_now.id %}"><img src="{{ festa_now.image.url }}"></a>
+            <a href="{% url 'now_detail' festa_now.id %}"><img src="{{ festa_now.poster.url }}"></a>
             <p>{{ festa_now.name }} D-day</p>
         {% endif %}
         {% endfor %}
@@ -36,7 +37,7 @@
         {% for festa_ready in festas.all %}
         {% if festa_ready.schedule|date:"Y m d" > today|date:"Y m d" %}
             <!-- 각 festa별 festa_ready게시판으로 이동 -->
-            <a href="{% url 'ready_detail' festa_ready.id %}"><img src="{{ festa_ready.image.url }}"></a>
+            <a href="{% url 'ready_detail' festa_ready.id %}"><img src="{{ festa_ready.poster.url }}"></a>
             <p>{{ festa_ready.name }} D-({{festa_ready.schedule|date:"d"}}-{{today|date:"d"}})</p>
             
         {% endif %}

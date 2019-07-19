@@ -24,6 +24,7 @@ urlpatterns = [
     path('', app_festa.views.home, name="home"),
     path('new/', app_festa.views.new, name="new"),
     path('create/', app_festa.views.create, name="create"),
+    path('success_create/', app_festa.views.success_create, name="success_create"),
     path('search/', app_festa.views.search, name="search"),
     path('<int:festa_id>/delete/', app_festa.views.delete, name="delete"),
     path('<int:festa_id>/edit/', app_festa.views.edit, name="edit"),
