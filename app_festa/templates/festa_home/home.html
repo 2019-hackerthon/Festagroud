@@ -11,7 +11,7 @@
     <div class="main">
         <h1>메인입니다</h1>
         <form action="{% url 'search' %}" method ="GET">
-            <input type="text" name="search_bar" value="{{keyword}}">
+            <input type="text" name="search_bar" placeholder="ex)'지산 락 페스티벌'궁금하지 않나요?"value="{{keyword}}">
             <input type="submit" value="검색">
         </form>
         {% for festa in result_festa %}
@@ -20,7 +20,9 @@
     </div>
     
     <div class="festa_now">
-        <h1>Festa NOW</h1>
+        <h1>Festa NOW</h1> <p>바로 오늘, 함께 즐겨봐요</p>
+        <p>{{today|date:"Y"}}년 {{today|date:"m"}}월 {{today|date:"d"}}일</p>
+
         <!--  Festa 객체들 중에서 공연 날짜 == 오늘 날짜 이면 festa_now에 게시 -->
         {% for festa_now in festas.all %} 
         {% if festa_now.schedule|date:"Y m d" == today|date:"Y m d" %}
@@ -32,7 +34,7 @@
     </div>
     
     <div class="festa_ready">
-        <h1>Festa READY</h1>
+        <h1>Festa READY</h1> <p>다가오는 행사를 200배 더 즐겁게 즐기려면?</p>
         <!-- Festa 객체들 중에서 공연 날짜 > 오늘 날짜 이면 festa_ready에 게시 -->
         {% for festa_ready in festas.all %}
         {% if festa_ready.schedule|date:"Y m d" > today|date:"Y m d" %}
