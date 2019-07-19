@@ -8,13 +8,21 @@
  -->
 {% block content %}
 <div class="container">
-    <h1>Festa NOW</h1>
+    <div class="main">
+        <form action="{% url 'search' %}" method ="GET">
+            <input type="text" name="search_bar" value="{{keyword}}">
+            <input type="submit" value="검색">
+        </form>
+        {% for festa in result_festa %}
+            {{festa.name}}
+        {% endfor%}
+        
+
+    </div>
+    
     <div class="festa_now">
-        <!-- 
-        Festa 객체들 중에서
-        공연 날짜 == 오늘 날짜 이면
-        festa_now에 게시
-         -->
+        <h1>Festa NOW</h1>
+        <!--  Festa 객체들 중에서 공연 날짜 == 오늘 날짜 이면 festa_now에 게시 -->
         {% for festa_now in festas.all %} 
         {% if festa_now.schedule|date:"Y m d" == today|date:"Y m d" %}
             <!-- 각 festa별 로그인 후 festa_now게시판으로 이동 -->
@@ -22,13 +30,10 @@
         {% endif %}
         {% endfor %}
     </div>
-    <h1>Festa READY</h1>
+    
     <div class="festa_ready">
-        <!-- 
-        Festa 객체들 중에서
-        공연 날짜 != 오늘 날짜 이면
-        festa_ready에 게시
-         -->
+        <h1>Festa READY</h1>
+        <!-- Festa 객체들 중에서 공연 날짜 != 오늘 날짜 이면 festa_ready에 게시 -->
         {% for festa_ready in festas.all %}
         {% if festa_ready.schedule|date:"Y m d" != today|date:"Y m d" %}
             <!-- 각 festa별 festa_ready게시판으로 이동 -->
@@ -38,22 +43,15 @@
     </div>
 </div>
 </body>
+<!-- footer 시작 -->
+<footer>
+<h1>푸터입니다</h1>
+</footer>
 
 <style>
-    .festa_now {
-        display: grid;
-        grid-template-columns: 33% 33% 33%;
-    }
-
-    .festa_ready {
-        display: grid;
-        grid-template-columns: 33% 33% 33%;
-    }
-
     img {
-        width: 80%;
-        text-align: center;
         height: 300px;
+        weight: 150px;
         border: 1px solid;
         border-color: black;
     }

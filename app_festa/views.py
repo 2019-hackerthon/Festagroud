@@ -54,3 +54,11 @@ def update(request, festa_id) :
         update_festa.image = request.FILES['image']
         update_festa.save()
         return redirect('home')
+  
+def search(request) :
+    all_festa = Festa.objects.all()
+    keyword = request.GET.get('search_bar')
+    result_festa=[]
+    for object in all_festa.filter(name__icontains = keyword) :
+        result_festa.append(object)
+    return render(request, 'festa_home/home.html', {'result_festa': result_festa})
