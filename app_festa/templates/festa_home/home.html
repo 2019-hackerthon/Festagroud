@@ -16,8 +16,6 @@
         {% for festa in result_festa %}
             {{festa.name}}
         {% endfor%}
-        
-
     </div>
     
     <div class="festa_now">
@@ -27,17 +25,20 @@
         {% if festa_now.schedule|date:"Y m d" == today|date:"Y m d" %}
             <!-- 각 festa별 로그인 후 festa_now게시판으로 이동 -->
             <a href="{% url 'now_detail' festa_now.id %}"><img src="{{ festa_now.image.url }}"></a>
+            <p>{{ festa_now.name }} D-day</p>
         {% endif %}
         {% endfor %}
     </div>
     
     <div class="festa_ready">
         <h1>Festa READY</h1>
-        <!-- Festa 객체들 중에서 공연 날짜 != 오늘 날짜 이면 festa_ready에 게시 -->
+        <!-- Festa 객체들 중에서 공연 날짜 > 오늘 날짜 이면 festa_ready에 게시 -->
         {% for festa_ready in festas.all %}
-        {% if festa_ready.schedule|date:"Y m d" != today|date:"Y m d" %}
+        {% if festa_ready.schedule|date:"Y m d" > today|date:"Y m d" %}
             <!-- 각 festa별 festa_ready게시판으로 이동 -->
             <a href="{% url 'ready_detail' festa_ready.id %}"><img src="{{ festa_ready.image.url }}"></a>
+            <p>{{ festa_ready.name }} D-({{festa_ready.schedule|date:"d"}}-{{today|date:"d"}})</p>
+            
         {% endif %}
         {% endfor %}
     </div>

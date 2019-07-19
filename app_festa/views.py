@@ -26,7 +26,15 @@ def create(request) :
         #     return redirect('festa_now/' + str(festa.id))
         # else :
         #     return redirect('festa_ready/' + str(festa.id))
-        return redirect('home')
+        return redirect('/basic_info/host_info/')
+
+def host_info(request) :
+    return render(request, 'festa_home/new/02host_info.html')
+
+def detail_info(request) :
+    return render(request, 'festa_home/new/03detail_info.html')
+
+
 def now_detail(request, festa_id) :
     festa_detail = get_object_or_404(Festa, pk = festa_id)
     return render(request, 'festa_now/detail.html', {'festa': festa_detail})
