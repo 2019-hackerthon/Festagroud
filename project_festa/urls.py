@@ -31,4 +31,6 @@ urlpatterns = [
     path('<int:festa_id>/update/', app_festa.views.update, name="update"),
     path('festa_now/<int:festa_id>/', app_festa.views.now_detail, name="now_detail"),
     path('festa_ready/<int:festa_id>/', app_festa.views.ready_detail, name="ready_detail"),
+    path('confirm_login/', app_festa.views.confirm_login, name="confirm_login"),
+    path('confirm/', app_festa.views.confirm, name="confirm"),
 ] + static(settings.MEDIA_URL, document_root = settings.MEDIA_ROOT)

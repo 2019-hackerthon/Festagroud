@@ -49,12 +49,12 @@ def edit(request, festa_id) :
     return render(request, 'festa_home/edit.html', {'festa' : edit_festa})
 
 def update(request, festa_id) :
-    if request.method == 'POST' and request.FILES['image'] :
+    if request.method == 'POST' and request.FILES['poster'] :
         update_festa = Festa.objects.get(id = festa_id)
         update_festa.name = request.POST['name']
         update_festa.schedule = request.POST['schedule']
         update_festa.space = request.POST['space']
-        update_festa.image = request.FILES['image']
+        update_festa.image = request.FILES['poster']
         update_festa.save()
         return redirect('home')
   
@@ -62,6 +62,14 @@ def search(request) :
     all_festa = Festa.objects.all()
     keyword = request.GET.get('search_bar')
     search_festa=[]
+    # festa이름이 keyword포함하면 search_festa list에 해당 festa추가
     for object in all_festa.filter(name__icontains = keyword) :
         search_festa.append(object)
     return render(request, 'festa_home/search.html', {'search_festa': search_festa})
+
+def confirm_login(request) :
+    return render(request, 'festa_home/confirm_login.html')
+
+def confirm(request) :
+    confirm_festa = Festa.objects.all()
+    return render(request, 'festa_home/confirm.html', {'confirm_festa':confirm_festa})
