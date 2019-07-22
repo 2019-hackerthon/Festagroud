@@ -25,7 +25,15 @@
                 <input type="text" name="host">
                 <p>고객 문의처</p>
                 <input type="text" name="contact">
-                <!-- <h4>지도</h4> -->
+                <p>지도</p>
+                <div id="map"></div>
+                <script>
+                var mapOptions = {
+                    center: new naver.maps.LatLng(37.3595704, 127.105399),
+                    zoom: 10
+                };
+                var map = new naver.maps.Map('map', mapOptions);
+                </script>  
                 <p>유의사항 게시글로 작성됩니다</p>
                 <textarea name="precautions" cols=70 rows=10></textarea>
                 <p>공지사항 게시글로 작성됩니다</p>
@@ -40,6 +48,9 @@
 </body>
 
 <style>
-
+#map {
+    width: 400px;
+    height: 300px;
+}
 </style>
 {% endblock %}

@@ -10,13 +10,30 @@
 <div class="container">
     <form action="{% url 'update' festa.id %}" method="POST" enctype="multipart/form-data">
         {% csrf_token %}
-        <h1>공연 이름 : <input type="text" name="name" value={{festa.name}}></h1>
-        <p>공연 날짜 : <input type="date" name="schedule" value="{{festa.schedule}}"></p>
-        <p>공연 장소 : <input type="tesxt" name="space" value="{{festa.space}}"></p>
-        <p>공연 상세정보 : <textarea name="info" cols=70 rows=10>{{festa.info}}</textarea></p>
-        <img src="{{ festa.image.url }}">
-        <p>: <input type="file" name="image" vlaue="찾아보기"></p>
-            
+        <p>공연 제목</p>
+        <input type="text" name="name" value={{festa.name}}>
+        <p>공연 날짜</p>
+        <input type="date" name="schedule" value="{{festa.schedule}}">
+        <p>공연 장소</p>
+        <input type="text" name="space" value="{{festa.space}}">
+        <p>공식 티켓판매처 링크</p>
+        <input type="text" name="purchase_link" value="{{festa.purchase_link}}">
+        <p>공연 주최/기획사</p>
+        <input type="text" name="host" value="{{festa.host}}">
+        <p>고객 문의처</p>
+        <input type="text" name="contact" value="{{festa.contact}}">
+        <!-- <h4>지도</h4> -->
+        <p>유의사항 게시글로 작성됩니다</p>
+        <textarea name="precautions" cols=70 rows=10>{{festa.precautions}}</textarea>
+        <p>공지사항 게시글로 작성됩니다</p>
+        <textarea name="notice" cols=70 rows=10>{{festa.notice}}</textarea>
+        <br>
+        <p>이미지 첨부 이미지 내 공연 쇅, 공연 출연진, 타임 테이블 정보 필수</p>
+        <p>현재 포스터</p>
+        <img src="{{ festa.poster.url }}">
+        <input type="file" name="poster" vlaue="찾아보기">
+        <br>
+        <input class="btn btn-dark" type="submit" value="제출하기">
         <input class="btn btn-dark" type="submit" value="수정하기">
     </form>
 

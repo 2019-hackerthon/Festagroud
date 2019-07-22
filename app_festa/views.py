@@ -30,13 +30,6 @@ def create(request) :
 def success_create(request) :
     return render(request, 'festa_home/success_create.html')
 
-def host_info(request) :
-    return render(request, 'festa_home/new/02host_info.html')
-
-def detail_info(request) :
-    return render(request, 'festa_home/new/03detail_info.html')
-
-
 def now_detail(request, festa_id) :
     festa_detail = get_object_or_404(Festa, pk = festa_id)
     return render(request, 'festa_now/detail.html', {'festa': festa_detail})
@@ -68,7 +61,7 @@ def update(request, festa_id) :
 def search(request) :
     all_festa = Festa.objects.all()
     keyword = request.GET.get('search_bar')
-    result_festa=[]
+    search_festa=[]
     for object in all_festa.filter(name__icontains = keyword) :
-        result_festa.append(object)
-    return render(request, 'festa_home/home.html', {'result_festa': result_festa})
+        search_festa.append(object)
+    return render(request, 'festa_home/search.html', {'search_festa': search_festa})
