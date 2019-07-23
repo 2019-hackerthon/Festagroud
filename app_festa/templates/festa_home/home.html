@@ -1,14 +1,7 @@
 {% extends 'base.html' %}
-<!-- 
-[base.html]
-<head>
-</head>
-
-<body>
- -->
 {% block content %}
-<div class="container">
-    <div class="main">
+<div class="container_home">
+    <div class="main_home">
         <h1>메인입니다</h1>
         <form action="{% url 'search' %}" method ="GET">
             <input type="text" name="search_bar" placeholder="ex)'지산 락 페스티벌'궁금하지 않나요?"value="{{keyword}}">
@@ -19,8 +12,26 @@
         {% endfor%}
     </div>
     
-    <div class="festa_now">
-        <h1>Festa NOW</h1> <p>바로 오늘, 함께 즐겨봐요</p>
+    <div class="festa_now_home">
+        <div id="festa_now_title_home">
+            <h5>Festa NOW</h5>
+            <p>바로 오늘, 함께 즐겨봐요</p>
+        </div>
+        <div id="festa_now_contents_home">
+            <!-- 동적생성 필요, 임시 -->
+            <div class="festa_now_items_home">
+                <a href="#test1">test1</a>
+            </div>
+            <div class="festa_now_items_home">
+                <a href="#test2">test2</a>
+            </div>
+            <div class="festa_now_items_home">
+                <a href="#test3">test3</a>
+            </div>
+        </div>
+        <div>
+
+        </div>
         <p>{{today|date:"Y"}}년 {{today|date:"m"}}월 {{today|date:"d"}}일</p>
 
         <!--  Festa 객체들 중에서 공연 날짜 == 오늘 날짜 이면 festa_now에 게시 -->
@@ -33,8 +44,23 @@
         {% endfor %}
     </div>
     
-    <div class="festa_ready">
-        <h1>Festa READY</h1> <p>다가오는 행사를 200배 더 즐겁게 즐기려면?</p>
+    <div class="festa_ready_home">
+        <div id="festa_ready_title_home">
+                <h5>Festa READY</h5>
+                <p>다가오는 행사를 200배 더 즐겁게 즐기려면?</p>
+        </div>
+        <div id="festa_ready_contents_home">
+                <!-- 동적생성 필요, 임시 -->
+                <div class="festa_ready_items_home">
+                    <a href="#test1">test1</a>
+                </div>
+                <div class="festa_ready_items_home">
+                    <a href="#test2">test2</a>
+                </div>
+                <div class="festa_ready_items_home">
+                    <a href="#test3">test3</a>
+                </div>
+            </div>
         <!-- Festa 객체들 중에서 공연 날짜 > 오늘 날짜 이면 festa_ready에 게시 -->
         {% for festa_ready in festas.all %}
         {% if festa_ready.schedule|date:"Y m d" > today|date:"Y m d" %}
@@ -47,17 +73,38 @@
     </div>
 </div>
 </body>
-<!-- footer 시작 -->
 <footer>
-<h1>푸터입니다</h1>
+    
 </footer>
-
 <style>
     img {
         height: 300px;
         weight: 150px;
         border: 1px solid;
         border-color: black;
+    }
+    foot
+    .container_home{
+        margin-left: 0%;
+        margin-right: 0%;
+        width: 100%;
+    }
+    #festa_now_title_home, #festa_ready_title_home{
+        display: flex;
+    }
+    #festa_now_contents_home, #festa_ready_contents_home{
+        display: flex;
+        overflow: auto;
+        justify-content: center;
+    }
+    .festa_now_home{
+        background: #D9E5FF;
+    }
+    .festa_now_items_home, .festa_ready_items_home{ /*'now & ready' items class */
+        margin: 3%;
+    }
+    .main_home, .festa_now_home, .festa_ready_home{
+        padding: 3% 10%;
     }
 </style>
 
