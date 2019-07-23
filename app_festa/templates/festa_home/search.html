@@ -9,7 +9,7 @@
 {% block content %}
 <div class="container">
     <div class="main">
-        <h1>메인입니다</h1>
+        <h1>{{메인입니다}}</h1>
         <form action="{% url 'search' %}" method ="GET">
             <input type="text" name="search_bar" placeholder="ex)'지산 락 페스티벌'궁금하지 않나요?"value="{{keyword}}">
             <input type="submit" value="검색">

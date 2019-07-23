@@ -14,6 +14,8 @@ class Festa(models.Model) :
 
     def __str__(self) :
         return self.name
+    class Meta :
+        ordering = ['schedule'] #가장 빠른 festa부터 게시
 
 
 class Accompany(models.Model) : #festa_ready의 동행구하는 게시판
