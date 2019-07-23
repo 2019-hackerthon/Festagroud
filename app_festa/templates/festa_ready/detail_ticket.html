@@ -1,0 +1,12 @@
+<h2><티켓거래 상세보기 페이지></h2>
+<p> 제목: {{ticket.title}}</p>
+<p> 거래타입: {{ticket.deal_type}}</p>
+<p> 작성자: {{ticket.writer}}</p>
+<p> 내용: {{ticket.description}}</p>
+
+<a href="{% url 'edit_ticket' ticket.pk %}" class="btn btn-primary">수정</a>
+
+<form action="{% url 'delete_ticket' ticket.pk %}" method="POST">
+        {% csrf_token%}
+        <input type="submit" value="삭제" class="btn btn-primary">
+    </form>

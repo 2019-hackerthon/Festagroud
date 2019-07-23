@@ -1,0 +1,12 @@
+<h2><동행찾기 상세보기 페이지></h2>
+<p> 제목: {{accompany.title}}</p>
+<p> 지역: {{accompany.area}}</p>
+<p> 작성자: {{accompany.writer}}</p>
+<p> 내용: {{accompany.description}}</p>
+
+<a href="{% url 'edit_accompany' accompany.pk %}" class="btn btn-primary">수정</a>
+
+<form action="{% url 'delete_accompany' accompany.pk %}" method="POST">
+    {% csrf_token%}
+    <input type="submit" value="삭제" class="btn btn-primary">
+</form>

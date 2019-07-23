@@ -1,0 +1,10 @@
+<h1>list</h1>
+{{all_accompanies}}
+
+{% for item in accompanies.all %}
+<p> 제목: {{item.title}}</p>
+<p> 지역: {{item.area}}</p>
+<p> 작성자: {{item.writer}}</p>
+<a href="{% url 'detail_accompany' item.pk%}" class="btn btn-primary">보러가기</a>
+<p>----------------------------</p>
+{% endfor %}
