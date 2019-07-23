@@ -9,18 +9,22 @@
 {% block content %}
 <div class="container">
     <div class="main">
-<<<<<<< HEAD
-        <h1>'{{keyword}}'의 검색결과</h1>
-=======
-        <h1>{{메인입니다}}</h1>
->>>>>>> master
+        <h1>'{{keyword}}' {{length_search}}건의 검색 결과</h1>
         <form action="{% url 'search' %}" method ="GET">
             <input type="text" name="search_bar" placeholder="ex)'지산 락 페스티벌'궁금하지 않나요?"">
             <input type="submit" value="검색">
         </form>
         {% for festa in search_festa %}
+        {% if festa.schedule|date:"Y m d" == today|date:"Y m d" %}
+        <!-- 각 festa별 로그인 후 festa_now게시판으로 이동 -->
+        <a href="{% url 'now_detail' festa.id %}"><img src="{{ festa.poster.url }}"></a>
+        <p>{{ festa.name }} D-day</p>
+        {% endif %}
+        {% if festa.schedule|date:"Y m d" != today|date:"Y m d" %}
+        <!-- 각 festa별 로그인 후 festa_now게시판으로 이동 -->
         <a href="{% url 'ready_detail' festa.id %}"><img src="{{ festa.poster.url }}"></a>
         <p>{{ festa.name }}</p>
+        {% endif %}
         {% endfor%}
     </div>
     

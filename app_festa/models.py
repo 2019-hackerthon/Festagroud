@@ -67,3 +67,8 @@ class Team(models.Model):
     def summary(self):
         return self.body2[:100]
 
+class RegisterNum(models.Model) :
+    register_num = models.IntegerField()
+
+
+
