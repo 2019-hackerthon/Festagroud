@@ -1,6 +1,7 @@
 from django.shortcuts import render, get_object_or_404, redirect
 from .models import Festa
 from .models import Accompany, Ticket
+from .models import Now, Team
 import datetime
 
 # Create your views here.
@@ -169,3 +170,107 @@ def delete_ticket(request,ticket_id):
         ticket = Ticket.objects.get(pk = ticket_id)
         ticket.delete()
         return redirect('list_ticket')
+
+
+def now_staff(request):
+    return render(request, 'festa_now/staff.html')
+
+def now_audience(request):
+    return render(request, 'festa_now/audience.html')
+
+##now_audience_festnow게시판
+def now_now(request):
+    nows = Now.objects
+    return render(request, 'festa_now/now.html', {'nows': nows})
+
+def new_now(request):
+    return render(request, 'festa_now/new_now.html')    
+
+def delete_now(request, now_id):
+    delete_now = get_object_or_404(Lost, pk=now_id)
+    if delete_now.password == request.GET['password'] :
+        delete_now.delete()
+    else:    
+        return redirect('now')
+    return redirect('now')
+
+def edit_now(request, now_id):
+    edit_now = get_object_or_404(Lost, pk=now_id)
+    if edit_now.password == request.GET['password'] :
+        return render(request, 'festa_now/eidt_now.html', {'now': edit_now})
+    else:
+        return redirect('now')
+
+def update_now(request, now_id):
+    update_now = get_object_or_404(Lost, pk= now_id)
+    update_now.title = request.GET["title"]
+    update_now.writer = request.GET['writer']
+    update_now.body = request.GET['body']
+    update_now.save()
+    return redirect('now')
+
+def create_now(request):
+    now = Now()
+    now.title = request.GET['title']
+    now.body = request.GET['body']
+    now.writer = request.GET['writer']
+    now.password = request.GET['password']
+    now.pub_date = timezone.datetime.now()
+    now.save()
+    return redirect('now')
+
+def check_edit_now(request, now_id):
+    return render(request, 'check_edit_now.html', {'now_id': now_id})
+
+def check_delete_now(request, now_id):
+    return render(request, 'check_delete_now.html', {'now_id': now_id})
+
+
+
+
+##now_staff_팀별게시판
+def now_team(request):
+    teams = Team.objects
+    return render(request, 'festa_now/team.html', {'teams': teams})
+
+def new_team(request):
+    return render(request, 'festa_now/new_team.html')    
+
+def delete_team(request, team_id):
+    delete_team = get_object_or_404(Lost, pk=team_id)
+    if delete_team.password2 == request.GET['password'] :
+        delete_team.delete()
+    else:    
+        return redirect('team')
+    return redirect('team')
+
+def edit_team(request, team_id):
+    edit_team = get_object_or_404(Lost, pk=team_id)
+    if edit_team.password2 == request.GET['password'] :
+        return render(request, 'festa_now/eidt_team.html', {'team': edit_team})
+    else:
+        return redirect('team')
+
+def update_team(request, team_id):
+    update_team = get_object_or_404(Lost, pk= team_id)
+    update_team.title2 = request.GET["title"]
+    update_team.writer2 = request.GET['writer']
+    update_team.body2 = request.GET['body']
+    update_team.save()
+    return redirect('now')
+
+def create_team(request):
+    now = Now()
+    now.title2 = request.GET['title']
+    now.body2 = request.GET['body']
+    now.writer2 = request.GET['writer']
+    now.password2 = request.GET['password']
+    now.pub_date2 = timezone.datetime.now()
+    now.save()
+    return redirect('team')
+
+def check_edit_team(request,   team_id):
+    return render(request, 'check_edit_team.html', {'team_id': team_id})
+
+def check_delete_team(request, team_id):
+    return render(request, 'check_delete_team.html', {'team_id': team_id})
