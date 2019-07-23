@@ -51,7 +51,7 @@ urlpatterns = [
     
     path('festa_now/staff', app_festa.views.now_staff, name="now_staff"),
     path('festa_now/audience', app_festa.views.now_audience, name="now_audience"),
-    
+    # audeince
     path('festa_now/now', app_festa.views.now_now, name="now_now"),
     path('festa_now/new_now', app_festa.views.new_now, name="new_now"),
     path('<int:now_id>/delete_now/', app_festa.views.delete_now, name="delete_now"),
@@ -60,7 +60,7 @@ urlpatterns = [
     path('create_now/', app_festa.views.create_now, name="create_now"),
     path('check_edit_now/<int:now_id>',  app_festa.views.check_edit_now, name='check_edit_now'),
     path('check_delete_now/<int:now_id>',  app_festa.views.check_delete_now, name='check_delete_now'),
-
+    # staff
     path('festa_now/', app_festa.views.now_team, name="team_team"),
     path('festa_now/', app_festa.views.new_team, name="new_team"),
     path('<int:now_id>/delete_now/', app_festa.views.delete_team, name="delete_team"),
