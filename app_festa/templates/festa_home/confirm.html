@@ -1,0 +1,28 @@
+{% extends 'base.html' %}
+<!-- 
+[base.html]
+<head>
+</head>
+
+<body>
+ -->
+ {% block content %}
+    <div class="container">
+        <h2>등록 확인</h2>
+        <br>
+        <div class="container">
+            {% for festa in confirm_festa.all %}
+                <a href="{% url 'ready_detail' festa.id %}">{{ festa.name }}{{ festa.host }}</a>
+                <hr>
+            {% endfor %}
+        </div>
+    </div>
+</body>
+
+<style>
+#map {
+    width: 400px;
+    height: 300px;
+}
+</style>
+{% endblock %}

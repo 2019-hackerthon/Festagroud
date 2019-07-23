@@ -1,0 +1,18 @@
+<h2>동행찾기 글 수정 페이지</h2>
+
+<form action=" {% url 'update_accompany' accompany.pk %}" method="POST">
+        {% csrf_token %}
+        <label>제목</label><br>
+        <input type="text" name="title" value="{{ accompany.title }}"><br>
+    
+        <label>작성자</label><br>
+        <input type="text" name="writer" value="{{ accompany.writer }}"><br>
+    
+        <label>지역</label><br>
+        <input type="text" name="area" value="{{ accompany.area }}"><br>
+    
+        <label>내용</label><br>
+        <textarea name="description">{{accompany.description}}</textarea><br>
+    
+        <input type="submit" class="btn btn-primary" value="수정">
+    </form>

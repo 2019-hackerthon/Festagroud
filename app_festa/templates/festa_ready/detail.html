@@ -13,10 +13,13 @@
     <p>공연 날짜 : {{ festa.schedule|date:"Y"}}년 {{ festa.schedule|date:"m"}}월 {{ festa.schedule|date:"d"}}일</p>
     <p>공연 장소 : {{ festa.space }}</p>
     <p>공식 티켓판매처 링크 : {{festa.purchase_link}}</p>
-    <p>공연 주최/기획사 : {{festa.hodt }}</p>
+    <p>공연 주최/기획사 : {{festa.host }}</p>
     <p>고객 문의처 : {{festa.contact }}</p>
     <p>공연 유의사항 : {{ festa.precautions }}</p>
     <p>공연 공지사항 : {{ festa.notice }}</p>
+
+    <a href="{% url 'accompany' festa.id %}">동행구하기 게시판</a><br>
+    <a href="{% url 'ticket' festa.id %}">티켓 양도/교환 게시판</a><br>
     <img src="{{ festa.poster.url }}">
     <br>
     <a href="{% url 'home' %}">목록 보러가기</a>

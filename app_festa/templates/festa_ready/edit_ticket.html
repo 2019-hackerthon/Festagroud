@@ -1,0 +1,17 @@
+
+<form action="{% url 'update_ticket' ticket.pk %}" method="POST">
+        {% csrf_token %}
+        <label>제목</label><br>
+        <input type="text" name="title" value="{{ ticket.title }}"><br>
+    
+        <label>작성자</label><br>
+        <input type="text" name="writer" value="{{ ticket.writer }}"><br>
+    
+        <label>지역</label><br>
+        <input type="text" name="deal_type" value="{{ ticket.deal_type }}"><br>
+    
+        <label>내용</label><br>
+        <textarea name="description">{{ticket.description}}</textarea><br>
+    
+        <input type="submit" class="btn btn-primary" value="수정">
+    </form>
