@@ -67,7 +67,6 @@ class Team(models.Model):
     def summary(self):
         return self.body2[:100]
 
-<<<<<<< HEAD
 
 class Commentn(models.Model):
     writer_now = models.CharField(max_length=200)
@@ -87,7 +86,6 @@ class Home(models.Model) : #festa_ready의 동행구하는 게시판
     region = models.CharField(max_length=200) #지역
     body = models.TextField() #내용
     pub_date = models.DateTimeField('date published')
-=======
 class RegisterNum(models.Model) :
     register_num = models.CharField(max_length = 10)
 
@@ -95,5 +93,4 @@ class RegisterNum(models.Model) :
         return self.register_num
 
 
->>>>>>> master
 
