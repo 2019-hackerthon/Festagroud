@@ -38,6 +38,8 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'app_festa.apps.AppFestaConfig',
+    'app_festaReady.apps.AppFestareadyConfig',
+    'app_festaNow.apps.AppFestanowConfig',
 ]
 
 MIDDLEWARE = [
