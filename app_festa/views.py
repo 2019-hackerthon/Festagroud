@@ -1,5 +1,5 @@
 from django.shortcuts import render, get_object_or_404, redirect
-from .models import Festa
+from .models import Festa, RegisterNum
 from .models import Accompany, Ticket
 from .models import Now, Team
 import datetime
@@ -23,6 +23,7 @@ def create(request) :
         festa.purchase_link= request.POST['purchase_link']
         festa.host= request.POST['host']
         festa.contact= request.POST['contact']
+        # festa.map= request.POST['map']
         festa.precautions= request.POST['precautions']
         festa.notice = request.POST['notice']
         festa.poster = request.FILES['poster']
@@ -77,6 +78,9 @@ def confirm_login(request) :
 
 def confirm(request) :
     confirm_festa = Festa.objects.all()
+    # register_num = RegisterNum.objects.all()
+    # rm = request.POST['register_num']
+    # if rm in register_num :
     return render(request, 'festa_home/confirm.html', {'confirm_festa':confirm_festa})
 
 def accompany(request, festa_id) :

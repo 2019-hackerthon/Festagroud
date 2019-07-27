@@ -68,7 +68,10 @@ class Team(models.Model):
         return self.body2[:100]
 
 class RegisterNum(models.Model) :
-    register_num = models.IntegerField()
+    register_num = models.CharField(max_length = 10)
+
+    def __str__(self) :
+        return self.register_num
 
 
 
