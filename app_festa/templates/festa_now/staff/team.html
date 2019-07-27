@@ -13,35 +13,33 @@
             <img src = http://www.kpenews.com/Files/4/News/201906/260_20190620191955168.JPG style="height:500px">
             <ul class="vertical-menu">
 
-                <li><a href="{% url 'now_audience' %}">공지사항</a></li>
+                <li><a href="{% url 'now_staff' %}">공지사항</a></li>
                 
-                <li><a href="{% url 'now_now' %}">Festa now</a></li>
+                <li><a href="{% url 'now_team' %}">팀별게시판</a></li>
                 
                 <li><a href="">지도</a></li>
                 
                 <li><a href="">찾아가라</a></li>
 
-                <li><a href="">집가자</a></li>
+                <li><a href="{% url 'staff_home' %}">집가자</a></li>
 
                 </ul>
-
-
         </div>
 
     <div class="col-md-7" style="background-color:#EEE9F7; ">
       
-        <h1>Festa now</h1>
-            <a href="{% url 'new_now'%}">글쓰기 </a>
+        <h1>팀별게시판</h1>
+            <a href="{% url 'new_team'%}">글쓰기 </a>
             
             <hr>
-            {% for now in nows.all %}
+            {% for team in teams.all %}
             <br>
-            <a href="{% url 'detail_now' now.id %}"> : {{now.title}}</a> 
-            {{now.writer}}
-            {{now.pub_date}}
+            <a href="{% url 'detail_team' team.id %}"> : {{team.title2}}</a> 
+            {{team.writer2}}
+            {{team.pub_date}}
             <br>
-            <a href="{% url 'check_edit_now' now.id%}" class="card-link">수정하기</a>
-            <a href="{% url 'check_delete_now' now.id %}" class="card-link">삭제하기</a>
+            <a href="{% url 'edit_team' team.id %}" class="card-link">수정하기</a>
+            <a href="{% url 'delete_team' team.id %}" class="card-link">삭제하기</a>
             
             <div class="middle">
                 <hr>

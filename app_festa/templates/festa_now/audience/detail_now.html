@@ -1,0 +1,69 @@
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+
+<style>
+    .loginHeaderV3{
+        padding: 76px 0 60px 0;
+        height: 20px;
+        text-align:center;
+    }
+
+    .loginHeaderV3 .var{
+        width: 10 px;
+        display: inline-block;
+        height: 20px;
+        vertical-align: top;
+        margin: 0 13.px 0 15px;
+        background: #d8d8d8;
+    }
+
+</style>
+
+
+</head>
+
+<body>
+    <center>
+        <h1>Detail Post</h1>
+
+        <p>
+            <h2>[Title] : {{now.title}}</h2>
+            <p>[Writer] : {{now.writer}}</p>
+            <p>[Date of Issue] : {{now.pub_date}}</p>
+            <p>
+                [Body]
+                <br>
+                <textarea name="body"  readonly="readonly" id="" cols="30" rows="10"
+                    style="padding:10px; margin:10px;">{{now.body}}</textarea>
+            </p>
+            <a href="{% url 'now_now' %}" class="store">Festa now</a>
+            <span class="var"></span>
+            <a href="{% url 'edit_now' now.id%}" class="store">수정하기</a>
+            <span class="var"></span>
+            <a href="{%url 'delete_now' now.id %}" class="store">삭제하기</a>
+    
+            <h2>comments</h2>
+            {% for comment in comments %}
+            {{comment.writer_now}}
+            <br>
+            {{comment.content_now}}
+            <hr>
+            {% endfor%}
+            <form action="{% url 'comment_now' now.id %}" method="POST">
+                {% csrf_token %}
+                작성자 : <input name="writer" type="text">
+                <br>
+                내용 : <textarea name="content" id="" cols="30" rows="10"></textarea>
+                <input type="submit">
+            </form>
+        </div>
+
+    
+    </center>

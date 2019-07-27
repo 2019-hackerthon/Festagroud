@@ -1,0 +1,73 @@
+
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+
+<style>
+    .loginHeaderV3{
+        padding: 76px 0 60px 0;
+        height: 20px;
+        text-align:center;
+    }
+
+    .loginHeaderV3 .var{
+        width: 10 px;
+        display: inline-block;
+        height: 20px;
+        vertical-align: top;
+        margin: 0 13.px 0 15px;
+        background: #d8d8d8;
+    }
+
+</style>
+
+
+</head>
+
+<body>
+    <center>
+        <h1>Detail Post</h1>
+
+        <p>
+            <h2>[Title] : {{team.title2}}</h2>
+            <p>[Writer] : {{team.writer2}}</p>
+            <p>[Date of Issue] : {{team.pub_date}}</p>
+            <p>
+                [Body]
+                <br>
+                <textarea name="body"  readonly="readonly" id="" cols="30" rows="10"
+                    style="padding:10px; margin:10px;">{{team.body2}}</textarea>
+            </p>
+            <a href="{% url 'now_team' %}" class="store">팀별게시판</a>
+            <span class="var"></span>
+            <a href="{% url 'edit_team' team.id%}" class="store">수정하기</a>
+            <span class="var"></span>
+            <a href="{%url 'delete_team' team.id %}" class="store">삭제하기</a>
+
+            <h2>comments</h2>
+            {% for comment in comments %}
+            {{comment.writer_team}}
+            <br>
+            {{comment.content_team}}
+            <hr>
+            {% endfor%}
+            <form action="{% url 'comment_team' team.id %}" method="POST">
+                {% csrf_token %}
+                작성자 : <input name="writer" type="text">
+                <br>
+                내용 : <textarea name="content" id="" cols="30" rows="10"></textarea>
+                <input type="submit">
+            </form>
+        </div>
+
+    </center>
+       
+</body>
+
+</html>

@@ -1,0 +1,36 @@
+{% extends 'base_audience.html' %}
+{% block content %}
+
+
+<div class="col-md-7" style="background-color:#EEE9F7; ">
+      
+    <h1>집가자</h1>
+        <a href="{% url 'new_home'%}">글쓰기 </a>
+        
+        <hr>
+        {% for home in homes.all %}
+        <br>
+        <a href="{% url 'detail_home' home.id %}"> : {{home.title}}</a> 
+        {{home.writer}}
+        {{home.region}}
+        {{home.pub_date}}
+        <br>
+        
+        <div class="middle">
+            <hr>
+        </div>
+            
+        {% endfor %}
+   
+
+
+</div>
+
+
+
+
+
+
+
+
+{% endblock %}
