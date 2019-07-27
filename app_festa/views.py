@@ -32,7 +32,8 @@ def create(request) :
         return redirect('success_create')
 
 def success_create(request) :
-    return render(request, 'festa_home/success_create.html')
+    reginumber = RegisterNum.objects.order_by("?").first()
+    return render(request, 'festa_home/success_create.html', {'number':reginumber})
 
 def now_detail(request, festa_id) :
     festa_detail = get_object_or_404(Festa, pk = festa_id)
