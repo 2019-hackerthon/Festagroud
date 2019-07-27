@@ -6,25 +6,25 @@
 
 <body>
  -->
- {% block content %}
+{% block content %}
+<div class="container">
+    <h2>등록 확인</h2>
+    <br>
     <div class="container">
-        <h2>등록 확인</h2>
-        <br>
-        <div class="container">
-            <form action="{% url 'confirm' %}" method="POST">
-                {% csrf_token %}
-                <p>인증번호를 입력해주세요</p>
-                <input class="btn " type="submit" value="확인">
-                <p>등록번호 <input type="text"></p>    
-            </form>
-        </div>
+        <form action="{% url 'confirm' %}" method="POST">
+            {% csrf_token %}
+            <p>인증번호를 입력해주세요</p>
+            <input class="btn " type="submit" value="확인">
+            <p>등록번호 <input type="text" name="register_num"></p>
+        </form>
     </div>
+</div>
 </body>
 
 <style>
-#map {
-    width: 400px;
-    height: 300px;
-}
+    #map {
+        width: 400px;
+        height: 300px;
+    }
 </style>
 {% endblock %}
