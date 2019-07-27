@@ -1,7 +1,14 @@
 from django.db import models
 
 # Create your models here.
+class RegisterNum(models.Model) :
+    register_num = models.CharField(max_length = 10)
+
+    def __str__(self) :
+        return self.register_num
+
 class Festa(models.Model) :
+    number = models.OneToOneField(RegisterNum, on_delete = models.CASCADE)
     name = models.CharField(max_length = 200) #공연제목
     schedule = models.DateField('date published') #공연날짜
     space = models.CharField(max_length = 200) #공연장소
@@ -101,11 +108,6 @@ class Home(models.Model) : #festa_ready의 동행구하는 게시판
     body = models.TextField() #내용
     pub_date = models.DateTimeField('date published')
     
-class RegisterNum(models.Model) :
-    register_num = models.CharField(max_length = 10)
-
-    def __str__(self) :
-        return self.register_num
 
 class Commenth(models.Model):
     writer_home = models.CharField(max_length=200)

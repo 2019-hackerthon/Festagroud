@@ -16,8 +16,11 @@ def new(request) :
     return render(request, 'festa_home/new.html')
 
 def create(request) :
+    #RegisterNum random으로 섞고 그 중 젤 첫번째랑 festa를 match
+    num = RegisterNum.objects.order_by("?").first()
     if request.method == 'POST' and request.FILES['poster']:
         festa = Festa()
+        festa.number = num
         festa.name= request.POST['name']
         festa.schedule = request.POST['schedule']
         festa.space = request.POST['space']
@@ -32,8 +35,9 @@ def create(request) :
         return redirect('success_create')
 
 def success_create(request) :
-    reginumber = RegisterNum.objects.order_by("?").first()
-    return render(request, 'festa_home/success_create.html', {'number':reginumber})
+    latest_festa = Festa.objects.latest('id')
+    number = latest_festa.number
+    return render(request, 'festa_home/success_create.html', {'number': number})
 
 def now_detail(request, festa_id) :
     festa_detail = get_object_or_404(Festa, pk = festa_id)
@@ -79,13 +83,7 @@ def confirm(request) :
     festa = Festa.objects.all()
     register_num = RegisterNum.objects.all()
     rm = request.POST['register_num']
-    all_number=[] #배열만듦
-    for object in register_num :
-        all_number.append(object)
-    if 'rm' in all_number :
-        return render(request, 'festa_home/confirm.html', {'confirm_festa':confirm_festa})
-    else :
-        return render(request, 'festa_home/home.html', {'all_number':all_number})
+    return render(request, 'festa_home/confirm.html')
 
 def accompany(request, festa_id) :
     festa_detail = get_object_or_404(Festa, pk = festa_id)
