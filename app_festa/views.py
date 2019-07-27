@@ -1,7 +1,7 @@
 from django.shortcuts import render, get_object_or_404, redirect
 from .models import Festa, RegisterNum
 from .models import Accompany, Ticket
-from .models import Now, Team, Commentn, Commentt, Home
+from .models import Now, Team, Commentn, Commentt, Home, Commenth
 import datetime
 from django.utils import timezone
 
@@ -24,7 +24,7 @@ def create(request) :
         festa.purchase_link= request.POST['purchase_link']
         festa.host= request.POST['host']
         festa.contact= request.POST['contact']
-        # festa.map= request.POST['map']
+        # festa.map = request.POST['map]
         festa.precautions= request.POST['precautions']
         festa.notice = request.POST['notice']
         festa.poster = request.FILES['poster']
@@ -64,24 +64,18 @@ def update(request, festa_id) :
   
 def search(request) :
     all_festa = Festa.objects.all()
-    today = datetime.datetime.now() #오늘 날짜 today 변수에 담음
     keyword = request.GET.get('search_bar')
     search_festa=[]
     # festa이름이 keyword포함하면 search_festa list에 해당 festa추가
     for object in all_festa.filter(name__icontains = keyword) :
         search_festa.append(object)
-    # search된 festa 배열 길이 반환
-    length_search = len(search_festa)
-    return render(request, 'festa_home/search.html', {'search_festa': search_festa, 'keyword': keyword, 'length_search': length_search, 'today':today})
+    return render(request, 'festa_home/search.html', {'search_festa': search_festa})
 
 def confirm_login(request) :
     return render(request, 'festa_home/confirm_login.html')
 
 def confirm(request) :
     confirm_festa = Festa.objects.all()
-    # register_num = RegisterNum.objects.all()
-    # rm = request.POST['register_num']
-    # if rm in register_num :
     return render(request, 'festa_home/confirm.html', {'confirm_festa':confirm_festa})
 
 def accompany(request, festa_id) :
@@ -288,6 +282,13 @@ def comment_team(request, team_id):
     comment.save()
     return redirect('detail_team', team_id)
 
+def comment_home(request, home_id):
+    comment = Commenth()
+    comment.writer_home = request.POST['writer']
+    comment.content_home = request.POST['content']
+    comment.home = get_object_or_404(Home, pk=home_id)
+    comment.save()
+    return redirect('detail_home', home_id)
 
 ##집가자
 def audience_home(request):
@@ -303,7 +304,8 @@ def new_home(request):
 
 def detail_home(request, home_id):
     home = Home.objects.get(pk=home_id)
-    return render(request, 'festa_now/detail_home.html', {'home' : home})   
+    comments_list = Commenth.objects.filter(home = home_id)
+    return render(request, 'festa_now/detail_home.html', {'home' : home, 'comments' : comments_list})   
 
 def delete_home(request, home_id):
     delete_home = get_object_or_404(Home, pk=home_id)
