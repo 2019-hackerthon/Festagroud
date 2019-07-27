@@ -92,5 +92,9 @@ class RegisterNum(models.Model) :
     def __str__(self) :
         return self.register_num
 
+class Commenth(models.Model):
+    writer_home = models.CharField(max_length=200)
+    content_home = models.TextField()
+    home = models.ForeignKey(Home, on_delete=models.CASCADE)
 
 
