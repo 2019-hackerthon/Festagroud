@@ -1,7 +1,7 @@
 from django.shortcuts import render, get_object_or_404, redirect
 from .models import Festa, RegisterNum
 from .models import Accompany, Ticket
-from .models import Now, Team, Commentn, Commentt, Home
+from .models import Now, Team, Commentn, Commentt, Home, Commenta, Commenttic
 import datetime
 from django.utils import timezone
 
@@ -105,7 +105,8 @@ def create_accompany(request):
 
 def detail_accompany(request, accompany_id):
     accompany = Accompany.objects.get(pk=accompany_id)
-    return render(request, 'festa_ready/detail_accompany.html', {'accompany':accompany})
+    comments_list = Commenta.objects.filter(accompany = accompany_id)
+    return render(request, 'festa_ready/detail_accompany.html', {'accompany':accompany, 'comments': comments_list})
 
 def edit_accompany(request, accompany_id):
     accompany = Accompany.objects.get(pk=accompany_id)
@@ -153,7 +154,9 @@ def create_ticket(request):
 
 def detail_ticket(request, ticket_id):
     ticket = Ticket.objects.get(pk=ticket_id)
-    return render(request, 'festa_ready/detail_ticket.html', {'ticket':ticket})
+    comments_list = Commenttic.objects.filter(ticket = ticket_id)
+    return render(request, 'festa_ready/detail_ticket.html', {'ticket':ticket, 'comments': comments_list})
+
 
 def edit_ticket(request, ticket_id):
     ticket = Ticket.objects.get(pk=ticket_id)
@@ -287,6 +290,22 @@ def comment_team(request, team_id):
     comment.team = get_object_or_404(Team, pk=team_id)
     comment.save()
     return redirect('detail_team', team_id)
+
+def comment_accompany(request, accompany_id):
+    comment = Commenta()
+    comment.writer_accompany = request.POST['writer']
+    comment.content_accompany = request.POST['content']
+    comment.accompany = get_object_or_404(Accompany, pk=accompany_id)
+    comment.save()
+    return redirect('detail_accompany', accompany_id)
+
+def comment_ticket(request, ticket_id):
+    comment = Commenttic()
+    comment.writer_ticket = request.POST['writer']
+    comment.content_ticket = request.POST['content']
+    comment.ticket = get_object_or_404(Ticket, pk=ticket_id)
+    comment.save()
+    return redirect('detail_ticket', ticket_id)
 
 
 ##집가자
