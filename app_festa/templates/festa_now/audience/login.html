@@ -1,0 +1,37 @@
+{% extends 'base.html' %}
+    
+{% block content %}
+
+<div class="row">
+    <div class="col-md-5">
+        <img src = http://www.kpenews.com/Files/4/News/201906/260_20190620191955168.JPG style="height:500px">
+    </div>
+
+    <div class="col-md-7" style="background-color:#EEE9F7; ">
+            {% if error %}
+            {{error}}
+            
+            {% endif %}
+            <div class="container">    
+                <h1>Login</h1>
+                <form method="POST", action="{% url 'login' %}">
+                    {% csrf_token %}
+                    Password:
+                    <br>
+                    <input name="password" type="password" value="">
+                    <br>
+                    <br>
+                    <input class="btn btn-primary" type="submit" value="Login">
+                </form>
+            </div>
+            {% endblock %}
+
+
+
+    </div>
+</div>    
+    
+            
+
+
+
