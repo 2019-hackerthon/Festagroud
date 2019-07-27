@@ -10,6 +10,9 @@
     <div class="container">
         <h2>등록 확인</h2>
         <br>
+        {% for number in all_number %}
+        {{number}}
+        {% endfor %}
         <div class="container">
             {% for festa in confirm_festa.all %}
                 <a href="{% url 'ready_detail' festa.id %}">{{ festa.name }}{{ festa.host }}</a>

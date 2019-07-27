@@ -78,11 +78,16 @@ def confirm_login(request) :
     return render(request, 'festa_home/confirm_login.html')
 
 def confirm(request) :
-    confirm_festa = Festa.objects.all()
-    # register_num = RegisterNum.objects.all()
-    # rm = request.POST['register_num']
-    # if rm in register_num :
-    return render(request, 'festa_home/confirm.html', {'confirm_festa':confirm_festa})
+    festa = Festa.objects.all()
+    register_num = RegisterNum.objects.all()
+    rm = request.POST['register_num']
+    all_number=[] #배열만듦
+    for object in register_num :
+        all_number.append(object)
+    if 'rm' in all_number :
+        return render(request, 'festa_home/confirm.html', {'confirm_festa':confirm_festa})
+    else :
+        return render(request, 'festa_home/home.html', {'all_number':all_number})
 
 def accompany(request, festa_id) :
     festa_detail = get_object_or_404(Festa, pk = festa_id)
@@ -335,6 +340,7 @@ def create_home(request):
         home.save()
         return redirect('home')
     return render(request, 'festa_now/deatil_home.html')
+
 
 
 
