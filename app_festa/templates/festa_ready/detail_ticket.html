@@ -9,4 +9,21 @@
 <form action="{% url 'delete_ticket' ticket.pk %}" method="POST">
         {% csrf_token%}
         <input type="submit" value="삭제" class="btn btn-primary">
-    </form>
+</form>
+
+
+<h2>comments</h2>
+{% for comment in comments %}
+<p>작성자: {{comment.writer_ticket}}</p>
+<p>내용: {{comment.content_ticket}}</p>
+
+<hr>
+{% endfor%}
+
+<form action="{% url 'comment_ticket' ticket.id %}" method="POST">
+    {% csrf_token %}
+    작성자 : <input name="writer" type="text">
+    <br>
+    내용 : <textarea name="content" id="" cols="30" rows="10"></textarea>
+    <input type="submit">
+</form>
