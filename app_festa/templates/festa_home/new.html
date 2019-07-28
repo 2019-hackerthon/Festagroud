@@ -26,12 +26,13 @@
             <p>고객 문의처</p>
             <input type="text" name="contact">
             <p>지도</p>
-            <input type="text" id="sample5_address" placeholder="공연장소를 입력하세요">
+            <input type="text" name="detail_map" id="sample5_address" placeholder="공연장소를 입력하세요">
             <input type="button" onclick="sample5_execDaumPostcode()" value="주소 검색"><br>
             <div id="map" style="width:300px;height:300px;margin-top:10px;"></div>
             
             <script src="http://dmaps.daum.net/map_js_init/postcode.v2.js"></script>
             <script src="//dapi.kakao.com/v2/maps/sdk.js?appkey=3a6997107b687683607fb8587b9bb914&libraries=services"></script>
+            
             <script>
                 var mapContainer = document.getElementById('map'), // 지도를 표시할 div
                     mapOption = {

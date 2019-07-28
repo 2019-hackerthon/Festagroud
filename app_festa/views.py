@@ -27,7 +27,7 @@ def create(request) :
         festa.purchase_link= request.POST['purchase_link']
         festa.host= request.POST['host']
         festa.contact= request.POST['contact']
-        # festa.map = request.POST['map]
+        festa.detail_map = request.POST['detail_map']
         festa.precautions= request.POST['precautions']
         festa.notice = request.POST['notice']
         festa.poster = request.FILES['poster']

@@ -15,6 +15,7 @@ class Festa(models.Model) :
     purchase_link = models.CharField(max_length = 200) #공식 티켓판매처 링크
     host = models.CharField(max_length = 200) #공연 주최/기획사
     contact = models.CharField(max_length = 200) #고객 문의처
+    detail_map = models.CharField(max_length = 200) #지도(상세주소)
     precautions = models.TextField() #유의사항
     notice = models.TextField() #공지사항
     poster = models.ImageField(upload_to = 'images/%Y/%m/%d') #공연포스터
