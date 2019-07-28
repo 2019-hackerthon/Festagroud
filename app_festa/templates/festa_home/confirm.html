@@ -10,15 +10,20 @@
     <div class="container">
         <h2>등록 확인</h2>
         <br>
-        {% for number in all_number %}
-        {{number}}
-        {% endfor %}
-        <div class="container">
-            {% for festa in confirm_festa.all %}
-                <a href="{% url 'ready_detail' festa.id %}">{{ festa.name }}{{ festa.host }}</a>
-                <hr>
-            {% endfor %}
-        </div>
+        <h1>등록번호 : {{festa_object.number}}</h1>
+        <h3>공연 이름 :{{ festa_object.name }}</h3>
+        <p>공연 날짜 : {{ festa_object.schedule|date:"Y"}}년 {{ festa_object.schedule|date:"m"}}월 {{ festa_object.schedule|date:"d"}}일</p>
+        <p>공연 장소 : {{ festa_object.space }}</p>
+        <p>공식 티켓판매처 링크 : {{festa_object.purchase_link}}</p>
+        <p>공연 주최/기획사 : {{festa_object.host }}</p>
+        <p>고객 문의처 : {{festa_object.contact }}</p>
+        <p>유의사항 : {{festa_object.precautions }}</p>
+        <p>공지사항 : {{festa_object.notice }}</p>
+        공연 포스터
+        <br>
+        <img src="{{ festa_object.poster.url }}">
+            
+        
     </div>
 </body>
 

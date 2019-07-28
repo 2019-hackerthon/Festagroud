@@ -80,10 +80,10 @@ def confirm_login(request) :
     return render(request, 'festa_home/confirm_login.html')
 
 def confirm(request) :
-    festa = Festa.objects.all()
-    register_num = RegisterNum.objects.all()
-    rm = request.POST['register_num']
-    return render(request, 'festa_home/confirm.html')
+    number = request.POST['register_num']
+    number_object = RegisterNum.objects.get(register_num = number)
+    festa_object=number_object.festa
+    return render(request, 'festa_home/confirm.html', {'festa_object':festa_object})
 
 
 
