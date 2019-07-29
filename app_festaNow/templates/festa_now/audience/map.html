@@ -28,24 +28,10 @@
 
     <div class="col-md-7" style="background-color:#EEE9F7; ">
       
-        <h1>Festa now</h1>
-            <a href="{% url 'new_now'%}">글쓰기 </a>
-            
-            <hr>
-            {% for now in nows.all %}
-            <br>
-            <a href="{% url 'detail_now' now.id %}"> : {{now.title}}</a> 
-            {{now.writer}}
-            {{now.pub_date}}
-            <br>
-            <a href="{% url 'edit_now' now.id %}" class="card-link">수정하기</a>
-            <a href="{% url 'delete_now' now.id %}" class="card-link">삭제하기</a>
-            
-            <div class="middle">
-                <hr>
+       
             </div>
                 
-            {% endfor %}
+           
        
 
 
