@@ -17,5 +17,14 @@ urlpatterns = [
     path('festa_ready/<int:festa_id>/', views.ready_detail, name="ready_detail"),
     path('confirm_login/', views.confirm_login, name="confirm_login"),
     path('confirm/', views.confirm, name="confirm"),
+    
+    path('staff_notice/', views.staff_notice, name="staff_notice"),
+    path('staff_new/', views.staff_new, name="staff_new"),
+    path('staff_edit/<int:staff_id>', views.staff_edit, name="staff_edit"),
+    path('staff_update/<int:staff_id>', views.staff_update, name="staff_update"),
+    path('staff_create/', views.staff_create, name="staff_create"),
+    path('staff_delete/<int:staff_id>', views.staff_delete, name="staff_delete"),
+    
+
 
 ]+ static(settings.MEDIA_URL, document_root = settings.MEDIA_ROOT)

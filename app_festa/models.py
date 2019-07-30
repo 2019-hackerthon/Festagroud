@@ -25,3 +25,15 @@ class Festa(models.Model) :
     class Meta :
         ordering = ['schedule'] #가장 빠른 festa부터 게시
 
+
+class Staff(models.Model):
+    title = models.CharField(max_length=200)
+    writer = models.CharField(max_length=100)
+    pub_date = models.DateTimeField('date published')
+    body = models.TextField()
+
+class Audience(models.Model):
+    title = models.CharField(max_length=200)
+    writer = models.CharField(max_length=100)
+    pub_date = models.DateTimeField('date published')
+    body = models.TextField()
