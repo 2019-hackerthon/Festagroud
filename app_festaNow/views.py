@@ -1,7 +1,7 @@
 from django.shortcuts import render, get_object_or_404, redirect
 from app_festa.models import Festa, RegisterNum
 from app_festaReady.models import Accompany, Ticket, Commenta, Commenttic
-from app_festaNow.models import Now, Team, Commentn, Commentt, Home, Commenth
+from app_festaNow.models import Now, Team, Commentn, Commentt, Home, Commenth, ReservationNum
 import datetime
 from django.utils import timezone
 
@@ -170,3 +170,40 @@ def create_home(request):
         home.save()
         return redirect('home')
     return render(request, 'festa_now/deatil_home.html')
+
+
+##staff audience now 로그인
+
+def audience_login(request):
+    return render(request, 'festa_now/audience/login.html')
+
+def staff_login(request):
+    return render(request, 'festa_now/staff/login.html')
+
+def confirm_now(request) :
+    first = request.POST['reservation_name']
+    second = request.POST["reservation_num"]
+    num_object = ReservationNum.objects.get(reservation_num = second)
+    name_object = ReservationNum.objects.get(reservation_name = first)
+    first = name_object
+    second = num_object
+    return render(request, 'festa_now/audience/audience.html')
+
+def confirm_now2(request) :
+    first = request.POST['reservation_name']
+    second = request.POST["reservation_num"]
+    num_object = ReservationNum.objects.get(reservation_num = second)
+    name_object = ReservationNum.objects.get(reservation_name = first)
+    first = name_object
+    second = num_object
+    return render(request, 'festa_now/staff/staff.html')
+
+
+def staff_map(request):
+    return render(request, 'festa_now/staff/map.html')
+
+def audience_map(request):
+    return render(request, 'festa_now/audience/map.html')
+
+
+

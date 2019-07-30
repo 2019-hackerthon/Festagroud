@@ -16,12 +16,14 @@ def list_accompany(request):
     return render(request, 'festa_ready/list_accompany.html', {'accompanies':accompanies})
 
 def create_accompany(request):
-    if request.method=="POST":
+    if request.method == "POST":
         title = request.POST.get('title')
         writer = request.POST.get('writer')
         area = request.POST.get('area')
         description = request.POST.get('description')
-        accompany = Accompany(title=title, writer=writer, area=area, description=description)
+        password = request.POST.get('password')
+        image = request.FILES.get('image')
+        accompany = Accompany(title=title, writer=writer, area=area, description=description, image=image, password=password)
         accompany.save()
         return redirect('list_accompany')        
     return render(request, 'festa_ready/create_accompany.html')
@@ -37,17 +39,19 @@ def edit_accompany(request, accompany_id):
 
 def update_accompany(request, accompany_id):
     if request.method == "POST":
-        accompany = Accompany.objects.get(id = accompany_id)
-        title = request.POST.get('title')
-        writer = request.POST.get('writer')
-        area = request.POST.get('area')
-        description = request.POST.get('description')
-        accompany.title = title
-        accompany.writer = writer
-        accompany.area = area
-        accompany.description = description
-        accompany.save()
-        return redirect('detail_accompany', accompany.pk)
+            accompany = Accompany.objects.get(id = accompany_id)
+            if request.POST.get('password') == accompany.password:
+                title = request.POST.get('title')
+                writer = request.POST.get('writer')
+                area = request.POST.get('area')
+                description = request.POST.get('description')
+                accompany.title = title
+                accompany.writer = writer
+                accompany.area = area
+                accompany.description = description
+                accompany.save()
+                return redirect('detail_accompany', accompany.pk)
+            return render(request, 'festa_ready/incorrect_accompany.html')
 
 def delete_accompany(request,accompany_id):
     if request.method == "POST":
@@ -68,9 +72,11 @@ def create_ticket(request):
     if request.method=="POST":
         title = request.POST.get('title')
         writer = request.POST.get('writer')
+        password = request.POST.get('password')
         deal_type = request.POST.get('deal_type')
         description = request.POST.get('description')
-        ticket = Ticket(title=title, writer=writer, deal_type=deal_type, description=description)
+        image = request.FILES.get('image')
+        ticket = Ticket(title=title, writer=writer, deal_type=deal_type, description=description, image = image, password=password)
         ticket.save()
         return redirect('list_ticket')        
     return render(request, 'festa_ready/create_ticket.html')
@@ -87,17 +93,19 @@ def edit_ticket(request, ticket_id):
 
 def update_ticket(request, ticket_id):
     if request.method == "POST":
-        ticket = Ticket.objects.get(id = ticket_id)
-        title = request.POST.get('title')
-        writer = request.POST.get('writer')
-        deal_type = request.POST.get('deal_type')
-        description = request.POST.get('description')
-        ticket.title = title
-        ticket.writer = writer
-        ticket.deal_type = deal_type
-        ticket.description = description
-        ticket.save()
-        return redirect('detail_ticket', ticket.pk)
+            ticket = Ticket.objects.get(id = ticket_id)
+            if request.POST.get('password') == ticket.password:
+                title = request.POST.get('title')
+                writer = request.POST.get('writer')
+                deal_type = request.POST.get('deal_type')
+                description = request.POST.get('description')
+                ticket.title = title
+                ticket.writer = writer
+                ticket.deal_type = deal_type
+                ticket.description = description
+                ticket.save()
+                return redirect('detail_ticket', ticket.pk)
+            return render(request, 'festa_ready/incorrect_ticket.html')
 
 def delete_ticket(request,ticket_id):
     if request.method == "POST":
@@ -120,4 +128,10 @@ def comment_ticket(request, ticket_id):
     comment.ticket = get_object_or_404(Ticket, pk=ticket_id)
     comment.save()
     return redirect('detail_ticket', ticket_id)
+
+def incorrect_accompany(request):
+    return render(request, 'incorrect_accompany.html')
+
+def incorrect_ticket(request):
+    return render(request, 'incorrect_ticket.html')
 
