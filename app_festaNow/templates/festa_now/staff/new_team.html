@@ -11,10 +11,10 @@
 <body>
 <center>
     <h1>새 글을 작성해주세요</h1>
-    <a href="{% url 'now_team' %}" class="store">팀별게시판</a>
+    <a href="{% url 'now_team' festa.id %}" class="store">팀별게시판</a>
     <br>
     <br>
-    <form action="{%url 'create_team' %}" method="POST">
+    <form action="{%url 'create_team' festa.id %}" method="POST">
         {% csrf_token %}
         [Title] : <input type="text" name='title'>
         <br>

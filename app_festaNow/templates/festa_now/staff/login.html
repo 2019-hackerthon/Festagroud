@@ -16,7 +16,7 @@
 
         <div class="col-md-7" style="background-color:#EEE9F7; ">
             <div class="container">
-                <form action="{% url 'confirm_now2' %}" method="POST">
+                <form action="{% url 'confirm_now2' festa.id %}" method="POST">
                     {% csrf_token %}
                     <p>정보를 입력해주세요</p>
                     <input class="btn btn-primary " type="submit" value="확인">

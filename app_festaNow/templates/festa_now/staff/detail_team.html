@@ -44,11 +44,11 @@
                 <textarea name="body"  readonly="readonly" id="" cols="30" rows="10"
                     style="padding:10px; margin:10px;">{{team.body2}}</textarea>
             </p>
-            <a href="{% url 'now_team' %}" class="store">팀별게시판</a>
+            <a href="{% url 'now_team' festa.id %}" class="store">팀별게시판</a>
             <span class="var"></span>
-            <a href="{% url 'edit_team' team.id%}" class="store">수정하기</a>
+            <a href="{% url 'edit_team' festa.id team.id%}" class="store">수정하기</a>
             <span class="var"></span>
-            <a href="{%url 'delete_team' team.id %}" class="store">삭제하기</a>
+            <a href="{%url 'delete_team' festa.id team.id %}" class="store">삭제하기</a>
 
             <h2>comments</h2>
             {% for comment in comments %}
@@ -57,7 +57,7 @@
             {{comment.content_team}}
             <hr>
             {% endfor%}
-            <form action="{% url 'comment_team' team.id %}" method="POST">
+            <form action="{% url 'comment_team' festa.id team.id %}" method="POST">
                 {% csrf_token %}
                 작성자 : <input name="writer" type="text">
                 <br>

@@ -16,10 +16,10 @@
 
         <div class="col-md-7" style="background-color:#EEE9F7; ">
             <div class="container">
-                <form action="{% url 'confirm_now' %}" method="POST">
+                <form action="{% url 'confirm_now' festa.id %}" method="POST">
                     {% csrf_token %}
                     <p>정보를 입력해주세요</p>
-                    <input class="btn btn-primary " type="submit" value="확인">
+                    <input class="btn btn-primary" type="submit" value="확인">
                     <br>
                     <br>
                     <p>예약자 <input type="text" name="reservation_name"></p>
