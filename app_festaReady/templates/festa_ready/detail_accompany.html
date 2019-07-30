@@ -1,9 +1,14 @@
+{% extends 'base.html' %}
+{% block content %}
+
 <h2><동행찾기 상세보기 페이지></h2>
 <p> 제목: {{accompany.title}}</p>
 <p> 지역: {{accompany.area}}</p>
 <p> 작성자: {{accompany.writer}}</p>
 <p> 내용: {{accompany.description}}</p>
-
+{% if accompany.image %}
+<img src="{{ accompany.image.url }}">
+{% endif %}
 <a href="{% url 'edit_accompany' accompany.pk %}" class="btn btn-primary">수정</a>
 
 <form action="{% url 'delete_accompany' accompany.pk %}" method="POST">
@@ -25,3 +30,5 @@
     내용 : <textarea name="content" id="" cols="30" rows="10"></textarea>
     <input type="submit">
 </form>
+
+{% endblock %}

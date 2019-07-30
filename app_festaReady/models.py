@@ -6,7 +6,8 @@ class Accompany(models.Model) : #festa_ready의 동행구하는 게시판
     writer = models.CharField(max_length=200) 
     area = models.CharField(max_length=200) 
     password = models.CharField(max_length=20)
-    description = models.TextField() 
+    description = models.TextField()
+    image = models.ImageField(upload_to = "images/", null=True)
 
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
@@ -24,6 +25,7 @@ class Ticket(models.Model): #festa_ready의 티켓 양도 교환 게시판
     deal_type = models.CharField(max_length=200) #양도/교환
     password = models.CharField(max_length=20)
     description = models.TextField() #내용
+    image = models.ImageField(upload_to =  "images/", null=True)
 
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
