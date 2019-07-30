@@ -55,3 +55,14 @@ class Commenth(models.Model):
     writer_home = models.CharField(max_length=200)
     content_home = models.TextField()
     home = models.ForeignKey(Home, on_delete=models.CASCADE)
+
+
+class ReservationNum(models.Model) :
+    reservation_name = models.CharField(max_length = 30)
+    reservation_num = models.CharField(max_length = 30)
+
+    def __str__(self) :
+        return self.reservation_name
+
+    def __str__(self) :
+        return self.reservation_num

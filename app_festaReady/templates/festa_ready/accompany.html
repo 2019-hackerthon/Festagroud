@@ -1,5 +1,39 @@
-<h1>동행구하기 게시판</h1>
+{% extends 'base.html' %}
+<!-- 
+[base.html]
+<head>
+</head>
 
-<a href="{% url 'list_accompany' %}">리스트보기</a><br>
-<a href="{% url 'create_accompany' %}">글쓰기</a><br>
+<body>
+ -->
+ {% block content %}
+ 
+    <div class="row">
+        <div class="col-md-5">
+            <img src = http://www.kpenews.com/Files/4/News/201906/260_20190620191955168.JPG style="height:500px">
+            <ul class="vertical-menu">
+
+                <li><a href="#">공연정보</a></li>
+                
+                <li><a href="{% url 'list_accompany' %}">동행구하기</a></li>
+                
+                <li><a href="{% url 'list_ticket' %}">티켓 양도/교환</a></li>
+
+            </ul>
+    </div>
+
+    <div class="col-md-7" style="background-color:#EEE9F7; ">
+        <h1>공연 이름 :{{ festa.name }}</h1>
+        <p>공연 날짜 : {{ festa.schedule|date:"Y"}}년 {{ festa.schedule|date:"m"}}월 {{ festa.schedule|date:"d"}}일</p>
+        <p>공연 장소 : {{ festa.space }}</p>
+        <p>공식 티켓판매처 링크 : {{festa.purchase_link}}</p>
+        <p>공연 주최/기획사 : {{festa.host }}</p>
+        <p>고객 문의처 : {{festa.contact }}</p>
+        <p>공연 유의사항 : {{ festa.precautions }}</p>
+        <p>공연 공지사항 : {{ festa.notice }}</p>
+
+
+</div>
+
+{% endblock %}
 

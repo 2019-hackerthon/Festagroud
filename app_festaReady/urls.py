@@ -23,4 +23,7 @@ urlpatterns = [
     path('delete_ticket/<int:ticket_id>/', views.delete_ticket, name = "delete_ticket"),
     path('comment_ticket/<int:ticket_id>', views.comment_ticket, name="comment_ticket"),
 
+    path('incorrect_accompany', views.incorrect_accompany, name="incorrect_accompany"),
+    path('incorrect_ticket', views.incorrect_ticket, name="incorrect_ticket"),
+
 ]+ static(settings.MEDIA_URL, document_root = settings.MEDIA_ROOT)

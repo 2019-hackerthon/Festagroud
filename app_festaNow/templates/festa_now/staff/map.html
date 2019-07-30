@@ -15,7 +15,7 @@
 
                 <li><a href="{% url 'now_staff' %}">공지사항</a></li>
                 
-                <li><a href="{% url 'now_team' %}">팀별게시판</a></li>
+                <li><a href="{% url 'now_team' %}">팀별 게시판</a></li>
                 
                 <li><a href="{% url 'staff_map' %}">지도</a></li>
                 
@@ -24,31 +24,12 @@
                 <li><a href="{% url 'staff_home' %}">집가자</a></li>
 
                 </ul>
+
+
         </div>
 
     <div class="col-md-7" style="background-color:#EEE9F7; ">
       
-        <h1>팀별게시판</h1>
-            <a href="{% url 'new_team'%}">글쓰기 </a>
-            
-            <hr>
-            {% for team in teams.all %}
-            <br>
-            <a href="{% url 'detail_team' team.id %}"> : {{team.title2}}</a> 
-            {{team.writer2}}
-            {{team.pub_date}}
-            <br>
-            <a href="{% url 'edit_team' team.id %}" class="card-link">수정하기</a>
-            <a href="{% url 'delete_team' team.id %}" class="card-link">삭제하기</a>
-            
-            <div class="middle">
-                <hr>
-            </div>
-                
-            {% endfor %}
-       
-
-
     </div>
 
     
