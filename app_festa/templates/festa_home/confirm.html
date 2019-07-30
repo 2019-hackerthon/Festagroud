@@ -37,7 +37,7 @@
         var geocoder = new kakao.maps.services.Geocoder();
 
         // 주소로 좌표를 검색합니다
-        geocoder.addressSearch('{{festa.detail_map}}', function (result, status) {
+        geocoder.addressSearch('{{festa_object.detail_map}}', function (result, status) {
 
             // 정상적으로 검색이 완료됐으면 
             if (status === kakao.maps.services.Status.OK) {
