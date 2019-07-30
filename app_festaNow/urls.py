@@ -37,9 +37,9 @@ urlpatterns = [
     path('comment_home/<int:home_id>', views.comment_home, name="comment_home"),
 
     path('confirm_now/', views.confirm_now, name="confirm_now"),
-    path('audience_login/', views.audience_login, name="audience_login"),
+    path('<int:festa_id>/audience_login', views.audience_login, name="audience_login"),
     path('confirm_now2/', views.confirm_now2, name="confirm_now2"),
-    path('staff_login/', views.staff_login, name="staff_login"),
+    path('<int:festa_id>/staff_login/', views.staff_login, name="staff_login"),
 
     path('audience_map/', views.audience_map, name="audience_map"),
     path('staff_map/', views.staff_map, name="staff_map"),

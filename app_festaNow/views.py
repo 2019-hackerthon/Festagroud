@@ -174,11 +174,13 @@ def create_home(request):
 
 ##staff audience now 로그인
 
-def audience_login(request):
-    return render(request, 'festa_now/audience/login.html')
+def audience_login(request, festa_id):
+    festa = get_object_or_404(Festa, pk = festa_id)
+    return render(request, 'festa_now/audience/login.html', {'festa': festa})
 
-def staff_login(request):
-    return render(request, 'festa_now/staff/login.html')
+def staff_login(request, festa_id):
+    festa = get_object_or_404(Festa, pk = festa_id)
+    return render(request, 'festa_now/staff/login.html', {'festa': festa})
 
 def confirm_now(request) :
     first = request.POST['reservation_name']
