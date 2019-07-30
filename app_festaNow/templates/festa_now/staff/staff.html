@@ -29,6 +29,7 @@
                                 <td id="table_intro" colspan="5"> 2019 멋사 해커톤 대회에 대한 게시판 입니다.</td>
                             </tr>
                             <tr id="kind_board">
+                                
                                 <td id="title" class="headTd">구분</td>
                                 <td id="title" class="headTd">제목</td>
                                 <td id="title" class="headTd">작성자</td>
@@ -36,13 +37,15 @@
                                 <td id="title" class="headTd">시간</td>
                             </tr>
                             <!-- 공지등록 -->
+                            {% for staff in staffs.all %}
                             <tr id="notice_board">
                                 <td>공지사항</td>
-                                <td class="title_td"><a href="#test">제목</a></td>
-                                <td>작성자</td>
-                                <td>등록날짜</td>
+                                <td class="title_td"><a href="{% url 'staff_detail' staff.id %}">{{staff.title}}</a></td>
+                                <td>{{staff.writer}}</td>
+                                <td>{{staff.pub_date}}</td>
                                 <td>시간</td>
                             </tr>
+                            {% endfor %}
                             <!-- 내용등록 -->
                             <tr id="content_board">
                                 <td>번호</td>
@@ -57,6 +60,7 @@
     </div>
 </div>
 
+       
 
 </body>
 

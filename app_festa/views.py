@@ -96,7 +96,7 @@ def staff_new(request):
 
 def staff_detail(request, staff_id):
     staff = Staff.objects.get(pk=staff_id)
-    return render(request, 'festa_home/staff_detail.html', {'now' : now})    
+    return render(request, 'festa_home/staff_detail.html', {'staff' : staff})    
 
 def staff_delete(request, staff_id):
     staff_delete = get_object_or_404(Staff, pk=staff_id)
