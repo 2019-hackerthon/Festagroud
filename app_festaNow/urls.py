@@ -16,7 +16,7 @@ urlpatterns = [
     path('<int:festa_id>/audience/update_now/<int:now_id>', views.update_now, name="update_now"),
     path('<int:festa_id>/audience/create_now', views.create_now, name="create_now"),
     path('<int:festa_id>/audience/comment_now/<int:now_id>', views.comment_now, name="comment_now"),
-    path('<int:festa_id>/audience/home', views.audience_home, name="audience_home"),
+    path('<int:festa_id>/home', views.audience_home, name="audience_home"),
 
     path('<int:festa_id>/staff/detail_team/<int:team_id>', views.detail_team, name="detail_team"),
     path('<int:festa_id>/staff/team', views.now_team, name="now_team"),
@@ -26,7 +26,7 @@ urlpatterns = [
     path('<int:festa_id>/staff/update_team/<int:team_id>', views.update_team, name="update_team"),
     path('<int:festa_id>/staff/create_team/', views.create_team, name="create_team"),
     path('<int:festa_id>/staff/comment_team/<int:team_id>', views.comment_team, name="comment_team"),
-    path('<int:festa_id>/staff/home', views.staff_home, name="staff_home"),
+    path('<int:festa_id>/home', views.staff_home, name="staff_home"),
 
     path('<int:festa_id>/detail_home/<int:home_id>', views.detail_home, name="detail_home"),
     path('<int:festa_id>/new_home', views.new_home, name="new_home"),

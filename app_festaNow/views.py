@@ -140,22 +140,22 @@ def comment_home(request, festa_id, home_id):
     comment.content_home = request.POST['content']
     comment.home = get_object_or_404(Home, pk=home_id)
     comment.save()
-    return redirect('detail_home', home_id)
+    return redirect('/festa_now/{}/home'.format(festa.id))
 
 ##집가자
 def audience_home(request, festa_id):
     festa = get_object_or_404(Festa, pk = festa_id)
     homes = Home.objects
-    return render(request, 'festa_now/audience/home.html', {'homes':homes, 'festa':festa})
+    return render(request, 'festa_now/audience/audience_home.html', {'homes':homes, 'festa':festa})
 
 def staff_home(request, festa_id):
     festa = get_object_or_404(Festa, pk = festa_id)
     homes = Home.objects
-    return render(request, 'festa_now/staff/home.html', {'homes':homes, 'festa': festa})    
+    return render(request, 'festa_now/staff/staff_home.html', {'homes':homes, 'festa': festa})    
 
 def new_home(request, festa_id):
     festa = get_object_or_404(Festa, pk = festa_id)
-    return render(request, 'festa_now/new_home.html')
+    return render(request, 'festa_now/new_home.html',{'festa': festa})
 
 def detail_home(request, festa_id, home_id):
     festa = get_object_or_404(Festa, pk = festa_id)
@@ -195,7 +195,7 @@ def create_home(request, festa_id):
         home.region = request.POST['region']
         home.pub_date = timezone.datetime.now()
         home.save()
-        return redirect('home')
+        return redirect('/festa_now/{}/home'.format(festa.id))
     return render(request, 'festa_now/deatil_home.html', {'festa':festa})
 
 
