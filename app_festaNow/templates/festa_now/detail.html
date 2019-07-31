@@ -10,15 +10,15 @@
  
     <div class="row">
         <div class="col-md-5">
-            <img src = http://www.kpenews.com/Files/4/News/201906/260_20190620191955168.JPG style="height:500px">
+            <img src = "{{festa.poster.url}}" style="height:500px">
 
         </div>
 
         <div class="col-md-7" style="background-color:#EEE9F7; ">
-            <a class="btn btn-primary" href="{% url 'staff_login' %}">Staff</a>
+            <a class="btn btn-primary" href="{% url 'staff_login' festa.id %}">Staff</a>
             <br>
             <Br>
-            <a class="btn btn-primary" href="{% url 'audience_login' %}">Audience</a>
+            <a class="btn btn-primary" href="{% url 'audience_login' festa.id %}">Audience</a>
     </div>
 
  

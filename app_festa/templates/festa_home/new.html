@@ -26,12 +26,13 @@
             <p>고객 문의처</p>
             <input type="text" name="contact">
             <p>지도</p>
-            <input type="text" id="sample5_address" placeholder="공연장소를 입력하세요">
+            <input type="text" name="detail_map" id="sample5_address" placeholder="공연장소를 입력하세요">
             <input type="button" onclick="sample5_execDaumPostcode()" value="주소 검색"><br>
             <div id="map" style="width:300px;height:300px;margin-top:10px;"></div>
             
             <script src="http://dmaps.daum.net/map_js_init/postcode.v2.js"></script>
             <script src="//dapi.kakao.com/v2/maps/sdk.js?appkey=3a6997107b687683607fb8587b9bb914&libraries=services"></script>
+            
             <script>
                 var mapContainer = document.getElementById('map'), // 지도를 표시할 div
                     mapOption = {
@@ -78,10 +79,10 @@
                     }).open();
                 }
             </script>
-            <p>유의사항 게시글로 작성됩니다</p>
-            <textarea name="precautions" cols=70 rows=10></textarea>
-            <p>공지사항 게시글로 작성됩니다</p>
-            <textarea name="notice" cols=70 rows=10></textarea>
+            <a href = "{% url 'staff_notice' %}">Staff 공지사항 작성하기</a>
+           <br>
+           <br>
+            <a href = "">Audience 공지사항 작성하기</a>
             <br>
             <p>이미지 첨부 이미지 내 공연 소개, 공연 출연진, 타임 테이블 정보 필수</p>
             <input type="file" name="poster" vlaue="찾아보기">

@@ -67,37 +67,32 @@
             
         </div>
     </nav>
-
-
-    <div class="row">
-        <div class="col-md-5">
-            <img src = http://www.kpenews.com/Files/4/News/201906/260_20190620191955168.JPG style="height:500px">
-            <ul>
-
-                <li><a href="">공지사항</a></li>
-                
-                <li><a href="{% url 'now_team' %}">팀별게시판</a></li>
-                
-                <li><a href="">지도</a></li>
-                
-                <li><a href="">찾아가라</a></li>
-
-                <li><a href="">집가자</a></li>
-
-                </ul>
-
-
-        </div>
-
-
-    <!-- navbar 끝 -->
-
-    <!-- 본문 시작 -->
-    {% load staticfiles %}
-
     {% block content %}
     {% endblock %}
+
+ 
+    <!-- 본문 시작 -->
+    {% load staticfiles %}
+    <div class="col-md-7" style="background-color:#EEE9F7; ">
+      
+        <h1>집가자</h1>
+            <a href="{% url 'new_home' festa.id %}">글쓰기 </a>
+            
+            <hr>
+            {% for home in homes.all %}
+            <br>
+            <a href="{% url 'detail_home' festa.id home.id %}"> : {{home.title}}</a> 
+            {{home.writer}}
+            {{home.region}}
+            {{home.pub_date}}
+            <br>
+            
+            <div class="middle">
+                <hr>
+            </div>
+            {% endfor %}
     <footer>
         
     </footer>
 </html>
+

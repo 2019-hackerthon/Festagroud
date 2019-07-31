@@ -43,11 +43,11 @@
                 <textarea name="body"  readonly="readonly" id="" cols="30" rows="10"
                     style="padding:10px; margin:10px;">{{now.body}}</textarea>
             </p>
-            <a href="{% url 'now_now' %}" class="store">Festa now</a>
+            <a href="{% url 'now_now' festa.id %}" class="store">Festa now</a>
             <span class="var"></span>
-            <a href="{% url 'edit_now' now.id%}" class="store">수정하기</a>
+            <a href="{% url 'edit_now' festa.id now.id%}" class="store">수정하기</a>
             <span class="var"></span>
-            <a href="{%url 'delete_now' now.id %}" class="store">삭제하기</a>
+            <a href="{%url 'delete_now' festa.id now.id %}" class="store">삭제하기</a>
     
             <h2>comments</h2>
             {% for comment in comments %}
@@ -56,7 +56,7 @@
             {{comment.content_now}}
             <hr>
             {% endfor%}
-            <form action="{% url 'comment_now' now.id %}" method="POST">
+            <form action="{% url 'comment_now' festa.id now.id %}" method="POST">
                 {% csrf_token %}
                 작성자 : <input name="writer" type="text">
                 <br>
