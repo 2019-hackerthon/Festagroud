@@ -10,18 +10,18 @@
  
     <div class="row">
         <div class="col-md-5">
-            <img src = http://www.kpenews.com/Files/4/News/201906/260_20190620191955168.JPG style="height:500px">
+            <img src ="{{festa.poster.url}}"style="height:500px">
             <ul class="vertical-menu">
 
-                <li><a href="{% url 'now_audience' %}">공지사항</a></li>
+                <li><a href="{% url 'now_audience' festa.id %}">공지사항</a></li>
                 
-                <li><a href="{% url 'now_now' %}">Festa now</a></li>
+                <li><a href="{% url 'now_now' festa.id %}">Festa now</a></li>
                 
-                <li><a href="{% url 'audience_map' %}">지도</a></li>
+                <li><a href="{% url 'audience_map' festa.id %}">지도</a></li>
                 
                 <li><a href="">찾아가라</a></li>
 
-                <li><a href="{% url 'audience_home' %}">집가자</a></li>
+                <li><a href="{% url 'audience_home' festa.id %}">집가자</a></li>
 
                 </ul>
         </div>
@@ -29,17 +29,17 @@
     <div class="col-md-7" style="background-color:#EEE9F7; ">
       
         <h1>Festa now</h1>
-            <a href="{% url 'new_now'%}">글쓰기 </a>
+            <a href="{% url 'new_now' festa.id %}">글쓰기 </a>
             
             <hr>
             {% for now in nows.all %}
             <br>
-            <a href="{% url 'detail_now' now.id %}"> : {{now.title}}</a> 
+            <a href="{% url 'detail_now' festa.id now.id %}"> : {{now.title}}</a> 
             {{now.writer}}
             {{now.pub_date}}
             <br>
-            <a href="{% url 'edit_now' now.id %}" class="card-link">수정하기</a>
-            <a href="{% url 'delete_now' now.id %}" class="card-link">삭제하기</a>
+            <a href="{% url 'edit_now' festa.id now.id %}" class="card-link">수정하기</a>
+            <a href="{% url 'delete_now' festa.id now.id %}" class="card-link">삭제하기</a>
             
             <div class="middle">
                 <hr>

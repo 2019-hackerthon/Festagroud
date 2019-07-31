@@ -1,0 +1,23 @@
+{% extends 'home_board.html' %}
+{% block content %}
+
+<div class="row">
+    <div class="col-md-5">
+        <img src ="{{festa.poster.url}}" style="height:500px">
+        <ul>
+
+            <li><a href="{% url 'now_staff' festa.id %}">공지사항</a></li>
+            
+            <li><a href="{% url 'now_team' festa.id %}">팀별게시판</a></li>
+            
+            <li><a href="{% url 'staff_map' festa.id %}">지도</a></li>
+            
+            <li><a href="">찾아가라</a></li>
+
+            <li><a href="{% url 'staff_home' festa.id %}">집가자</a></li>
+
+            </ul>
+
+
+    </div>
+{% endblock %}
