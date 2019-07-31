@@ -1,0 +1,31 @@
+{% extends 'base.html' %}
+<!-- 
+[base.html]
+<head>
+</head>
+
+<body>
+ -->
+ {% block content %}
+
+<h1>Staff 공지사항</h1>
+<a href="{% url 'staff_new'%}">글쓰기 </a>
+
+<hr>
+{% for staff in staffs.all %}
+<br>
+<a href="{% url 'staff_detail' staff.id %}"> : {{staff.title}}</a> 
+{{staff.writer}}
+{{staff.pub_date}}
+<br>
+<a href="{% url 'staff_edit' staff.id %}" class="card-link">수정하기</a>
+<a href="{% url 'staff_delete' staff.id %}" class="card-link">삭제하기</a>
+
+<div class="middle">
+    <hr>
+
+    {% endfor %}
+       
+
+
+{% endblock %}

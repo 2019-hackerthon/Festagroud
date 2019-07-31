@@ -1,4 +1,5 @@
 from django.db import models
+from app_festa.models import Festa
 
 # Create your models here.
 class Now(models.Model):
@@ -60,7 +61,7 @@ class Commenth(models.Model):
 class ReservationNum(models.Model) :
     reservation_name = models.CharField(max_length = 30)
     reservation_num = models.CharField(max_length = 30)
-
+    festa = models.ForeignKey(Festa, on_delete=models.CASCADE)
     def __str__(self) :
         return self.reservation_name
 
