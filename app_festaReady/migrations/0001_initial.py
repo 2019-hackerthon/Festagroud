@@ -30,20 +30,9 @@ class Migration(migrations.Migration):
             name='Commenta',
             fields=[
                 ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-<<<<<<< HEAD
-                ('title', models.CharField(max_length=200)),
-                ('writer', models.CharField(max_length=200)),
-                ('deal_type', models.CharField(max_length=200)),
-                ('password', models.CharField(max_length=20)),
-                ('description', models.TextField()),
-                ('image', models.ImageField(null=True, upload_to='images/')),
-                ('created_at', models.DateTimeField(auto_now_add=True)),
-                ('updated_at', models.DateTimeField(auto_now=True)),
-=======
                 ('writer_accompany', models.CharField(max_length=200)),
                 ('content_accompany', models.TextField()),
                 ('accompany', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='app_festaReady.Accompany')),
->>>>>>> 4038fd768a74ea4fd5a5d3004dc45ba42b380ebe
             ],
         ),
         migrations.CreateModel(
