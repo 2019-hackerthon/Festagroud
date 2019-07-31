@@ -1,0 +1,56 @@
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+
+<style>
+    .loginHeaderV3{
+        padding: 76px 0 60px 0;
+        height: 20px;
+        text-align:center;
+    }
+
+    .loginHeaderV3 .var{
+        width: 10 px;
+        display: inline-block;
+        height: 20px;
+        vertical-align: top;
+        margin: 0 13.px 0 15px;
+        background: #d8d8d8;
+    }
+
+</style>
+
+
+</head>
+
+<body>
+    <center>
+        <h1>공지사항</h1>
+
+        <p>
+            <h2>[Title] : {{staff.title}}</h2>
+            <p>[Writer] : {{staff.writer}}</p>
+            <p>[Date of Issue] : {{staff.pub_date}}</p>
+            <p>
+                [Body]
+                <br>
+                <textarea name="body"  readonly="readonly" id="" cols="30" rows="10"
+                    style="padding:10px; margin:10px;">{{staff.body}}</textarea>
+            </p>
+            <a href="{% url 'staff_notice' %}" class="store">공지사항</a>
+            <span class="var"></span>
+            <a href="{% url 'staff_edit' staff.id%}" class="store">수정하기</a>
+            <span class="var"></span>
+            <a href="{%url 'staff_delete' staff.id %}" class="store">삭제하기</a>
+    
+        
+        </div>
+
+    
+    </center>

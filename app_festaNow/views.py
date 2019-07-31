@@ -1,5 +1,5 @@
-from django.shortcuts import render, get_object_or_404, redirect, resolve_url
-from app_festa.models import Festa, RegisterNum
+from django.shortcuts import render, get_object_or_404, redirect
+from app_festa.models import Festa, RegisterNum, Staff
 from app_festaReady.models import Accompany, Ticket, Commenta, Commenttic
 from app_festaNow.models import Now, Team, Commentn, Commentt, Home, Commenth, ReservationNum
 import datetime
@@ -8,8 +8,9 @@ from django.utils import timezone
 
 # Create your views here.
 def now_staff(request, festa_id):
+    staffs = Staff.objects
     festa = get_object_or_404(Festa, pk = festa_id)
-    return render(request, 'festa_now/staff/staff.html', {'festa':festa})
+    return render(request, 'festa_now/staff/staff.html', {'festa':festa, 'staffs':staffs})
 
 def now_audience(request, festa_id):
     festa = get_object_or_404(Festa, pk = festa_id)
