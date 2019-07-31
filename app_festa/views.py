@@ -28,8 +28,6 @@ def create(request) :
         festa.host= request.POST['host']
         festa.contact= request.POST['contact']
         festa.detail_map = request.POST['detail_map']
-        festa.precautions= request.POST['precautions']
-        festa.notice = request.POST['notice']
         festa.poster = request.FILES['poster']
         festa.save()
         return redirect('success_create')
