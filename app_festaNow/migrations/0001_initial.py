@@ -65,10 +65,7 @@ class Migration(migrations.Migration):
                 ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
                 ('reservation_name', models.CharField(max_length=30)),
                 ('reservation_num', models.CharField(max_length=30)),
-<<<<<<< HEAD
-=======
                 ('festa', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='app_festa.Festa')),
->>>>>>> 4038fd768a74ea4fd5a5d3004dc45ba42b380ebe
             ],
         ),
         migrations.CreateModel(
