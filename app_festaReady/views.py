@@ -13,19 +13,20 @@ def accompany(request, festa_id) :
 
 def list_accompany(request, festa_id):
     festa = get_object_or_404(Festa, pk = festa_id)
-    accompanies = Accompany.objects
+    accompanies = Accompany.objects.filter(festa = festa.id)
     return render(request, 'festa_ready/list_accompany.html', {'accompanies':accompanies, 'festa':festa})
 
 def create_accompany(request, festa_id) :
     festa = get_object_or_404(Festa, pk = festa_id)
     if request.method == "POST":
+        festa = get_object_or_404(Festa, pk = festa_id)
         title = request.POST.get('title')
         writer = request.POST.get('writer')
         area = request.POST.get('area')
         description = request.POST.get('description')
         password = request.POST.get('password')
         image = request.FILES.get('image')
-        accompany = Accompany(title=title, writer=writer, area=area, description=description, image=image, password=password)
+        accompany = Accompany(festa=festa, title=title, writer=writer, area=area, description=description, image=image, password=password)
         accompany.save()
         return redirect('list_accompany', festa.id)        
     return render(request, 'festa_ready/create_accompany.html', {'festa':festa})
@@ -72,20 +73,21 @@ def ticket(request, festa_id) :
 
 def list_ticket(request, festa_id):
     festa = get_object_or_404(Festa, pk = festa_id)
-    tickets = Ticket.objects
+    tickets = Ticket.objects.filter(festa = festa.id)
     return render(request, 'festa_ready/list_ticket.html', {'tickets':tickets, 'festa':festa})
 
 
 def create_ticket(request, festa_id):
     festa = get_object_or_404(Festa, pk = festa_id)
     if request.method=="POST":
+        festa = get_object_or_404(Festa, pk = festa_id)
         title = request.POST.get('title')
         writer = request.POST.get('writer')
         password = request.POST.get('password')
         deal_type = request.POST.get('deal_type')
         description = request.POST.get('description')
         image = request.FILES.get('image')
-        ticket = Ticket(title=title, writer=writer, deal_type=deal_type, description=description, image = image, password=password)
+        ticket = Ticket(festa=festa, title=title, writer=writer, deal_type=deal_type, description=description, image = image, password=password)
         ticket.save()
         return redirect('detail_ticket', festa.id, ticket.pk)        
     return render(request, 'festa_ready/create_ticket.html', {'festa':festa})

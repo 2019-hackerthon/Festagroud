@@ -1,7 +1,9 @@
 from django.db import models
+from app_festa.models import Festa
 
 # Create your models here.
 class Accompany(models.Model) : #festa_ready의 동행구하는 게시판
+    festa = models.ForeignKey(Festa, on_delete=models.CASCADE)
     title = models.CharField(max_length=200) 
     writer = models.CharField(max_length=200) 
     area = models.CharField(max_length=200) 
@@ -19,8 +21,8 @@ class Commenta(models.Model):
     accompany = models.ForeignKey(Accompany, on_delete=models.CASCADE)
 
 
-
 class Ticket(models.Model): #festa_ready의 티켓 양도 교환 게시판
+    festa = models.ForeignKey(Festa, on_delete=models.CASCADE)
     title = models.CharField(max_length=200) #제목
     writer = models.CharField(max_length=200) #작성자
     deal_type = models.CharField(max_length=200) #양도/교환
