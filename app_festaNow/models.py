@@ -3,7 +3,7 @@ from app_festa.models import Festa
 
 # Create your models here.
 class Now(models.Model):
-
+    festa = models.ForeignKey(Festa, on_delete=models.CASCADE)
     title = models.CharField(max_length=200)
     writer = models.CharField(max_length=100)
     pub_date = models.DateTimeField('date published')
@@ -18,7 +18,7 @@ class Now(models.Model):
 
 
 class Team(models.Model):
-
+    festa = models.ForeignKey(Festa, on_delete=models.CASCADE)
     title2 = models.CharField(max_length=200)
     writer2 = models.CharField(max_length=100)
     pub_date2 = models.DateTimeField('date published')
@@ -45,6 +45,7 @@ class Commentt(models.Model):
 ##집가자 게시판
 
 class Home(models.Model) : #festa_ready의 동행구하는 게시판
+    festa = models.ForeignKey(Festa, on_delete=models.CASCADE)
     title = models.CharField(max_length=200) #글제목
     writer = models.CharField(max_length=200) #작성자
     region = models.CharField(max_length=200) #지역
