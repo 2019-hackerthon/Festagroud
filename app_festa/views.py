@@ -84,6 +84,15 @@ def confirm(request) :
     festa_object=number_object.festa
     return render(request, 'festa_home/confirm.html', {'festa_object':festa_object})
 
+def all_festaNow(request) :
+    festas = Festa.objects
+    today = datetime.datetime.now()
+    return render(request, 'festa_home/all_festaNow.html', {'festa':festas, 'today':today})
+
+def all_festaReady(request) :
+    festas = Festa.objects
+    today = datetime.datetime.now()
+    return render(request, 'festa_home/all_festaReady.html', {'festa':festas, 'today':today})
 
 ##staff 공지사항
 def staff_notice(request):

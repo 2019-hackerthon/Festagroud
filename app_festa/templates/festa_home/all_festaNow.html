@@ -1,0 +1,16 @@
+<div class="container">
+    <h1>Festa NOW 바로 오늘, 함꼐 즐겨 봐요</h1>
+    <!--검색 버튼-->
+    <form action="{% url 'search' %}" method="GET">
+        <input type="text" name="search_bar" placeholder="ex)'지산 락 페스티벌'궁금하지 않나요?" value="{{keyword}}">
+        <input type="submit" value="검색">
+    </form>
+
+    {% for festa_now in festa.all %}
+    {% if festa_now.schedule|date:"Y m d" == today|date:"Y m d" %}
+        <img src="{{festa_now.poster.url}}">
+        <p>{{festa_now.name}}</p>
+
+    {% endif %}
+    {% endfor %}
+</div>

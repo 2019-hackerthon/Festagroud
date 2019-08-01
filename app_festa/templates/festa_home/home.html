@@ -1,5 +1,6 @@
 {% extends 'base_copyright_version.html' %}
 {% block content %}
+
 <div class="container_home">
     <!--메인 최상단 배경 및 검색 버튼-->
     <div id="main_home">
@@ -27,6 +28,7 @@
             <div id="festa_now_title_home">
                 <h5 class="main_text">Festa NOW</h5>
                 <p class="sub_text">바로 오늘, 함께 즐겨봐요</p>
+                <a href="{% url 'all_festaNow' %}">전체보기</a>
             </div>
             <!-- 전체 아이템 리스트 박스 -->
             <div class="contents_list">
@@ -60,6 +62,7 @@
             <div id="festa_ready_title_home">
                 <h5 class="main_text">Festa READY</h5>
                 <p class="sub_text">다가오는 행사를 200배 더 즐겁게 즐기려면?</p>
+                <a href="{% url 'all_festaReady' %}">전체보기</a>
             </div>
             <!-- 전체 아이템 리스트 박스 -->
             <div class="contents_list">
