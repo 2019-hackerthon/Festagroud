@@ -1,6 +1,6 @@
 <h2>동행찾기 글 수정 페이지</h2>
 
-<form action=" {% url 'update_accompany' accompany.pk %}" method="POST">
+<form action=" {% url 'update_accompany' festa.id accompany.pk %}" method="POST">
         {% csrf_token %}
         <label>제목</label><br>
         <input type="text" name="title" value="{{ accompany.title }}"><br>

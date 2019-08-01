@@ -12,6 +12,7 @@ class Accompany(models.Model) : #festa_ready의 동행구하는 게시판
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 
+
 class Commenta(models.Model):
     writer_accompany = models.CharField(max_length=200)
     content_accompany = models.TextField()

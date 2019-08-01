@@ -9,9 +9,9 @@
 {% if accompany.image %}
 <img src="{{ accompany.image.url }}">
 {% endif %}
-<a href="{% url 'edit_accompany' accompany.pk %}" class="btn btn-primary">수정</a>
+<a href="{% url 'edit_accompany' festa.id accompany.pk %}" class="btn btn-primary">수정</a>
 
-<form action="{% url 'delete_accompany' accompany.pk %}" method="POST">
+<form action="{% url 'delete_accompany' festa.id accompany.pk %}" method="POST">
     {% csrf_token%}
     <input type="submit" value="삭제" class="btn btn-primary">
 </form>
@@ -23,7 +23,7 @@
 <hr>
 {% endfor%}
 
-<form action="{% url 'comment_accompany' accompany.id %}" method="POST">
+<form action="{% url 'comment_accompany' festa.id accompany.id %}" method="POST">
     {% csrf_token %}
     작성자 : <input name="writer" type="text">
     <br>

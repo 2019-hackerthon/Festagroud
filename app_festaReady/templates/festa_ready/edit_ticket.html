@@ -1,5 +1,5 @@
 
-<form action="{% url 'update_ticket' ticket.pk %}" method="POST">
+<form action="{% url 'update_ticket' festa.id ticket.pk %}" method="POST">
         {% csrf_token %}
         <label>제목</label><br>
         <input type="text" name="title" value="{{ ticket.title }}"><br>

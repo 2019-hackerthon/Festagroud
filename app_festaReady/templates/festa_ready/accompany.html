@@ -15,9 +15,9 @@
 
                 <li><a href="#">공연정보</a></li>
                 
-                <li><a href="{% url 'list_accompany' %}">동행구하기</a></li>
+                <li><a href="{% url 'list_accompany' festa.id %}">동행구하기</a></li>
                 
-                <li><a href="{% url 'list_ticket' %}">티켓 양도/교환</a></li>
+                <li><a href="{% url 'list_ticket' festa.id %}">티켓 양도/교환</a></li>
 
             </ul>
     </div>

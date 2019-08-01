@@ -15,9 +15,9 @@
 
                 <li><a href="#">공연정보</a></li>
                 
-                <li><a href="{% url 'list_accompany' %}">동행구하기</a></li>
+                <li><a href="{% url 'list_accompany' festa.id %}">동행구하기</a></li>
                 
-                <li><a href="{% url 'list_ticket' %}">티켓 양도/교환</a></li>
+                <li><a href="{% url 'list_ticket' festa.id %}">티켓 양도/교환</a></li>
 
             </ul>
     </div>
@@ -31,7 +31,7 @@
         <p> 제목: {{item.title}}</p>
         <p> 지역: {{item.area}}</p>
         <p> 작성자: {{item.writer}}</p>
-        <a href="{% url 'detail_accompany' item.pk%}" class="btn btn-primary">보러가기</a>
+        <a href="{% url 'detail_accompany' festa.id item.pk%}" class="btn btn-primary">보러가기</a>
         <p>----------------------------</p>
         {% endfor %}
 
