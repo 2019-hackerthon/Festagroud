@@ -1,6 +1,7 @@
 from django.db import models
 from app_festa.models import Festa
 
+
 # Create your models here.
 class Now(models.Model):
     festa = models.ForeignKey(Festa, on_delete=models.CASCADE)

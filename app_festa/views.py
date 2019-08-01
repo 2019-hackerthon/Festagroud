@@ -10,6 +10,7 @@ from django.utils import timezone
 def home(request) :
     festas = Festa.objects # Festa객체 받기
     today = datetime.datetime.now() #오늘 날짜 today 변수에 담음
+    
     return render(request, 'festa_home/home.html', {'festas' : festas, 'today':today})
 
 def new(request) :

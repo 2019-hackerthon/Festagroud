@@ -43,6 +43,7 @@
                         <span class="day_span">
                             {{ festa_now.name }} D-day
                         </span>
+                        <p>{{festa_now.reservationnum_set.all|length}}명이 참여해요</p>
                     </div>
                 </div>
                 {% endif %}
@@ -84,6 +85,7 @@
                                 document.getElementById('festa_ready_date_span').innerHTML = cFestaReadyText;
                             </script>
                         </span>
+                        <p>{{ festa_ready.reservationnum_set.all|length}}명이 참여해요</p>
                     </div>
                 </div>
                 {% endif %}
