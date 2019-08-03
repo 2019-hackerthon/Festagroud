@@ -4,7 +4,7 @@ from app_festaReady.models import Accompany, Ticket, Commenta, Commenttic
 from app_festaNow.models import Now, Team, Commentn, Commentt, Home, Commenth
 import datetime
 from django.utils import timezone
-
+from django.core.paginator import Paginator
 
 # Create your views here.
 def accompany(request, festa_id) :
@@ -13,7 +13,14 @@ def accompany(request, festa_id) :
 
 def list_accompany(request):
     accompanies = Accompany.objects
-    return render(request, 'festa_ready/list_accompany.html', {'accompanies':accompanies})
+    accompany_list = Accompany.objects.all()
+    search = request.GET.get('search', '')
+    if search:
+        accompany_list = accompany_list.filter(title__icontains=search)
+    paginator = Paginator(accompany_list, 3)
+    page = request.GET.get('page')
+    posts = paginator.get_page(page)
+    return render(request, 'festa_ready/list_accompany.html', {'accompanies':accompanies, 'posts':posts, 'search':search})
 
 def create_accompany(request):
     if request.method == "POST":
@@ -66,7 +73,14 @@ def ticket(request, festa_id) :
 
 def list_ticket(request):
     tickets = Ticket.objects
-    return render(request, 'festa_ready/list_ticket.html', {'tickets':tickets})
+    ticket_list = Ticket.objects.all()
+    search = request.GET.get('search', '')
+    if search:
+        ticket_list = ticket_list.filter(title__icontains=search)
+    paginator = Paginator(ticket_list, 3)
+    page = request.GET.get('page')
+    posts = paginator.get_page(page)
+    return render(request, 'festa_ready/list_ticket.html', {'tickets':tickets, 'posts':posts, 'search':search})
 
 def create_ticket(request):
     if request.method=="POST":
@@ -117,6 +131,7 @@ def comment_accompany(request, accompany_id):
     comment = Commenta()
     comment.writer_accompany = request.POST['writer']
     comment.content_accompany = request.POST['content']
+    comment.password = request.POST['password']
     comment.accompany = get_object_or_404(Accompany, pk=accompany_id)
     comment.save()
     return redirect('detail_accompany', accompany_id)
@@ -125,6 +140,7 @@ def comment_ticket(request, ticket_id):
     comment = Commenttic()
     comment.writer_ticket = request.POST['writer']
     comment.content_ticket = request.POST['content']
+    comment.password = request.POST['password']
     comment.ticket = get_object_or_404(Ticket, pk=ticket_id)
     comment.save()
     return redirect('detail_ticket', ticket_id)

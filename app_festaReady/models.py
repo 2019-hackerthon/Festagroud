@@ -15,6 +15,7 @@ class Accompany(models.Model) : #festa_ready의 동행구하는 게시판
 class Commenta(models.Model):
     writer_accompany = models.CharField(max_length=200)
     content_accompany = models.TextField()
+    password = models.CharField(max_length=20)
     accompany = models.ForeignKey(Accompany, on_delete=models.CASCADE)
 
 
@@ -34,4 +35,5 @@ class Ticket(models.Model): #festa_ready의 티켓 양도 교환 게시판
 class Commenttic(models.Model):
     writer_ticket = models.CharField(max_length=200)
     content_ticket = models.TextField()
+    password = models.CharField(max_length=20)
     ticket = models.ForeignKey(Ticket, on_delete=models.CASCADE)
