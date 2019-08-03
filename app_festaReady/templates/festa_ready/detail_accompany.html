@@ -25,7 +25,8 @@
 
 <form action="{% url 'comment_accompany' festa.id accompany.id %}" method="POST">
     {% csrf_token %}
-    작성자 : <input name="writer" type="text">
+    작성자 : <input name="writer" type="text">    
+    비밀번호: <input type="password" name="password"><br>
     <br>
     내용 : <textarea name="content" id="" cols="30" rows="10"></textarea>
     <input type="submit">

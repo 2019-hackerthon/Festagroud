@@ -24,16 +24,43 @@
 
     <div class="col-md-7" style="background-color:#EEE9F7; ">
 
+        <a href="{% url 'create_accompany' %}" class="btn btn-primary">글쓰기</a>
 
-        {{all_accompanies}}
+        <form action="" method="get">
+                <input type="text" name="search" value="{{ search }}">
+                <input type="submit" value="검색">
+        </form>
 
-        {% for item in accompanies.all %}
-        <p> 제목: {{item.title}}</p>
-        <p> 지역: {{item.area}}</p>
-        <p> 작성자: {{item.writer}}</p>
-        <a href="{% url 'detail_accompany' festa.id item.pk%}" class="btn btn-primary">보러가기</a>
+        <p>----------------------------</p>
+
+
+        {% for accompany in posts %}
+        <p> 제목: {{accompany.title}}</p>
+        <p> 지역: {{accompany.area}}</p>
+        <p> 작성자: {{accompany.writer}}</p>
+        <a href="{% url 'detail_accompany' festa.id accompany.id%}" class="btn btn-primary">보러가기</a>
         <p>----------------------------</p>
         {% endfor %}
+
+        <div class="container">
+
+        {% if posts.has_previous %}
+        <a href="?page=1">first</a>
+        <a href="?page={{posts.previous_page_number}}">Previous</a>
+        {% endif %}
+
+        <span>{{posts.number}}</span>
+        <span>of</span>
+        <span>{{posts.paginator.num_pages}}</span>
+
+        {% if posts.has_next %}
+        <a href="?page={{posts.next_page_number}}">Next</a>
+        <a href="?page={{posts.paginator.num_pages}}">Last</a>
+        {% endif %}
+
+        </div>
+
+        <br><br>
 
     </div>
 
