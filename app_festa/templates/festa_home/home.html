@@ -4,19 +4,27 @@
 <div class="container_home">
     <!--메인 최상단 배경 및 검색 버튼-->
     <div id="main_home">
-        <div>
-            <span>우리만의 그라운드, 페스타 그라운드</span>
-        </div>
-        <div>
-            <!--검색 버튼-->
-            <form action="{% url 'search' %}" method="GET">
-                <input type="text" name="search_bar" placeholder="ex)'지산 락 페스티벌'궁금하지 않나요?" value="{{keyword}}">
-                <input type="submit" value="검색">
-            </form>
-            <!-- 검색결과 가져오기 -->
-            {% for festa in result_festa %}
-            {{festa.name}}
-            {% endfor%}
+        <!-- 겹쳐질 div들일 올라갈 최하단 div -->
+        <div id="main_banner">
+            <!-- 실제 겹쳐지는 div, img -->
+            <img src="/static/image/top_banner.png" alt="banner">
+            <div id="foreground_div">
+                <!-- 겹쳐진 div 위에서 contents 가 올라갈 div -->
+                <div id="main_content_div">
+                    <!-- form_wrapper div -->
+                    <div id="form_wrapper">
+                        <form action="{% url 'search' %}" method="GET">
+                            <input id="editText" type="text" name="search_bar" placeholder="ex)'지산 락 페스티벌'궁금하지 않나요?"
+                                value="{{keyword}}">
+                            <input id="searchBt" type="submit" value="&#xf002" class="fa-lg">
+                        </form>
+
+                        {% for festa in result_festa %}
+                        {{festa.name}}
+                        {% endfor%}
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 
@@ -28,24 +36,23 @@
             <div id="festa_now_title_home">
                 <h5 class="main_text">Festa NOW</h5>
                 <p class="sub_text">바로 오늘, 함께 즐겨봐요</p>
-                <a href="{% url 'all_festaNow' %}">전체보기</a>
             </div>
             <!-- 전체 아이템 리스트 박스 -->
             <div class="contents_list">
                 {% for festa_now in festas.all %}
-                {% if today|date:"Y m d" >= festa_now.schedule_start|date:"Y m d" and festa_now.schedule_end|date:"Y m d" >= today|date:"Y m d" %}
+                {% if today|date:"Y m d" >=  festa_now.schedule_start|date:"Y m d" and festa_now.schedule_end|date:"Y m d" >=  today|date:"Y m d" %}
                 <!-- 개별 아이템 박스 -->
                 <div class="item_object">
                     <!-- 이미지 표시 박스 -->
                     <div class="img_wrapper">
-                        <a href="{% url 'now_detail' festa_now.id %}"><img class="thumnail" src="{{ festa_now.poster.url }}"></a>
+                        <a href="{% url 'now_detail' festa_now.id %}"><img class="thumnail"
+                                src="{{ festa_now.poster.url }}"></a>
                     </div>
                     <!-- 날짜 표시 박스 -->
                     <div class="day_wrapper">
                         <span class="day_span">
                             {{ festa_now.name }} D-day
                         </span>
-                        <p>{{festa_now.reservationnum_set.all|length}}명이 참여해요</p>
                     </div>
                 </div>
                 {% endif %}
@@ -62,8 +69,10 @@
             <div id="festa_ready_title_home">
                 <h5 class="main_text">Festa READY</h5>
                 <p class="sub_text">다가오는 행사를 200배 더 즐겁게 즐기려면?</p>
-                <a href="{% url 'all_festaReady' %}">전체보기</a>
             </div>
+            <script>
+                let festa_ready_day_cal = 0;
+            </script>
             <!-- 전체 아이템 리스트 박스 -->
             <div class="contents_list">
                 {% for festa_ready in festas.all %}
@@ -72,23 +81,29 @@
                 <div class="item_object">
                     <!-- 이미지 표시 박스 -->
                     <div class="img_wrapper">
-                        <a href="{% url 'ready_detail' festa_ready.id %}"><img class="thumnail" src="{{ festa_ready.poster.url }}"></a>
+                        <a href="{% url 'ready_detail' festa_ready.id %}"><img class="thumnail"
+                                src="{{ festa_ready.poster.url }}"></a>
                     </div>
                     <!-- 날짜 표시 박스 -->
                     <div class="day_wrapper">
-                        <span class="day_span" id="festa_ready_date_span">
-                            {{ festa_ready.name }} D-({{festa_ready.schedule|date:"d"}}-{{today|date:"d"}})
-                            <script>
-                                var dayInterval = 0;
-                                var cFestaName = "{{ festa_ready.name }}";
-                                var cToday = "{{today|date:"d"}}";
-                                var cFestaDay = "{{festa_ready.schedule|date:"d"}}";
-                                dayInterval = cFestaDay - cToday;
-                                var cFestaReadyText = cFestaName + " D -" + dayInterval
-                                document.getElementById('festa_ready_date_span').innerHTML = cFestaReadyText;
-                            </script>
+                        <span class="day_span">
+                            {{ festa_ready.name }}
                         </span>
-                        <p>{{ festa_ready.reservationnum_set.all|length}}명이 참여해요</p>
+                        <span class="festa_ready_date_span">
+                            D - {{today|date:"d"}} - {{festa_ready.schedule|date:"d"}}
+                        </span>
+                        <script type="text/javascript">
+                            festa_ready_day_cal++;
+                            var cFestaName = "{{ festa_ready.name }}";
+                            var cToday = "{{today|date:" d "}}";
+                            var cFestaDay = "{{festa_ready.schedule|date:" d "}}";
+                            dayInterval = cFestaDay - cToday;
+                            var cFestaReadyText = " D - " + dayInterval
+                            var festa_ready_dday = document.getElementsByClassName('festa_ready_date_span');
+                            for (var i in festa_ready_dday) {
+                                festa_ready_dday[i].innerHTML = cFestaReadyText;
+                            }
+                        </script>
                     </div>
                 </div>
                 {% endif %}
@@ -98,6 +113,10 @@
     </div>
 </div>
 </body>
+
+<!-- 자바 스크립트 연결 -->
+{% load static %}
+<script type="text/javascript" src="{% static 'js/home_js.js' %}"></script>
 
 <style>
     /* 전체 컨테이너 셋팅 */
@@ -109,39 +128,79 @@
     }
 
     /* 검색 배너, 페스타 나우, 페스타 레디 div 설정 */
-    #main_home,
     #festa_now_home,
     #festa_ready_home {
         width: 100%;
         padding: 2% 10%;
     }
 
-    #main_home{
+    #main_home {
         width: 100%;
-        padding: 5% 10%;
+    }
+
+    /* id=main_banner, div겹치기용 */
+    #main_banner {
+        position: relative;
+        left: 0px;
+        top: 0px;
+    }
+
+    /* id=foreground_div */
+    #foreground_div {
+        position: absolute;
+        left: 0px;
+        top: 0px;
+        width: 100%;
+        height: 100%;
+    }
+
+    #main_content_div {
         display: flex;
-        background-image: url('/static/banner.png');
-        background-size: contain;
-        background-repeat: no-repeat;
-        background-position: center center;
+        flex-direction: column;
+        width: 100%;
+        height: 100%;
     }
 
-    #main_home div{
+    #form_wrapper {
         width: 50%;
+        height: 100%;
+        align-self: flex-end;
+        display: flex;
+        padding-right: 10%;
     }
 
-    #main_home div form{
-        padding-top: 10%;
-        text-align: center;
+    #form_wrapper form {
+        width: 100%;
+        align-self: center;
+        display: block;
+        border: 1px solid #EAEAEA;
+    }
+
+    #editText {
+        width: 90%;
+        text-overflow: ellipsis;
+    }
+
+    #searchBt {
+        width: 10%;
+        padding: 1px;
+        background: #ff5543;
+        font-family: FontAwesome;
+        color: #ffffff;
+    }
+
+    #form_wrapper form input {
+        float: left;
+        border: 0px;
     }
 
     /* 페스타 나우 배경색 지정 */
-    #festa_now_home{
+    #festa_now_home {
         background: #D9E5FF;
     }
 
     /* 보여질 내용 사이즈 설정 */
-    .content_box{
+    .content_box {
         width: 100%;
     }
 
@@ -153,22 +212,22 @@
     }
 
     /* 아이템 리스트 박스 가로정렬 */
-    .contents_list{
+    .contents_list {
         display: flex;
         width: 100%;
         overflow: auto;
     }
 
     /* 아이템 간의 margin */
-    .item_object{
+    .item_object {
         width: 25%;
         margin-left: 1%;
         margin-right: 1%;
     }
 
     img {
-	width: 100%;
-    height: 240px;
+        width: 100%;
+        height: auto;
     }
 
     /* '날씨 표시' 크기 글자만큼만 차지하도록 */
@@ -190,69 +249,10 @@
         margin-right: 1%;
         width: auto;
     }
-    .sub_text{
+
+    .sub_text {
         margin-left: 10px;
     }
 </style>
-
-<script>
-    window.onload = function(){
-        this.imgResize();
-    }
-    // 썸네일 브라우저 크기에 따른 변화
-    window.onresize = function(){
-        this.imgResize();
-    }
-
-    function imgResize(){
-        // 브라우저 크기 확인
-        var browser_width = document.body.clientWidth;
-        var browser_height = document.body.clientHeight;
-
-        var thumnail = document.getElementsByClassName('thumnail');
-        var cWidth = 0;
-        var cHeight = 0;
-
-        for(var i = 0; i < thumnail.length; i++){
-            var limit = false;
-            cWidth = thumnail[i].width;
-
-            this.imgSizeLimit(browser_width, cWidth, thumnail[i]);
-
-            //가로 세로 비율 유지 및 적용
-            cHeight = cWidth * 0.68;
-            var heightToPixel = cHeight + 'px';
-            thumnail[i].style.height = heightToPixel;
-        }
-    }
-
-    //썸네일 이미지 크기 최대최소 제한
-    function imgSizeLimit(browserWidth, containerWidth, objectItem){
-        if(browserWidth >= 1290){
-            containerWidth = 320;
-            objectItem.style.width = '320px';
-            var iWrapper = document.getElementsByClassName('item_object');
-            for(var j = 0; j < iWrapper.length; j++){
-                iWrapper[j].style.width = '320px';
-            }
-        }
-        else if(browserWidth <= 600){
-            containerWidth = 120;
-            objectItem.style.width = '120px';
-            var iWrapper = document.getElementsByClassName('item_object');
-            for(var j = 0; j < iWrapper.length; j++){
-                iWrapper[j].style.width = '120px';
-            }
-        }
-        else{
-            var iWrapper = document.getElementsByClassName('item_object');
-            for(var j = 0; j < iWrapper.length; j++){
-                iWrapper[j].style.width = '25%';
-            }
-            objectItem.style.width = '100%';
-            containerWidth = objectItem.width;
-        }
-    }
-</script>
 
 {% endblock %}

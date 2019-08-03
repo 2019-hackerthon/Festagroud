@@ -1,32 +1,77 @@
 {% extends 'base.html' %}
-<!-- 
-[base.html]
-<head>
-</head>
+{% block content %}
 
-<body>
- -->
- {% block content %}
- 
-    <div class="row">
-        <div class="col-md-5">
-            <img src = "{{festa.poster.url}}" style="height:500px">
-
-        </div>
-
-        <div class="col-md-7" style="background-color:#EEE9F7; ">
-            <a class="btn btn-primary" href="{% url 'staff_login' festa.id %}">Staff</a>
-            <br>
-            <Br>
-            <a class="btn btn-primary" href="{% url 'audience_login' festa.id %}">Audience</a>
+<div id="select_box">
+    <div>어떤 역할로 참여하시나요?</div>
+    <div id="staff_or_audience_bt">
+        <form id="staff_form" action="{% url 'staff_login' festa.id %}" method="GET">
+            <input id="staffBt" type="submit" value="Staff">
+            <div>스태프로 참여합니다</div>
+        </form>
+        <form id="audience_form" action="{% url 'audience_login' festa.id%}" method="GET">
+            <input id="audienceBt" type="submit" value="Audience">
+            <div>관람객으로 참여합니다</div>
+        </form>
     </div>
+</div>
 
- 
- 
- 
- 
- 
- 
-    
-</body>
+<!-- 자바 스크립트 연결 -->
+{% load static %}
+<script type="text/javascript" src="{% static 'js/detail_js.js' %}"></script>
+
+<style>
+    #select_box {
+        height: auto;
+        width: 100%;
+        align-self: center;
+        padding-left: 15%;
+    }
+
+    #select_box div {
+        padding-bottom: 68px;
+        font-size: 36px;
+        font-weight: bold;
+    }
+
+    #staff_or_audience_bt {
+        display: flex;
+        width: 100%;
+    }
+
+    #staff_or_audience_bt form {
+        width: 28%;
+    }
+
+    #audience_form {
+        margin-left: 10%;
+        width: 28%;
+    }
+
+    #staff_form{
+        width: 28%;
+    }
+
+    #staffBt,
+    #audienceBt {
+        width: 100%;
+        font-size: 36px;
+        font-weight: bold;
+        color: #ffffff;
+    }
+
+    #staffBt {
+        background: #ff5543;
+    }
+
+    #audienceBt {
+        background: #6357ff;
+    }
+
+    #staff_or_audience_bt form div {
+        font-size: 14px;
+        opacity: 0.5;
+        text-align: center;
+        padding-top: 3%;
+    }
+</style>
 {% endblock %}
