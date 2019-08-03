@@ -40,7 +40,7 @@
                             {% for staff in staffs.all %}
                             <tr id="notice_board">
                                 <td>공지사항</td>
-                                <td class="title_td"><a href="{% url 'staff_detail' staff.id %}">{{staff.title}}</a></td>
+                                <td class="title_td"><a href="{% url 'staff_detail' festa.id staff.id %}">{{staff.title}}</a></td>
                                 <td>{{staff.writer}}</td>
                                 <td>{{staff.pub_date}}</td>
                                 <td>시간</td>
