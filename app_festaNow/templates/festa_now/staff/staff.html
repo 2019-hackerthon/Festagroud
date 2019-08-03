@@ -3,23 +3,25 @@
 
 <div class="user_page">
     <div id="user_item_selector">
-        <img src = "{{festa.poster.url}}" style="height:500px">
-            <ul class="vertical-menu">
+        <img src=http://www.kpenews.com/Files/4/News/201906/260_20190620191955168.JPG style="height:500px">
+        <ul class="vertical-menu">
 
-                <li><a href="{% url 'now_staff' festa.id %}">공지사항</a></li>
-                
-                <li><a href="{% url 'now_team' festa.id %}">팀별 게시판</a></li>
-                
-                <li><a href="{% url 'staff_map' festa.id %}">지도</a></li>
-                
-                <li><a href="">찾아가라</a></li>
+            <li><a href="{% url 'now_staff' festa.id %}">공지사항</a></li>
 
-                <li><a href="{% url 'staff_home' festa.id %}">집가자</a></li>
+            <li><a href="{% url 'now_team' festa.id %}">팀별 게시판</a></li>
 
-                </ul>
+            <li><a href="{% url 'staff_map' festa.id %}">지도</a></li>
+
+            <li><a href="">찾아가라</a></li>
+
+            <li><a href="{% url 'staff_home' festa.id %}">집가자</a></li>
+
+        </ul>
 
     </div>
+</div>
 
+<<<<<<< HEAD
     <div id="user_item_view">
         <div id="table_bt_div">
             <span><input type="submit" value="글쓰기"></span>
@@ -56,34 +58,46 @@
                             </tr>
                         </table>
             </div>
+=======
+<div id="user_item_view">
+    <div id="table_bt_div">
+        <span><input type="submit" value="글쓰기"></span>
+        <div id="table_div">
+            <table>
+                <tr>
+                    <td id="table_intro" colspan="5"> 2019 멋사 해커톤 대회에 대한 게시판 입니다.</td>
+                </tr>
+                <tr id="kind_board">
+                    <td id="title" class="headTd">구분</td>
+                    <td id="title" class="headTd">제목</td>
+                    <td id="title" class="headTd">작성자</td>
+                    <td id="title" class="headTd">날짜</td>
+                </tr>
+                <!-- 공지등록 -->
+                <tr id="notice_board">
+                    <td>공지사항</td>
+                    <td class="title_td"><a href="#test">제목</a></td>
+                    <td>작성자</td>
+                    <td>날짜 시간</td>
+                </tr>
+                <!-- 내용등록 -->
+                <tr id="content_board">
+                    <td>번호</td>
+                    <td class="title_td"><a href="test">(지역) 제목</a></td>
+                    <td>작성자</td>
+                    <td>날짜 시간</td>
+                </tr>
+            </table>
+>>>>>>> 5fe127f7a0d69bfb6b6acbb3be6b81c03e5957ae
         </div>
     </div>
 </div>
 
-       
-
-</body>
+<!-- 자바 스크립트 연결 -->
+{% load static %}
+<script type="text/javascript" src="{% static 'js/detail_js.js' %}"></script>
 
 <style>
-    .user_page {
-        width: 100%;
-        display: flex;
-    }
-
-    #user_item_selector,
-    #user_item_view {
-        width: 50%;
-        height: 100%;
-    }
-
-    #user_item_view {
-        background: #EEE9F7;
-        padding-top: 3%;
-        padding-bottom: 3%;
-        padding-left: 1.5%;
-        padding-right: 7%;
-    }
-
     #table_bt_div {
         background: #ffffff;
         padding-left: 3%;
@@ -92,53 +106,43 @@
         padding-bottom: 5%;
     }
 
-    #table_div{
+    #table_div {
         width: 100%;
     }
-    
-    #notice_board, #kind_board{
+
+    #notice_board,
+    #kind_board {
         border-bottom: 1px solid #6357ff;
     }
-    #notice_board{
+
+    #notice_board {
         color: #6357ff;
     }
 
-    #notice_board a{
+    #notice_board a {
         color: #6357ff;
         text-decoration: none;
     }
-    #content_board{
+
+    #content_board {
         border-bottom: 1px solid #D5D5D5;
     }
-    #content_board a{
+
+    #content_board a {
         color: #000000;
         text-decoration: none;
     }
-    td{
+
+    td {
         width: 10%;
     }
-    .title_td{
+
+    .title_td {
         width: 50%;
     }
-    table{
+
+    table {
         width: 100%;
     }
 </style>
-
-<script>
-        window.onload = function(){
-            this.absoluteHeight();
-    
-        }
-    
-        window.onresize = function(){
-            this.absoluteHeight();
-        }
-    
-        function absoluteHeight(){
-            var browser_height = document.body.clientHeight;
-            var maxScreen = document.getElementsByClassName('user_page')
-            maxScreen[0].style.height = browser_height + 'px';
-        }
-    </script>
 {% endblock %}
