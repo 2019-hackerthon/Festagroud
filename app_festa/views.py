@@ -23,7 +23,8 @@ def create(request) :
         festa = Festa()
         festa.number = num
         festa.name= request.POST['name']
-        festa.schedule = request.POST['schedule']
+        festa.schedule_start = request.POST['schedule_start']
+        festa.schedule_end = request.POST['schedule_end']
         festa.space = request.POST['space']
         festa.purchase_link= request.POST['purchase_link']
         festa.host= request.POST['host']
@@ -82,7 +83,7 @@ def confirm(request) :
     number = request.POST['register_num']
     number_object = RegisterNum.objects.get(register_num = number)
     festa_object=number_object.festa
-    return render(request, 'festa_home/confirm.html', {'festa_object':festa_object})
+    return render(request, 'festa_home/confirm.html', {'festa':festa_object})
 
 def all_festaNow(request) :
     festas = Festa.objects

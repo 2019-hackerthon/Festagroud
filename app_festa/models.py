@@ -10,7 +10,8 @@ class RegisterNum(models.Model) :
 class Festa(models.Model) :
     number = models.OneToOneField(RegisterNum, on_delete = models.CASCADE)
     name = models.CharField(max_length = 200) #공연제목
-    schedule = models.DateField('date published') #공연날짜
+    schedule_start = models.DateField('date published') #공연시작날짜
+    schedule_end = models.DateField('date published') #공연끝날짜
     space = models.CharField(max_length = 200) #공연장소
     purchase_link = models.CharField(max_length = 200) #공식 티켓판매처 링크
     host = models.CharField(max_length = 200) #공연 주최/기획사
@@ -23,7 +24,7 @@ class Festa(models.Model) :
     def __str__(self) :
         return self.name
     class Meta :
-        ordering = ['schedule'] #가장 빠른 festa부터 게시
+        ordering = ['schedule_start'] #가장 빠른 festa부터 게시
 
 
 class Staff(models.Model):

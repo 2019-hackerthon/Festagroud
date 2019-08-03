@@ -33,7 +33,7 @@
             <!-- 전체 아이템 리스트 박스 -->
             <div class="contents_list">
                 {% for festa_now in festas.all %}
-                {% if festa_now.schedule|date:"Y m d" == today|date:"Y m d" %}
+                {% if today|date:"Y m d" >= festa_now.schedule_start|date:"Y m d" and festa_now.schedule_end|date:"Y m d" >= today|date:"Y m d" %}
                 <!-- 개별 아이템 박스 -->
                 <div class="item_object">
                     <!-- 이미지 표시 박스 -->
@@ -67,7 +67,7 @@
             <!-- 전체 아이템 리스트 박스 -->
             <div class="contents_list">
                 {% for festa_ready in festas.all %}
-                {% if festa_ready.schedule|date:"Y m d" > today|date:"Y m d" %}
+                {% if festa_ready.schedule_start|date:"Y m d" > today|date:"Y m d" %}
                 <!-- 개별 아이템 박스 -->
                 <div class="item_object">
                     <!-- 이미지 표시 박스 -->

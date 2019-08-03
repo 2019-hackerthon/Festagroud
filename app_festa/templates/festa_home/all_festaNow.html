@@ -7,7 +7,7 @@
     </form>
 
     {% for festa_now in festa.all %}
-    {% if festa_now.schedule|date:"Y m d" == today|date:"Y m d" %}
+    {% if today|date:"Y m d" >= festa_now.schedule_start|date:"Y m d" and festa_now.schedule_end|date:"Y m d" >= today|date:"Y m d" %}
         <img src="{{festa_now.poster.url}}">
         <p>{{festa_now.name}}</p>
 
