@@ -13,7 +13,7 @@
             <img src ="{{festa.poster.url}}"style="height:500px">
             <ul class="vertical-menu">
 
-                <li><a href="{% url 'now_staff' festa.id %}">공지사항</a></li>
+                <li><a href="{% url 'staff_main' festa.id %}">공지사항</a></li>
                 
                 <li><a href="{% url 'now_team' festa.id %}">팀별게시판</a></li>
                 
@@ -21,7 +21,7 @@
                 
                 <li><a href=""  >찾아가라</a></li>
 
-                <li><a href="{% url 'staff_home' festa.id %}">집가자</a></li>
+                <li><a href="">집가자</a></li>
 
                 </ul>
         </div>

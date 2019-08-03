@@ -49,8 +49,8 @@
                 <div id="user_item_selector">
                         <img src="{{festa.poster.url}}" style="height:500px">
                         <ul class="vertical-menu">
-                
-                            <li><a href="{% url 'now_staff' festa.id %}">공지사항</a></li>
+                            <!-- url 이름 바껴서 밑에 한줄만 바꿨어욤 ㅎㅎ  -->
+                            <li><a href="{% url 'staff_main' festa.id %}">공지사항</a></li>
                 
                             <li><a href="{% url 'now_team' festa.id %}">팀별 게시판</a></li>
                 

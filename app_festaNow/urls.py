@@ -5,9 +5,6 @@ from django.conf.urls.static import static
 
 
 urlpatterns = [
-    path('<int:festa_id>/staff/staff', views.now_staff, name="now_staff"),
-    path('<int:festa_id>/audience/audience', views.now_audience, name="now_audience"),
-    
     path('<int:festa_id>/audience/detail_now/<int:now_id>', views.detail_now, name="detail_now"),
     path('<int:festa_id>/audience/now', views.now_now, name="now_now"),
     path('<int:festa_id>/audience/new_now', views.new_now, name="new_now"),
@@ -16,6 +13,7 @@ urlpatterns = [
     path('<int:festa_id>/audience/update_now/<int:now_id>', views.update_now, name="update_now"),
     path('<int:festa_id>/audience/create_now', views.create_now, name="create_now"),
     path('<int:festa_id>/audience/comment_now/<int:now_id>', views.comment_now, name="comment_now"),
+    path('<int:festa_id>/audience/map', views.audience_map, name="audience_map"),
     path('<int:festa_id>/home', views.audience_home, name="audience_home"),
 
     path('<int:festa_id>/staff/detail_team/<int:team_id>', views.detail_team, name="detail_team"),
@@ -26,6 +24,7 @@ urlpatterns = [
     path('<int:festa_id>/staff/update_team/<int:team_id>', views.update_team, name="update_team"),
     path('<int:festa_id>/staff/create_team/', views.create_team, name="create_team"),
     path('<int:festa_id>/staff/comment_team/<int:team_id>', views.comment_team, name="comment_team"),
+    path('<int:festa_id>/staff/map', views.staff_map, name="staff_map"),
     path('<int:festa_id>/home', views.staff_home, name="staff_home"),
 
     path('<int:festa_id>/detail_home/<int:home_id>', views.detail_home, name="detail_home"),
@@ -36,12 +35,9 @@ urlpatterns = [
     path('<int:festa_id>/create_home/', views.create_home, name="create_home"),
     path('<int:festa_id>/comment_home/<int:home_id>', views.comment_home, name="comment_home"),
 
-    path('<int:festa_id>/confirm_now', views.confirm_now, name="confirm_now"),
+    path('<int:festa_id>/audience/audience_main', views.audience_main, name="audience_main"),
     path('<int:festa_id>/audience_login', views.audience_login, name="audience_login"),
-    path('<int:festa_id>/confirm_now2', views.confirm_now2, name="confirm_now2"),
+    path('<int:festa_id>/staff/staff_main', views.staff_main, name="staff_main"),
     path('<int:festa_id>/staff_login', views.staff_login, name="staff_login"),
-
-    path('<int:festa_id>/audience/map', views.audience_map, name="audience_map"),
-    path('<int:festa_id>/staff/map', views.staff_map, name="staff_map"),
 
 ]+ static(settings.MEDIA_URL, document_root = settings.MEDIA_ROOT)

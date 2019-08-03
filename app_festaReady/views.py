@@ -7,9 +7,9 @@ from django.utils import timezone
 from django.core.paginator import Paginator
 
 # Create your views here.
-def accompany(request, festa_id) :
+def ready_main(request, festa_id) :
     festa = get_object_or_404(Festa, pk = festa_id)
-    return render(request, 'festa_ready/accompany.html', {'festa': festa})
+    return render(request, 'festa_ready/ready_main.html', {'festa': festa})
 
 def list_accompany(request, festa_id):
     festa = get_object_or_404(Festa, pk = festa_id)

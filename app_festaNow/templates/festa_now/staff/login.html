@@ -4,7 +4,7 @@
  <div id="certificate_box">
         <div id="explain_text_box">인증번호를 입력해주세요</div>
         <div id="booked_name_and_num">
-            <form id="edit_box_form" action="{% url 'confirm_now2' festa.id %}" method="POST">
+            <form id="edit_box_form" action="{% url 'staff_main' festa.id %}" method="POST">
                 {% csrf_token %}
                 <div id="invisible_edit_box">
                     <div id="reserve_span">

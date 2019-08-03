@@ -7,16 +7,56 @@ from django.utils import timezone
 
 
 # Create your views here.
-def now_staff(request, festa_id):
-    staffs = Staff.objects
-    festa = get_object_or_404(Festa, pk = festa_id)
-    return render(request, 'festa_now/staff/staff.html', {'festa':festa, 'staffs':staffs})
 
-def now_audience(request, festa_id):
-    festa = get_object_or_404(Festa, pk = festa_id)
-    return render(request, 'festa_now/audience/audience.html', {'festa':festa})
+##################### staff_main이랑 audience_main으로 대체함#####################################
+# def now_staff(request, festa_id):
+#     staffs = Staff.objects
+#     festa = get_object_or_404(Festa, pk = festa_id)
+#     return render(request, 'festa_now/staff/staff.html', {'festa':festa, 'staffs':staffs})
 
-## festa.now_audience_festnow게시판
+# def now_audience(request, festa_id):
+#     festa = get_object_or_404(Festa, pk = festa_id)
+#     return render(request, 'festa_now/audience/audience.html', {'festa':festa})
+#################################################################################################
+
+########## festa_now/staff, audience/main(공지사항)+login ##########
+def audience_login(request, festa_id):
+    festa = get_object_or_404(Festa, pk = festa_id)
+    return render(request, 'festa_now/audience/login.html', {'festa': festa})
+
+def staff_login(request, festa_id):
+    festa = get_object_or_404(Festa, pk = festa_id)
+    return render(request, 'festa_now/staff/login.html', {'festa': festa})
+
+def audience_main(request, festa_id) :
+    if request.method == 'POST' :
+        festa = get_object_or_404(Festa, pk = festa_id)
+        first = request.POST['reservation_name']
+        second = request.POST["reservation_num"]
+        num_object = ReservationNum.objects.get(reservation_num = second)
+        name_object = ReservationNum.objects.get(reservation_name = first)
+        first = name_object
+        second = num_object
+        return render(request, 'festa_now/audience/audience_main.html', {'festa':festa})
+    else :
+        festa = get_object_or_404(Festa, pk = festa_id)
+        return render(request, 'festa_now/audience/audience_main.html', {'festa':festa})
+
+def staff_main(request, festa_id) :
+    if request.method == 'POST':
+        festa = get_object_or_404(Festa, pk = festa_id)
+        first = request.POST['reservation_name']
+        second = request.POST["reservation_num"]
+        num_object = ReservationNum.objects.get(reservation_num = second)
+        name_object = ReservationNum.objects.get(reservation_name = first)
+        first = name_object
+        second = num_object
+        return render(request, 'festa_now/staff/staff_main.html', {'festa':festa})
+    else :
+        festa = get_object_or_404(Festa, pk = festa_id)
+        return render(request, 'festa_now/staff/staff_main.html', {'festa':festa})
+
+########## festa_now/audience/festnow게시판 ##########
 def now_now(request, festa_id):
     festa = get_object_or_404(Festa, pk = festa_id)
     nows = Now.objects.filter(festa = festa.id)
@@ -67,7 +107,17 @@ def create_now(request, festa_id):
         return redirect('/festa_now/{}/audience/detail_now/{}'.format(festa.id, now.id))
     return render(request, 'festa_now/audience/now.html', {'festa':festa})
 
-## festa.now_staff_팀별게시판
+########## festa_now/audience/map ##########
+def audience_map(request, festa_id):
+    festa = get_object_or_404(Festa, pk = festa_id)
+    return render(request, 'festa_now/audience/map.html', {'festa':festa})
+
+########## festa_now/staff/map ##########
+def staff_map(request, festa_id):
+    festa = get_object_or_404(Festa, pk = festa_id)
+    return render(request, 'festa_now/staff/map.html', {'festa':festa})
+
+########## festa_now/staff/팀별게시판 ##########
 def now_team(request, festa_id):
     festa = get_object_or_404(Festa, pk = festa_id)
     teams = Team.objects.filter(festa = festa.id)
@@ -117,35 +167,7 @@ def create_team(request, festa_id):
         return redirect('/festa_now/{}/staff/detail_team/{}'.format(festa.id, team.id))
     return render(request, 'festa_now/staff/team.html', {'festa': festa})
 
-## 댓글 
-def comment_now(request, festa_id, now_id):
-    festa = get_object_or_404(Festa, pk = festa_id)
-    comment = Commentn()
-    comment.writer_now = request.POST['writer']
-    comment.content_now = request.POST['content']
-    comment.now = get_object_or_404(Now, pk=now_id)
-    comment.save()
-    return redirect('detail_now', festa_id, now_id)
-
-def comment_team(request, festa_id, team_id):
-    festa = get_object_or_404(Festa, pk = festa_id)
-    comment = Commentt()
-    comment.writer_team = request.POST['writer']
-    comment.content_team = request.POST['content']
-    comment.team = get_object_or_404(Team, pk=team_id)
-    comment.save()
-    return redirect('detail_team', festa_id, team_id)
-
-def comment_home(request, festa_id, home_id):
-    festa = get_object_or_404(Festa, pk = festa_id)
-    comment = Commenth()
-    comment.writer_home = request.POST['writer']
-    comment.content_home = request.POST['content']
-    comment.home = get_object_or_404(Home, pk=home_id)
-    comment.save()
-    return redirect('detail+home', festa_id, home_id)
-
-##집가자
+########## festa_now/staff+audience/home(집가자 게시판) ##########
 def audience_home(request, festa_id):
     festa = get_object_or_404(Festa, pk = festa_id)
     homes = Home.objects.filter(festa = festa.id)
@@ -202,45 +224,30 @@ def create_home(request, festa_id):
         return redirect('/festa_now/{}/home'.format(festa.id))
     return render(request, 'festa_now/deatil_home.html', {'festa':festa})
 
-
-##staff audience now 로그인
-
-def audience_login(request, festa_id):
+########## festa_now/staff+audience/festanow게시판, 팀별게시판, 집가자게시판 댓글들 ##########
+def comment_now(request, festa_id, now_id):
     festa = get_object_or_404(Festa, pk = festa_id)
-    return render(request, 'festa_now/audience/login.html', {'festa': festa})
+    comment = Commentn()
+    comment.writer_now = request.POST['writer']
+    comment.content_now = request.POST['content']
+    comment.now = get_object_or_404(Now, pk=now_id)
+    comment.save()
+    return redirect('detail_now', festa_id, now_id)
 
-def staff_login(request, festa_id):
+def comment_team(request, festa_id, team_id):
     festa = get_object_or_404(Festa, pk = festa_id)
-    return render(request, 'festa_now/staff/login.html', {'festa': festa})
+    comment = Commentt()
+    comment.writer_team = request.POST['writer']
+    comment.content_team = request.POST['content']
+    comment.team = get_object_or_404(Team, pk=team_id)
+    comment.save()
+    return redirect('detail_team', festa_id, team_id)
 
-def confirm_now(request, festa_id) :
+def comment_home(request, festa_id, home_id):
     festa = get_object_or_404(Festa, pk = festa_id)
-    first = request.POST['reservation_name']
-    second = request.POST["reservation_num"]
-    num_object = ReservationNum.objects.get(reservation_num = second)
-    name_object = ReservationNum.objects.get(reservation_name = first)
-    first = name_object
-    second = num_object
-    return render(request, 'festa_now/audience/audience.html', {'festa':festa})
-
-def confirm_now2(request, festa_id) :
-    festa = get_object_or_404(Festa, pk = festa_id)
-    first = request.POST['reservation_name']
-    second = request.POST["reservation_num"]
-    num_object = ReservationNum.objects.get(reservation_num = second)
-    name_object = ReservationNum.objects.get(reservation_name = first)
-    first = name_object
-    second = num_object
-    return render(request, 'festa_now/staff/staff.html', {'festa':festa})
-
-
-def staff_map(request, festa_id):
-    festa = get_object_or_404(Festa, pk = festa_id)
-    return render(request, 'festa_now/staff/map.html', {'festa':festa})
-
-def audience_map(request, festa_id):
-    festa = get_object_or_404(Festa, pk = festa_id)
-    return render(request, 'festa_now/audience/map.html', {'festa':festa})
-
-
-
+    comment = Commenth()
+    comment.writer_home = request.POST['writer']
+    comment.content_home = request.POST['content']
+    comment.home = get_object_or_404(Home, pk=home_id)
+    comment.save()
+    return redirect('detail+home', festa_id, home_id)
