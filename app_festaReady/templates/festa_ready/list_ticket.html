@@ -23,17 +23,43 @@
     </div>
 
     <div class="col-md-7" style="background-color:#EEE9F7; ">
-        
-        {{all_tickets}}
 
-        {% for item in tickets.all %}
-        <p> 제목: {{item.title}}</p>
-        <p> 지역: {{item.deal_type}}</p>
-        <p> 작성자: {{item.writer}}</p>
-        <a href="{% url 'detail_ticket' festa.id item.pk %}" class="btn btn-primary">보러가기</a>
-        <p>-------------------------</p>
-
-        {% endfor %}
+            <a href="{% url 'create_ticket' %}" class="btn btn-primary">글쓰기</a>
+            
+            <form action="" method="get">
+                    <input type="text" name="search" value="{{ search }}">
+                    <input type="submit" value="검색">
+            </form>
+            <p>----------------------------</p>
+    
+    
+            {% for ticket in posts %}
+            <p> 제목: {{ticket.title}}</p>
+            <p> 지역: {{ticket.deal_type}}</p>
+            <p> 작성자: {{ticket.writer}}</p>
+            <a href="{% url 'detail_ticket' festa.id ticket.id%}" class="btn btn-primary">보러가기</a>
+            <p>----------------------------</p>
+            {% endfor %}
+    
+            <div class="container">
+    
+            {% if posts.has_previous %}
+            <a href="?page=1">first</a>
+            <a href="?page={{posts.previous_page_number}}">Previous</a>
+            {% endif %}
+    
+            <span>{{posts.number}}</span>
+            <span>of</span>
+            <span>{{posts.paginator.num_pages}}</span>
+    
+            {% if posts.has_next %}
+            <a href="?page={{posts.next_page_number}}">Next</a>
+            <a href="?page={{posts.paginator.num_pages}}">Last</a>
+            {% endif %}
+    
+            </div>
+    
+            <br><br>
 
     </div>
 
