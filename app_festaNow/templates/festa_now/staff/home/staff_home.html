@@ -1,0 +1,30 @@
+{% extends 'base.html' %}
+{% block content %}
+
+<div id="team_div">
+    <h1>집가자</h1>
+    <a href="{% url 's_new_home' festa.id %}">글쓰기 </a>
+
+    <hr>
+    {% for home in homes.all %}
+    <br>
+    <a href="{% url 's_detail_home' festa.id home.id %}"> : {{home.title}}</a>
+    {{home.region}}
+    {{home.writer}}
+    {{home.pub_date}}
+    <br>
+    <a href="{% url 's_edit_home' festa.id home.id %}" class="card-link">수정하기</a>
+    <a href="{% url 's_delete_home' festa.id home.id %}" class="card-link">삭제하기</a>
+
+    <div class="middle">
+        <hr>
+    </div>
+
+    {% endfor %}
+</div>
+<!-- 자바 스크립트 연결 -->
+{% load static %}
+<script type="text/javascript" src="{% static 'js/standard_js.js' %}"></script>
+
+<style></style>
+{% endblock %}

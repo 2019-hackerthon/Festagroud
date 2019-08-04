@@ -48,9 +48,9 @@
             </p>
             <input type="button" value="뒤로가기" onclick="history.back(-3);">
             <span class="var"></span>
-            <a href="{% url 'edit_home' festa.id home.id%}" class="store">수정하기</a>
+            <a href="{% url 'a_edit_home' festa.id home.id%}" class="store">수정하기</a>
             <span class="var"></span>
-            <a href="{%url 'delete_home' festa.id home.id %}" class="store">삭제하기</a>
+            <a href="{%url 'a_delete_home' festa.id home.id %}" class="store">삭제하기</a>
 
             <h2>comments</h2>
             {% for comment in comments %}
@@ -59,7 +59,7 @@
             {{comment.content_home}}
             <hr>
             {% endfor%}
-            <form action="{% url 'comment_home' festa.id home.id %}" method="POST">
+            <form action="{% url 'a_comment_home' festa.id home.id %}" method="POST">
                 {% csrf_token %}
                 작성자 : <input name="writer" type="text">
                 <br>

@@ -14,7 +14,7 @@
     <input type="button" value="뒤로가기" onclick="history.back(-1);">
     <br>
     <br>
-    <form action="{% url 'create_home' festa.id %}" method="POST">
+    <form action="{% url 'a_create_home' festa.id %}" method="POST">
         {% csrf_token %}
         [Title] : <input type="text" name='title' placeholder="제목을 입력해 주세요">
         <br>

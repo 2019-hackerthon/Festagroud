@@ -172,40 +172,34 @@ def create_team(request, festa_id):
         return redirect('detail_team', festa.id, team.pk)
     return render(request, 'festa_now/staff/team.html', {'festa': festa})
 
-########## festa_now/staff+audience/home(집가자 게시판) ##########
+########## festa_now/audience/home(집가자 게시판) ##########
 def audience_home(request, festa_id):
     festa = get_object_or_404(Festa, pk = festa_id)
     homes = Home.objects.filter(festa = festa.id)
-    return render(request, 'festa_now/audience/audience_home.html', {'homes':homes, 'festa':festa})
-
-def staff_home(request, festa_id):
+    return render(request, 'festa_now/audience/home/audience_home.html', {'homes':homes, 'festa':festa})
+def a_new_home(request, festa_id):
     festa = get_object_or_404(Festa, pk = festa_id)
-    homes = Home.objects.filter(festa = festa.id)
-    return render(request, 'festa_now/staff/staff_home.html', {'homes':homes, 'festa': festa})    
+    return render(request, 'festa_now/audience/home/new_home.html',{'festa': festa})
 
-def new_home(request, festa_id):
-    festa = get_object_or_404(Festa, pk = festa_id)
-    return render(request, 'festa_now/new_home.html',{'festa': festa})
-
-def detail_home(request, festa_id, home_id):
+def a_detail_home(request, festa_id, home_id):
     festa = get_object_or_404(Festa, pk = festa_id)
     home = Home.objects.get(pk=home_id)
     comments_list = Commenth.objects.filter(home = home_id)
-    return render(request, 'festa_now/detail_home.html', {'home' : home, 'comments' : comments_list, 'festa': festa})   
+    return render(request, 'festa_now/audience/home/detail_home.html', {'home' : home, 'comments' : comments_list, 'festa': festa})   
 
-def delete_home(request, festa_id, home_id):
+def a_delete_home(request, festa_id, home_id):
     festa = get_object_or_404(Festa, pk = festa_id)
     delete_home = get_object_or_404(Home, pk=home_id)
     delete_home.delete()
-    return redirect('home')
+    return redirect('audience_home', festa_id)
 
-def edit_home(request, festa_id, home_id):
+def a_edit_home(request, festa_id, home_id):
     festa = get_object_or_404(Festa, pk = festa_id)
     edit_home = Home.objects.get(pk=home_id)
-    return render(request, 'festa_now/edit_home.html', {'home': edit_home, 'festa': festa})
+    return render(request, 'festa_now/audience/home/edit_home.html', {'home': edit_home, 'festa': festa})
 
 
-def update_home(request, festa_id, home_id):
+def a_update_home(request, festa_id, home_id):
     festa = get_object_or_404(Festa, pk = festa_id)
     update_home = Home.objects.get(id = home_id)
     update_home.title = request.POST["title"]
@@ -213,9 +207,9 @@ def update_home(request, festa_id, home_id):
     update_home.body = request.POST['body']
     update_home.region = request.POST['region']
     update_home.save()
-    return redirect('detail_home', festa.id, update_home.pk)
+    return redirect('a_detail_home', festa.id, update_home.pk)
 
-def create_home(request, festa_id):
+def a_create_home(request, festa_id):
     festa = get_object_or_404(Festa, pk = festa_id)
     if request.method=="POST":
         home = Home()
@@ -226,8 +220,60 @@ def create_home(request, festa_id):
         home.region = request.POST['region']
         home.pub_date = timezone.datetime.now()
         home.save()
-        return redirect('detail_home', festa.id, home.pk)
-    return render(request, 'festa_now/deatil_home.html', {'festa':festa})
+        return redirect('a_detail_home', festa.id, home.pk)
+    return render(request, 'festa_now/audience/home/deatil_home.html', {'festa':festa})
+
+########## festa_now/staff/home(집가자 게시판) ###########
+def staff_home(request, festa_id):
+    festa = get_object_or_404(Festa, pk = festa_id)
+    homes = Home.objects.filter(festa = festa.id)
+    return render(request, 'festa_now/staff/home/staff_home.html', {'homes':homes, 'festa': festa})    
+
+def s_new_home(request, festa_id):
+    festa = get_object_or_404(Festa, pk = festa_id)
+    return render(request, 'festa_now/staff/home/new_home.html',{'festa': festa})
+
+def s_detail_home(request, festa_id, home_id):
+    festa = get_object_or_404(Festa, pk = festa_id)
+    home = Home.objects.get(pk=home_id)
+    comments_list = Commenth.objects.filter(home = home_id)
+    return render(request, 'festa_now/staff/home/detail_home.html', {'home' : home, 'comments' : comments_list, 'festa': festa})   
+
+def s_delete_home(request, festa_id, home_id):
+    festa = get_object_or_404(Festa, pk = festa_id)
+    delete_home = get_object_or_404(Home, pk=home_id)
+    delete_home.delete()
+    return redirect('staff_home', festa_id)
+
+def s_edit_home(request, festa_id, home_id):
+    festa = get_object_or_404(Festa, pk = festa_id)
+    edit_home = Home.objects.get(pk=home_id)
+    return render(request, 'festa_now/staff/home/edit_home.html', {'home': edit_home, 'festa': festa})
+
+
+def s_update_home(request, festa_id, home_id):
+    festa = get_object_or_404(Festa, pk = festa_id)
+    update_home = Home.objects.get(id = home_id)
+    update_home.title = request.POST["title"]
+    update_home.writer = request.POST['writer']
+    update_home.body = request.POST['body']
+    update_home.region = request.POST['region']
+    update_home.save()
+    return redirect('s_detail_home', festa.id, update_home.pk)
+
+def s_create_home(request, festa_id):
+    festa = get_object_or_404(Festa, pk = festa_id)
+    if request.method=="POST":
+        home = Home()
+        home.festa = get_object_or_404(Festa, pk = festa_id)
+        home.title = request.POST['title']
+        home.body = request.POST['body']
+        home.writer = request.POST['writer']
+        home.region = request.POST['region']
+        home.pub_date = timezone.datetime.now()
+        home.save()
+        return redirect('s_detail_home', festa.id, home.pk)
+    return render(request, 'festa_now/staff/home/deatil_home.html', {'festa':festa})
 
 ########## festa_now/staff+audience/festanow게시판, 팀별게시판, 집가자게시판 댓글들 ##########
 def comment_now(request, festa_id, now_id):
@@ -248,11 +294,20 @@ def comment_team(request, festa_id, team_id):
     comment.save()
     return redirect('detail_team', festa_id, team_id)
 
-def comment_home(request, festa_id, home_id):
+def s_comment_home(request, festa_id, home_id):
     festa = get_object_or_404(Festa, pk = festa_id)
     comment = Commenth()
     comment.writer_home = request.POST['writer']
     comment.content_home = request.POST['content']
     comment.home = get_object_or_404(Home, pk=home_id)
     comment.save()
-    return redirect('detail+home', festa_id, home_id)
+    return redirect('s_detail_home', festa_id, home_id)
+
+def a_comment_home(request, festa_id, home_id):
+    festa = get_object_or_404(Festa, pk = festa_id)
+    comment = Commenth()
+    comment.writer_home = request.POST['writer']
+    comment.content_home = request.POST['content']
+    comment.home = get_object_or_404(Home, pk=home_id)
+    comment.save()
+    return redirect('a_detail_home', festa_id, home_id)

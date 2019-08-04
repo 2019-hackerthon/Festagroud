@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+<center>
+    <h1>집가자</h1>
+    <input type="button" value="뒤로가기" onclick="history.back(-1);">
+    <br>
+    <br>
+    <form action="{% url 's_create_home' festa.id %}" method="POST">
+        {% csrf_token %}
+        [Title] : <input type="text" name='title' placeholder="제목을 입력해 주세요">
+        <br>
+        <br>
+        [Writer] : <input type="text" name='writer'>
+        <br>
+        <br>
+        [Region] : 
+        <select name="region">
+            <option name="서울">서울</option>
+            <option name="경기">경기</option>
+            <option name="제주">제주</option>
+        </select>
+        <br>
+        <br>
+        [Body]
+        <br>
+        <textarea name="body" id="" cols="30" rows="10" placeholder="내용을 입력해 주세요" style="padding:10px; margin:10px;"></textarea>
+        <br>
+        
+        <button type='submit'>게시글 작성</button>
+    </form>
+</center>
+</body>
+
+</html>

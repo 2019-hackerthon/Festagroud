@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta http-equiv="X-UA-Compatible" content="ie=edge">
+        <title>Document</title>
+</head>
+
+<body>
+<center>
+        <h1>글을 수정중입니다.</h1>
+        <form action="{% url 's_update_home' festa.id home.id %}" method="POST">
+                {% csrf_token %}
+                [Title] : <input type="text" name='title' value="{{home.title}}">
+                <br>
+                <br>
+                [Wirter] : <input type="text" name='writer' value="{{home.writer}}">
+                <br>
+                <br>
+                
+                [Region] : 
+                <select name="region">
+                    <option name="서울">서울</option>
+                    <option name="경기">경기</option>
+                    <option name="제주">제주</option>
+                </select>
+                <br>
+                <br>
+                [Body]
+                <br>
+                <textarea name="body" id="" cols="30" rows="10"
+                        placeholder="write your content"style="padding:10px; margin:10px;" >{{home.body}}</textarea>
+                <br>
+                <br>
+                <button type='submit'>게시글 수정</button>
+        </form>
+</center>
+</body>
+
+</html>

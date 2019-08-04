@@ -28,25 +28,25 @@
 
     <div class="col-md-7" style="background-color:#EEE9F7; ">
       
-        <h1>Festa now</h1>
-            <a href="{% url 'new_now' festa.id %}">글쓰기 </a>
-            
+            <h1>집가자</h1>
+            <a href="{% url 'a_new_home' festa.id %}">글쓰기 </a>
+        
             <hr>
-            {% for now in nows.all %}
+            {% for home in homes.all %}
             <br>
-            <a href="{% url 'detail_now' festa.id now.id %}"> : {{now.title}}</a> 
-            {{now.writer}}
-            {{now.pub_date}}
+            <a href="{% url 'a_detail_home' festa.id home.id %}"> : {{home.title}}</a>
+            {{home.region}}
+            {{home.writer}}
+            {{home.pub_date}}
             <br>
-            <a href="{% url 'edit_now' festa.id now.id %}" class="card-link">수정하기</a>
-            <a href="{% url 'delete_now' festa.id now.id %}" class="card-link">삭제하기</a>
-            
+            <a href="{% url 'a_edit_home' festa.id home.id %}" class="card-link">수정하기</a>
+            <a href="{% url 'a_delete_home' festa.id home.id %}" class="card-link">삭제하기</a>
+        
             <div class="middle">
                 <hr>
             </div>
-                
+        
             {% endfor %}
-       
 
 
     </div>
