@@ -16,18 +16,24 @@
     <br>
     <form action="{%url 'create_team' festa.id %}" method="POST">
         {% csrf_token %}
-        [Title] : <input type="text" name='title'>
+        [Title] : <input type="text" name='title' placeholder="제목을 입력해 주세요">
         <br>
         <br>
         [Writer] : <input type="text" name='writer'>
         <br>
         <br>
+        [POST_TYPE]
+        <select name="post_type">
+            <option name="중요">중요</option>
+            <option name="질문">질문</option>
+        </select>
+        <br>
         [Body]
         <br>
-        <textarea name="body" id="" cols="30" rows="10" placeholder="write your content" style="padding:10px; margin:10px;"></textarea>
+        <textarea name="body" id="" cols="30" rows="10" placeholder="내용을 입력해 주세요 style="padding:10px; margin:10px;"></textarea>
         <br>
         
-        <button type='submit'>작성하기</button>
+        <button type='submit'>게시글 작성</button>
     </form>
 </center>
 </body>

@@ -19,7 +19,13 @@
                 [Wirter] : <input type="text" name='writer' value="{{home.writer}}">
                 <br>
                 <br>
-                [Region] : <input type="text" name='region' value="{{home.region}}">
+                
+                [Region] : 
+                <select name="region">
+                    <option name="서울">서울</option>
+                    <option name="경기">경기</option>
+                    <option name="제주">제주</option>
+                </select>
                 <br>
                 <br>
                 [Body]
@@ -28,7 +34,7 @@
                         placeholder="write your content"style="padding:10px; margin:10px;" >{{home.body}}</textarea>
                 <br>
                 <br>
-                <button type='submit'>수정하기</button>
+                <button type='submit'>게시글 수정</button>
         </form>
 </center>
 </body>

@@ -35,7 +35,7 @@
     
             {% for ticket in posts %}
             <p> 제목: {{ticket.title}}</p>
-            <p> 지역: {{ticket.deal_type}}</p>
+            <p> 거래방법: {{ticket.deal_type}}</p>
             <p> 작성자: {{ticket.writer}}</p>
             <a href="{% url 'detail_ticket' festa.id ticket.id%}" class="btn btn-primary">보러가기</a>
             <p>----------------------------</p>

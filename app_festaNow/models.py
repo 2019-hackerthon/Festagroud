@@ -7,6 +7,12 @@ class Now(models.Model):
     festa = models.ForeignKey(Festa, on_delete=models.CASCADE)
     title = models.CharField(max_length=200)
     writer = models.CharField(max_length=100)
+    POST_TYPE = (
+        ('now', 'now'),
+        ('질문', '질문'),
+        ('나눔', '나눔'),
+    )
+    post_type = models.CharField(max_length = 100, choices = POST_TYPE)
     pub_date = models.DateTimeField('date published')
     password = models.CharField(max_length=20)
     body = models.TextField()
@@ -22,6 +28,11 @@ class Team(models.Model):
     festa = models.ForeignKey(Festa, on_delete=models.CASCADE)
     title2 = models.CharField(max_length=200)
     writer2 = models.CharField(max_length=100)
+    POST_TYPE = (
+        ('중요', '중요'),
+        ('질문', '질문'),
+    )
+    post_type = models.CharField(max_length = 100, choices = POST_TYPE)
     pub_date2 = models.DateTimeField('date published')
     password2 = models.CharField(max_length=20)
     body2 = models.TextField()
@@ -49,7 +60,12 @@ class Home(models.Model) : #festa_ready의 동행구하는 게시판
     festa = models.ForeignKey(Festa, on_delete=models.CASCADE)
     title = models.CharField(max_length=200) #글제목
     writer = models.CharField(max_length=200) #작성자
-    region = models.CharField(max_length=200) #지역
+    REGION = (
+        ('서울', '서울'),
+        ('경기', '경기'),
+        ('제주', '제주'),
+    )
+    region = models.CharField(max_length=200, choices = REGION ) #지역
     body = models.TextField() #내용
     pub_date = models.DateTimeField('date published')
     

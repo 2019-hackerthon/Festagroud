@@ -87,12 +87,14 @@ def edit_now(request, festa_id, now_id):
 
 def update_now(request, festa_id, now_id):
     festa = get_object_or_404(Festa, pk = festa_id)
-    update_now = Now.objects.get(id = now_id)
-    update_now.title = request.POST["title"]
-    update_now.writer = request.POST['writer']
-    update_now.body = request.POST['body']
-    update_now.save()
-    return redirect('/festa_now/{}/audience/now'.format(festa.id))
+    if request.method == 'POST' :
+        update_now = Now.objects.get(id = now_id)
+        update_now.title = request.POST["title"]
+        update_now.writer = request.POST['writer']
+        update_now.post_type = request.POST['post_type']
+        update_now.body = request.POST['body']
+        update_now.save()
+        return redirect('detail_now', festa.id, update_now.pk)
 
 def create_now(request, festa_id):
     festa = get_object_or_404(Festa, pk = festa_id)
@@ -101,10 +103,11 @@ def create_now(request, festa_id):
         now.festa = get_object_or_404(Festa, pk = festa_id)
         now.title = request.POST['title']
         now.body = request.POST['body']
+        now.post_type = request.POST['post_type']
         now.writer = request.POST['writer']
         now.pub_date = timezone.datetime.now()
         now.save()
-        return redirect('/festa_now/{}/audience/detail_now/{}'.format(festa.id, now.id))
+        return redirect('detail_now', festa.id, now.pk)
     return render(request, 'festa_now/audience/now.html', {'festa':festa})
 
 ########## festa_now/audience/map ##########
@@ -150,9 +153,10 @@ def update_team(request, festa_id, team_id):
     update_team = Team.objects.get(id = team_id)
     update_team.title2 = request.POST["title"]
     update_team.writer2 = request.POST['writer']
+    update_team.post_type = request.POST['post_type']
     update_team.body2 = request.POST['body']
     update_team.save()
-    return redirect('/festa_now/{}/staff/team'.format(festa.id))
+    return redirect('detail_team', festa.id, update_team.pk)
 
 def create_team(request, festa_id):
     festa = get_object_or_404(Festa, pk = festa_id)
@@ -162,9 +166,10 @@ def create_team(request, festa_id):
         team.title2 = request.POST['title']
         team.body2 = request.POST['body']
         team.writer2 = request.POST['writer']
+        team.post_type = request.POST['post_type']
         team.pub_date2 = timezone.datetime.now()
         team.save()
-        return redirect('/festa_now/{}/staff/detail_team/{}'.format(festa.id, team.id))
+        return redirect('detail_team', festa.id, team.pk)
     return render(request, 'festa_now/staff/team.html', {'festa': festa})
 
 ########## festa_now/staff+audience/home(집가자 게시판) ##########
@@ -208,7 +213,7 @@ def update_home(request, festa_id, home_id):
     update_home.body = request.POST['body']
     update_home.region = request.POST['region']
     update_home.save()
-    return redirect('home')
+    return redirect('detail_home', festa.id, update_home.pk)
 
 def create_home(request, festa_id):
     festa = get_object_or_404(Festa, pk = festa_id)
@@ -221,7 +226,7 @@ def create_home(request, festa_id):
         home.region = request.POST['region']
         home.pub_date = timezone.datetime.now()
         home.save()
-        return redirect('/festa_now/{}/home'.format(festa.id))
+        return redirect('detail_home', festa.id, home.pk)
     return render(request, 'festa_now/deatil_home.html', {'festa':festa})
 
 ########## festa_now/staff+audience/festanow게시판, 팀별게시판, 집가자게시판 댓글들 ##########

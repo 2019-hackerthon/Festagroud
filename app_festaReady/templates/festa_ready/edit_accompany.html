@@ -12,10 +12,14 @@
         <input type="password" name="password"><br>
     
         <label>지역</label><br>
-        <input type="text" name="area" value="{{ accompany.area }}"><br>
-    
+        <select name="area" value="{{ accompany.area }}">
+            <option value="서울">서울</option>
+            <option value="경기">경기</option>
+            <option value="제주">제주</option>
+        </select><br>
+
         <label>내용</label><br>
         <textarea name="description">{{accompany.description}}</textarea><br>
     
-        <input type="submit" class="btn btn-primary" value="수정">
+        <input type="submit" class="btn btn-primary" value="게시글 수정">
     </form>

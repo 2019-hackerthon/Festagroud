@@ -16,12 +16,6 @@
 
 
 <h2>comments</h2>
-{% for comment in comments %}
-<p>작성자: {{comment.writer_ticket}}</p>
-<p>내용: {{comment.content_ticket}}</p>
-
-<hr>
-{% endfor%}
 
 <form action="{% url 'comment_ticket' festa.id ticket.id %}" method="POST">
     {% csrf_token %}

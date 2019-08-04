@@ -2,32 +2,38 @@
 <html lang="en">
 
 <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <meta http-equiv="X-UA-Compatible" content="ie=edge">
-        <title>Document</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
 </head>
 
 <body>
-<center>
+    <center>
         <h1>글을 수정중입니다.</h1>
         <form action="{% url 'update_team' festa.id team.id %}" method="POST">
-                {% csrf_token %}
-                [Title] : <input type="text" name='title' value="{{team.title2}}">
-                <br>
-                <br>
-                [Wirter] : <input type="text" name='writer' value="{{team.writer2}}">
-                <br>
-                <br>
-                [Body]
-                <br>
-                <textarea name="body" id="" cols="30" rows="10"
-                        placeholder="write your content"style="padding:10px; margin:10px;" >{{team.body2}}</textarea>
-                <br>
-                <br>
-                <button type='submit'>수정하기</button>
+            {% csrf_token %}
+            [Title] : <input type="text" name='title' value="{{team.title2}}">
+            <br>
+            <br>
+            [Wirter] : <input type="text" name='writer' value="{{team.writer2}}">
+            <br>
+            <br>
+            [POST_TYPE]
+            <select name="post_type"  value="{{team.post_type}}">
+                <option name="중요">중요</option>
+                <option name="질문">질문</option>
+            </select>
+            <br>
+            [Body]
+            <br>
+            <textarea name="body" id="" cols="30" rows="10" placeholder="write your content"
+                style="padding:10px; margin:10px;">{{team.body2}}</textarea>
+            <br>
+            <br>
+            <button type='submit'>게시글 수정</button>
         </form>
-</center>
+    </center>
 </body>
 
 </html>
