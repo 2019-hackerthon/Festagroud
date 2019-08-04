@@ -1,0 +1,75 @@
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+
+<style>
+    .loginHeaderV3{
+        padding: 76px 0 60px 0;
+        height: 20px;
+        text-align:center;
+    }
+
+    .loginHeaderV3 .var{
+        width: 10 px;
+        display: inline-block;
+        height: 20px;
+        vertical-align: top;
+        margin: 0 13.px 0 15px;
+        background: #d8d8d8;
+    }
+
+</style>
+
+
+</head>
+
+<body>
+    <center>
+        <h1>Detail Post</h1>
+
+
+
+        <p>
+            <h2>[Title] : {{lost_found.title}}</h2>
+            <p>[Writer] : {{lost_found.writer}}</p>
+            <p>[Post type] : {{lost_found.post_type}}</p>
+            <p>[Date of Issue] : {{lost_found.pub_date}}</p>
+            <p>
+                [Body]
+                <br>
+                <textarea name="body"  readonly="readonly" id="" cols="30" rows="10"
+                    style="padding:10px; margin:10px;">{{lost_found.body}}</textarea>
+            </p>
+            <img src="{{lost_found.image.url}}">
+            <br>
+            <a href="{% url 'audience_lost_found' festa.id %}" class="store">분실물 목록보러가기</a>
+            <span class="var"></span>
+            <a href="{% url 'a_edit_lost_found' festa.id lost_found.id%}" class="store">수정하기</a>
+            <span class="var"></span>
+            <a href="{%url 'a_delete_lost_found' festa.id lost_found.id %}" class="store">삭제하기</a>
+
+            <h2>comments</h2>
+            {% for comment in comments %}
+            {{comment.writer_lost_found}}
+            <br>
+            {{comment.content_lost_found}}
+            <hr>
+            {% endfor%}
+            <form action="{% url 'a_comment_lost_found' festa.id lost_found.id %}" method="POST">
+                {% csrf_token %}
+                작성자 : <input name="writer" type="text">
+                <br>
+                내용 : <textarea name="content" id="" cols="30" rows="10"></textarea>
+                <input type="submit">
+            </form>
+    
+        </div>
+
+    
+    </center>

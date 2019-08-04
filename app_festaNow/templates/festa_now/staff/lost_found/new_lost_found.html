@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+<center>
+    <h1>찾아가라</h1>
+    <br>
+    <br>
+    <form action="{% url 's_create_lost_found' festa.id %}" method="POST" enctype="multipart/form-data">
+        {% csrf_token %}
+        [Title] : <input type="text" name='title' placeholder="제목을 입력해 주세요">
+        <br>
+        <br>
+        [Writer] : <input type="text" name='writer'>
+        <br>
+        <br>
+        [Post type] : 
+        <select name="post_type">
+            <option name="습득">습득</option>
+            <option name="분실">분실</option>
+        </select>
+        <br>
+        <br>
+        [Body]
+        <br>
+        <textarea name="body" id="" cols="30" rows="10" placeholder="내용을 입력해 주세요" style="padding:10px; margin:10px;"></textarea>
+        <br>
+        <p>이미지 첨부</p>
+        <input type="file" name="image" vlaue="찾아보기">
+        <button type='submit'>게시글 작성</button>
+    </form>
+</center>
+</body>
+
+</html>

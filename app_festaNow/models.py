@@ -56,7 +56,7 @@ class Commentt(models.Model):
 
 ##집가자 게시판
 
-class Home(models.Model) : #festa_ready의 동행구하는 게시판
+class Home(models.Model) :
     festa = models.ForeignKey(Festa, on_delete=models.CASCADE)
     title = models.CharField(max_length=200) #글제목
     writer = models.CharField(max_length=200) #작성자
@@ -85,3 +85,22 @@ class ReservationNum(models.Model) :
 
     def __str__(self) :
         return self.reservation_num
+
+## 분실물 게시판
+class Lost_Found(models.Model) : 
+    festa = models.ForeignKey(Festa, on_delete=models.CASCADE)
+    title = models.CharField(max_length=200) #글제목
+    writer = models.CharField(max_length=200) #작성자
+    POST_TYPE = (
+        ('분실', '분실'),
+        ('습득', '습득'),
+    )
+    post_type = models.CharField(max_length=200, choices = POST_TYPE ) #분실/습득
+    body = models.TextField() #내용
+    pub_date = models.DateTimeField('date published') 
+    image = models.ImageField(upload_to = 'images/%Y/%m/%d') #분실물 이미지
+
+class Commentlf(models.Model):
+    writer_lost_found = models.CharField(max_length=200)
+    content_lost_found = models.TextField()
+    lost_found = models.ForeignKey(Lost_Found, on_delete=models.CASCADE)

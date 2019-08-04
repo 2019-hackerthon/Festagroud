@@ -1,0 +1,56 @@
+{% extends 'base.html' %}
+<!-- 
+[base.html]
+<head>
+</head>
+
+<body>
+ -->
+{% block content %}
+
+<div class="row">
+    <div class="col-md-5">
+        <img src="{{festa.poster.url}}" style="height:500px">
+        <ul class="vertical-menu">
+
+            <li><a href="{% url 'audience_main' festa.id %}">공지사항</a></li>
+
+            <li><a href="{% url 'now_now' festa.id %}">Festa now</a></li>
+
+            <li><a href="{% url 'audience_map' festa.id %}">지도</a></li>
+
+            <li><a href="">찾아가라</a></li>
+
+            <li><a href="{% url 'audience_home' festa.id %}">집가자</a></li>
+
+        </ul>
+    </div>
+
+    <div class="col-md-7" style="background-color:#EEE9F7; ">
+
+        <h1>찾아가라</h1>
+        <a href="{% url 'a_new_lost_found' festa.id %}">글쓰기 </a>
+
+        <hr>
+        {% for lost_found in lost_founds.all %}
+        <br>
+        <a href="{% url 'a_detail_lost_found' festa.id lost_found.id %}"> : {{lost_found.title}}</a>
+        {{lost_found.post_type}}
+        {{lost_found.writer}}
+        {{lost_found.pub_date}}
+        <br>
+        <a href="{% url 'a_edit_lost_found' festa.id lost_found.id %}" class="card-link">수정하기</a>
+        <a href="{% url 'a_delete_lost_found' festa.id lost_found.id %}" class="card-link">삭제하기</a>
+
+        <div class="middle">
+            <hr>
+        </div>
+
+        {% endfor %}
+
+
+    </div>
+
+
+    </body>
+    {% endblock %}

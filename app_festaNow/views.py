@@ -1,7 +1,7 @@
 from django.shortcuts import render, get_object_or_404, redirect
 from app_festa.models import Festa, RegisterNum, Staff
 from app_festaReady.models import Accompany, Ticket, Commenta, Commenttic
-from app_festaNow.models import Now, Team, Commentn, Commentt, Home, Commenth, ReservationNum
+from app_festaNow.models import Now, Team, Commentn, Commentt, Home, Commenth, ReservationNum, Lost_Found, Commentlf
 import datetime
 from django.utils import timezone
 
@@ -223,6 +223,115 @@ def a_create_home(request, festa_id):
         return redirect('a_detail_home', festa.id, home.pk)
     return render(request, 'festa_now/audience/home/deatil_home.html', {'festa':festa})
 
+########## festa_now/audience/lost_found(찾아가라 게시판) ##########
+def audience_lost_found(request, festa_id):
+    festa = get_object_or_404(Festa, pk = festa_id)
+    lost_founds = Lost_Found.objects.filter(festa = festa.id)
+    return render(request, 'festa_now/audience/lost_found/audience_lost_found.html', {'lost_founds':lost_founds, 'festa':festa})
+
+def a_new_lost_found(request, festa_id):
+    festa = get_object_or_404(Festa, pk = festa_id)
+    return render(request, 'festa_now/audience/lost_found/new_lost_found.html',{'festa': festa})
+
+def a_detail_lost_found(request, festa_id, lost_found_id):
+    festa = get_object_or_404(Festa, pk = festa_id)
+    lost_found = Lost_Found.objects.get(pk=lost_found_id)
+    comments_list = Commentlf.objects.filter(lost_found = lost_found_id)
+    return render(request, 'festa_now/audience/lost_found/detail_lost_found.html', {'lost_found' : lost_found, 'comments' : comments_list, 'festa': festa})   
+
+def a_delete_lost_found(request, festa_id, lost_found_id):
+    festa = get_object_or_404(Festa, pk = festa_id)
+    delete_lost_found = get_object_or_404(Lost_Found, pk=lost_found_id)
+    delete_lost_found.delete()
+    return redirect('audience_lost_found', festa_id)
+
+def a_edit_lost_found(request, festa_id, lost_found_id):
+    festa = get_object_or_404(Festa, pk = festa_id)
+    edit_lost_found = Lost_Found.objects.get(pk=lost_found_id)
+    return render(request, 'festa_now/audience/lost_found/edit_lost_found.html', {'lost_found': edit_lost_found, 'festa': festa})
+
+
+def a_update_lost_found(request, festa_id, lost_found_id):
+    festa = get_object_or_404(Festa, pk = festa_id)
+    update_lost_found = Lost_Found.objects.get(id =lost_found_id)
+    update_lost_found.title = request.POST["title"]
+    update_lost_found.writer = request.POST['writer']
+    update_lost_found.body = request.POST['body']
+    update_lost_found.post_type = request.POST['post_type']
+    update_lost_found.image = request.FILES['image']
+    update_lost_found.save()
+    return redirect('a_detail_lost_found', festa.id, update_lost_found.pk)
+
+def a_create_lost_found(request, festa_id):
+    festa = get_object_or_404(Festa, pk = festa_id)
+    if request.method=="POST":
+        lost_found = Lost_Found()
+        lost_found.festa = get_object_or_404(Festa, pk = festa_id)
+        lost_found.title = request.POST['title']
+        lost_found.body = request.POST['body']
+        lost_found.writer = request.POST['writer']
+        lost_found.post_type = request.POST['post_type']
+        lost_found.image = request.FILES['image']
+        lost_found.pub_date = timezone.datetime.now()
+        lost_found.save()
+        return redirect('a_detail_lost_found', festa.id, lost_found.pk)
+    return render(request, 'festa_now/audience/lost_found/deatil_lost_found.html', {'festa':festa})
+
+########## festa_now/staff/lost_found(찾아가라 게시판) ##########
+def staff_lost_found(request, festa_id):
+    festa = get_object_or_404(Festa, pk = festa_id)
+    lost_founds = Lost_Found.objects.filter(festa = festa.id)
+    return render(request, 'festa_now/staff/lost_found/staff_lost_found.html', {'lost_founds':lost_founds, 'festa':festa})
+    
+def s_new_lost_found(request, festa_id):
+    festa = get_object_or_404(Festa, pk = festa_id)
+    return render(request, 'festa_now/staff/lost_found/new_lost_found.html',{'festa': festa})
+
+def s_detail_lost_found(request, festa_id, lost_found_id):
+    festa = get_object_or_404(Festa, pk = festa_id)
+    lost_found = Lost_Found.objects.get(pk=lost_found_id)
+    comments_list = Commentlf.objects.filter(lost_found = lost_found_id)
+    return render(request, 'festa_now/staff/lost_found/detail_lost_found.html', {'lost_found' : lost_found, 'comments' : comments_list, 'festa': festa})   
+
+def s_delete_lost_found(request, festa_id, lost_found_id):
+    festa = get_object_or_404(Festa, pk = festa_id)
+    delete_lost_found = get_object_or_404(Lost_Found, pk=lost_found_id)
+    delete_lost_found.delete()
+    return redirect('staff_lost_found', festa_id)
+
+def s_edit_lost_found(request, festa_id, lost_found_id):
+    festa = get_object_or_404(Festa, pk = festa_id)
+    edit_lost_found = Lost_Found.objects.get(pk=lost_found_id)
+    return render(request, 'festa_now/staff/lost_found/edit_lost_found.html', {'lost_found': edit_lost_found, 'festa': festa})
+
+
+def s_update_lost_found(request, festa_id, lost_found_id):
+    festa = get_object_or_404(Festa, pk = festa_id)
+    update_lost_found = Lost_Found.objects.get(id =lost_found_id)
+    update_lost_found.title = request.POST["title"]
+    update_lost_found.writer = request.POST['writer']
+    update_lost_found.body = request.POST['body']
+    update_lost_found.post_type = request.POST['post_type']
+    update_lost_found.image = request.FILES['image']
+    update_lost_found.save()
+    return redirect('s_detail_lost_found', festa.id, update_lost_found.pk)
+
+def s_create_lost_found(request, festa_id):
+    festa = get_object_or_404(Festa, pk = festa_id)
+    if request.method=="POST":
+        lost_found = Lost_Found()
+        lost_found.festa = get_object_or_404(Festa, pk = festa_id)
+        lost_found.title = request.POST['title']
+        lost_found.body = request.POST['body']
+        lost_found.writer = request.POST['writer']
+        lost_found.post_type = request.POST['post_type']
+        lost_found.image = request.FILES['image']
+        lost_found.pub_date = timezone.datetime.now()
+        lost_found.save()
+        return redirect('s_detail_lost_found', festa.id, lost_found.pk)
+    return render(request, 'festa_now/staff/lost_found/deatil_lost_found.html', {'festa':festa})
+
+
 ########## festa_now/staff/home(집가자 게시판) ###########
 def staff_home(request, festa_id):
     festa = get_object_or_404(Festa, pk = festa_id)
@@ -311,3 +420,23 @@ def a_comment_home(request, festa_id, home_id):
     comment.home = get_object_or_404(Home, pk=home_id)
     comment.save()
     return redirect('a_detail_home', festa_id, home_id)
+
+def a_comment_lost_found(request, festa_id, lost_found_id):
+    festa = get_object_or_404(Festa, pk = festa_id)
+    comment = Commentlf()
+    comment.writer_lost_found = request.POST['writer']
+    comment.content_lost_found = request.POST['content']
+    comment.lost_found = get_object_or_404(Lost_Found, pk=lost_found_id)
+    comment.save()
+    return redirect('a_detail_lost_found', festa_id, lost_found_id)
+
+def s_comment_lost_found(request, festa_id, lost_found_id):
+    festa = get_object_or_404(Festa, pk = festa_id)
+    comment = Commentlf()
+    comment.writer_lost_found = request.POST['writer']
+    comment.content_lost_found = request.POST['content']
+    comment.lost_found = get_object_or_404(Lost_Found, pk=lost_found_id)
+    comment.save()
+    return redirect('s_detail_lost_found', festa_id, lost_found_id)
+
+

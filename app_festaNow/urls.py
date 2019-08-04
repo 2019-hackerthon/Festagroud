@@ -5,7 +5,7 @@ from django.conf.urls.static import static
 
 
 urlpatterns = [
-    path('<int:festa_id>/audience/detail_now/<int:now_id>', views.detail_now, name="detail_now"),
+    path('<int:festa_id>/audience/detail_now/<int:now_id>', views.detail_now, name="detail_now"), #festanow/audience/festanow
     path('<int:festa_id>/audience/now', views.now_now, name="now_now"),
     path('<int:festa_id>/audience/new_now', views.new_now, name="new_now"),
     path('<int:festa_id>/audience/delete_now/<int:now_id>', views.delete_now, name="delete_now"),
@@ -13,8 +13,8 @@ urlpatterns = [
     path('<int:festa_id>/audience/update_now/<int:now_id>', views.update_now, name="update_now"),
     path('<int:festa_id>/audience/create_now', views.create_now, name="create_now"),
     path('<int:festa_id>/audience/comment_now/<int:now_id>', views.comment_now, name="comment_now"),
-    path('<int:festa_id>/audience/map', views.audience_map, name="audience_map"),
-    path('<int:festa_id>/audience/home', views.audience_home, name="audience_home"),
+    path('<int:festa_id>/audience/map', views.audience_map, name="audience_map"), #festanow/audience/map
+    path('<int:festa_id>/audience/home', views.audience_home, name="audience_home"), #festanow/audience/집가자
     path('<int:festa_id>/audience/detail_home/<int:home_id>', views.a_detail_home, name="a_detail_home"),
     path('<int:festa_id>/audience/new_home', views.a_new_home, name="a_new_home"),
     path('<int:festa_id>/audience/delete_home/<int:home_id>', views.a_delete_home, name="a_delete_home"),
@@ -22,6 +22,15 @@ urlpatterns = [
     path('<int:festa_id>/audience/update_home/<int:home_id>', views.a_update_home, name="a_update_home"),
     path('<int:festa_id>/audience/create_home/', views.a_create_home, name="a_create_home"),
     path('<int:festa_id>/audience/comment_home/<int:home_id>', views.a_comment_home, name="a_comment_home"),
+    path('<int:festa_id>/audience/lost_found', views.audience_lost_found, name="audience_lost_found"), #festanow/audience/찾아가라
+    path('<int:festa_id>/audience/detail_lost_found/<int:lost_found_id>', views.a_detail_lost_found, name="a_detail_lost_found"),
+    path('<int:festa_id>/audience/new_lost_found', views.a_new_lost_found, name="a_new_lost_found"),
+    path('<int:festa_id>/audience/delete_lost_found/<int:lost_found_id>', views.a_delete_lost_found, name="a_delete_lost_found"),
+    path('<int:festa_id>/audience/edit_lost_found/<int:lost_found_id>', views.a_edit_lost_found, name="a_edit_lost_found"),
+    path('<int:festa_id>/audience/update_lost_found/<int:lost_found_id>', views.a_update_lost_found, name="a_update_lost_found"),
+    path('<int:festa_id>/audience/create_lost_found/', views.a_create_lost_found, name="a_create_lost_found"),
+    path('<int:festa_id>/audience/comment_lost_found/<int:lost_found_id>', views.a_comment_lost_found, name="a_comment_lost_found"),
+
 
     path('<int:festa_id>/staff/detail_team/<int:team_id>', views.detail_team, name="detail_team"),
     path('<int:festa_id>/staff/team', views.now_team, name="now_team"),
@@ -40,6 +49,15 @@ urlpatterns = [
     path('<int:festa_id>/staff/update_home/<int:home_id>', views.s_update_home, name="s_update_home"),
     path('<int:festa_id>/staff/create_home/', views.s_create_home, name="s_create_home"),
     path('<int:festa_id>/staff/comment_home/<int:home_id>', views.s_comment_home, name="s_comment_home"),
+    path('<int:festa_id>/staff/lost_found', views.staff_lost_found, name="staff_lost_found"), #festanow/staff/찾아가라
+    path('<int:festa_id>/staff/detail_lost_found/<int:lost_found_id>', views.s_detail_lost_found, name="s_detail_lost_found"),
+    path('<int:festa_id>/staff/new_lost_found', views.s_new_lost_found, name="s_new_lost_found"),
+    path('<int:festa_id>/staff/delete_lost_found/<int:lost_found_id>', views.s_delete_lost_found, name="s_delete_lost_found"),
+    path('<int:festa_id>/staff/edit_lost_found/<int:lost_found_id>', views.s_edit_lost_found, name="s_edit_lost_found"),
+    path('<int:festa_id>/staff/update_lost_found/<int:lost_found_id>', views.s_update_lost_found, name="s_update_lost_found"),
+    path('<int:festa_id>/staff/create_lost_found/', views.s_create_lost_found, name="s_create_lost_found"),
+    path('<int:festa_id>/staff/comment_lost_found/<int:lost_found_id>', views.s_comment_lost_found, name="s_comment_lost_found"),
+
 
     path('<int:festa_id>/audience/audience_main', views.audience_main, name="audience_main"),
     path('<int:festa_id>/audience_login', views.audience_login, name="audience_login"),
