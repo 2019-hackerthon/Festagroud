@@ -29,7 +29,8 @@ class Team(models.Model):
     title2 = models.CharField(max_length=200)
     writer2 = models.CharField(max_length=100)
     POST_TYPE = (
-        ('중요', '중요'),
+        ('공지사항', '공지사항'),
+        ('긴급공지', '긴급공지'),
         ('질문', '질문'),
     )
     post_type = models.CharField(max_length = 100, choices = POST_TYPE)
@@ -63,6 +64,13 @@ class Home(models.Model) :
     REGION = (
         ('서울', '서울'),
         ('경기', '경기'),
+        ('강원', '강원'),
+        ('충남', '충남'),
+        ('충북', '충북'),
+        ('경북', '경북'),
+        ('경남', '경남'),
+        ('전북', '전북'),
+        ('전남', '전남'),
         ('제주', '제주'),
     )
     region = models.CharField(max_length=200, choices = REGION ) #지역
