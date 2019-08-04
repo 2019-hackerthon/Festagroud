@@ -4,6 +4,7 @@ window.onload = function () {
     this.imgSizeLimit();
     this.horizentalEditText();
     this.btSearchResize();
+    this.imgResize();
     
 }
 window.onresize = function () {
@@ -12,23 +13,7 @@ window.onresize = function () {
     this.imgSizeLimit();
     this.horizentalEditText();
     this.btSearchResize();
-    
-}
-
-window.onload = function () {
-    this.fullScreen();
-    this.backgroundResize();
-    this.imgSizeLimit();
-    this.horizentalEditText();
-    this.btSearchResize();
-    
-}
-window.onresize = function () {
-    this.fullScreen();
-    this.backgroundResize();
-    this.imgSizeLimit();
-    this.horizentalEditText();
-    this.btSearchResize();
+    this.imgResize();
     
 }
 

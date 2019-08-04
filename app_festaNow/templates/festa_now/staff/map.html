@@ -1,79 +1,54 @@
 {% extends 'base.html' %}
-<!-- 
-[base.html]
-<head>
-</head>
-
-<body>
- -->
 {% block content %}
 
-<div class="row">
-    <div class="col-md-5">
-        <img src="{{festa.poster.url}}" style="height:500px">
-        <ul class="vertical-menu">
+<div id="map">
+    {{festa.space}} {{festa.detail_map}}
+    <div id="map" style="width:100%;height:350px;"></div>
 
-            <li><a href="{% url 'staff_main' festa.id %}">공지사항</a></li>
+    <script type="text/javascript"
+        src="//dapi.kakao.com/v2/maps/sdk.js?appkey=3a6997107b687683607fb8587b9bb914&libraries=services"></script>
+    <script>
+        var mapContainer = document.getElementById('map'), // 지도를 표시할 div 
+            mapOption = {
+                center: new kakao.maps.LatLng(33.450701, 126.570667), // 지도의 중심좌표
+                level: 3 // 지도의 확대 레벨
+            };
 
-            <li><a href="{% url 'now_team' festa.id %}">팀별 게시판</a></li>
+        // 지도를 생성합니다    
+        var map = new kakao.maps.Map(mapContainer, mapOption);
 
-            <li><a href="{% url 'staff_map' festa.id %}">지도</a></li>
+        // 주소-좌표 변환 객체를 생성합니다
+        var geocoder = new kakao.maps.services.Geocoder();
 
-            <li><a href="">찾아가라</a></li>
+        // 주소로 좌표를 검색합니다
+        geocoder.addressSearch('{{festa_object.detail_map}}', function (result, status) {
 
-            <li><a href="">집가자</a></li>
+            // 정상적으로 검색이 완료됐으면 
+            if (status === kakao.maps.services.Status.OK) {
 
-        </ul>
-    </div>
+                var coords = new kakao.maps.LatLng(result[0].y, result[0].x);
 
-    <div class="col-md-7" style="background-color:#EEE9F7;">
-        {{festa.space}} {{festa.detail_map}}
-        <div id="map" style="width:100%;height:350px;"></div>
+                // 결과값으로 받은 위치를 마커로 표시합니다
+                var marker = new kakao.maps.Marker({
+                    map: map,
+                    position: coords
+                });
 
-        <script type="text/javascript"
-            src="//dapi.kakao.com/v2/maps/sdk.js?appkey=3a6997107b687683607fb8587b9bb914&libraries=services"></script>
-        <script>
-            var mapContainer = document.getElementById('map'), // 지도를 표시할 div 
-                mapOption = {
-                    center: new kakao.maps.LatLng(33.450701, 126.570667), // 지도의 중심좌표
-                    level: 3 // 지도의 확대 레벨
-                };
+                // 인포윈도우로 장소에 대한 설명을 표시합니다
+                var infowindow = new kakao.maps.InfoWindow({
+                    content: '<div style="width:150px;text-align:center;padding:6px 0;">공연 장소:{{festa_object.space}}</div>'
+                });
+                infowindow.open(map, marker);
 
-            // 지도를 생성합니다    
-            var map = new kakao.maps.Map(mapContainer, mapOption);
+                // 지도의 중심을 결과값으로 받은 위치로 이동시킵니다
+                map.setCenter(coords);
+            }
+        });
+    </script>
+</div>
 
-            // 주소-좌표 변환 객체를 생성합니다
-            var geocoder = new kakao.maps.services.Geocoder();
-
-            // 주소로 좌표를 검색합니다
-            geocoder.addressSearch('{{festa_object.detail_map}}', function (result, status) {
-
-                // 정상적으로 검색이 완료됐으면 
-                if (status === kakao.maps.services.Status.OK) {
-
-                    var coords = new kakao.maps.LatLng(result[0].y, result[0].x);
-
-                    // 결과값으로 받은 위치를 마커로 표시합니다
-                    var marker = new kakao.maps.Marker({
-                        map: map,
-                        position: coords
-                    });
-
-                    // 인포윈도우로 장소에 대한 설명을 표시합니다
-                    var infowindow = new kakao.maps.InfoWindow({
-                        content: '<div style="width:150px;text-align:center;padding:6px 0;">공연 장소:{{festa_object.space}}</div>'
-                    });
-                    infowindow.open(map, marker);
-
-                    // 지도의 중심을 결과값으로 받은 위치로 이동시킵니다
-                    map.setCenter(coords);
-                }
-            });    
-        </script>
-
-
-    </div>
-
-
-    </body>
-    {% endblock %}
+<!-- 자바 스크립트 연결 -->
+{% load static %}
+<script type="text/javascript" src="{% static 'js/standard_js.js' %}"></script>
+<style></style>
+{% endblock %}

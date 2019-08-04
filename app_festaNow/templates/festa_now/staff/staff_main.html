@@ -1,27 +1,7 @@
 {% extends 'base.html' %}
 {% block content %}
 
-<div class="user_page">
-    <div id="user_item_selector">
-        <img src=http://www.kpenews.com/Files/4/News/201906/260_20190620191955168.JPG style="height:500px">
-        <ul class="vertical-menu">
-
-            <li><a href="{% url 'staff_main' festa.id %}">공지사항</a></li>
-
-            <li><a href="{% url 'now_team' festa.id %}">팀별 게시판</a></li>
-
-            <li><a href="{% url 'staff_map' festa.id %}">지도</a></li>
-
-            <li><a href="">찾아가라</a></li>
-
-            <li><a href="">집가자</a></li>
-
-        </ul>
-
-    </div>
-</div>
-
-<div id="user_item_view">
+<div id="notice_div">
     <div id="table_bt_div">
         <span><input type="submit" value="글쓰기"></span>
         <div id="table_div">
@@ -56,7 +36,7 @@
 
 <!-- 자바 스크립트 연결 -->
 {% load static %}
-<script type="text/javascript" src="{% static 'js/detail_js.js' %}"></script>
+<script type="text/javascript" src="/static/js/standard_js.js?ver=1' %}"></script>
 
 <style>
     #table_bt_div {

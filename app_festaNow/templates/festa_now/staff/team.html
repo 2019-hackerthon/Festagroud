@@ -1,56 +1,29 @@
 {% extends 'base.html' %}
-<!-- 
-[base.html]
-<head>
-</head>
+{% block content %}
 
-<body>
- -->
- {% block content %}
- 
-    <div class="row">
-        <div class="col-md-5">
-            <img src ="{{festa.poster.url}}"style="height:500px">
-            <ul class="vertical-menu">
+<div id="team_div">
+    <h1>팀별게시판</h1>
+    <a href="{% url 'new_team' festa.id %}">글쓰기 </a>
 
-                <li><a href="{% url 'staff_main' festa.id %}">공지사항</a></li>
-                
-                <li><a href="{% url 'now_team' festa.id %}">팀별게시판</a></li>
-                
-                <li><a href="{% url 'staff_map' festa.id %}">지도</a></li>
-                
-                <li><a href=""  >찾아가라</a></li>
+    <hr>
+    {% for team in teams.all %}
+    <br>
+    <a href="{% url 'detail_team' festa.id team.id %}"> : {{team.title2}}</a>
+    {{team.writer2}}
+    {{team.pub_date}}
+    <br>
+    <a href="{% url 'edit_team' festa.id team.id %}" class="card-link">수정하기</a>
+    <a href="{% url 'delete_team' festa.id team.id %}" class="card-link">삭제하기</a>
 
-                <li><a href="">집가자</a></li>
-
-                </ul>
-        </div>
-
-    <div class="col-md-7" style="background-color:#EEE9F7; ">
-      
-        <h1>팀별게시판</h1>
-            <a href="{% url 'new_team' festa.id %}">글쓰기 </a>
-            
-            <hr>
-            {% for team in teams.all %}
-            <br>
-            <a href="{% url 'detail_team' festa.id team.id %}"> : {{team.title2}}</a> 
-            {{team.writer2}}
-            {{team.pub_date}}
-            <br>
-            <a href="{% url 'edit_team' festa.id team.id %}" class="card-link">수정하기</a>
-            <a href="{% url 'delete_team' festa.id team.id %}" class="card-link">삭제하기</a>
-            
-            <div class="middle">
-                <hr>
-            </div>
-                
-            {% endfor %}
-       
-
-
+    <div class="middle">
+        <hr>
     </div>
 
-    
-</body>
+    {% endfor %}
+</div>
+<!-- 자바 스크립트 연결 -->
+{% load static %}
+<script type="text/javascript" src="{% static 'js/standard_js.js' %}"></script>
+
+<style></style>
 {% endblock %}

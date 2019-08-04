@@ -5,7 +5,7 @@ let container_height = 0;
             if (window.innerWidth <= 1000) {
                 background_con.style.width = '375px';
             } else {
-                background_con.style.width = '35%';
+                background_con.style.width = '40%';
             }
     
         }
@@ -28,4 +28,32 @@ let container_height = 0;
             var detail_background = document.getElementById('detail_background_img');
             detail_background.style.height = container_height + 'px';
             detail_background.style.width = document.getElementById('festa_image').clientWidth + 'px';
+        }
+
+        function imgResize() {
+            // 브라우저 크기 확인
+            var wrapper = document.getElementById('fore_img_wrapper');
+            var img = document.getElementById('fore_img');
+            var wrapper_width = wrapper.clientWidth;
+            img.style.width = wrapper_width + 'px';
+            img.style.height = (wrapper_width * 0.68) + 'px';
+            console.log(wrapper_width);
+            console.log(img.style.width);
+        
+            // var thumnail = document.getElementsByClassName('thumnail');
+            // var cWidth = 0;
+            // var cHeight = 0;
+        
+            // for (var i = 0; i < thumnail.length; i++) {
+            //     cWidth = thumnail[i].clientWidth;
+        
+            //     // alert(cWidth);
+        
+            //     this.imgSizeLimit(browser_width, cWidth, thumnail[i]);
+        
+            //     //가로 세로 비율 유지 및 적용
+            //     cHeight = customWidth * 0.68;
+            //     var heightToPixel = cHeight + 'px';
+            //     thumnail[i].style.height = heightToPixel;
+            // }
         }

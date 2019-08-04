@@ -3,12 +3,14 @@ window.onload = function () {
     this.backgroundResize();
     this.imgSizeLimit();
     this.horizentalBt();
+    this.imgResize();
 }
 window.onresize = function () {
     this.fullScreen();
     this.backgroundResize();
     this.imgSizeLimit();
     this.horizentalBt();
+    this.imgResize();
 }
 
 function horizentalBt(){
