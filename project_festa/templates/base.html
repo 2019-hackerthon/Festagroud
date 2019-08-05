@@ -64,30 +64,35 @@
                         </div>
                     </div>
                     <div id="now_menu_wrapper">
-                        <ul class="vertical-menu">
-                    
-                            <li><a href="{% url 'staff_main' festa.id %}">공지사항</a></li>
+                        <div>
+                            <a id="notice_menu" href="{% url 'staff_main' festa.id %}">공지사항</a>
+                        </div>
+                        <div>
+                            <a id="teamBoard_menu" href="{% url 'now_team' festa.id %}">팀별 게시판</a>
+                        </div>
+                        <div>
+                            <a id="map_menu" href="{% url 'staff_map' festa.id %}">지도</a>
+                        </div>
+                        <div>
+                            <a id="lookingFor_menu" href="{% url 'staff_lost_found' festa.id %}">찾아가라</a>
+                        </div>
 
-                            <li><a href="{% url 'now_team' festa.id %}">팀별 게시판</a></li>
+                        <div>
+                            <a id="goHome_menu" href="{% url 'staff_home' festa.id %}">집가자</a>
+                        </div>
 
-                            <li><a href="{% url 'staff_map' festa.id %}">지도</a></li>
-
-                            <li><a href="{% url 'staff_lost_found' festa.id %}">찾아가라</a></li>
-
-                            <li><a href="{% url 'staff_home' festa.id %}">집가자</a></li>
-                        </ul>
                     </div>
                     <div id="ready_menu_wrapper">
-                        <ul class="vertical-menu">
-            
-                            <li><a href="{% url 'ready_main' festa.id %}">공연정보</a></li>
-                            
-                            <li><a href="{% url 'list_accompany' festa.id %}">동행구하기</a></li>
-                            
-                            <li><a href="{% url 'list_ticket' festa.id %}">티켓 양도/교환</a></li>
-            
-                        </ul>
-                </div>
+                        <div>
+                            <a href="{% url 'ready_main' festa.id %}">공연정보</a>
+                        </div>
+                        <div>
+                            <a href="{% url 'list_accompany' festa.id %}">동행구하기</a>
+                        </div>
+                        <div>
+                            <a href="{% url 'list_ticket' festa.id %}">티켓 양도/교환</a>
+                        </div>
+                    </div>
                 </div>
 
             </div>
@@ -130,6 +135,16 @@
         text-decoration: none;
     }
 
+    #now_menu_wrapper div a, #ready_menu_wrapper div a{
+        color: #000000;
+        text-decoration: none;
+        font-size: 20px;
+    }
+
+    #now_menu_wrapper div, #ready_menu_wrapper div{
+        margin-top: 3px;
+    }
+
     .footer_item_top {
         margin-left: 0.5%;
         margin-right: 0.5%;
@@ -148,7 +163,7 @@
         background: #ffffff;
     }
 
-    #detail_foreground_div{
+    #detail_foreground_div {
         position: absolute;
         left: 0px;
         top: 0px;
@@ -156,51 +171,48 @@
         height: 100%;
     }
 
-    #foreground_content_div{
+    #foreground_content_div {
         width: 100%;
         height: 100%;
-        padding-top: 8%;
+        padding-top: 6%;
     }
 
-    #fore_img_wrapper, #now_menu_wrapper, #ready_menu_wrapper, #title_text_wrapper, #festa_info_wrapper{
+    #fore_img_wrapper,
+    #now_menu_wrapper,
+    #ready_menu_wrapper,
+    #title_text_wrapper,
+    #festa_info_wrapper {
         margin-left: 32%;
         margin-right: 15%;
     }
 
-    #title_text_wrapper{
+    #title_text_wrapper {
         font-size: 20px;
         font-weight: bold;
     }
 
-    #fore_img_wrapper{
-        margin-top: 20px;
+    #fore_img_wrapper {
+        margin-top: 10px;
     }
 
-    #festa_info_wrapper{
-        margin-top: 16px;
+    #festa_info_wrapper {
+        margin-top: 10px;
     }
 
-    #festa_name{
+    #festa_name {
         font-size: 20px;
         font-weight: bold;
     }
 
-    #festa_date{
+    #festa_date {
         font-size: 14px;
         font-weight: 500;
         opacity: 0.5;
     }
 
-    #now_menu_wrapper{
+    #now_menu_wrapper, #ready_menu_wrapper {
         display: none;
-        margin-top: 40px;
-        font-weight: bold;
-        font-size: 20px;
-    }
-
-    #ready_menu_wrapper{
-        display: none;
-        margin-top: 40px;
+        margin-top: 20px;
         font-weight: bold;
         font-size: 20px;
     }
