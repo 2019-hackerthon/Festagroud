@@ -1,37 +1,11 @@
 {% extends 'base.html' %}
-<!-- 
-[base.html]
-<head>
-</head>
-
-<body>
- -->
  {% block content %}
  
-    <div class="row">
-        <div class="col-md-5">
-            <img src ="{{festa.poster.url}}"style="height:500px">
-            <ul>
+ <div>
 
-                <li><a href="{% url 'audience_main' festa.id %}">공지사항</a></li>
-                
-                <li><a href="{% url 'now_now' festa.id %}">Festa now</a></li>
-                
-                <li><a href="{% url 'audience_map' festa.id %}">지도</a></li>
-                
-                <li><a href="{% url 'audience_lost_found' festa.id %}">찾아가라</a></li>
+ </div>
 
-                <li><a href="{% url 'audience_home' festa.id %}">집가자</a></li>
-
-                </ul>
-
-
-        </div>
-
-    <div class="col-md-7" style="background-color:#EEE9F7; ">
-      
-    </div>
-
-    
-</body>
+<!-- 자바 스크립트 연결 -->
+{% load static %}
+<script type="text/javascript" src="/static/js/standard_js.js?ver=2' %}"></script>
 {% endblock %}

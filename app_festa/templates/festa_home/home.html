@@ -96,7 +96,7 @@
                             festa_ready_day_cal++;
                             var cFestaName = "{{ festa_ready.name }}";
                             var cToday = "{{today|date:" d "}}";
-                            var cFestaDay = "{{festa_ready.schedule|date:" d "}}";
+                            var cFestaDay = "{{festa_ready.schedule_start|date:" d "}}";
                             dayInterval = cFestaDay - cToday;
                             var cFestaReadyText = " D - " + dayInterval
                             var festa_ready_dday = document.getElementsByClassName('festa_ready_date_span');

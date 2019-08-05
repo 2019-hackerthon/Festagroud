@@ -1,31 +1,94 @@
 {% extends 'base.html' %}
-<!-- 
-[base.html]
-<head>
-</head>
-
-<body>
- -->
  {% block content %}
  
-    <div class="row">
-        <div class="col-md-5">
-            <img src ="{{festa.poster.url}}"style="height:500px">
-
+ <div id="certificate_box">
+        <div id="explain_text_box">인증번호를 입력해주세요</div>
+        <div id="booked_name_and_num">
+            <form id="edit_box_form" action="{% url 'audience_main' festa.id %}" method="POST">
+                {% csrf_token %}
+                <div class="visible_edit_box">
+                    <div id="reserve_span">
+                        <span>이름</span>
+                    </div class="bt_wrapper">
+                        <input id="name_editText" type="text" name="reservation_name" value="1234"></p>
+                    </div>
+                <div class="visible_edit_box">
+                    <div id="reserve_span">
+                            <span>예매 번호</span>
+                    </div>
+                    <div class="bt_wrapper">
+                            <input id="num_editText" type="text" name="reservation_num" placeholder="1234">
+                            <input id="certificateBt" type="submit" value="&#xf064" class="fa-7x">
+                    </div>   
+                </div>
+            </form>
         </div>
+ </div>
+<!-- 자바 스크립트 연결 -->
+{% load static %}
+<script type="text/javascript" src="/static/js/login_js.js?ver=5' %}"></script>
+<style>
+    #certificate_box {
+        height: auto;
+        width: 100%;
+        align-self: center;
+        padding-left: 15%;
+        padding-bottom: 1%;
+    }
+    #explain_text_box{
+        font-size: 36px;
+        font-weight: bold;
+        padding-bottom: 68px;
+    }
+    #booked_name_and_num {
+        width: 100%;
+        padding-bottom: 68px;
+    }
 
-        <div class="col-md-7" style="background-color:#EEE9F7; ">
-            <div class="container">
-                <form action="{% url 'audience_main' festa.id %}" method="POST">
-                    {% csrf_token %}
-                    <p>정보를 입력해주세요</p>
-                    <input class="btn btn-primary" type="submit" value="확인">
-                    <br>
-                    <br>
-                    <p>예약자 <input type="text" name="reservation_name"></p>
-                    <p>예약번호 <input type="text" name="reservation_num"></p>
-                </form>
-            </div>
-    </div>
-</body>
+    #edit_box_form{
+        width: 80%;
+    }
+    #edit_box_form div{
+        font-size: 24px;
+        font-weight: 500;
+    }
+
+    .visible_edit_box{
+        display: flex;
+        width: 100%;
+        padding-bottom: 68px;
+    }
+
+    #reserve_span{
+        display: flex;
+    }
+    #reserve_span span{
+        align-self: center;
+    }
+
+    .bt_wrapper{
+        border: 1px solid #9e9e9e;
+        height: auto;
+        width: 70%;
+        margin-left: 7%;
+    }
+
+    .bt_wrapper input{
+        float: left;
+        border: 0px;
+    }
+
+    #num_editText {
+        width: 90%;
+        text-overflow: ellipsis;
+    }
+
+    #certificateBt {
+        width: 10%;
+        padding: 1px;
+        background: #ff5543;
+        font-family: FontAwesome;
+        color: #ffffff;
+    }
+</style>
 {% endblock %}
