@@ -1,28 +1,8 @@
 {% extends 'base.html' %}
-<!-- 
-[base.html]
-<head>
-</head>
+{% block content %}
 
-<body>
- -->
- {% block content %}
- 
-    <div class="row">
-        <div class="col-md-5">
-            <img src = "{{festa.poster.url}}" style="height:500px">
-            <ul class="vertical-menu">
-
-                <li><a href="{% url 'ready_main' festa.id %}">공연정보</a></li>
-                
-                <li><a href="{% url 'list_accompany' festa.id %}">동행구하기</a></li>
-                
-                <li><a href="{% url 'list_ticket' festa.id %}">티켓 양도/교환</a></li>
-
-            </ul>
-    </div>
-
-    <div class="col-md-7" style="background-color:#EEE9F7; ">
+<div id="ready_div">
+    <div>
         <h1>공연 이름 :{{ festa.name }}</h1>
         <p>공연 날짜 : {{ festa.schedule|date:"Y"}}년 {{ festa.schedule|date:"m"}}월 {{ festa.schedule|date:"d"}}일</p>
         <p>공연 장소 : {{ festa.space }}</p>
@@ -31,9 +11,12 @@
         <p>고객 문의처 : {{festa.contact }}</p>
         <p>공연 유의사항 : {{ festa.precautions }}</p>
         <p>공연 공지사항 : {{ festa.notice }}</p>
-
-
+    </div>
 </div>
+
+<!-- 자바 스크립트 연결 -->
+{% load static %}
+<script type="text/javascript" src="/static/js/ready_standard_js.js?ver=1' %}"></script>
 
 {% endblock %}
 

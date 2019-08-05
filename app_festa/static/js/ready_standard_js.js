@@ -14,6 +14,6 @@ window.onresize = function () {
 }
 
 function menuDisplay(){
-    var nowMenuView = document.getElementById('now_menu_wrapper');
-    nowMenuView.style.display = 'block';
+    var readyMenuView = document.getElementById('ready_menu_wrapper');
+    readyMenuView.style.display = 'block';
 }

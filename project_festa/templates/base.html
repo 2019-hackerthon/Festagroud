@@ -63,7 +63,7 @@
                             날짜 들어갈 거에요~
                         </div>
                     </div>
-                    <div id="menu_wrapper">
+                    <div id="now_menu_wrapper">
                         <ul class="vertical-menu">
                     
                             <li><a href="{% url 'staff_main' festa.id %}">공지사항</a></li>
@@ -75,9 +75,19 @@
                             <li><a href="{% url 'staff_lost_found' festa.id %}">찾아가라</a></li>
 
                             <li><a href="{% url 'staff_home' festa.id %}">집가자</a></li>
-
                         </ul>
                     </div>
+                    <div id="ready_menu_wrapper">
+                        <ul class="vertical-menu">
+            
+                            <li><a href="{% url 'ready_main' festa.id %}">공연정보</a></li>
+                            
+                            <li><a href="{% url 'list_accompany' festa.id %}">동행구하기</a></li>
+                            
+                            <li><a href="{% url 'list_ticket' festa.id %}">티켓 양도/교환</a></li>
+            
+                        </ul>
+                </div>
                 </div>
 
             </div>
@@ -152,7 +162,7 @@
         padding-top: 8%;
     }
 
-    #fore_img_wrapper, #menu_wrapper, #title_text_wrapper, #festa_info_wrapper{
+    #fore_img_wrapper, #now_menu_wrapper, #ready_menu_wrapper, #title_text_wrapper, #festa_info_wrapper{
         margin-left: 32%;
         margin-right: 15%;
     }
@@ -181,7 +191,14 @@
         opacity: 0.5;
     }
 
-    #menu_wrapper{
+    #now_menu_wrapper{
+        display: none;
+        margin-top: 40px;
+        font-weight: bold;
+        font-size: 20px;
+    }
+
+    #ready_menu_wrapper{
         display: none;
         margin-top: 40px;
         font-weight: bold;
