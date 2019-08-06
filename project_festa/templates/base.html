@@ -50,7 +50,7 @@
             <div id="detail_foreground_div">
                 <div id="foreground_content_div">
                     <div id="title_text_wrapper">
-                        Festa Now
+                        <div>Festa Now</div>
                     </div>
                     <div id="fore_img_wrapper">
                         <img id="fore_img" src="{{festa.poster.url}}" style="height:500px">
@@ -142,7 +142,7 @@
     }
 
     #now_menu_wrapper div, #ready_menu_wrapper div{
-        margin-top: 3px;
+        margin-top: 0.5rem;
     }
 
     .footer_item_top {
@@ -153,6 +153,7 @@
 
     #container_select_staff_audience {
         width: 100%;
+        height: 100%;
         display: flex;
         overflow: hidden;
     }
@@ -160,6 +161,7 @@
     #festa_image {
         position: relative;
         width: 40%;
+        height: 100%;
         background: #ffffff;
     }
 
@@ -174,7 +176,6 @@
     #foreground_content_div {
         width: 100%;
         height: 100%;
-        padding-top: 6%;
     }
 
     #fore_img_wrapper,
@@ -187,15 +188,22 @@
     }
 
     #title_text_wrapper {
+        height: 10%;
         font-size: 20px;
         font-weight: bold;
+        display: flex;
+    }
+    #title_text_wrapper div{
+        height: auto;
+        align-self: center;
     }
 
     #fore_img_wrapper {
-        margin-top: 20px;
+        margin-top: 1rem;
     }
 
     #festa_info_wrapper {
+        height: 10%;
         margin-top: 15px;
     }
 
