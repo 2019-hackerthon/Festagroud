@@ -6,7 +6,7 @@
     <a href="{% url 'new_team' festa.id %}">글쓰기 </a>
 
     <hr>
-    {% for team in teams.all %}
+    {% for team in team_list %}
     <br>
     <a href="{% url 'detail_team' festa.id team.id %}"> : {{team.title2}}</a>
     {{team.writer2}}
@@ -20,7 +20,24 @@
     </div>
 
     {% endfor %}
+    <div class="middle">
+        {%if team_list.has_previous%}
+        <a href="?page=1">First</a>
+        <a href="?page={{team_list.previous_page_number}}">Previous</a>
+        {%endif%}
+    
+        <span>{{team_list.number}}</span>
+        <span>of</span>
+        <span>{{team_list.paginator.num_pages}}</span>
+    
+        {%if team_list.has_next%}
+        <a href="?page={{team_list.next_page_number}}">Next</a>
+        <a href="?page={{team_list.paginator.num_pages}}">Last</a>
+        {%endif%}
+    </div>
 </div>
+
+
 <!-- 자바 스크립트 연결 -->
 {% load static %}
 <script type="text/javascript" src="/static/js/standard_js.js?ver=2' %}"></script>

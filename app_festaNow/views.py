@@ -4,6 +4,7 @@ from app_festaReady.models import Accompany, Ticket, Commenta, Commenttic
 from app_festaNow.models import Now, Team, Commentn, Commentt, Home, Commenth, ReservationNum, Lost_Found, Commentlf
 import datetime
 from django.utils import timezone
+from django.core.paginator import Paginator
 
 
 # Create your views here.
@@ -60,7 +61,11 @@ def staff_main(request, festa_id) :
 def now_now(request, festa_id):
     festa = get_object_or_404(Festa, pk = festa_id)
     nows = Now.objects.filter(festa = festa.id)
-    return render(request, 'festa_now/audience/now.html', {'nows': nows, 'festa': festa})
+    paginator = Paginator(nows, 5)
+    page = request.GET.get('page')
+    now_list = paginator.get_page(page)
+    return render(request, 'festa_now/audience/now.html', {'nows': nows, 'now_list': now_list,'festa': festa})
+
 
 def new_now(request, festa_id):
     festa = get_object_or_404(Festa, pk = festa_id)
@@ -124,7 +129,10 @@ def staff_map(request, festa_id):
 def now_team(request, festa_id):
     festa = get_object_or_404(Festa, pk = festa_id)
     teams = Team.objects.filter(festa = festa.id)
-    return render(request, 'festa_now/staff/team.html', {'teams': teams, 'festa': festa})
+    paginator = Paginator(teams, 5)
+    page = request.GET.get('page')
+    team_list = paginator.get_page(page)
+    return render(request, 'festa_now/staff/team.html', {'teams': teams,'team_list':team_list ,'festa': festa})
 
 def new_team(request, festa_id):
     festa = get_object_or_404(Festa, pk = festa_id)
@@ -176,7 +184,10 @@ def create_team(request, festa_id):
 def audience_home(request, festa_id):
     festa = get_object_or_404(Festa, pk = festa_id)
     homes = Home.objects.filter(festa = festa.id)
-    return render(request, 'festa_now/audience/home/audience_home.html', {'homes':homes, 'festa':festa})
+    paginator = Paginator(homes, 5)
+    page = request.GET.get('page')
+    home_list = paginator.get_page(page)
+    return render(request, 'festa_now/audience/home/audience_home.html', {'homes':homes, 'home_list':home_list, 'festa':festa})
 def a_new_home(request, festa_id):
     festa = get_object_or_404(Festa, pk = festa_id)
     return render(request, 'festa_now/audience/home/new_home.html',{'festa': festa})
@@ -227,7 +238,10 @@ def a_create_home(request, festa_id):
 def audience_lost_found(request, festa_id):
     festa = get_object_or_404(Festa, pk = festa_id)
     lost_founds = Lost_Found.objects.filter(festa = festa.id)
-    return render(request, 'festa_now/audience/lost_found/audience_lost_found.html', {'lost_founds':lost_founds, 'festa':festa})
+    paginator = Paginator(lost_founds, 5)
+    page = request.GET.get('page')
+    lostfounds_list = paginator.get_page(page)
+    return render(request, 'festa_now/audience/lost_found/audience_lost_found.html', {'lost_founds':lost_founds, 'lostfounds_list' : lostfounds_list, 'festa':festa})
 
 def a_new_lost_found(request, festa_id):
     festa = get_object_or_404(Festa, pk = festa_id)
@@ -281,7 +295,10 @@ def a_create_lost_found(request, festa_id):
 def staff_lost_found(request, festa_id):
     festa = get_object_or_404(Festa, pk = festa_id)
     lost_founds = Lost_Found.objects.filter(festa = festa.id)
-    return render(request, 'festa_now/staff/lost_found/staff_lost_found.html', {'lost_founds':lost_founds, 'festa':festa})
+    paginator = Paginator(lost_founds, 5)
+    page = request.GET.get('page')
+    lostfounds_list = paginator.get_page(page)
+    return render(request, 'festa_now/staff/lost_found/staff_lost_found.html', {'lost_founds':lost_founds, 'lostfounds_list' : lostfounds_list,'festa':festa})
     
 def s_new_lost_found(request, festa_id):
     festa = get_object_or_404(Festa, pk = festa_id)
@@ -336,7 +353,10 @@ def s_create_lost_found(request, festa_id):
 def staff_home(request, festa_id):
     festa = get_object_or_404(Festa, pk = festa_id)
     homes = Home.objects.filter(festa = festa.id)
-    return render(request, 'festa_now/staff/home/staff_home.html', {'homes':homes, 'festa': festa})    
+    paginator = Paginator(homes, 5)
+    page = request.GET.get('page')
+    home_list = paginator.get_page(page)
+    return render(request, 'festa_now/staff/home/staff_home.html', {'homes':homes,'home_list':home_list ,'festa': festa})    
 
 def s_new_home(request, festa_id):
     festa = get_object_or_404(Festa, pk = festa_id)

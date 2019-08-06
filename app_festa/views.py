@@ -79,11 +79,12 @@ def search(request) :
 def confirm_login(request) :
     return render(request, 'festa_home/confirm_login.html')
 
-def confirm(request) :
+def confirm(request, registerNum_id) :
+    registerNum = get_object_or_404(RegisterNum, pk = RegisterNum_id)
     number = request.POST['register_num']
     number_object = RegisterNum.objects.get(register_num = number)
     festa_object=number_object.festa
-    return render(request, 'festa_home/confirm.html', {'festa':festa_object})
+    return render(request, 'festa_home/confirm.html', {'festa':festa_object, 'registerNum' : registerNum})
 
 def all_festaNow(request) :
     festas = Festa.objects
@@ -96,10 +97,12 @@ def all_festaReady(request) :
     return render(request, 'festa_home/all_festaReady.html', {'festa':festas, 'today':today})
 
 ##staff 공지사항
-def staff_notice(request):
-    staffs = Staff.objects
+def staff_notice(request, festa_id):
+#     registernum = get_object_or_404(RegisterNum, pk )
+#     festa = get_object_or_404(Festa, pk = festa_id)
+    staffs = Staff.objects.filter(festa = festa.id)
     return render(request, 'festa_home/staff_notice.html', {'staffs': staffs})
-
+ 
 def staff_new(request):
     return render(request, 'festa_home/staff_new.html')
 

@@ -46,7 +46,8 @@
                 <textarea name="body"  readonly="readonly" id="" cols="30" rows="10"
                     style="padding:10px; margin:10px;">{{home.body}}</textarea>
             </p>
-            <input type="button" value="뒤로가기" onclick="history.back(-3);">
+            <a href="{% url 'audience_home' festa.id %}" class="store">집가자</a>
+            <!-- <input type="button" value="뒤로가기" onclick="history.back(-3);"> -->
             <span class="var"></span>
             <a href="{% url 'a_edit_home' festa.id home.id%}" class="store">수정하기</a>
             <span class="var"></span>

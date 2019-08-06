@@ -1,11 +1,4 @@
-{% extends 'base.html' %}
-<!-- 
-[base.html]
-<head>
-</head>
-
-<body>
- -->
+{% extends 'base_copyright_version.html' %}
 {% block content %}
 
 <div class="row">
@@ -32,7 +25,7 @@
         <a href="{% url 'a_new_lost_found' festa.id %}">글쓰기 </a>
 
         <hr>
-        {% for lost_found in lost_founds.all %}
+        {% for lost_found in lostfounds_list %}
         <br>
         <a href="{% url 'a_detail_lost_found' festa.id lost_found.id %}"> : {{lost_found.title}}</a>
         {{lost_found.post_type}}
@@ -47,7 +40,21 @@
         </div>
 
         {% endfor %}
+        <div class="middle">
+            {%if lostfounds_list.has_previous%}
+            <a href="?page=1">First</a>
+            <a href="?page={{lostfounds_list.previous_page_number}}">Previous</a>
+            {%endif%}
 
+            <span>{{lostfounds_list.number}}</span>
+            <span>of</span>
+            <span>{{lostfounds_list.paginator.num_pages}}</span>
+
+            {%if lostfounds_list.has_next%}
+            <a href="?page={{lostfounds_list.next_page_number}}">Next</a>
+            <a href="?page={{lostfounds_list.paginator.num_pages}}">Last</a>
+            {%endif%}
+        </div>
 
     </div>
 

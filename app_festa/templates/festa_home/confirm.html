@@ -1,17 +1,16 @@
-{% extends 'base.html' %}
-<!-- 
-[base.html]
-<head>
-</head>
-
-<body>
- -->
+{% extends 'base_copyright_version.html' %}
 {% block content %}
+
 <div class="container">
     <h2>등록 확인</h2>
     <br>
-    <h1>등록번호 : {{festa_object.number}}</h1>
+    <h1>등록번호 : {{festa.number}}</h1>
 
+    <a href = "{% url 'staff_notice' %}">Staff 공지사항 작성하기</a>
+    <br>
+    <br>
+    <a href = "">Audience 공지사항 작성하기</a>
+    <br>
     <form action="{% url 'update' festa.id %}" method="POST" enctype="multipart/form-data">
         {% csrf_token %}
         <h1>1. 기본 정보 입력</h1>

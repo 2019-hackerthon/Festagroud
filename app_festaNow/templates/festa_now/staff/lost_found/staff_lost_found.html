@@ -1,28 +1,47 @@
 {% extends 'base.html' %}
 {% block content %}
 
-<div id="team_div">
-    <h1>찾아가라</h1>
-    <a href="{% url 's_new_lost_found' festa.id %}">글쓰기 </a>
+   
 
-    <hr>
-    {% for lost_found in lost_founds.all %}
-    <br>
-    <a href="{% url 's_detail_lost_found' festa.id lost_found.id %}"> : {{lost_found.title}}</a>
-    {{lost_found.post_type}}
-    {{lost_found.writer}}
-    {{lost_found.pub_date}}
-    <br>
-    <a href="{% url 's_edit_lost_found' festa.id lost_found.id %}" class="card-link">수정하기</a>
-    <a href="{% url 's_delete_lost_found' festa.id lost_found.id %}" class="card-link">삭제하기</a>
+    <div class="col-md-7" style="background-color:#EEE9F7; ">
+        <div id="team_div">
+            <h1>찾아가라</h1>
+            <a href="{% url 's_new_lost_found' festa.id %}">글쓰기 </a>
 
-    <div class="middle">
-        <hr>
+            <hr>
+            {% for lost_found in lostfounds_list %}
+            <br>
+            <a href="{% url 's_detail_lost_found' festa.id lost_found.id %}"> : {{lost_found.title}}</a>
+            {{lost_found.post_type}}
+            {{lost_found.writer}}
+            {{lost_found.pub_date}}
+            <br>
+            <a href="{% url 's_edit_lost_found' festa.id lost_found.id %}" class="card-link">수정하기</a>
+            <a href="{% url 's_delete_lost_found' festa.id lost_found.id %}" class="card-link">삭제하기</a>
+
+            <div class="middle">
+                <hr>
+            </div>
+
+            {% endfor %}
+        </div>
+        <div class="middle">
+            {%if lostfounds_list.has_previous%}
+            <a href="?page=1">First</a>
+            <a href="?page={{lostfounds_list.previous_page_number}}">Previous</a>
+            {%endif%}
+
+            <span>{{lostfounds_list.number}}</span>
+            <span>of</span>
+            <span>{{lostfounds_list.paginator.num_pages}}</span>
+
+            {%if lostfounds_list.has_next%}
+            <a href="?page={{lostfounds_list.next_page_number}}">Next</a>
+            <a href="?page={{lostfounds_list.paginator.num_pages}}">Last</a>
+            {%endif%}
+        </div>
     </div>
-
-    {% endfor %}
-
-</div>
+  
 <!-- 자바 스크립트 연결 -->
 {% load static %}
 <script type="text/javascript" src="{% static 'js/standard_js.js' %}"></script>
