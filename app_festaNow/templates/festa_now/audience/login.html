@@ -7,13 +7,15 @@
             <form id="edit_box_form" action="{% url 'audience_main' festa.id %}" method="POST">
                 {% csrf_token %}
                 <div class="visible_edit_box">
-                    <div id="reserve_span">
-                        <span>이름</span>
-                    </div class="bt_wrapper">
+                    <div class="reserve_span">
+                        <span>이 &nbsp; &nbsp; &nbsp; &nbsp; 름</span>
+                    </div>
+                    <div class="bt_wrapper">
                         <input id="name_editText" type="text" name="reservation_name" value="1234"></p>
                     </div>
+                </div>
                 <div class="visible_edit_box">
-                    <div id="reserve_span">
+                    <div class="reserve_span">
                             <span>예매 번호</span>
                     </div>
                     <div class="bt_wrapper">
@@ -26,7 +28,7 @@
  </div>
 <!-- 자바 스크립트 연결 -->
 {% load static %}
-<script type="text/javascript" src="/static/js/login_js.js?ver=5' %}"></script>
+<script type="text/javascript" src="/static/js/login_js.js?ver=13' %}"></script>
 <style>
     #certificate_box {
         height: auto;
@@ -59,14 +61,15 @@
         padding-bottom: 68px;
     }
 
-    #reserve_span{
+    .reserve_span{
         display: flex;
     }
-    #reserve_span span{
+    .reserve_span span{
         align-self: center;
     }
 
     .bt_wrapper{
+        display: flex;
         border: 1px solid #9e9e9e;
         height: auto;
         width: 70%;
@@ -78,7 +81,7 @@
         border: 0px;
     }
 
-    #num_editText {
+    #num_editText, #name_editText {
         width: 90%;
         text-overflow: ellipsis;
     }
