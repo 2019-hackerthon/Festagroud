@@ -8,9 +8,11 @@
     <hr>
     {% for team in teams.all %}
     <br>
-    <a href="{% url 'detail_team' festa.id team.id %}"> : {{team.title2}}</a>
+    <a href="{% url 'detail_team' festa.id team.id %}">{{team.title2}}</a>
+    {{team.post_type}}
     {{team.writer2}}
-    {{team.pub_date}}
+    {{team.pub_date2|date:"m/d"}}
+    {{team.pub_date2|time:"H:i"}}
     <br>
     <a href="{% url 'edit_team' festa.id team.id %}" class="card-link">수정하기</a>
     <a href="{% url 'delete_team' festa.id team.id %}" class="card-link">삭제하기</a>

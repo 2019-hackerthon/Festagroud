@@ -4,7 +4,9 @@
 <div id="ready_festaInfo_div">
     <div>
         <h1>공연 이름 :{{ festa.name }}</h1>
-        <p>공연 날짜 : {{ festa.schedule|date:"Y"}}년 {{ festa.schedule|date:"m"}}월 {{ festa.schedule|date:"d"}}일</p>
+        <p>공연 날짜 : {{ festa.schedule_start|date:"Y"}}년 {{ festa.schedule_start|date:"m"}}월 {{ festa.schedule_start|date:"d"}}일
+            ~ {{ festa.schedule_end|date:"Y"}}년 {{ festa.schedule_end|date:"m"}}월 {{ festa.schedule_end|date:"d"}}일
+        </p>
         <p>공연 장소 : {{ festa.space }}</p>
         <p>공식 티켓판매처 링크 : {{festa.purchase_link}}</p>
         <p>공연 주최/기획사 : {{festa.host }}</p>

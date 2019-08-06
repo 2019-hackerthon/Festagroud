@@ -19,8 +19,8 @@
 
 <form action="{% url 'comment_ticket' festa.id ticket.id %}" method="POST">
     {% csrf_token %}
-    작성자 : <input name="writer" type="text">
+    작성자 : <input name="writer" type="text" placeholder="작성자를 입력해 주세요">
     <br>
-    내용 : <textarea name="content" id="" cols="30" rows="10"></textarea>
-    <input type="submit">
+    내용 : <textarea name="content" id="" cols="30" rows="10" placeholder="댓글을 입력해 주세요"></textarea>
+    <input type="submit" value="댓글 작성">
 </form>

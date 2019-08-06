@@ -11,7 +11,8 @@
     <a href="{% url 's_detail_home' festa.id home.id %}"> : {{home.title}}</a>
     {{home.region}}
     {{home.writer}}
-    {{home.pub_date}}
+    {{home.pub_date|date:"m/d"}}
+    {{home.pub_date|time:"H:i"}}
     <br>
     <a href="{% url 's_edit_home' festa.id home.id %}" class="card-link">수정하기</a>
     <a href="{% url 's_delete_home' festa.id home.id %}" class="card-link">삭제하기</a>
