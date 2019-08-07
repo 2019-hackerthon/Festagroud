@@ -1,0 +1,79 @@
+{% extends 'base_copyright_version.html' %}
+{% block content %}
+ 
+    <div class="row"  style="height:500px;">
+        <div class="col-md-5">
+                <h1>Staff 공지사항</h1>
+                <a href="{% url 'new_staff' festa.id %}">글쓰기 </a>
+                
+                <hr>
+                {% for staff in staff_list %}
+                <br>
+                <a href="{% url 'detail_staff' festa.id staff.id %}"> : {{staff.title}}</a> 
+                {{staff.writer}}
+                {{staff.pub_date}}
+                <br>
+                <a href="{% url 'edit_staff' festa.id staff.id %}" class="card-link">수정하기</a>
+                <a href="{% url 'delete_staff' festa.id staff.id %}" class="card-link">삭제하기</a>
+                {% endfor %}
+                <div class="middle">
+                    {%if staff_list.has_previous%}
+                    <a href="?page=1">First</a>
+                    <a href="?page={{staff_list.previous_page_number}}">Previous</a>
+                    {%endif%}
+    
+                    <span>{{staff_list.number}}</span>
+                    <span>of</span>
+                    <span>{{staff_list.paginator.num_pages}}</span>
+    
+                    {%if staff_list.has_next%}
+                    <a href="?page={{staff_list.next_page_number}}">Next</a>
+                    <a href="?page={{staff_list.paginator.num_pages}}">Last</a>
+                    {%endif%}
+                </div>
+
+
+        </div>
+
+        <div class="col-md-7" style="background-color:#EEE9F7; ">
+                <h1>Audience 공지사항</h1>
+                <!-- <a href="{% url 'new_now' festa.id %}">글쓰기 </a>
+                
+                <hr>
+                {% for now in now_list %}
+                <br>
+                <a href="{% url 'detail_now' festa.id now.id %}"> : {{now.title}}</a> 
+                {{now.writer}}
+                {{now.pub_date}}
+                <br>
+                <a href="{% url 'edit_now' festa.id now.id %}" class="card-link">수정하기</a>
+                <a href="{% url 'delete_now' festa.id now.id %}" class="card-link">삭제하기</a>
+                {% endfor %}
+                <div class="middle">
+                    {%if now_list.has_previous%}
+                    <a href="?page=1">First</a>
+                    <a href="?page={{now_list.previous_page_number}}">Previous</a>
+                    {%endif%}
+    
+                    <span>{{now_list.number}}</span>
+                    <span>of</span>
+                    <span>{{now_list.paginator.num_pages}}</span>
+    
+                    {%if now_list.has_next%}
+                    <a href="?page={{now_list.next_page_number}}">Next</a>
+                    <a href="?page={{now_list.paginator.num_pages}}">Last</a>
+                    {%endif%} -->
+
+
+        
+        </div>
+                
+          
+       
+
+
+    </div>
+
+    
+</body>
+{% endblock %}

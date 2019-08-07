@@ -16,7 +16,7 @@ urlpatterns = [
     path('festa_now/<int:festa_id>/', views.now_detail, name="now_detail"),
     # path('festa_ready/<int:festa_id>/', views.ready_detail, name="ready_detail"),
     path('confirm_login/', views.confirm_login, name="confirm_login"),
-    path('<int:registerNum_id>/confirm/', views.confirm, name="confirm"),
+    path('confirm/', views.confirm, name="confirm"),
     path('all_festaNow/', views.all_festaNow, name="all_festaNow"),
     path('all_festaReady/', views.all_festaReady, name="all_festaReady"),
     

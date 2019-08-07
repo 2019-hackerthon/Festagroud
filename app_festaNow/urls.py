@@ -64,4 +64,18 @@ urlpatterns = [
     path('<int:festa_id>/staff/staff_main', views.staff_main, name="staff_main"),
     path('<int:festa_id>/staff_login', views.staff_login, name="staff_login"),
 
+    path('<int:festa_id>/staff/notice', views.notice, name="notice"),
+    path('<int:festa_id>/confirm_register', views.confirm_register, name="confirm_register"),
+    path('<int:festa_id>/confirm_login', views.confirm_login, name="confirm_login"),
+
+    path('<int:festa_id>/staff/detail_staff/<int:staff_id>', views.detail_staff, name="detail_staff"),
+    path('<int:festa_id>/staff/new_staff', views.new_staff, name="new_staff"),
+    path('<int:festa_id>/staff/delete_staff/<int:staff_id>', views.delete_staff, name="delete_staff"),
+    path('<int:festa_id>/staff/edit_staff/<int:staff_id>', views.edit_staff, name="edit_staff"),
+    path('<int:festa_id>/staff/update_staff/<int:staff_id>', views.update_staff, name="update_staff"),
+    path('<int:festa_id>/staff/create_staff/', views.create_staff, name="create_staff"),
+
+
+
+
 ]+ static(settings.MEDIA_URL, document_root = settings.MEDIA_ROOT)

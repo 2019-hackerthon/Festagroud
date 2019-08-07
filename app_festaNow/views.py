@@ -460,3 +460,88 @@ def s_comment_lost_found(request, festa_id, lost_found_id):
     return redirect('s_detail_lost_found', festa_id, lost_found_id)
 
 
+########################## festa_now/공지사항 #########################
+
+def confirm_login(request, festa_id) : 
+    festa = get_object_or_404(Festa, pk = festa_id)
+    return render(request, 'festa_now/staff/notice/confirm_login.html', {'festa':festa})
+
+def confirm_register(request, festa_id) : 
+    festa = get_object_or_404(Festa, pk = festa_id)
+    number = request.POST['register_num']
+    number_object = RegisterNum.objects.get(register_num = number)
+    return render(request, 'festa_now/staff/notice/notice.html', {'festa':festa})
+
+def notice(request, festa_id) :
+    if request.method == 'POST':
+        festa = get_object_or_404(Festa, pk = festa_id)
+        staffs = Staff.objects.filter(festa = festa.id)
+        number = request.POST['register_num']
+        number_object = RegisterNum.objects.get(register_num = number)
+        festa_object=number_object.festa
+        return render(request, 'festa_now/staff/notice/notice.html', {'festa':festa,'staffs':staffs,'staff_list':staff_list})
+    
+    
+    paginator = Paginator(staffs, 5)
+    page = request.GET.get('page')
+    staff_list = paginator.get_page(page)
+    return render(request, 'festa_now/staff/notice/notice.html',{'staffs':staffs,'staff_list':staff_list, 'festa': festa,'festa_object':festa_object})
+
+def staff_main(request, festa_id) :
+    if request.method == 'POST':
+        festa = get_object_or_404(Festa, pk = festa_id)
+        first = request.POST['reservation_name']
+        second = request.POST["reservation_num"]
+        num_object = ReservationNum.objects.get(reservation_num = second)
+        name_object = ReservationNum.objects.get(reservation_name = first)
+        first = name_object
+        second = num_object
+        return render(request, 'festa_now/staff/staff_main.html', {'festa':festa})
+    else :
+        festa = get_object_or_404(Festa, pk = festa_id)
+        return render(request, 'festa_now/staff/staff_main.html', {'festa':festa})
+
+
+def new_staff(request, festa_id) : 
+    festa = get_object_or_404(Festa, pk = festa_id)
+    return render(request, 'festa_now/staff/notice/new_staff.html', {'festa':festa})
+
+def detail_staff(request, festa_id, staff_id):
+    festa = get_object_or_404(Festa, pk = festa_id)
+    staff = Staff.objects.get(pk=staff_id)
+    return render(request, 'festa_now/staff/notice/detail_staff.html', {'staff' : staff,'festa':festa })
+
+def delete_staff(request, festa_id, staff_id):
+    festa = get_object_or_404(Festa, pk = festa_id)
+    delete_staff = get_object_or_404(Staff, pk=staff_id)
+    delete_staff.delete()
+    return redirect('/festa_now/{}/staff/notice'.format(festa.id))
+    
+
+def edit_staff(request, festa_id, staff_id):
+    festa = get_object_or_404(Festa, pk = festa_id)
+    edit_staff = Staff.objects.get(pk=staff_id)
+    return render(request, 'festa_now/staff/notice/edit_staff.html', {'staff': edit_staff, 'festa':festa})
+
+
+def update_staff(request, festa_id, staff_id):
+    festa = get_object_or_404(Festa, pk = festa_id)
+    update_staff = Staff.objects.get(id = staff_id)
+    update_staff.title = request.POST["title"]
+    update_staff.writer = request.POST['writer']
+    update_staff.body = request.POST['body']
+    update_staff.save()
+    return redirect('/festa_now/{}/staff/notice'.format(festa.id))
+
+def create_staff(request, festa_id):
+    festa = get_object_or_404(Festa, pk = festa_id)
+    if request.method=="POST":
+        staff = Staff()
+        staff.festa = get_object_or_404(Festa, pk = festa_id)
+        staff.title = request.POST['title']
+        staff.body = request.POST['body']
+        staff.writer = request.POST['writer']
+        staff.pub_date = timezone.datetime.now()
+        staff.save()
+        return redirect('/festa_now/{}/staff/notice/detail_staff/{}'.format(festa.id, staff.id))
+    return render(request, 'festa_now/staff/notice/notice.html', {'festa':festa})
