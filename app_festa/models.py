@@ -39,3 +39,6 @@ class Audience(models.Model):
     writer = models.CharField(max_length=100)
     pub_date = models.DateTimeField('date published')
     body = models.TextField()
+    festa = models.ForeignKey(Festa, on_delete=models.CASCADE)
+
+    

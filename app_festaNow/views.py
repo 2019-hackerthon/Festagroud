@@ -1,5 +1,5 @@
 from django.shortcuts import render, get_object_or_404, redirect
-from app_festa.models import Festa, RegisterNum, Staff
+from app_festa.models import Festa, RegisterNum, Staff, Audience
 from app_festaReady.models import Accompany, Ticket, Commenta, Commenttic
 from app_festaNow.models import Now, Team, Commentn, Commentt, Home, Commenth, ReservationNum, Lost_Found, Commentlf
 import datetime
@@ -460,7 +460,7 @@ def s_comment_lost_found(request, festa_id, lost_found_id):
     return redirect('s_detail_lost_found', festa_id, lost_found_id)
 
 
-########################## festa_now/공지사항 #########################
+########################## festa_now/공지사항 - staff #########################
 
 def confirm_login(request, festa_id) : 
     festa = get_object_or_404(Festa, pk = festa_id)
@@ -470,37 +470,19 @@ def confirm_register(request, festa_id) :
     festa = get_object_or_404(Festa, pk = festa_id)
     number = request.POST['register_num']
     number_object = RegisterNum.objects.get(register_num = number)
-    return render(request, 'festa_now/staff/notice/notice.html', {'festa':festa})
+    return render(request, 'festa_now/staff/notice/notice.html',{'festa':festa})
 
 def notice(request, festa_id) :
-    if request.method == 'POST':
         festa = get_object_or_404(Festa, pk = festa_id)
         staffs = Staff.objects.filter(festa = festa.id)
-        number = request.POST['register_num']
-        number_object = RegisterNum.objects.get(register_num = number)
-        festa_object=number_object.festa
-        return render(request, 'festa_now/staff/notice/notice.html', {'festa':festa,'staffs':staffs,'staff_list':staff_list})
-    
-    
-    paginator = Paginator(staffs, 5)
-    page = request.GET.get('page')
-    staff_list = paginator.get_page(page)
-    return render(request, 'festa_now/staff/notice/notice.html',{'staffs':staffs,'staff_list':staff_list, 'festa': festa,'festa_object':festa_object})
-
-def staff_main(request, festa_id) :
-    if request.method == 'POST':
-        festa = get_object_or_404(Festa, pk = festa_id)
-        first = request.POST['reservation_name']
-        second = request.POST["reservation_num"]
-        num_object = ReservationNum.objects.get(reservation_num = second)
-        name_object = ReservationNum.objects.get(reservation_name = first)
-        first = name_object
-        second = num_object
-        return render(request, 'festa_now/staff/staff_main.html', {'festa':festa})
-    else :
-        festa = get_object_or_404(Festa, pk = festa_id)
-        return render(request, 'festa_now/staff/staff_main.html', {'festa':festa})
-
+        audiences = Audience.objects.filter(festa = festa.id)
+        paginator = Paginator(staffs, 5)
+        paginator2 = paginator(audiences, 5)
+        page = request.GET.get('page')
+        page2 = request.GET.get('page2')
+        staff_list = paginator.get_page(page)
+        audience_list = paginator2.get_page(page2)
+        return render(request, 'festa_now/staff/notice/notice.html', {'festa':festa,'staffs':staffs,'staff_list':staff_list, 'audiences':audiences, 'audience_list':audience_list})
 
 def new_staff(request, festa_id) : 
     festa = get_object_or_404(Festa, pk = festa_id)
@@ -543,5 +525,53 @@ def create_staff(request, festa_id):
         staff.writer = request.POST['writer']
         staff.pub_date = timezone.datetime.now()
         staff.save()
-        return redirect('/festa_now/{}/staff/notice/detail_staff/{}'.format(festa.id, staff.id))
+        return redirect('/festa_now/{}/staff/notice'.format(festa.id))
+    return render(request, 'festa_now/staff/notice/notice.html', {'festa':festa})
+ 
+
+
+ ########################## festa_now/공지사항 - audience #########################
+
+def new_audience(request, festa_id) : 
+    festa = get_object_or_404(Festa, pk = festa_id)
+    return render(request, 'festa_now/staff/notice/new_audience.html', {'festa':festa})
+
+def detail_audience(request, festa_id, audience_id):
+    festa = get_object_or_404(Festa, pk = festa_id)
+    audience = Audience.objects.get(pk=staff_id)
+    return render(request, 'festa_now/staff/notice/detail_audience.html', {'audience' : audience,'festa':festa })
+
+def delete_audience(request, festa_id, audience_id):
+    festa = get_object_or_404(Festa, pk = festa_id)
+    delete_audience = get_object_or_404(Audience, pk=audience_id)
+    delete_audience.delete()
+    return redirect('/festa_now/{}/staff/notice'.format(festa.id))
+    
+
+def edit_audience(request, festa_id, audience_id):
+    festa = get_object_or_404(Festa, pk = festa_id)
+    edit_audience = Audience.objects.get(pk=audience_id)
+    return render(request, 'festa_now/staff/notice/edit_audience.html', {'audience': edit_audience, 'festa':festa})
+
+
+def update_audience(request, festa_id, audience_id):
+    festa = get_object_or_404(Festa, pk = festa_id)
+    update_audience = Audience.objects.get(id = audience_id)
+    update_audience.title = request.POST["title"]
+    update_audience.writer = request.POST['writer']
+    update_audience.body = request.POST['body']
+    update_audience.save()
+    return redirect('/festa_now/{}/staff/notice'.format(festa.id))
+
+def create_audience(request, festa_id):
+    festa = get_object_or_404(Festa, pk = festa_id)
+    if request.method=="POST":
+        audience = Audience()
+        audience.festa = get_object_or_404(Festa, pk = festa_id)
+        audience.title = request.POST['title']
+        audience.body = request.POST['body']
+        audience.writer = request.POST['writer']
+        audience.pub_date = timezone.datetime.now()
+        audience.save()
+        return redirect('/festa_now/{}/staff/notice'.format(festa.id))
     return render(request, 'festa_now/staff/notice/notice.html', {'festa':festa})

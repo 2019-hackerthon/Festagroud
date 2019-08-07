@@ -37,32 +37,32 @@
 
         <div class="col-md-7" style="background-color:#EEE9F7; ">
                 <h1>Audience 공지사항</h1>
-                <!-- <a href="{% url 'new_now' festa.id %}">글쓰기 </a>
+                <a href="{% url 'new_audience' festa.id %}">글쓰기 </a>
                 
                 <hr>
-                {% for now in now_list %}
+                {% for audience in audience_list %}
                 <br>
-                <a href="{% url 'detail_now' festa.id now.id %}"> : {{now.title}}</a> 
-                {{now.writer}}
-                {{now.pub_date}}
+                <a href="{% url 'detail_audience' festa.id audience.id %}"> : {{audience.title}}</a> 
+                {{audience.writer}}
+                {{audience.pub_date}}
                 <br>
-                <a href="{% url 'edit_now' festa.id now.id %}" class="card-link">수정하기</a>
-                <a href="{% url 'delete_now' festa.id now.id %}" class="card-link">삭제하기</a>
+                <a href="{% url 'edit_audience' festa.id audience.id %}" class="card-link">수정하기</a>
+                <a href="{% url 'delete_audience' festa.id audience.id %}" class="card-link">삭제하기</a>
                 {% endfor %}
                 <div class="middle">
-                    {%if now_list.has_previous%}
+                    {%if audience_list.has_previous%}
                     <a href="?page=1">First</a>
-                    <a href="?page={{now_list.previous_page_number}}">Previous</a>
+                    <a href="?page={{audience_list.previous_page_number}}">Previous</a>
                     {%endif%}
     
-                    <span>{{now_list.number}}</span>
+                    <span>{{audience_list.number}}</span>
                     <span>of</span>
-                    <span>{{now_list.paginator.num_pages}}</span>
+                    <span>{{audience_list.paginator.num_pages}}</span>
     
-                    {%if now_list.has_next%}
-                    <a href="?page={{now_list.next_page_number}}">Next</a>
-                    <a href="?page={{now_list.paginator.num_pages}}">Last</a>
-                    {%endif%} -->
+                    {%if audience_list.has_next%}
+                    <a href="?page={{audience_list.next_page_number}}">Next</a>
+                    <a href="?page={{audience_list.paginator.num_pages}}">Last</a>
+                    {%endif%}
 
 
         

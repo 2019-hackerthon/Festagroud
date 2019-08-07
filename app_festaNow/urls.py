@@ -65,8 +65,8 @@ urlpatterns = [
     path('<int:festa_id>/staff_login', views.staff_login, name="staff_login"),
 
     path('<int:festa_id>/staff/notice', views.notice, name="notice"),
-    path('<int:festa_id>/confirm_register', views.confirm_register, name="confirm_register"),
-    path('<int:festa_id>/confirm_login', views.confirm_login, name="confirm_login"),
+    path('<int:festa_id>/staff/notice', views.confirm_register, name="confirm_register"),
+    path('<int:festa_id>/staff/confirm_login', views.confirm_login, name="confirm_login"),
 
     path('<int:festa_id>/staff/detail_staff/<int:staff_id>', views.detail_staff, name="detail_staff"),
     path('<int:festa_id>/staff/new_staff', views.new_staff, name="new_staff"),
@@ -74,6 +74,13 @@ urlpatterns = [
     path('<int:festa_id>/staff/edit_staff/<int:staff_id>', views.edit_staff, name="edit_staff"),
     path('<int:festa_id>/staff/update_staff/<int:staff_id>', views.update_staff, name="update_staff"),
     path('<int:festa_id>/staff/create_staff/', views.create_staff, name="create_staff"),
+
+    path('<int:festa_id>/staff/detail_audience/<int:audience_id>', views.detail_audience, name="detail_audience"),
+    path('<int:festa_id>/staff/new_audience', views.new_audience, name="new_audience"),
+    path('<int:festa_id>/staff/delete_audience/<int:audience_id>', views.delete_audience, name="delete_audience"),
+    path('<int:festa_id>/staff/edit_audienece/<int:audience_id>', views.edit_audience, name="edit_audience"),
+    path('<int:festa_id>/staff/update_audience/<int:audience_id>', views.update_audience, name="update_audience"),
+    path('<int:festa_id>/staff/create_audience/', views.create_audience, name="create_audience"),
 
 
 
