@@ -19,9 +19,19 @@
             </ul>
     </div>
 
-<div class="col-md-7" style="background-color:#EEE9F7; ">
+    <div class="col-md-7" style="background-color:#EEE9F7; ">
+            <div id="subtitle_text_wrapper">
+                    공지사항
+                </div>
+            {% for audience in audiences.all %}
+                <br>
+                <a href="{% url 'detail_audience' festa.id audience.id %}"> : {{audience.title}}</a> 
+                {{audience.writer}}
+                {{audience.pub_date}}
+                <br>
+                {% endfor %}
     </div>
-    
+</div>
 
 <!-- 자바 스크립트 연결 -->
 {% load static %}
