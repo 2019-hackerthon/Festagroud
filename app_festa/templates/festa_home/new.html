@@ -1,11 +1,4 @@
 {% extends 'base_copyright_version.html' %}
-<!-- 
-[base.html]
-<head>
-</head>
-
-<body>
- -->
 {% block content %}
 <div class="container">
     <h2>페스타 등록하기</h2>
@@ -79,10 +72,6 @@
                     }).open();
                 }
             </script>
-            <a href = "{% url 'staff_notice' %}">Staff 공지사항 작성하기</a>
-           <br>
-           <br>
-            <a href = "">Audience 공지사항 작성하기</a>
             <br>
             <p>이미지 첨부 이미지 내 공연 소개, 공연 출연진, 타임 테이블 정보 필수</p>
             <input type="file" name="poster" vlaue="찾아보기">

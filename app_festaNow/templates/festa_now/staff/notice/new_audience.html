@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+<center>
+    <h1>새 글을 작성해주세요</h1>
+    <a href="{% url 'notice' festa.id %}" class="store">공지사항 게시판</a>
+    <br>
+    <br>
+    <form action="{%url 'create_audience' festa.id %}" method="POST">
+        {% csrf_token %}
+        [Title] : <input type="text" name='title'>
+        <br>
+        <br>
+        [Writer] : <input type="text" name='writer'>
+        <br>
+        <br>
+        [Body]
+        <br>
+        <textarea name="body" id="" cols="30" rows="10" placeholder="write your content" style="padding:10px; margin:10px;"></textarea>
+        <br>
+        
+        <button type='submit'>작성하기</button>
+    </form>
+</center>
+</body>
+
+</html>
