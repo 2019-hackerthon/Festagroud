@@ -1,45 +1,30 @@
-{% extends 'base_copyright_version.html' %}
+{% extends 'base.html' %}
 {% block content %}
 
-<div class="row">
-    <div class="col-md-5">
-        <img src="{{festa.poster.url}}" style="height:500px">
-        <ul class="vertical-menu">
-
-            <li><a href="{% url 'audience_main' festa.id %}">공지사항</a></li>
-
-            <li><a href="{% url 'now_now' festa.id %}">Festa now</a></li>
-
-            <li><a href="{% url 'audience_map' festa.id %}">지도</a></li>
-
-            <li><a href="">찾아가라</a></li>
-
-            <li><a href="{% url 'audience_home' festa.id %}">집가자</a></li>
-
-        </ul>
-    </div>
+   
 
     <div class="col-md-7" style="background-color:#EEE9F7; ">
+        <div id="team_div">
+            <h1>찾아가라</h1>
+            <a href="{% url 's_new_lost_found' festa.id %}">글쓰기 </a>
 
-        <h1>찾아가라</h1>
-        <a href="{% url 'a_new_lost_found' festa.id %}">글쓰기 </a>
-
-        <hr>
-        {% for lost_found in lostfounds_list %}
-        <br>
-        <a href="{% url 'a_detail_lost_found' festa.id lost_found.id %}"> : {{lost_found.title}}</a>
-        {{lost_found.post_type}}
-        {{lost_found.writer}}
-        {{lost_found.pub_date}}
-        <br>
-        <a href="{% url 'a_edit_lost_found' festa.id lost_found.id %}" class="card-link">수정하기</a>
-        <a href="{% url 'a_delete_lost_found' festa.id lost_found.id %}" class="card-link">삭제하기</a>
-
-        <div class="middle">
             <hr>
-        </div>
+            {% for lost_found in lostfounds_list %}
+            <br>
+            <a href="{% url 's_detail_lost_found' festa.id lost_found.id %}"> : {{lost_found.title}}</a>
+            {{lost_found.post_type}}
+            {{lost_found.writer}}
+            {{lost_found.pub_date}}
+            <br>
+            <a href="{% url 's_edit_lost_found' festa.id lost_found.id %}" class="card-link">수정하기</a>
+            <a href="{% url 's_delete_lost_found' festa.id lost_found.id %}" class="card-link">삭제하기</a>
 
-        {% endfor %}
+            <div class="middle">
+                <hr>
+            </div>
+
+            {% endfor %}
+        </div>
         <div class="middle">
             {%if lostfounds_list.has_previous%}
             <a href="?page=1">First</a>
@@ -55,9 +40,11 @@
             <a href="?page={{lostfounds_list.paginator.num_pages}}">Last</a>
             {%endif%}
         </div>
-
     </div>
+  
+<!-- 자바 스크립트 연결 -->
+{% load static %}
+<script type="text/javascript" src="{% static 'js/festa_now_audience_js.js' %}"></script>
 
-
-    </body>
-    {% endblock %}
+<style></style>
+{% endblock %}
