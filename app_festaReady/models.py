@@ -28,10 +28,14 @@ class Accompany(models.Model) : #festa_ready의 동행구하는 게시판
 
 
 class Commenta(models.Model):
-    writer_accompany = models.CharField(max_length=200)
-    content_accompany = models.TextField()
+    festa = models.ForeignKey(Festa, on_delete=models.CASCADE)
+    writer = models.CharField(max_length=200)
+    content = models.TextField()
     password = models.CharField(max_length=20)
     accompany = models.ForeignKey(Accompany, on_delete=models.CASCADE)
+
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
 
 
 class Ticket(models.Model): #festa_ready의 티켓 양도 교환 게시판

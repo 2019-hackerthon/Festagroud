@@ -11,19 +11,17 @@
 {% endif %}
 <a href="{% url 'edit_accompany' festa.id accompany.pk %}" class="btn btn-primary">수정</a>
 
-<form action="{% url 'delete_accompany' festa.id accompany.pk %}" method="POST">
-    {% csrf_token%}
-    <input type="submit" value="삭제" class="btn btn-primary">
-</form>
+<a href="{% url 'delete_accompany' festa.id accompany.pk %}" class="btn btn-primary">삭제</a>
 
 <h2>comments</h2>
-{% for comment in comments %}
-<p>작성자: {{comment.writer_accompany}}</p>
-<p>내용: {{comment.content_accompany}}</p>
+{% for commenta in commentas %}
+<p>작성자: {{commenta.writer}}</p>
+<p>내용: {{commenta.content}}</p>
+<a href="{% url 'delete_commenta' festa.id accompany.id commenta.pk %}" class="btn btn-primary">삭제</a>
 <hr>
 {% endfor%}
 
-<form action="{% url 'comment_accompany' festa.id accompany.id %}" method="POST">
+<form action="{% url 'create_commenta' festa.id accompany.id %}" method="POST">
     {% csrf_token %}
     작성자 : <input name="writer" type="text">    
     비밀번호: <input type="password" name="password"><br>
