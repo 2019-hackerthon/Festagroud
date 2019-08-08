@@ -1,64 +1,46 @@
-{% extends 'base_copyright_version.html' %}
+{% extends 'base.html' %}
 {% block content %}
- 
- 
-    <div class="row">
-        <div class="col-md-5">
-            <img src ="{{festa.poster.url}}"style="height:500px">
-            <ul class="vertical-menu">
 
-                <li><a href="{% url 'audience_main' festa.id %}">공지사항</a></li>
-                
-                <li><a href="{% url 'now_now' festa.id %}">Festa now</a></li>
-                
-                <li><a href="{% url 'audience_map' festa.id %}">지도</a></li>
-                
-                <li><a href="{% url 'audience_lost_found' festa.id %}">찾아가라</a></li>
+<div id="team_div">
+    <h1>팀별게시판</h1>
+    <a href="{% url 'new_team' festa.id %}">글쓰기 </a>
 
-                <li><a href="{% url 'audience_home' festa.id %}">집가자</a></li>
+    <hr>
+    {% for team in team_list %}
+    <br>
+    <a href="{% url 'detail_team' festa.id team.id %}"> : {{team.title2}}</a>
+    {{team.writer2}}
+    {{team.pub_date}}
+    <br>
+    <a href="{% url 'edit_team' festa.id team.id %}" class="card-link">수정하기</a>
+    <a href="{% url 'delete_team' festa.id team.id %}" class="card-link">삭제하기</a>
 
-                </ul>
-        </div>
-
-    <div class="col-md-7" style="background-color:#EEE9F7; ">
-      
-        <h1>Festa now</h1>
-            <a href="{% url 'new_now' festa.id %}">글쓰기 </a>
-            
-            <hr>
-            {% for now in now_list %}
-            <br>
-            <a href="{% url 'detail_now' festa.id now.id %}"> : {{now.title}}</a> 
-            {{now.writer}}
-            {{now.pub_date}}
-            <br>
-            <a href="{% url 'edit_now' festa.id now.id %}" class="card-link">수정하기</a>
-            <a href="{% url 'delete_now' festa.id now.id %}" class="card-link">삭제하기</a>
-            
-            <div class="middle">
-                <hr>
-            </div>
-                
-            {% endfor %}
-            <div class="middle">
-                {%if now_list.has_previous%}
-                <a href="?page=1">First</a>
-                <a href="?page={{now_list.previous_page_number}}">Previous</a>
-                {%endif%}
-
-                <span>{{now_list.number}}</span>
-                <span>of</span>
-                <span>{{now_list.paginator.num_pages}}</span>
-
-                {%if now_list.has_next%}
-                <a href="?page={{now_list.next_page_number}}">Next</a>
-                <a href="?page={{now_list.paginator.num_pages}}">Last</a>
-                {%endif%}
-            </div>
-
-
+    <div class="middle">
+        <hr>
     </div>
 
+    {% endfor %}
+    <div class="middle">
+        {%if team_list.has_previous%}
+        <a href="?page=1">First</a>
+        <a href="?page={{team_list.previous_page_number}}">Previous</a>
+        {%endif%}
     
-</body>
+        <span>{{team_list.number}}</span>
+        <span>of</span>
+        <span>{{team_list.paginator.num_pages}}</span>
+    
+        {%if team_list.has_next%}
+        <a href="?page={{team_list.next_page_number}}">Next</a>
+        <a href="?page={{team_list.paginator.num_pages}}">Last</a>
+        {%endif%}
+    </div>
+</div>
+
+
+<!-- 자바 스크립트 연결 -->
+{% load static %}
+<script type="text/javascript" src="{% static 'js/festa_now_audience_js.js' %}"></script>
+
+<style></style>
 {% endblock %}

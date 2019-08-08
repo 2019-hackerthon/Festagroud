@@ -37,9 +37,11 @@
 
         // fore_img_wrapper에 들어갈 이미지 리사이즈
         function imgResize() {
+            var img_wrapper = document.getElementById('fore_img_wrapper');
             var img = document.getElementById('fore_img');
-            var img_width = img.clientWidth;
-            img.style.height = (img_width * 0.68) + 'px';
+            var img_width = img_wrapper.clientWidth;
+            img.style.width = img_width + 'px';
+            img.style.height = (img.clientWidth * 0.68) + 'px';
         }
 
         // 왼쪽 사이드바 텍스트 사이즈 제한
