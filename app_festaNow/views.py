@@ -483,8 +483,9 @@ def confirm_register(request, festa_id) :
         number_object = RegisterNum.objects.get(register_num = number)
         if (festa.number.register_num == number_object.register_num) :
             return redirect('notice', festa_id)
-        # else :
-        #     return render(request, 'festa_now/staff/notice/cannot_notice.html')
+        else :
+            false=0
+            return render(request, 'festa_now/staff/notice/confirm_login.html',{'fail':false, 'festa':festa})
     
 
 def notice(request, festa_id) :
