@@ -477,10 +477,15 @@ def confirm_login(request, festa_id) :
     return render(request, 'festa_now/staff/notice/confirm_login.html', {'festa':festa})
 
 def confirm_register(request, festa_id) : 
-    festa = get_object_or_404(Festa, pk = festa_id)
-    number = request.POST['register_num']
-    number_object = RegisterNum.objects.get(register_num = number)
-    return render(request, 'festa_now/staff/notice/notice.html',{'festa':festa})
+    if request.method == 'POST' :
+        number = request.POST['register_num']
+        festa = Festa.objects.get(id = festa_id)
+        number_object = RegisterNum.objects.get(register_num = number)
+        if (festa.number.register_num == number_object.register_num) :
+            return redirect('notice', festa_id)
+        # else :
+        #     return render(request, 'festa_now/staff/notice/cannot_notice.html')
+    
 
 def notice(request, festa_id) :
     festa = get_object_or_404(Festa, pk = festa_id)
