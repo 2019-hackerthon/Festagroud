@@ -1,16 +1,13 @@
 {% extends 'base.html' %}
 {% block content %}
-<!-- {% extends 'base.html' %}
-{% block content %}
 
-<div id="notice_container">
+<div id="team_container">
     <div id="subtitle_text_wrapper">
-        공지사항
-        <i class="fas fa-infinity"></i>
+        팀별 게시판
     </div>
     <div id="table_bt_div">
         <div id="bt_write_div">
-            <form action="{% url 'confirm_login' festa.id %}" method="GET">
+            <form action="{% url 'new_team' festa.id %}" method="GET">
                 <input id="write_bt_image" type="submit" value="&#xf040" class="7x">
                 <input id="write_bt_text" type="submit" value="글쓰기">
             </form>
@@ -22,44 +19,41 @@
                     <td id="table_intro" colspan="5"> 2019 멋사 해커톤 대회에 대한 게시판 입니다.</td>
                 </tr>
                 <tr id="kind_board">
-                    <td id="title" class="headTd">구분</td>
-                    <td id="title" class="headTd">제목</td>
-                    <td id="title" class="headTd">작성자</td>
-                    <td id="title" class="headTd">날짜</td>
+                    <td>구분</td>
+                    <td>제목</td>
+                    <td>작성자</td>
+                    <td>날짜</td>
+                    <td>시간</td>
                 </tr>
-                <!-- 공지등록 -->
-                {% for staff in staff_list %}
-                <tr class="notice_board">
-                    <td>공지사항</td>
-                    <td class="title_td"><a href="{% url 'detail_staff' festa.id staff.id %}"> : {{staff.title}}</a>
-                    </td>
-                    <td>{{staff.writer}}</td>
-                    <td>{{staff.pub_date}}</td>
+
+                <!-- 내용등록 -->
+                {% for team in team_list %}
+                <tr class="content_board">
+                    <td>지역</td>
+                    <td class="title_td">
+                            <a href="{% url 'detail_team' festa.id team.id %}"> <span>{{team.title2}}</span></a>
+                        </td>
+                    <td>{{team.writer2}}</td>
+                    <td>{{team.pub_date|date:"Y/m/d"}}</td>
+                    <td>{{team.pub_date|time:"H:i"}}</td>
                 </tr>
                 {% endfor %}
-                <!-- 내용등록 -->
-                <tr id="content_board">
-                    <td>번호</td>
-                    <td class="title_td"><a href="test">(지역) 제목</a></td>
-                    <td>작성자</td>
-                    <td>날짜 시간</td>
-                </tr>
             </table>
         </div>
 
         <div id="pagination">
-            {%if staff_list.has_previous%}
+            {%if team_list.has_previous%}
             <a href="?page=1">First</a>
-            <a href="?page={{staff_list.previous_page_number}}">Previous</a>
+            <a href="?page={{team_list.previous_page_number}}">Previous</a>
             {%endif%}
 
-            <span>{{staff_list.number}}</span>
+            <span>{{team_list.number}}</span>
             <span>of</span>
-            <span>{{staff_list.paginator.num_pages}}</span>
+            <span>{{team_list.paginator.num_pages}}</span>
 
-            {%if staff_list.has_next%}
-            <a href="?page={{staff_list.next_page_number}}">Next</a>
-            <a href="?page={{staff_list.paginator.num_pages}}">Last</a>
+            {%if team_list.has_next%}
+            <a href="?page={{team_list.next_page_number}}">Next</a>
+            <a href="?page={{team_list.paginator.num_pages}}">Last</a>
             {%endif%}
         </div>
     </div>
@@ -70,7 +64,8 @@
 <script type="text/javascript" src="/static/js/festa_now_staff_js.js?ver=3' %}"></script>
 
 <style>
-    #notice_container {
+    /* 전체 컨테이너 */
+    #team_container {
         width: 100%;
         height: 100%;
         padding-top: 50px;
@@ -78,64 +73,107 @@
         padding-right: 20%;
     }
 
+    /* 팀별 게시판 타이틀 */
     #subtitle_text_wrapper {
         font-size: 20px;
         font-weight: bold;
-        min-width: 525px;
     }
 
+    /* content가 들어가 container */
     #table_bt_div {
         background: #ffffff;
         padding-left: 3%;
         padding-right: 3%;
-        padding-top: 5%;
+        padding-top: 2%;
         padding-bottom: 5%;
         margin-top: 20px;
-        min-width: 525px;
+        width: 100%;
     }
 
+    /* 버튼 wrapper */
+    #bt_write_div {
+        width: 100%;
+    }
+
+    /* 테이블 wrapper */
     #table_div {
         width: 100%;
     }
 
-    .notice_board,
+    #table_intro {
+        font-size: 1vw;
+        font-weight: bold;
+    }
+
+    /* 카테고리 board, 실제 내용(content) board -> 밑줄 긋는 css */
+
+    #kind_board,
+    .content_board {
+        width: 100%;
+        font-size: 18px;
+    }
+
     #kind_board {
-        border-bottom: 1px solid #6357ff;
+        border-bottom: 1px solid #000000;
+        font-weight: 500;
     }
 
-    .notice_board {
-        color: #6357ff;
+    #kind_board td {
+        padding-top: 30px;
     }
 
-    .notice_board a {
-        color: #6357ff;
-        text-decoration: none;
+    .content_board {
+        border-bottom: 1px solid #000000;
+        color: #000000;
     }
 
-    #content_board {
-        border-bottom: 1px solid #D5D5D5;
-    }
-
-    #content_board a {
+    /* board 안에 있는 a 태그 */
+    .content_board td a {
         color: #000000;
         text-decoration: none;
     }
 
-    td {
-        width: 10%;
+    .content_board td {
+        padding-top: 3px;
+        padding-bottom: 3px;
     }
 
-    .title_td {
-        width: 50%;
-    }
-
+    /* 테이블 태그 */
     table {
         width: 100%;
     }
 
-    #pagination {
-        width: 100%;
+    /* table_div 안 모든 td 태그 */
+    td {
         text-align: center;
+    }
+
+    /* 제목이 들어가는 특정 td */
+    .title_td {
+        width: 40%;
+    }
+
+    .title_td a span {
+        display: block;
+        width: 300px;
+        height: auto;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        text-align: center;
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+    #bt_write_div form {
+        background: #eaeaea;
+        text-align: center;
+        display: inline-block;
+        padding: 7px 20px;
+    }
+
+    #bt_write_div form input {
+        border: 0px;
     }
 
     #write_bt_image {
@@ -153,57 +191,10 @@
         padding: 0px;
     }
 
-    #bt_write_div form {
-        background: #eaeaea;
+    /* 페이지 네이션 */
+    #pagination {
+        width: 100%;
         text-align: center;
-        display: inline-block;
-    }
-
-    #bt_write_div form input {
-        border: 0px;
     }
 </style>
-{% endblock %} -->
-<div id="team_div">
-    <h1>팀별게시판</h1>
-    <a href="{% url 'new_team' festa.id %}">글쓰기 </a>
-
-    <hr>
-    {% for team in team_list %}
-    <br>
-    <a href="{% url 'detail_team' festa.id team.id %}"> : {{team.title2}}</a>
-    {{team.writer2}}
-    {{team.pub_date}}
-    <br>
-    <a href="{% url 'edit_team' festa.id team.id %}" class="card-link">수정하기</a>
-    <a href="{% url 'delete_team' festa.id team.id %}" class="card-link">삭제하기</a>
-
-    <div class="middle">
-        <hr>
-    </div>
-
-    {% endfor %}
-    <div class="middle">
-        {%if team_list.has_previous%}
-        <a href="?page=1">First</a>
-        <a href="?page={{team_list.previous_page_number}}">Previous</a>
-        {%endif%}
-    
-        <span>{{team_list.number}}</span>
-        <span>of</span>
-        <span>{{team_list.paginator.num_pages}}</span>
-    
-        {%if team_list.has_next%}
-        <a href="?page={{team_list.next_page_number}}">Next</a>
-        <a href="?page={{team_list.paginator.num_pages}}">Last</a>
-        {%endif%}
-    </div>
-</div>
-
-
-<!-- 자바 스크립트 연결 -->
-{% load static %}
-<script type="text/javascript" src="/static/js/festa_now_staff_js.js?ver=3' %}"></script>
-
-<style></style>
 {% endblock %}
