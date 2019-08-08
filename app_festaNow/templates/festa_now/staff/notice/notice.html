@@ -14,7 +14,7 @@
                 <br>
                 <a href="{% url 'detail_staff' festa.id staff.id %}"> : {{staff.title}}</a> 
                 {{staff.writer}}
-                {{staff.pub_date| date:"y/m/d"}}
+                {{staff.pub_date| date:"Y m d"}}
                 <br>
                 <a href="{% url 'edit_staff' festa.id staff.id %}" class="card-link">수정하기</a>
                 <a href="{% url 'delete_staff' festa.id staff.id %}" class="card-link">삭제하기</a>

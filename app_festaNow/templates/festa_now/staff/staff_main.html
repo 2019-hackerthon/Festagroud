@@ -45,7 +45,8 @@
         <br>
         <a href="{% url 'detail_staff' festa.id staff.id %}"> : {{staff.title}}</a>
         {{staff.writer}}
-        {{staff.pub_date}}
+        {{staff.pub_date|date:"Y/m/d"}}
+        {{staff.pub_date|time:"H:i"}}
         <br>
         {% endfor %}
         <div id="pagination">

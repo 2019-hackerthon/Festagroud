@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <!-- 기본 베이스 html 파일 -->
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -11,20 +12,25 @@
         integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
         integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous">
-    </script>
+        </script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
         integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous">
-    </script>
+        </script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
         integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous">
-    </script>
-    <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+        </script>
+    <link rel="stylesheet" type="text/css"
+        href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
 </head>
 
 <body>
     <!-- 네비게이션 -->
-    <nav class="navbar navbar-expand-lg navbar-light bg-light" id="nav_container">
-        <a class="navbar-brand" href="{% url 'home' %}">FGD</a>
+    <nav class="navbar navbar-expand-lg navbar-light bg-light fixed-top" id="nav_container">
+        <div class="logo">
+            <a class="navbar-brand" href="{% url 'home' %}">
+                <img src="/static/image/logo.png">
+            </a>
+        </div>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
             aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
@@ -57,10 +63,10 @@
                     </div>
                     <div id="festa_info_wrapper">
                         <div id="festa_name">
-                            페스타 이름들어갈 거에요~
+                            {{festa.name}}
                         </div>
                         <div id="festa_date">
-                            날짜 들어갈 거에요~
+                            {{festa.schedule_start|date:"Y년 m월 d일"}} ~ {{festa.schedule_end|date:"Y년 m월 d일"}}
                         </div>
                     </div>
                     <div id="now_staff_menu_wrapper">
@@ -82,23 +88,23 @@
                         </div>
                     </div>
                     <div id="now_audience_menu_wrapper">
-                            <div>
-                                <a id="notice_menu" href="{% url 'audience_main' festa.id %}">공지사항</a>
-                            </div>
-                            <div>
-                                <a id="teamBoard_menu" href="{% url 'now_now' festa.id %}">Festa now</a>
-                            </div>
-                            <div>
-                                <a id="map_menu" href="{% url 'audience_map' festa.id %}">지도</a>
-                            </div>
-                            <div>
-                                <a id="lookingFor_menu" href="{% url 'audience_lost_found' festa.id %}">찾아가라</a>
-                            </div>
-    
-                            <div>
-                                <a id="goHome_menu" href="{% url 'audience_home' festa.id %}">집가자</a>
-                            </div>
+                        <div>
+                            <a id="notice_menu" href="{% url 'audience_main' festa.id %}">공지사항</a>
                         </div>
+                        <div>
+                            <a id="teamBoard_menu" href="{% url 'now_now' festa.id %}">Festa now</a>
+                        </div>
+                        <div>
+                            <a id="map_menu" href="{% url 'audience_map' festa.id %}">지도</a>
+                        </div>
+                        <div>
+                            <a id="lookingFor_menu" href="{% url 'audience_lost_found' festa.id %}">찾아가라</a>
+                        </div>
+
+                        <div>
+                            <a id="goHome_menu" href="{% url 'audience_home' festa.id %}">집가자</a>
+                        </div>
+                    </div>
                     <div id="ready_menu_wrapper">
                         <div>
                             <a href="{% url 'ready_main' festa.id %}">공연정보</a>
@@ -139,6 +145,27 @@
 </html>
 
 <style>
+    
+    #navbarSupportedContent a {
+        
+        border: 1px solid #6357ff;
+        background-color: #6357ff;
+        color: white;
+        margin-right: 20px;
+        text-align: right;
+    }
+    .logo img{
+        width: 60px;
+        height: auto;
+        margin-left: 120px;
+    }
+    nav {
+        height: 45px;
+        -webkit-box-shadow: 0 8px 6px -6px  rgba(0, 0, 0, 0.2);
+        -moz-box-shadow: 0 8px 6px -6px  rgba(0, 0, 0, 0.2);
+        box-shadow: 0 8px 6px -6px rgba(0, 0, 0, 0.2);
+
+    }
     /************************ center contents ***************/
 
     /* nav와 footer 사이의 컨텐츠가 들어갈 컨테이너 */
@@ -193,8 +220,7 @@
     #festa_info_wrapper,
     #now_staff_menu_wrapper,
     #now_audience_menu_wrapper,
-    #ready_menu_wrapper
-    {
+    #ready_menu_wrapper {
         width: 100%;
         padding-left: 25%;
         padding-right: 10%;
@@ -215,7 +241,7 @@
     }
 
     /* fore_img_wrapper에 들어갈 이미지 */
-    #fore_img{
+    #fore_img {
         max-width: 100%;
     }
 
@@ -238,19 +264,25 @@
     }
 
     /* 왼쪽 사이드바 메뉴 아이템(공연정보, 지도, 찾아가라 등) container css */
-    #now_staff_menu_wrapper, #now_audience_menu_wrapper, #ready_menu_wrapper {
+    #now_staff_menu_wrapper,
+    #now_audience_menu_wrapper,
+    #ready_menu_wrapper {
         display: none;
         font-weight: bold;
         margin-top: 6%;
     }
 
     /* menu_wrapper 안에 있는 아이템의 개별 div css */
-    #now_staff_menu_wrapper div, #now_audience_menu_wrapper div, #ready_menu_wrapper div{
+    #now_staff_menu_wrapper div,
+    #now_audience_menu_wrapper div,
+    #ready_menu_wrapper div {
         margin-top: 0.2vw;
     }
 
     /* menu_wrapper 안에 있는, div 안에 있는 a 태그 css */
-    #now_staff_menu_wrapper div a, #now_audience_menu_wrapper div a, #ready_menu_wrapper div a{
+    #now_staff_menu_wrapper div a,
+    #now_audience_menu_wrapper div a,
+    #ready_menu_wrapper div a {
         color: #000000;
         text-decoration: none;
     }
