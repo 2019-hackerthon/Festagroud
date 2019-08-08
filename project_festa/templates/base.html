@@ -18,7 +18,7 @@
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
         integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous">
     </script>
-    <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet" />
+    <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
 </head>
 
 <body>
@@ -83,20 +83,20 @@
                     </div>
                     <div id="now_audience_menu_wrapper">
                             <div>
-                                <a id="notice_menu" href="{% url 'staff_main' festa.id %}">공지사항</a>
+                                <a id="notice_menu" href="{% url 'audience_main' festa.id %}">공지사항</a>
                             </div>
                             <div>
-                                <a id="teamBoard_menu" href="{% url 'now_team' festa.id %}">팀별 게시판</a>
+                                <a id="teamBoard_menu" href="{% url 'now_now' festa.id %}">Festa now</a>
                             </div>
                             <div>
-                                <a id="map_menu" href="{% url 'staff_map' festa.id %}">지도</a>
+                                <a id="map_menu" href="{% url 'audience_map' festa.id %}">지도</a>
                             </div>
                             <div>
-                                <a id="lookingFor_menu" href="{% url 'staff_lost_found' festa.id %}">찾아가라</a>
+                                <a id="lookingFor_menu" href="{% url 'audience_lost_found' festa.id %}">찾아가라</a>
                             </div>
     
                             <div>
-                                <a id="goHome_menu" href="{% url 'staff_home' festa.id %}">집가자</a>
+                                <a id="goHome_menu" href="{% url 'audience_home' festa.id %}">집가자</a>
                             </div>
                         </div>
                     <div id="ready_menu_wrapper">
