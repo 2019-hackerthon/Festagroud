@@ -1,19 +1,29 @@
 window.onload = function () {
+    // base.js
     this.fullScreen();
     this.backgroundResize();
     this.imgSizeLimit();
+    this.imgResize();
+    this.leftSidebarTextLimit();
+
+    //login.js
     this.horizentalEditText();
     this.btSearchResize();
-    this.imgResize();
-    
+    this.textSizeLimit();
 }
 window.onresize = function () {
+    
+    // base.js
     this.fullScreen();
     this.backgroundResize();
     this.imgSizeLimit();
+    this.imgResize();
+    this.leftSidebarTextLimit();
+
+    //login.js
     this.horizentalEditText();
     this.btSearchResize();
-    this.imgResize();
+    this.textSizeLimit();
     
 }
 
@@ -81,4 +91,19 @@ function horizentalEditText(){
 
     btWrapper[0].style.width = (numEditText.offsetWidth+2) + 'px';
     nameEditText.style.width = '100%';
+}
+
+// text 사이즈 제한
+function textSizeLimit(){
+    var detailTextWrapper = document.getElementById('explain_text_box');
+
+    detailTextWrapper.style.fontSize = '3vw';
+    
+    let detailText = document.querySelector('#explain_text_box');
+    let computedDetailText = window.getComputedStyle(detailText);
+    let currentDetailTextSize = computedDetailText.getPropertyValue('font-size').match(/\d+/);
+
+    if(currentDetailTextSize > 30){
+        detailTextWrapper.style.fontSize = '30px';
+    }
 }

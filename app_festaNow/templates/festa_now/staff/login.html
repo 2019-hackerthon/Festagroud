@@ -1,7 +1,7 @@
 {% extends 'base.html' %}
  {% block content %}
  
- <div id="certificate_box">
+ <div id="login_container">
         <div id="explain_text_box">인증번호를 입력해주세요</div>
         <div id="booked_name_and_num">
                 <form id="edit_box_form" action="{% url 'staff_main' festa.id %}" method="POST">
@@ -28,23 +28,22 @@
  </div>
 <!-- 자바 스크립트 연결 -->
 {% load static %}
-<script type="text/javascript" src="/static/js/login_js.js?ver=13' %}"></script>
+<script type="text/javascript" src="/static/js/login_js.js?ver=14' %}"></script>
 <style>
-    #certificate_box {
-        height: auto;
+    #login_container {
         width: 100%;
-        align-self: center;
+        height: 100%;
         padding-left: 15%;
-        padding-bottom: 1%;
+        margin-top: 50px;
     }
     #explain_text_box{
-        font-size: 40px;
+        font-size: 3vw;
         font-weight: bold;
-        padding-bottom: 68px;
+        padding-top: 100px;
     }
     #booked_name_and_num {
         width: 100%;
-        padding-bottom: 68px;
+        margin-top: 70px;
     }
 
     #edit_box_form{

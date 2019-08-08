@@ -1,20 +1,29 @@
 window.onload = function () {
+    // base.js
     this.fullScreen();
-    this.backgroundResize();
     this.imgSizeLimit();
-    this.horizentalBt();
+    this.backgroundResize();
     this.imgResize();
     this.leftSidebarTextLimit();
+
+    //detail.js
+    this.horizentalBt();
+    this.textSizeLimit();
 }
 window.onresize = function () {
+    // base.js
     this.fullScreen();
-    this.backgroundResize();
     this.imgSizeLimit();
-    this.horizentalBt();
+    this.backgroundResize();
     this.imgResize();
     this.leftSidebarTextLimit();
+
+    //detail.js
+    this.horizentalBt();
+    this.textSizeLimit();
 }
 
+// 화면 작아지면서 세로 모드 될때
 function horizentalBt(){
     var bt = document.getElementById('staff_or_audience_bt');
     var audienceForm = document.getElementById('audience_form');
@@ -40,5 +49,19 @@ function horizentalBt(){
         audienceForm.style.marginLeft = '10%';
         btStaff.style.fontSize = '36px';
         btAudience.style.fontSize = '36px';
+        }
     }
-}
+    // text 사이즈 제한
+    function textSizeLimit(){
+        var detailTextWrapper = document.getElementById('explain_role_box');
+
+        detailTextWrapper.style.fontSize = '3vw';
+        
+        let detailText = document.querySelector('#explain_role_box');
+        let computedDetailText = window.getComputedStyle(detailText);
+        let currentDetailTextSize = computedDetailText.getPropertyValue('font-size').match(/\d+/);
+
+        if(currentDetailTextSize > 30){
+            detailTextWrapper.style.fontSize = '30px';
+        }
+    }
