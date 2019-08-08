@@ -9,45 +9,36 @@
     <div id="table_bt_div">
         <div id="bt_write_div">
             <form action="{% url 'confirm_login' festa.id %}" method="GET">
-                    <input id="write_bt_image" type="submit" value="&#xf040" class="7x">
-                    <input id="write_bt_text" type="submit" value="글쓰기">
+                <input id="write_bt_image" type="submit" value="&#xf040" class="7x">
+                <input id="write_bt_text" type="submit" value="글쓰기">
             </form>
         </div>
 
         <div id="table_div">
-                <table>
-                    <tr>
-                        <td id="table_intro" colspan="5"> 2019 멋사 해커톤 대회에 대한 게시판 입니다.</td>
-                    </tr>
-                    <tr id="kind_board">
-                        <td id="title" class="headTd">구분</td>
-                        <td id="title" class="headTd">제목</td>
-                        <td id="title" class="headTd">작성자</td>
-                        <td id="title" class="headTd">날짜</td>
-                    </tr>
-                    <!-- 공지등록 -->
-                    <tr id="notice_board">
-                        <td>공지사항</td>
-                        <td class="title_td"><a href="#test">제목</a></td>
-                        <td>작성자</td>
-                        <td>날짜 시간</td>
-                    </tr>
-                    <!-- 내용등록 -->
-                    <tr id="content_board">
-                        <td>번호</td>
-                        <td class="title_td"><a href="test">(지역) 제목</a></td>
-                        <td>작성자</td>
-                        <td>날짜 시간</td>
-                    </tr>
-                </table>
-            </div>
-        {% for staff in staff_list %}
-        <br>
-        <a href="{% url 'detail_staff' festa.id staff.id %}"> : {{staff.title}}</a>
-        {{staff.writer}}
-        {{staff.pub_date}}
-        <br>
-        {% endfor %}
+            <table>
+                <tr>
+                    <td id="table_intro" colspan="5"> 2019 멋사 해커톤 대회에 대한 게시판 입니다.</td>
+                </tr>
+                <tr id="kind_board">
+                    <td id="title" class="headTd">구분</td>
+                    <td id="title" class="headTd">제목</td>
+                    <td id="title" class="headTd">작성자</td>
+                    <td id="title" class="headTd">날짜</td>
+                    <td id="title" class="headTd">시간</td>
+                </tr>
+                <!-- 공지등록 -->
+                {% for staff in staff_list %}
+                <tr class="notice_board">
+                    <td>공지사항</td>
+                    <td class="title_td"><a href="{% url 'detail_staff' festa.id staff.id %}"> {{staff.title}}</a></td>
+                    <td>{{staff.writer}}</td>
+                    <td>{{staff.pub_date|date:"Y/m/d"}}</td>
+                    <td>{{staff.pub_date|time:"H:i"}}</td>
+                </tr>
+                {% endfor %}
+            </table>
+        </div>
+
         <div id="pagination">
             {%if staff_list.has_previous%}
             <a href="?page=1">First</a>
@@ -63,101 +54,125 @@
             <a href="?page={{staff_list.paginator.num_pages}}">Last</a>
             {%endif%}
         </div>
-        </div>
     </div>
+</div>
 
-    <!-- 자바 스크립트 연결 -->
-    {% load static %}
-    <script type="text/javascript" src="/static/js/festa_now_staff_js.js?ver=3' %}"></script>
+<!-- 자바 스크립트 연결 -->
+{% load static %}
+<script type="text/javascript" src="/static/js/festa_now_staff_js.js?ver=3' %}"></script>
 
-    <style>
-        #notice_container {
-            width: 100%;
-            height: 100%;
-            padding-top: 50px;
-            padding-left: 3%;
-            padding-right: 20%;
-        }
+<style>
+    #notice_container {
+        width: 100%;
+        height: 100%;
+        padding-top: 50px;
+        padding-left: 3%;
+        padding-right: 20%;
+    }
 
-        #subtitle_text_wrapper {
-            font-size: 20px;
-            font-weight: bold;
-            min-width: 525px;
-        }
+    #subtitle_text_wrapper {
+        font-size: 20px;
+        font-weight: bold;
+        min-width: 525px;
+    }
 
-        #table_bt_div {
-            background: #ffffff;
-            padding-left: 3%;
-            padding-right: 3%;
-            padding-top: 5%;
-            padding-bottom: 5%;
-            margin-top: 20px;
-            min-width: 525px;
-        }
+    #table_bt_div {
+        background: #ffffff;
+        padding-left: 3%;
+        padding-right: 3%;
+        padding-top: 5%;
+        padding-bottom: 5%;
+        margin-top: 20px;
+        width: 100%;
+    }
 
-        #table_div {
-            width: 100%;
-        }
+    #table_div {
+        width: 100%;
+    }
 
-        #notice_board,
-        #kind_board {
-            border-bottom: 1px solid #6357ff;
-        }
+    .notice_board,
+    #kind_board {
+        border-bottom: 1px solid #6357ff;
+        /* text-align: center; */
+        width: 100%;
+    }
 
-        #notice_board {
-            color: #6357ff;
-        }
+    .notice_board {
+        color: #6357ff;
+    }
 
-        #notice_board a {
-            color: #6357ff;
-            text-decoration: none;
-        }
+    .notice_board a {
+        color: #6357ff;
+        text-decoration: none;
+    }
 
-        #content_board {
-            border-bottom: 1px solid #D5D5D5;
-        }
+    /* #content_board {
+        border-bottom: 1px solid #D5D5D5;
+    }
 
-        #content_board a {
-            color: #000000;
-            text-decoration: none;
-        }
+    #content_board a {
+        color: #000000;
+        text-decoration: none;
+    } */
 
-        td {
-            width: 10%;
-        }
+    td {
+        width: 200px;
+        display: inline-block;
+        /* display: block; */
+        text-overflow: ellipsis;
+    }
 
-        .title_td {
-            width: 50%;
-        }
+    .headTd{
+        width: 100px;
+    }
 
-        table {
-            width: 100%;
-        }
+    .title_td{
+        overflow: hidden;
+        white-space: nowrap;
+        text-overflow: ellipsis;
+        width: auto;
+    }
 
-        #pagination{
-            width: 100%;
-            text-align: center;
-        }
-        #write_bt_image{
-            width: auto;
-            padding: 1px;
-            font-family: 'FontAwesome';
-            background: none;
-            border: 0px;
-            padding: 0px;
-        }
-        #write_bt_text{
-            border: 0px;
-            background: none;
-            padding: 0px;
-        }
-        #bt_write_div form{
-            background: #eaeaea;
-            text-align: center;
-            display: inline-block;
-        }
-        #bt_write_div form input{
+    /* .title_td a{
+        
+    } */
+
+    table {
+        width: 100%;
+    }
+
+    #pagination {
+        width: 100%;
+        text-align: center;
+    }
+
+    #write_bt_image {
+        width: auto;
+        padding: 1px;
+        font-family: 'FontAwesome';
+        background: none;
         border: 0px;
-        }
-    </style>
-    {% endblock %}
+        padding: 0px;
+    }
+
+    #write_bt_text {
+        border: 0px;
+        background: none;
+        padding: 0px;
+    }
+
+    #bt_write_div form {
+        background: #eaeaea;
+        text-align: center;
+        display: inline-block;
+    }
+
+    #bt_write_div form input {
+        border: 0px;
+    }
+
+    #bt_write_div{
+        width: 100%;
+    }
+</style>
+{% endblock %}
