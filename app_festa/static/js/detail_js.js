@@ -4,6 +4,7 @@ window.onload = function () {
     this.imgSizeLimit();
     this.horizentalBt();
     this.imgResize();
+    this.leftSidebarTextLimit();
 }
 window.onresize = function () {
     this.fullScreen();
@@ -11,6 +12,7 @@ window.onresize = function () {
     this.imgSizeLimit();
     this.horizentalBt();
     this.imgResize();
+    this.leftSidebarTextLimit();
 }
 
 function horizentalBt(){
@@ -20,7 +22,7 @@ function horizentalBt(){
     var btAudience = document.getElementById('audienceBt');
     var staffForm = document.getElementById('staff_form');
     
-    if(window.innerWidth <= 1220){
+    if(window.innerWidth <= 1150){
         bt.style.display = 'block';
         audienceForm.style.marginLeft = '0%';
         btStaff.style.fontSize = '20px';
