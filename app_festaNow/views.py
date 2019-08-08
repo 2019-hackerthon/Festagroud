@@ -477,6 +477,7 @@ def confirm_login(request, festa_id) :
     return render(request, 'festa_now/staff/notice/confirm_login.html', {'festa':festa})
 
 def confirm_register(request, festa_id) : 
+    noConfirm = "AS"
     if request.method == 'POST' :
         number = request.POST['register_num']
         festa = Festa.objects.get(id = festa_id)

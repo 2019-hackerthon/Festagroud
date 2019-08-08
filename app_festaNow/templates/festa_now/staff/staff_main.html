@@ -4,17 +4,17 @@
 <div id="notice_container">
     <div id="subtitle_text_wrapper">
         공지사항
-        <i class="fas fa-infinity"></i>
     </div>
     <div id="table_bt_div">
         <div id="bt_write_div">
             <form action="{% url 'confirm_login' festa.id %}" method="GET">
-                    <input id="write_bt_image" type="submit" value="&#xf040" class="7x">
-                    <input id="write_bt_text" type="submit" value="글쓰기">
+                <input id="write_bt_image" type="submit" value="&#xf040" class="7x">
+                <input id="write_bt_text" type="submit" value="글쓰기">
             </form>
         </div>
 
         <div id="table_div">
+<<<<<<< HEAD
                 <table>
                     <tr>
                         <td id="table_intro" colspan="5"> 2019 멋사 해커톤 대회에 대한 게시판 입니다.</td>
@@ -49,6 +49,34 @@
         {{staff.pub_date|time:"H:i"}}
         <br>
         {% endfor %}
+=======
+            <table>
+                <tr>
+                    <td id="table_intro" colspan="5"> 2019 멋사 해커톤 대회에 대한 게시판 입니다.</td>
+                </tr>
+                <tr id="kind_board">
+                    <td>구분</td>
+                    <td>제목</td>
+                    <td>작성자</td>
+                    <td>날짜</td>
+                    <td>시간</td>
+                </tr>
+                <!-- 공지등록 -->
+                {% for staff in staff_list %}
+                <tr class="notice_board">
+                    <td>공지사항</td>
+                    <td class="title_td">
+                        <a href="{% url 'detail_staff' festa.id staff.id %}"> <span>{{staff.title}}</span></a>
+                    </td>
+                    <td>{{staff.writer}}</td>
+                    <td>{{staff.pub_date|date:"Y/m/d"}}</td>
+                    <td>{{staff.pub_date|time:"H:i"}}</td>
+                </tr>
+                {% endfor %}
+            </table>
+        </div>
+
+>>>>>>> ade1b82f18934c8a2ee2358484aba94e99f1b6fd
         <div id="pagination">
             {%if staff_list.has_previous%}
             <a href="?page=1">First</a>
@@ -64,101 +92,154 @@
             <a href="?page={{staff_list.paginator.num_pages}}">Last</a>
             {%endif%}
         </div>
-        </div>
     </div>
+</div>
 
-    <!-- 자바 스크립트 연결 -->
-    {% load static %}
-    <script type="text/javascript" src="/static/js/festa_now_staff_js.js?ver=3' %}"></script>
+<!-- 자바 스크립트 연결 -->
+{% load static %}
+<script type="text/javascript" src="/static/js/festa_now_staff_js.js?ver=3' %}"></script>
 
-    <style>
-        #notice_container {
-            width: 100%;
-            height: 100%;
-            padding-top: 50px;
-            padding-left: 3%;
-            padding-right: 20%;
-        }
+<style>
+    /* 전체 컨테이너 */
+    #notice_container {
+        width: 100%;
+        height: 100%;
+        padding-top: 50px;
+        padding-left: 3%;
+        padding-right: 20%;
+    }
 
-        #subtitle_text_wrapper {
-            font-size: 20px;
-            font-weight: bold;
-            min-width: 525px;
-        }
+    /* 공지사항 타이틀 */
+    #subtitle_text_wrapper {
+        font-size: 20px;
+        font-weight: bold;
+    }
 
-        #table_bt_div {
-            background: #ffffff;
-            padding-left: 3%;
-            padding-right: 3%;
-            padding-top: 5%;
-            padding-bottom: 5%;
-            margin-top: 20px;
-            min-width: 525px;
-        }
+    /* content가 들어가 container */
+    #table_bt_div {
+        background: #ffffff;
+        padding-left: 3%;
+        padding-right: 3%;
+        padding-top: 2%;
+        padding-bottom: 5%;
+        margin-top: 20px;
+        width: 100%;
+    }
 
-        #table_div {
-            width: 100%;
-        }
+    /* 버튼 wrapper */
+    #bt_write_div {
+        width: 100%;
+    }
 
-        #notice_board,
-        #kind_board {
-            border-bottom: 1px solid #6357ff;
-        }
+    /* 테이블 wrapper */
+    #table_div {
+        width: 100%;
+    }
 
-        #notice_board {
-            color: #6357ff;
-        }
+    #table_intro {
+        font-size: 1vw;
+        font-weight: bold;
+    }
 
-        #notice_board a {
-            color: #6357ff;
-            text-decoration: none;
-        }
+    /* 카테고리 board, 실제 내용(공지사항) board -> 밑줄 긋는 css */
 
-        #content_board {
-            border-bottom: 1px solid #D5D5D5;
-        }
+    #kind_board,
+    .notice_board {
+        width: 100%;
+        font-size: 18px;
+    }
 
-        #content_board a {
-            color: #000000;
-            text-decoration: none;
-        }
+    #kind_board {
+        border-bottom: 1px solid #000000;
+        font-weight: 500;
+    }
 
-        td {
-            width: 10%;
-        }
+    #kind_board td {
+        padding-top: 30px;
+    }
 
-        .title_td {
-            width: 50%;
-        }
+    .notice_board {
+        border-bottom: 1px solid #6357ff;
+        color: #6357ff;
+    }
 
-        table {
-            width: 100%;
-        }
+    /* board 안에 있는 a 태그 */
+    .notice_board td a {
+        color: #6357ff;
+        text-decoration: none;
+    }
 
-        #pagination{
-            width: 100%;
-            text-align: center;
-        }
-        #write_bt_image{
-            width: auto;
-            padding: 1px;
-            font-family: 'FontAwesome';
-            background: none;
-            border: 0px;
-            padding: 0px;
-        }
-        #write_bt_text{
-            border: 0px;
-            background: none;
-            padding: 0px;
-        }
-        #bt_write_div form{
-            background: #eaeaea;
-            text-align: center;
-            display: inline-block;
-        }
-        #bt_write_div form input{
+    .notice_board td {
+        padding-top: 3px;
+        padding-bottom: 3px;
+    }
+
+    /* #content_board {
+        border-bottom: 1px solid #D5D5D5;
+    }
+
+    #content_board a {
+        color: #000000;
+        text-decoration: none;
+    } */
+
+    /* 테이블 태그 */
+    table {
+        width: 100%;
+    }
+
+    /* table_div 안 모든 td 태그 */
+    td {
+        text-align: center;
+    }
+
+    /* 제목이 들어가는 특정 td */
+    .title_td {
+        width: 40%;
+    }
+
+    .title_td a span {
+        display: block;
+        width: 300px;
+        height: auto;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        text-align: center;
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+    #bt_write_div form {
+        background: #eaeaea;
+        text-align: center;
+        display: inline-block;
+        padding: 7px 20px;
+    }
+
+    #bt_write_div form input {
         border: 0px;
-        }
-    </style>
-    {% endblock %}
+    }
+
+    #write_bt_image {
+        width: auto;
+        padding: 1px;
+        font-family: 'FontAwesome';
+        background: none;
+        border: 0px;
+        padding: 0px;
+    }
+
+    #write_bt_text {
+        border: 0px;
+        background: none;
+        padding: 0px;
+    }
+
+    /* 페이지 네이션 */
+    #pagination {
+        width: 100%;
+        text-align: center;
+    }
+</style>
+{% endblock %}
