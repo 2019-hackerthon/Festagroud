@@ -10,7 +10,7 @@
         <span><input type="submit" value="글쓰기"></span>
         {% for staff in staff_list %}
                 <br>
-                <a href="{% url 'detail_staff' festa.id staff.id %}"> : {{staff.title}}</a> 
+                <a href="{% url 'detail_staff' festa.id staff.id %}">  {{staff.title}}</a> 
                 {{staff.writer}}
                 {{staff.pub_date}}
                 <br>
