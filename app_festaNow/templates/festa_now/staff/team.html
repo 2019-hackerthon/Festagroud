@@ -29,7 +29,7 @@
                 <!-- 내용등록 -->
                 {% for team in team_list %}
                 <tr class="content_board">
-                    <td>지역</td>
+                    <td>{{team.post_type}}</td>
                     <td class="title_td">
                             <a href="{% url 'detail_team' festa.id team.id %}"> <span>{{team.title2}}</span></a>
                         </td>

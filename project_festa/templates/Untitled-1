@@ -1,0 +1,24 @@
+{% extends 'base.html' %}
+{% block content %}
+
+<div id="ready_festaInfo_div">
+    <div>
+        <h1>공연 이름 :{{ festa.name }}</h1>
+        <p>공연 날짜 : {{ festa.schedule_start|date:"Y"}}년 {{ festa.schedule_start|date:"m"}}월 {{ festa.schedule_start|date:"d"}}일
+            ~ {{ festa.schedule_end|date:"Y"}}년 {{ festa.schedule_end|date:"m"}}월 {{ festa.schedule_end|date:"d"}}일
+        </p>
+        <p>공연 장소 : {{ festa.space }}</p>
+        <p>공식 티켓판매처 링크 : {{festa.purchase_link}}</p>
+        <p>공연 주최/기획사 : {{festa.host }}</p>
+        <p>고객 문의처 : {{festa.contact }}</p>
+        <p>공연 유의사항 : {{ festa.precautions }}</p>
+        <p>공연 공지사항 : {{ festa.notice }}</p>
+    </div>
+</div>
+
+<!-- 자바 스크립트 연결 -->
+{% load static %}
+<script type="text/javascript" src="/static/js/festa_ready_js.js?ver=3' %}"></script>
+
+{% endblock %}
+
