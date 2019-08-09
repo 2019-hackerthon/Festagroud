@@ -10,7 +10,7 @@
 {% if accompany.image %}
 <img src="{{ accompany.image.url }}">
 {% endif %}
-<a href="{% url 'edit_accompany' festa.id accompany.pk %}" class="btn btn-primary">수정</a>
+<a href="{% url 'edit_accompany' festa     .id accompany.pk %}" class="btn btn-primary">수정</a>
 
 <a href="{% url 'delete_accompany' festa.id accompany.pk %}" class="btn btn-primary">삭제</a>
 

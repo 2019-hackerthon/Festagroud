@@ -2,9 +2,19 @@
 {% block content %}
 
 <div id="list_ticket_container">
-    <div id="subtitle_text_wrapper">
-        티켓 양도 / 교환
-    </div>
+
+        <div class="row justify-content-between">
+                <div class="col-4" id="subtitle_text_wrapper">
+                        티켓 양도 / 교환
+                </div>
+                <div class="col-4" align="right" id="all">
+                        <form action="" method="get">
+                                <input type="text" name="search" value="{{ search }}">
+                                <input type="submit" value="검색">
+                        </form>
+                </div>
+        </div>
+
     <div id="table_bt_div">
         <div id="bt_write_div">
             <form action="{% url 'create_ticket' festa.id %}" method="GET">
@@ -12,10 +22,7 @@
                 <input id="write_bt_text" type="submit" value="글쓰기">
             </form>
         </div>
-        <form action="" method="get">
-            <input type="text" name="search" value="{{ search }}">
-            <input type="submit" value="검색">
-        </form>
+
 
         <div id="table_div">
             <table>

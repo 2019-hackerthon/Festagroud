@@ -29,25 +29,32 @@
     </div>
 
     <!-- 페스타 나우 박스 -->
-    <div id="festa_now_home">
+    <div id="festa_now_home" >
         <!-- 전체 아이템 컨텐츠 박스 -->
-        <div class="contents_box">
+        <div class="contents_box" >
             <!-- 전체 아이템 타이틀 박스 -->
-            <div id="festa_now_title_home">
-                <h5 class="main_text">Festa now</h5>
-                <p class="sub_text">바로 오늘, 함께 즐겨봐요</p>
-                <a href="{% url 'all_festaNow' %}">전체보기</a>
+            <div class="row" id="festa_now_title_home" >
+                <div class="col1" style="width:10%">
+                    <h5 class="main_text">Festa now</h5>
+                </div>
+                <div class="col2" style="width:80%">
+                    <p class="sub_text" >바로 오늘, 함께 즐겨봐요</p>
+                </div>
+                <div class="col3" align="right" id = "all" >
+                    <a href="{% url 'all_festaNow' %}"  style="color: black">전체보기</a>
+                </div>
             </div>
+
             <!-- 전체 아이템 리스트 박스 -->
-            <div class="contents_list">
+            <div class="contents_list" >
                 {% for festa_now in festas.all %}
                 {% if today|date:"Y m d" >=  festa_now.schedule_start|date:"Y m d" and festa_now.schedule_end|date:"Y m d" >=  today|date:"Y m d" %}
                 <!-- 개별 아이템 박스 -->
-                <div class="item_object">
+                <div class="item_object" >
                     <!-- 이미지 표시 박스 -->
-                    <div class="img_wrapper">
+                    <div class="img_wrapper" >
                         <a href="{% url 'now_detail' festa_now.id %}"><img class="thumnail"
-                                src="{{ festa_now.poster.url }}"></a>
+                                src="{{ festa_now.poster.url }}" /></a>
                     </div>
                     <!-- 날짜 표시 박스 -->
                     <div class="day_wrapper">
@@ -66,15 +73,20 @@
     <!-- 페스타 레디 -->
     <div id="festa_ready_home">
         <!-- 전체 아이템 컨텐츠 박스 -->
-        <div class="contents_box">
+        <div class="contents_box" >
             <div id="festa_ready_title_home">
-                <h5 class="main_text">Festa ready</h5>
-                <p class="sub_text">다가오는 행사를 200배 더 즐겁게 즐기려면?</p>
-                <div id="all">
-                    
-                        <a href="{% url 'all_festaReady' %}">전체보기</a>
-                    
+
+                <div class="col1" style="width:10%">
+                    <h5 class="main_text">Festa ready</h5>
                 </div>
+                <div class="col2" style="width:80%">
+                    <p class="sub_text">다가오는 행사를 200배 더 즐겁게 즐기려면?</p>
+                </div>
+                <div class="col3" align="right" id = "all" >
+                    <a href="{% url 'all_festaNow' %}" style="color: black">전체보기</a>
+                </div>
+
+
             </div>
             <script>
                 let festa_ready_day_cal = 0;
@@ -135,9 +147,16 @@
     }
 
     /* 검색 배너, 페스타 나우, 페스타 레디 div 설정 */
-    #festa_now_home,
+    #festa_now_home{
+        width: 100%;
+        padding: 2% 10%;
+        height: 489px;
+    }
+
+
     #festa_ready_home {
         width: 100%;
+        height: 489px;
         padding: 2% 10%;
     }
 
@@ -210,6 +229,7 @@
     /* 보여질 내용 사이즈 설정 */
     .content_box {
         width: 100%;
+        height: 400px;
     }
 
     /* 타이틀 가로정렬(메인 타이틀, 서브타이틀) */
@@ -258,8 +278,40 @@
         width: auto;
     }
 
+    .main_text{
+        width: 129px;
+        height: 36px;
+        font-family: NotoSansCJKkr;
+        font-size: 24px;
+        font-weight: bold;
+        font-style: normal;
+        font-stretch: normal;
+        line-height: normal;
+        letter-spacing: -0.6px;
+        color: var(--black);
+    }
+
     .sub_text {
         margin-left: 10px;
+        font-size: 18px;
+        font-weight: 500;
+        opacity: 0.5;
+        color: var(--black);
+        font-style: normal;
+        font-stretch: normal;
+        line-height: normal;
+    }
+
+    .col3{
+        font-size: 18px;
+        font-weight: 500;
+        font-style: normal;
+        font-stretch: normal;
+        line-height: normal;
+        letter-spacing: -0.45px;
+        text-align: right;
+        color: var(--black);
+        opacity: 0.5;
     }
 </style>
 
