@@ -5,6 +5,7 @@ window.onload = function () {
     this.imgResize();
     this.leftSidebarTextLimit();
 
+    this.festaInfoScroll();
     this.menuDisplay();
 }
 window.onresize = function () {
@@ -13,11 +14,18 @@ window.onresize = function () {
     this.imgSizeLimit();
     this.imgResize();
     this.leftSidebarTextLimit();
-    
+
+    this.festaInfoScroll();
     this.menuDisplay();
 }
 
 function menuDisplay(){
-    var nowMenuView = document.getElementById('now_staff_menu_wrapper');
+    var nowMenuView = document.getElementById('ready_menu_wrapper');
     nowMenuView.style.display = 'block';
+}
+
+function festaInfoScroll(){
+    var scrollDiv = document.getElementById('festa_info');
+    var maxHeight = scrollDiv.clientHeight;
+    scrollDiv.style.height = maxHeight + 'px';
 }

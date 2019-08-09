@@ -4,6 +4,7 @@ window.onload = function () {
     this.imgSizeLimit();
     this.imgResize();
     this.leftSidebarTextLimit();
+
     this.menuDisplay();
 }
 window.onresize = function () {
@@ -12,6 +13,7 @@ window.onresize = function () {
     this.imgSizeLimit();
     this.imgResize();
     this.leftSidebarTextLimit();
+    
     this.menuDisplay();
 }
 
