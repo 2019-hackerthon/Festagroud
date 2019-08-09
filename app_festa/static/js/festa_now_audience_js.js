@@ -6,6 +6,7 @@ window.onload = function () {
     this.leftSidebarTextLimit();
 
     this.menuDisplay();
+    this.textChange();
 }
 window.onresize = function () {
     this.fullScreen();
@@ -15,9 +16,15 @@ window.onresize = function () {
     this.leftSidebarTextLimit();
     
     this.menuDisplay();
+    this.textChange();
 }
 
 function menuDisplay(){
     var nowMenuView = document.getElementById('now_audience_menu_wrapper');
     nowMenuView.style.display = 'block';
+}
+
+function textChange(){
+    var textTitle = document.getElementById('title_text_wrapper');
+    textTitle.innerHTML = 'Festa Now'
 }

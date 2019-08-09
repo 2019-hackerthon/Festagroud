@@ -6,6 +6,8 @@
         찾아가라(to. STAFF)
     </div>
     <div id="background_div">
+            <form name="cancle_or_save_form" method="POST">
+                    {% csrf_token %}
             <div>
                     <div id="festa_info">
                             <div class="festa_content" id="date_div">
@@ -30,6 +32,26 @@
                                 </div>
                             </div>
                         </div>
+                        <div id="button_div">
+                                <div>
+                                    <input type="submit" value="삭제" onClick='bt_function(0)'>
+                                </div>
+                                <div>
+                                    <input type="submit" value="수정" onClick='bt_function(1)'>
+                                </div>
+                            </div>
+                            </form>
+                            <script>
+                                    var submitForm = document.cancle_or_save_form;
+                        
+                                    function bt_function(cSave) {
+                                        if (cSave == 0) {
+                                            submitForm.action = "/festa_now/{{festa.id}}/staff/delete_lost_found/{{lost_found.id}}/";
+                                        } else {
+                                            submitForm.action = "/festa_now/{{festa.id}}/staff/edit_lost_found/{{lost_found.id}}/";
+                                        }
+                                    }
+                                </script>
             </div>
     </div>
 </div>
@@ -83,6 +105,20 @@
     }
     .festa_image img{
         max-width: 100%;
+    }
+    #button_div {
+        display: flex;
+        justify-content: center;
+        margin-top: 30px;
+    }
+
+    #button_div div {
+        margin: 10px;
+    }
+
+    #button_div div input {
+        width: 100px;
+        background: #f4f3ff;
     }
 </style>
 {% endblock %}

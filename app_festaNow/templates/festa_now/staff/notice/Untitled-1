@@ -1,82 +1,33 @@
-{% extends 'base_copyright_version.html' %}
-{% block content %}
- 
-    <div class="row"  style="height:500px;">
-        <div class="col-md-5">
-                <a href="{% url 'staff_main' festa.id %}">뒤로</a>
-                <h1>Staff 공지사항</h1>
-                
-                <a href="{% url 'new_staff' festa.id %}">글쓰기 </a>
-                
-                
-                <hr>
-                {% for staff in staff_list %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta http-equiv="X-UA-Compatible" content="ie=edge">
+        <title>Document</title>
+</head>
+
+<body>
+<center>
+        <h1>글을 수정중입니다.</h1>
+        <form action="{% url 'update_staff' festa.id staff.id %}" method="POST">
+                {% csrf_token %}
+                [Title] : <input type="text" name='title' value="{{staff.title}}">
                 <br>
-                <a href="{% url 'detail_staff' festa.id staff.id %}"> : {{staff.title}}</a> 
-                {{staff.writer}}
-                {{staff.pub_date| date:"Y m d"}}
                 <br>
-                <a href="{% url 'edit_staff' festa.id staff.id %}" class="card-link">수정하기</a>
-                <a href="{% url 'delete_staff' festa.id staff.id %}" class="card-link">삭제하기</a>
-                {% endfor %}
-                <div class="middle">
-                    {%if staff_list.has_previous%}
-                    <a href="?page=1">First</a>
-                    <a href="?page={{staff_list.previous_page_number}}">Previous</a>
-                    {%endif%}
-    
-                    <span>{{staff_list.number}}</span>
-                    <span>of</span>
-                    <span>{{staff_list.paginator.num_pages}}</span>
-    
-                    {%if staff_list.has_next%}
-                    <a href="?page={{staff_list.next_page_number}}">Next</a>
-                    <a href="?page={{staff_list.paginator.num_pages}}">Last</a>
-                    {%endif%}
-                </div>
-
-
-        </div>
-
-        <div class="col-md-7" style="background-color:#EEE9F7; ">
-                <h1>Audience 공지사항</h1>
-                <a href="{% url 'new_audience' festa.id %}">글쓰기 </a>
-                
-                <hr>
-                {% for audience in audiences.all %}
+                [Wirter] : <input type="text" name='writer' value="{{staff.writer}}">
                 <br>
-                <a href="{% url 'detail_audience' festa.id audience.id %}"> : {{audience.title}}</a> 
-                {{audience.writer}}
-                {{audience.pub_date}}
                 <br>
-                <a href="{% url 'edit_audience' festa.id audience.id %}" class="card-link">수정하기</a>
-                <a href="{% url 'delete_audience' festa.id audience.id %}" class="card-link">삭제하기</a>
-                {% endfor %}
-                <!-- <div class="middle">
-                    {%if audience_list.has_previous%}
-                    <a href="?page=1">First</a>
-                    <a href="?page={{audience_list.previous_page_number}}">Previous</a>
-                    {%endif%}
-    
-                    <span>{{audience_list.number}}</span>
-                    <span>of</span>
-                    <span>{{audience_list.paginator.num_pages}}</span>
-    
-                    {%if audience_list.has_next%}
-                    <a href="?page={{audience_list.next_page_number}}">Next</a>
-                    <a href="?page={{audience_list.paginator.num_pages}}">Last</a>
-                    {%endif%} -->
-
-
-        
-        </div>
-                
-          
-       
-
-
-    </div>
-
-    
+                [Body]
+                <br>
+                <textarea name="body" id="" cols="30" rows="10"
+                        placeholder="write your content"style="padding:10px; margin:10px;" >{{staff.body}}</textarea>
+                <br>
+                <br>
+                <button type='submit'>수정하기</button>
+        </form>
+</center>
 </body>
-{% endblock %}
+
+</html>
