@@ -1,6 +1,7 @@
 <h2><티켓거래 상세보기 페이지></h2>
 <p> 제목: {{ticket.title}}</p>
-<p> 거래타입: {{ticket.deal_type}}</p>
+<p>{{ ticket.created_at }}</p>
+<p> 거래타입: {{ticket.deal_type|date:"o년 m월 j일 h:i"}}</p>
 <p> 작성자: {{ticket.writer}}</p>
 <p> 내용: {{ticket.description}}</p>
 {% if ticket.image %}
