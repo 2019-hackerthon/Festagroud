@@ -2,8 +2,16 @@
 {% block content %}
 
 <div id="staff_lost_container">
-    <div id="subtitle_text_wrapper">
-        찾아가라
+    <div class="title_search">
+        <div id="subtitle_text_wrapper">
+            찾아가라
+        </div>
+        <div id="form_wrapper">
+            <form action="" method="GET">
+                <input id="editText" type="text" name="search" value="{{search}}">
+                <input id="searchBt" type="submit" value="&#xf002" class="fa-lg">
+            </form>
+        </div>
     </div>
     <div id="table_bt_div">
         <div id="bt_write_div">
@@ -12,10 +20,7 @@
                 <input id="write_bt_text" type="submit" value="글쓰기">
             </form>
         </div>
-        <form action="" method="get">
-            <input type="text" name="search" value="{{ search }}">
-            <input type="submit" value="검색">
-        </form>
+        
 
         <div id="table_div">
             <table>
@@ -71,11 +76,14 @@
         padding-left: 3%;
         padding-right: 20%;
     }
+
     /* 공지사항 타이틀 */
     #subtitle_text_wrapper {
+        width: 50%;
         font-size: 20px;
         font-weight: bold;
     }
+
     /* content가 들어가 container */
     #table_bt_div {
         background: #ffffff;
@@ -86,44 +94,54 @@
         margin-top: 20px;
         width: 100%;
     }
+
     /* 버튼 wrapper */
     #bt_write_div {
         width: 100%;
     }
+
     /* 테이블 wrapper */
     #table_div {
         width: 100%;
     }
+
     #table_intro {
         font-size: 1vw;
         font-weight: bold;
     }
+
     /* 카테고리 board, 실제 내용(공지사항) board -> 밑줄 긋는 css */
     #kind_board,
     .notice_board {
         width: 100%;
         font-size: 18px;
     }
+
     #kind_board {
         border-bottom: 1px solid #000000;
         font-weight: 500;
     }
+
     #kind_board td {
         padding-top: 30px;
     }
+
     .notice_board {
         border-bottom: 1px solid #6357ff;
         color: #6357ff;
     }
+
     /* board 안에 있는 a 태그 */
     .notice_board td a {
         color: #6357ff;
         text-decoration: none;
     }
+
     .notice_board td {
         padding-top: 3px;
         padding-bottom: 3px;
     }
+
     /* #content_board {
         border-bottom: 1px solid #D5D5D5;
     }
@@ -135,14 +153,17 @@
     table {
         width: 100%;
     }
+
     /* table_div 안 모든 td 태그 */
     td {
         text-align: center;
     }
+
     /* 제목이 들어가는 특정 td */
     .title_td {
         width: 40%;
     }
+
     .title_td a span {
         display: block;
         width: 300px;
@@ -154,15 +175,18 @@
         margin-left: auto;
         margin-right: auto;
     }
+
     #bt_write_div form {
         background: #eaeaea;
         text-align: center;
         display: inline-block;
         padding: 7px 20px;
     }
+
     #bt_write_div form input {
         border: 0px;
     }
+
     #write_bt_image {
         width: auto;
         padding: 1px;
@@ -171,15 +195,58 @@
         border: 0px;
         padding: 0px;
     }
+
     #write_bt_text {
         border: 0px;
         background: none;
         padding: 0px;
     }
+
     /* 페이지 네이션 */
     #pagination {
         width: 100%;
         text-align: center;
+    }
+
+    /* 검색 버튼 */
+    #form_wrapper {
+        width: 100%;
+        height: 100%;
+        align-self: flex-end;
+        display: flex;
+        /* padding-right: 10%; */
+        padding-left: 30%;
+    }
+
+    #form_wrapper form {
+        width: 100%;
+        align-self: center;
+        display: block;
+        border: 1px solid #EAEAEA;
+    }
+
+    #editText {
+        width: 90%;
+        text-overflow: ellipsis;
+    }
+
+    #searchBt {
+        width: 10%;
+        height: 26px;
+        padding: 1px;
+        background: #ff5543;
+        font-family: FontAwesome;
+        color: #ffffff;
+    }
+
+    #form_wrapper form input {
+        float: left;
+        border: 0px;
+    }
+
+    .title_search {
+        width: 100%;
+        display: inline-flex;
     }
 </style>
 {% endblock %}
