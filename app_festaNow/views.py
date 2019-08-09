@@ -61,6 +61,7 @@ def staff_main(request, festa_id) :
         return render(request, 'festa_now/staff/staff_main.html', {'festa':festa, 'staffs':staffs, 'staff_list':staff_list})
     else :
         false = 0
+        festa = get_object_or_404(Festa, pk = festa_id)
         return render(request, 'festa_now/staff/login.html', {'festa': festa, 'fail':false})
 
 ########## festa_now/audience/festnow게시판 ##########
