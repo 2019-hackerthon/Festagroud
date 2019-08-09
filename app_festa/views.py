@@ -70,11 +70,12 @@ def update(request, festa_id) :
 def search(request) :
     all_festa = Festa.objects.all()
     keyword = request.GET.get('search_bar')
+    len_search = len(Festa.objects.filter(name__icontains = keyword))
     search_festa=[]
     # festa이름이 keyword포함하면 search_festa list에 해당 festa추가
     for object in all_festa.filter(name__icontains = keyword) :
         search_festa.append(object)
-    return render(request, 'festa_home/search.html', {'search_festa': search_festa})
+    return render(request, 'festa_home/search.html', {'search_festa': search_festa, 'keyword':keyword, 'len_search':len_search})
 
 def confirm_login(request) :
     return render(request, 'festa_home/confirm_login.html')

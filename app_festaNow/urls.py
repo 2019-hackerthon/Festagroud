@@ -14,6 +14,9 @@ urlpatterns = [
     path('<int:festa_id>/audience/update_now/<int:now_id>', views.update_now, name="update_now"),
     path('<int:festa_id>/audience/create_now', views.create_now, name="create_now"),
     path('<int:festa_id>/audience/comment_now/<int:now_id>', views.comment_now, name="comment_now"),
+    
+    path('<int:festa_id>/audience/delete_cn/<int:commentn_id>', views.delete_cn, name="delete_cn"),
+    
     path('<int:festa_id>/audience/map', views.audience_map, name="audience_map"), #festanow/audience/map
     path('<int:festa_id>/audience/home', views.audience_home, name="audience_home"), #festanow/audience/집가자
     path('<int:festa_id>/audience/detail_home/<int:home_id>', views.a_detail_home, name="a_detail_home"),

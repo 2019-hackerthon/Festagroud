@@ -56,6 +56,9 @@
             {{comment.writer_now}}
             <br>
             {{comment.content_now}}
+            <span class="var"></span>
+            <a href="{%url 'delete_cn' festa.id now.id %}" class="store">삭제하기</a>
+           
             <hr>
             {% endfor%}
             <form action="{% url 'comment_now' festa.id now.id %}" method="POST">
