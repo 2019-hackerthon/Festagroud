@@ -22,10 +22,13 @@ urlpatterns = [
     path('<int:festa_id>/edit_ticket/<int:ticket_id>/', views.edit_ticket, name="edit_ticket"),
     path('<int:festa_id>/update_ticket/<int:ticket_id>/', views.update_ticket, name="update_ticket"),
     path('<int:festa_id>/delete_ticket/<int:ticket_id>/', views.delete_ticket, name = "delete_ticket"),
-    path('<int:festa_id>/comment_ticket/<int:ticket_id>', views.comment_ticket, name="comment_ticket"),
+    path('<int:festa_id>/<int:ticket_id>/create_commenttic/', views.create_commenttic, name="create_commenttic"),
+    path('<int:festa_id>/delete_commenttic/<int:ticket_id>/<int:commenttic_id>', views.delete_commenttic, name="delete_commenttic"),
 
     path('<int:festa_id>/incorrect_accompany', views.incorrect_accompany, name="incorrect_accompany"),
     path('<int:festa_id>/incorrect_ticket', views.incorrect_ticket, name="incorrect_ticket"),
     path('<int:festa_id>/<int:accompany_id>/incorrect_commenta', views.incorrect_commenta, name="incorrect_commenta"),
+    path('<int:festa_id>/<int:ticket_id>/incorrect_commenttic', views.incorrect_commenttic, name="incorrect_commenttic"),
+
 
 ]+ static(settings.MEDIA_URL, document_root = settings.MEDIA_ROOT)

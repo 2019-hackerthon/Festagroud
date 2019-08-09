@@ -30,7 +30,7 @@
                 <tr class="notice_board">
                     <td>{{accompany.area}}</td>
                     <td class="title_td">
-                        <a href="{% url 's_detail_home' festa.id accompany.id %}"> <span>{{accompany.title}}</span></a>
+                        <a href="{% url 'detail_accompany' festa.id accompany.id %}"> <span>{{accompany.title}}</span></a>
                     </td>
                     <td>{{accompany.writer}}</td>
                     <td>{{accompany.pub_date|date:"Y/m/d"}}</td>
