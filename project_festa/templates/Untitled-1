@@ -1,19 +1,41 @@
 {% extends 'base.html' %}
 {% block content %}
+<div id="ready_partner_div">
+        <a href="{% url 'create_accompany' festa.id %}" class="btn btn-primary">글쓰기</a>
 
-<div id="ready_festaInfo_div">
-    <div>
-        <h1>공연 이름 :{{ festa.name }}</h1>
-        <p>공연 날짜 : {{ festa.schedule_start|date:"Y"}}년 {{ festa.schedule_start|date:"m"}}월 {{ festa.schedule_start|date:"d"}}일
-            ~ {{ festa.schedule_end|date:"Y"}}년 {{ festa.schedule_end|date:"m"}}월 {{ festa.schedule_end|date:"d"}}일
-        </p>
-        <p>공연 장소 : {{ festa.space }}</p>
-        <p>공식 티켓판매처 링크 : {{festa.purchase_link}}</p>
-        <p>공연 주최/기획사 : {{festa.host }}</p>
-        <p>고객 문의처 : {{festa.contact }}</p>
-        <p>공연 유의사항 : {{ festa.precautions }}</p>
-        <p>공연 공지사항 : {{ festa.notice }}</p>
-    </div>
+        <form action="" method="get">
+                <input type="text" name="search" value="{{ search }}">
+                <input type="submit" value="검색">
+        </form>
+
+        <p>----------------------------</p>
+
+
+        {% for accompany in posts %}
+        <p> 제목: {{accompany.title}}</p>
+        <p> 지역: {{accompany.area}}</p>
+        <p> 작성자: {{accompany.writer}}</p>
+        <a href="{% url 'detail_accompany' festa.id accompany.id%}" class="btn btn-primary">보러가기</a>
+        <p>----------------------------</p>
+        {% endfor %}
+
+        <div class="container">
+
+        {% if posts.has_previous %}
+        <a href="?page=1">first</a>
+        <a href="?page={{posts.previous_page_number}}">Previous</a>
+        {% endif %}
+
+        <span>{{posts.number}}</span>
+        <span>of</span>
+        <span>{{posts.paginator.num_pages}}</span>
+
+        {% if posts.has_next %}
+        <a href="?page={{posts.next_page_number}}">Next</a>
+        <a href="?page={{posts.paginator.num_pages}}">Last</a>
+        {% endif %}
+
+        </div>
 </div>
 
 <!-- 자바 스크립트 연결 -->
@@ -21,4 +43,3 @@
 <script type="text/javascript" src="/static/js/festa_ready_js.js?ver=3' %}"></script>
 
 {% endblock %}
-
