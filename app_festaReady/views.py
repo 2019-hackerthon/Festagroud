@@ -20,7 +20,7 @@ def list_accompany(request, festa_id):
     search = request.GET.get('search', '')
     if search:
         accompany_list = accompany_list.filter(title__icontains=search)
-    paginator = Paginator(accompany_list, 3)
+    paginator = Paginator(accompany_list, 5)
     page = request.GET.get('page')
     posts = paginator.get_page(page)
     return render(request, 'festa_ready/list_accompany.html', {'accompanies':accompanies, 'posts':posts, 'search':search, 'festa':festa})
@@ -58,7 +58,7 @@ def edit_accompany(request, festa_id, accompany_id):
 def update_accompany(request, festa_id, accompany_id):
     festa = get_object_or_404(Festa, pk = festa_id)
     if request.method == "POST":
-            false = 0
+            false = 0 
             accompany = Accompany.objects.get(id = accompany_id)
             if request.POST.get('password') == accompany.password:
                 title = request.POST.get('title')
@@ -100,7 +100,7 @@ def list_ticket(request, festa_id):
     search = request.GET.get('search', '')
     if search:
         ticket_list = ticket_list.filter(title__icontains=search)
-    paginator = Paginator(ticket_list, 3)
+    paginator = Paginator(ticket_list, 5)
     page = request.GET.get('page')
     posts = paginator.get_page(page)
     return render(request, 'festa_ready/list_ticket.html', {'tickets':tickets, 'posts':posts, 'search':search, 'festa':festa})

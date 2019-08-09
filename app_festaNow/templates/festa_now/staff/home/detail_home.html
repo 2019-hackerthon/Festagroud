@@ -6,28 +6,50 @@
         집가자(to. STAFF)
     </div>
     <div id="background_div">
-        <div>
-            <div id="festa_info">
-                <div class="festa_content" id="date_div">
-                    <div>등록날짜 {{home.pub_date|date:"o년 m월 j일 h:i"}}</div>
-                </div>
-                <div class="festa_content">
-                    <div>제목</div>
-                    <div><input type="text" name='title' value='[{{home.region}}] {{home.title}}' disabled></div>
-                </div>
-                <div class="festa_content festa_content_second">
-                    <div>작성자</div>
-                    <div><input type="text" name='writer' value='{{home.writer}}' disabled></div>
-                </div>
-                <div class="festa_content festa_content_second">
-                    <div>내용</div>
-                    <div>
-                        <textarea name="body" cols="30" rows="10" disabled>{{home.body}}</textarea>
+        <form name="cancle_or_save_form" method="POST">
+            {% csrf_token %}
+            <div>
+                <div id="festa_info">
+                    <div class="festa_content" id="date_div">
+                        <div>등록날짜 {{home.pub_date|date:"o년 m월 j일 h:i"}}</div>
+                    </div>
+                    <div class="festa_content">
+                        <div>제목</div>
+                        <div><input type="text" name='title' value='[{{home.region}}] {{home.title}}' disabled></div>
+                    </div>
+                    <div class="festa_content festa_content_second">
+                        <div>작성자</div>
+                        <div><input type="text" name='writer' value='{{home.writer}}' disabled></div>
+                    </div>
+                    <div class="festa_content festa_content_second">
+                        <div>내용</div>
+                        <div>
+                            <textarea name="body" cols="30" rows="10" disabled>{{home.body}}</textarea>
+                        </div>
                     </div>
                 </div>
-            </div>
-        </div>
+                <div id="button_div">
+                    <div>
+                        <input type="submit" value="삭제" onClick='bt_function(0)'>
+                    </div>
+                    <div>
+                        <input type="submit" value="수정" onClick='bt_function(1)'>
+                    </div>
+                </div>
+        </form>
+        <script>
+            var submitForm = document.cancle_or_save_form;
+
+            function bt_function(cSave) {
+                if (cSave == 0) {
+                    submitForm.action = "/festa_now/{{festa.id}}/staff/delete_home/{{home.id}}/";
+                } else {
+                    submitForm.action = "/festa_now/{{festa.id}}/staff/edit_home/{{home.id}}/";
+                }
+            }
+        </script>
     </div>
+</div>
 </div>
 
 <style>
@@ -77,6 +99,21 @@
         display: flex;
         justify-content: flex-end;
         font-size: 13px;
+    }
+
+    #button_div {
+        display: flex;
+        justify-content: center;
+        margin-top: 30px;
+    }
+
+    #button_div div {
+        margin: 10px;
+    }
+
+    #button_div div input {
+        width: 100px;
+        background: #f4f3ff;
     }
 </style>
 {% endblock %}

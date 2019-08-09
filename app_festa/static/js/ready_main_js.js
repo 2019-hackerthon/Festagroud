@@ -7,6 +7,7 @@ window.onload = function () {
 
     this.festaInfoScroll();
     this.menuDisplay();
+    this.textChange();
 }
 window.onresize = function () {
     this.fullScreen();
@@ -17,6 +18,7 @@ window.onresize = function () {
 
     this.festaInfoScroll();
     this.menuDisplay();
+    this.textChange();
 }
 
 function menuDisplay(){
@@ -28,4 +30,9 @@ function festaInfoScroll(){
     var scrollDiv = document.getElementById('festa_info');
     var maxHeight = scrollDiv.clientHeight;
     scrollDiv.style.height = maxHeight + 'px';
+}
+
+function textChange(){
+    var textTitle = document.getElementById('title_text_wrapper');
+    textTitle.innerHTML = 'Festa Ready'
 }
