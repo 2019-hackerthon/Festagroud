@@ -61,7 +61,8 @@ def update(request, festa_id) :
     if request.method == 'POST' and request.FILES['poster'] :
         update_festa = Festa.objects.get(id = festa_id)
         update_festa.name = request.POST['name']
-        update_festa.schedule = request.POST['schedule']
+        update_festa.schedule_start = request.POST['schedule_start']
+        update_festa.schedule_end = request.POST['schedule_end']
         update_festa.space = request.POST['space']
         update_festa.image = request.FILES['poster']
         update_festa.save()
