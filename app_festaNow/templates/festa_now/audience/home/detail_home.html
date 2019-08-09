@@ -9,7 +9,7 @@
         <div>
             <div id="festa_info">
                 <div class="festa_content" id="date_div">
-                    <div>등록날짜 {{home.pub_date}}</div>
+                    <div>등록날짜 {{home.pub_date|date:"o년 m월 j일 h:i"}}</div>
                 </div>
                 <div class="festa_content">
                     <div>제목</div>
@@ -31,7 +31,7 @@
 </div>
 
 <style>
-    /* 전체 컨테이너 */
+    /* 전체 컨테이너 */ 
     #new_staff_container {
         width: 100%;
         height: 100%;

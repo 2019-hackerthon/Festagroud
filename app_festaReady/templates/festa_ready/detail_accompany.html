@@ -9,7 +9,7 @@
             <div>
                 <div id="festa_info">
                     <div class="festa_content" id="date_div">
-                        <div>등록날짜 {{accompany.pub_date}}</div>
+                        <div>등록날짜 {{accompany.created_at|date:"o년 m월 j일 h:i"}}</div>
                     </div>
                     <div class="festa_content">
                         <div>제목</div>
@@ -19,6 +19,10 @@
                         <div>작성자</div>
                         <div><input type="text" name='writer' value='{{accompany.writer}}' disabled></div>
                     </div>
+                    <div class="festa_content festa_content_second festa_image">
+                            <div>첨부 이미지</div>
+                            <div><img src="{{ accompany.image.url }}" alt=""></div>
+                        </div>
                     <div class="festa_content festa_content_second">
                         <div>내용</div>
                         <div>
@@ -76,6 +80,9 @@
         display: flex;
         justify-content: flex-end;
         font-size: 13px;
+    }
+    .festa_image img{
+        max-width: 100%;
     }
 </style>
 {% endblock %}
