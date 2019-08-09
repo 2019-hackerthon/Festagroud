@@ -42,8 +42,8 @@
                             <span>{{accompany.title}}</span></a>
                     </td>
                     <td>{{accompany.writer}}</td>
-                    <td>{{accompany.pub_date|date:"Y/m/d"}}</td>
-                    <td>{{accompany.pub_date|time:"H:i"}}</td>
+                    <td>{{accompany.created_at|date:"Y/m/d"}}</td>
+                    <td>{{accompany.created_at|time:"H:i"}}</td>
                 </tr>
                 {% endfor %}
             </table>
