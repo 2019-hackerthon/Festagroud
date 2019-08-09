@@ -11,25 +11,6 @@
                 <tr>
                     <td id="table_intro" colspan="5"> '{{ festa.name }}'의 공연정보 입니다.</td>
                 </tr>
-                <tr id="kind_board">
-                    <td>공지사항</td>
-                    <td>제목</td>
-                    <td>작성자</td>
-                    <td>날짜</td>
-                    <td>시간</td>
-                </tr>
-                <!-- 게시글 등록 -->
-                <!-- {% for home in home_list %}
-                <tr class="notice_board">
-                    <td>{{home.region}}</td>
-                    <td class="title_td">
-                        <a href="{% url 's_detail_home' festa.id home.id %}"> <span>{{home.title}}</span></a>
-                    </td>
-                    <td>{{home.writer}}</td>
-                    <td>{{home.pub_date|date:"Y/m/d"}}</td>
-                    <td>{{home.pub_date|time:"H:i"}}</td>
-                </tr>
-                {% endfor %} -->
             </table>
         </div>
         <div id="festa_info">
@@ -74,22 +55,6 @@
             </div>
             {% endif %}
         </div>
-
-        <!-- <div id="pagination">
-            {%if home_list.has_previous%}
-            <a href="?page=1">First</a>
-            <a href="?page={{home_list.previous_page_number}}">Previous</a>
-            {%endif%}
-
-            <span>{{home_list.number}}</span>
-            <span>of</span>
-            <span>{{home_list.paginator.num_pages}}</span>
-
-            {%if home_list.has_next%}
-            <a href="?page={{home_list.next_page_number}}">Next</a>
-            <a href="?page={{home_list.paginator.num_pages}}">Last</a>
-            {%endif%}
-        </div> -->
     </div>
 </div>
 
@@ -158,39 +123,6 @@
         padding: 5px 20px;
     }
 
-    /* 카테고리 board, 실제 내용(공지사항) board -> 밑줄 긋는 css */
-
-    #kind_board,
-    .notice_board {
-        width: 100%;
-        font-size: 18px;
-    }
-
-    #kind_board {
-        border-bottom: 1px solid #000000;
-        font-weight: 500;
-    }
-
-    #kind_board td {
-        padding-top: 30px;
-    }
-
-    .notice_board {
-        border-bottom: 1px solid #6357ff;
-        color: #6357ff;
-    }
-
-    /* board 안에 있는 a 태그 */
-    .notice_board td a {
-        color: #6357ff;
-        text-decoration: none;
-    }
-
-    .notice_board td {
-        padding-top: 3px;
-        padding-bottom: 3px;
-    }
-
     /* 테이블 태그 */
     table {
         width: 100%;
@@ -198,29 +130,6 @@
 
     /* table_div 안 모든 td 태그 */
     td {
-        text-align: center;
-    }
-
-    /* 제목이 들어가는 특정 td */
-    .title_td {
-        width: 40%;
-    }
-
-    .title_td a span {
-        display: block;
-        width: 300px;
-        height: auto;
-        white-space: nowrap;
-        overflow: hidden;
-        text-overflow: ellipsis;
-        text-align: center;
-        margin-left: auto;
-        margin-right: auto;
-    }
-
-    /* 페이지 네이션 */
-    #pagination {
-        width: 100%;
         text-align: center;
     }
 </style>

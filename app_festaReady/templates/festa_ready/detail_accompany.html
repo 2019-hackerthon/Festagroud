@@ -1,34 +1,88 @@
-{% extends 'base.html' %}
+{% extends 'base_copyright_version.html' %}
 {% block content %}
 
-<h2><동행찾기 상세보기 페이지></h2>
-<p> 제목: {{accompany.title}}</p>
-<p>{{ accompany.created_at|date:"o년 m월 j일 h:i"}}</p>
-<p> 지역: {{accompany.area}}</p>
-<p> 작성자: {{accompany.writer}}</p>
-<p> 내용: {{accompany.description}}</p>
-{% if accompany.image %}
-<img src="{{ accompany.image.url }}">
-{% endif %}
-<a href="{% url 'edit_accompany' festa.id accompany.pk %}" class="btn btn-primary">수정</a>
+<div id="new_staff_container">
+    <div id="subtitle_text_wrapper">
+        동행구하기
+    </div>
+    <div id="background_div">
+            <div>
+                <div id="festa_info">
+                    <div class="festa_content" id="date_div">
+                        <div>등록날짜 {{accompany.created_at|date:"o년 m월 j일 h:i"}}</div>
+                    </div>
+                    <div class="festa_content">
+                        <div>제목</div>
+                        <div><input type="text" name='title' value='[{{accompany.area}}] {{accompany.title}}' disabled></div>
+                    </div>
+                    <div class="festa_content festa_content_second">
+                        <div>작성자</div>
+                        <div><input type="text" name='writer' value='{{accompany.writer}}' disabled></div>
+                    </div>
+                    <div class="festa_content festa_content_second festa_image">
+                            <div>첨부 이미지</div>
+                            <div><img src="{{ accompany.image.url }}" alt=""></div>
+                        </div>
+                    <div class="festa_content festa_content_second">
+                        <div>내용</div>
+                        <div>
+                            <textarea name="description" cols="30" rows="10" disabled>{{accompany.description}}</textarea>
+                        </div>
+                    </div>
+                </div>
+            </div>
+    </div>
+</div>
 
-<a href="{% url 'delete_accompany' festa.id accompany.pk %}" class="btn btn-primary">삭제</a>
+<style>
+    /* 전체 컨테이너 */
+    #new_staff_container {
+        width: 100%;
+        height: 100%;
+        padding-top: 50px;
+        padding-left: 20%;
+        padding-right: 20%;
+        background: #f4f3ff;
+    }
 
-<h2>comments</h2>
-{% for commenta in commentas %}
-<p>작성자: {{commenta.writer}}</p>
-<p>내용: {{commenta.content}}</p>
-<a href="{% url 'delete_commenta' festa.id accompany.id commenta.pk %}" class="btn btn-primary">삭제</a>
-<hr>
-{% endfor%}
+    /* 공지사항 타이틀 */
+    #subtitle_text_wrapper {
+        font-size: 20px;
+        font-weight: bold;
+    }
 
-<form action="{% url 'create_commenta' festa.id accompany.id %}" method="POST">
-    {% csrf_token %}
-    작성자 : <input name="writer" type="text">    
-    비밀번호: <input type="password" name="password"><br>
-    <br>
-    내용 : <textarea name="content" id="" cols="30" rows="10"></textarea>
-    <input type="submit">
-</form>
+    #background_div {
+        background: #ffffff;
+        margin-top: 10px;
+        padding-top: 10px;
+        padding-bottom: 30px;
+    }
 
+    .festa_content_second {
+        margin-top: 3%;
+    }
+
+    .festa_content div {
+        max-width: 100%;
+        width: 100%;
+        padding: 2px 10px;
+    }
+
+    .festa_content div input,
+    .festa_content div textarea {
+        border: 1px solid #747474;
+        /* margin: 10px;*/
+        padding: 10px;
+        width: 100%;
+        max-width: 100%;
+    }
+    #date_div div {
+        display: flex;
+        justify-content: flex-end;
+        font-size: 13px;
+    }
+    .festa_image img{
+        max-width: 100%;
+    }
+</style>
 {% endblock %}

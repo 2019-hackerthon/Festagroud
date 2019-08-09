@@ -13,7 +13,10 @@
             </form>
         </div>
     </div>
-    <div id="table_bt_div">
+
+
+    <div id="table_bt_div" >
+
         <div id="bt_write_div">
             <form action="{% url 'create_accompany' festa.id %}" method="GET">
                 <input id="write_bt_image" type="submit" value="&#xf040" class="7x">
@@ -42,8 +45,8 @@
                             <span>{{accompany.title}}</span></a>
                     </td>
                     <td>{{accompany.writer}}</td>
-                    <td>{{accompany.pub_date|date:"Y/m/d"}}</td>
-                    <td>{{accompany.pub_date|time:"H:i"}}</td>
+                    <td>{{accompany.created_at|date:"Y/m/d"}}</td>
+                    <td>{{accompany.created_at|time:"H:i"}}</td>
                 </tr>
                 {% endfor %}
             </table>
