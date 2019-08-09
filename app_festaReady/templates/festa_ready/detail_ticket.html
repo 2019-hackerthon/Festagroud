@@ -15,12 +15,19 @@
 </form>
 
 
-<h2>comments</h2>
+<h2>commenttics</h2>
+{% for commenttic in commenttics %}
+<p>작성자: {{commenttic.writer}}</p>
+<p>내용: {{commenttic.content}}</p>
+<a href="{% url 'delete_commenttic' festa.id ticket.id commenttic.pk %}" class="btn btn-primary">삭제</a>
+<hr>
+{% endfor%}
 
-<form action="{% url 'comment_ticket' festa.id ticket.id %}" method="POST">
+<form action="{% url 'create_commenttic' festa.id ticket.id %}" method="POST">
     {% csrf_token %}
-    작성자 : <input name="writer" type="text" placeholder="작성자를 입력해 주세요">
+    작성자 : <input name="writer" type="text">    
+    비밀번호: <input type="password" name="password"><br>
     <br>
-    내용 : <textarea name="content" id="" cols="30" rows="10" placeholder="댓글을 입력해 주세요"></textarea>
-    <input type="submit" value="댓글 작성">
+    내용 : <textarea name="content" id="" cols="30" rows="10"></textarea>
+    <input type="submit">
 </form>

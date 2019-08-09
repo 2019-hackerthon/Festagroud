@@ -12,13 +12,13 @@
     <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet" />
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
         integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous">
-        </script>
+    </script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
         integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous">
-        </script>
+    </script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
         integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous">
-        </script>
+    </script>
 
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport"
@@ -30,27 +30,27 @@
 <body>
 
     <!-- navbar시작 -->
-    <nav class="navbar navbar-expand-lg navbar-light bg-light">
-        <div class="logo">
-            <a class="navbar-brand" href="{% url 'home' %}">
-                <img src="/static/image/logo.png">
-            </a>
-        </div>
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
-            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-        </button>
+    <nav class="navbar navbar-expand-lg navbar-light bg-light" id="nav_container">
+        <div id="nav_div">
+            <div class="logo">
+                    <form action="{% url 'home' %}" method="GET">
+                            <div><input id="bt_logo" type="image" src="/static/image/logo.png"></div>
+                        </form>
+            </div>
 
-        <div class="collapse navbar-collapse" id="navbarSupportedContent">
-            <ul class="navbar-nav mr-auto">
-                <li class="nav-item">
-                    <a class="nav-link" href="{% url 'confirm_login' %}">등록 확인</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="{% url 'new' %}">페스타 등록하기</a>
-                </li>
-            </ul>
+            <div id="nav_bt">
+                <div id="bt_gotit">
+                    <form action="{% url 'confirm_login' %}" method="GET">
+                            <span><input class="left_bt" type="submit" value="등록확인"></span>
+                    </form>
+                </div>
+                <div id="bt_enroll">
+                    <form action="{% url 'new' %}" method="GET">
+                        <span><input class="left_bt" type="submit" value="페스타 등록"></span>
+                    </form>
+                </div>
 
+            </div>
         </div>
     </nav>
     <!-- navbar 끝 -->
@@ -81,33 +81,67 @@
 </html>
 
 <style>
-    #navbarSupportedContent a {
-        border: 1px solid #6357ff;
-        background-color: #6357ff;
-        color: white;
-        margin-left: 20px;
-        text-align: right;
-        display: inline-block;
-        height: 33px;
-        font-size: 18px;
-        padding-top: 3px;
-    }
-    nav ul {
-        margin-left: 750px;
+
+    /*네비게이션바*/
+    #nav_div{
+        display: flex;
+        width: 100%;
+        height: 100%;
     }
 
-    .logo img {
-        width: 60px;
-        height: auto;
-        margin-left: 182.25px;
+    .navbar{
+        padding-top: 0px;
+        padding-bottom: 0px;
     }
+
+    #bt_gotit{
+        margin-right: 10px;
+    }
+    #bt_enroll{
+        margin-right: 10%;
+    }
+    .logo{
+        width: 20%;
+        display: flex;
+        justify-content: center;
+    }
+
+    .logo form div{
+        width: 100%;
+        height: 100%;
+    }
+
+    #bt_logo{
+        width: 60px;
+        height: 100%;
+    }
+
+    #nav_bt{
+        width: 80%;
+        display: flex;
+        justify-content: flex-end;
+        align-self: center;
+    }
+
+    .logo form input{
+        width: 64px;
+        height: 32px;
+    }
+
+    .left_bt{
+        text-align: center;
+        background: #f4f3ff;
+    }
+    
 
     nav {
         height: 48.75px;
-        -webkit-box-shadow: 0 8px 6px -6px  rgba(0, 0, 0, 0.2);
-        -moz-box-shadow: 0 8px 6px -6px  rgba(0, 0, 0, 0.2);
+        -webkit-box-shadow: 0 8px 6px -6px rgba(0, 0, 0, 0.2);
+        -moz-box-shadow: 0 8px 6px -6px rgba(0, 0, 0, 0.2);
         box-shadow: 0 8px 6px -6px rgba(0, 0, 0, 0.2);
     }
+
+    /*********************************/
 
     footer {
         width: 100%;
