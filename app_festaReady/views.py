@@ -52,6 +52,7 @@ def edit_accompany(request, festa_id, accompany_id):
 def update_accompany(request, festa_id, accompany_id):
     festa = get_object_or_404(Festa, pk = festa_id)
     if request.method == "POST":
+            false = 0
             accompany = Accompany.objects.get(id = accompany_id)
             if request.POST.get('password') == accompany.password:
                 title = request.POST.get('title')
@@ -64,7 +65,7 @@ def update_accompany(request, festa_id, accompany_id):
                 accompany.description = description
                 accompany.save()
                 return redirect('detail_accompany', festa.id, accompany.pk)
-            return render(request, 'festa_ready/incorrect_accompany.html', {'festa':festa})
+            return render(request, 'festa_ready/edit_accompany.html', {'accompany': accompany, 'festa':festa, 'fail':false})
 
 def delete_accompany(request, festa_id, accompany_id):
     festa = get_object_or_404(Festa, pk = festa_id)
@@ -127,6 +128,7 @@ def update_ticket(request, festa_id, ticket_id):
     festa = get_object_or_404(Festa, pk = festa_id)
     if request.method == "POST":
             ticket = Ticket.objects.get(id = ticket_id)
+            false = 0
             if request.POST.get('password') == ticket.password:
                 title = request.POST.get('title')
                 writer = request.POST.get('writer')
@@ -138,7 +140,7 @@ def update_ticket(request, festa_id, ticket_id):
                 ticket.description = description
                 ticket.save()
                 return redirect('detail_ticket', festa.id, ticket.pk)
-            return render(request, 'festa_ready/incorrect_ticket.html', {'festa':festa})
+            return render(request, 'festa_ready/edit_ticket.html', {'ticket': ticket, 'festa':festa, 'fail':false})
 
 def delete_ticket(request, festa_id, ticket_id):
     festa = get_object_or_404(Festa, pk = festa_id)
@@ -189,9 +191,6 @@ def incorrect_accompany(request, festa_id):
     festa = get_object_or_404(Festa, pk = festa_id)
     return render(request, 'festa_ready/incorrect_accompany.html', {'festa':festa})
 
-def incorrect_ticket(request, festa_id):
-    festa = get_object_or_404(Festa, pk = festa_id)
-    return render(request, 'festa_ready/incorrect_ticket.html', {'festa':festa})
 
 def incorrect_commenta(request, festa_id, accompany_id):
     festa = get_object_or_404(Festa, pk = festa_id)
