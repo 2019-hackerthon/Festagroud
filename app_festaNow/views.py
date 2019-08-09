@@ -30,6 +30,7 @@ def staff_login(request, festa_id):
     return render(request, 'festa_now/staff/login.html', {'festa': festa})
 
 def audience_main(request, festa_id) :
+    noConfirm="AS"
     if request.method == 'POST' :
         first = request.POST['reservation_name'] ## 동명이인존재
         second = request.POST["reservation_num"] ## num은 PK
@@ -44,12 +45,12 @@ def audience_main(request, festa_id) :
         for a in range(0, len(search_reservation)) :
             if (search_reservation[a].reservation_name == name_object.reservation_name and search_reservation[a].reservation_num == num_object.reservation_num) : 
                  return render(request, 'festa_now/audience/audience_main.html', {'festa':festa, 'audiences':audiences, 'reservationnum':reservationnum})
-            # else :
-            #     festa = get_object_or_404(Festa, pk = festa_id)
-            #     audiences = Audience.objects.filter(festa = festa.id)
-            #     return render(request, 'festa_now/audience/login.html', {'festa':festa, 'audiences':audiences, 'reservationnum':reservationnum})
-    
+            else :
+                false = 0
+                return render(request, 'festa_now/audience/login.html', {'fail':false, 'festa':festa})
+            
 def staff_main(request, festa_id) :
+    noConfirm="AS"
     if request.method == 'POST':
         first = request.POST['reservation_name']
         second = request.POST["reservation_num"]
@@ -67,7 +68,11 @@ def staff_main(request, festa_id) :
         for a in range(0, len(search_reservation)) : 
             if (search_reservation[a].reservation_name == name_object.reservation_name and search_reservation[a].reservation_num == num_object.reservation_num) : 
                 return render(request, 'festa_now/staff/staff_main.html', {'festa':festa, 'staffs':staffs, 'staff_list':staff_list})
-            # else :
+            else :
+                false = 0
+                return render(request, 'festa_now/staff/login.html', {'fail':false, 'festa':festa})
+
+            # else 
             #     festa = get_object_or_404(Festa, pk = festa_id)
             #     staffs = Staff.objects.filter(festa = festa.id)
             #     paginator = Paginator(staffs, 5)

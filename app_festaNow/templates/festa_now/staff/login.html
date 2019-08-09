@@ -6,6 +6,7 @@
         <div id="booked_name_and_num">
                 <form id="edit_box_form" action="{% url 'staff_main' festa.id %}" method="POST">
                 {% csrf_token %}
+                {{fail}}
                 <div class="visible_edit_box">
                     <div class="reserve_span">
                         <span>팀 &nbsp; &nbsp;&nbsp;번 &nbsp;호</span>
