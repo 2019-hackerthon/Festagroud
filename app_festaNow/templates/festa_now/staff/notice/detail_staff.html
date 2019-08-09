@@ -3,16 +3,14 @@
 
 <div id="new_staff_container">
     <div id="subtitle_text_wrapper">
-        공지사항 작성(to. STAFF)
+        공지사항(to. STAFF)
     </div>
     <div id="background_div">
-        <form name="cancle_or_save_form" method="POST">
-            {% csrf_token %}
             <div>
                 <div id="festa_info">
-                        <div class="festa_content" id="date_div">
-                            <div>등록날짜 {{staff.pub_date}}</div>
-                            </div>
+                    <div class="festa_content" id="date_div">
+                        <div>등록날짜 {{staff.pub_date}}</div>
+                    </div>
                     <div class="festa_content">
                         <div>공지제목</div>
                         <div><input type="text" name='title' value='{{staff.title}}' disabled></div>
@@ -28,29 +26,7 @@
                         </div>
                     </div>
                 </div>
-                <div id="button_div">
-                    <div>
-                        <input type="submit" value="취소" onClick='bt_function(0)'>
-                    </div>
-                    <div>
-                        <input type="submit" value="완료" onClick='bt_function(1)'>
-                    </div>
-                </div>
             </div>
-        </form>
-        
-        <script>
-            var submitForm = document.cancle_or_save_form;
-
-            function bt_function(cSave){
-                if(cSave == 0){
-                    submitForm.action = "/festa_now/{{festa.id}}/staff/notice";
-                }
-                else{
-                    submitForm.action = "/festa_now/{{festa.id}}/staff/create_staff/";
-                }
-            }
-        </script>
     </div>
 </div>
 
@@ -96,21 +72,7 @@
         width: 100%;
         max-width: 100%;
     }
-
-    #button_div{
-        display: flex;
-        justify-content: center;
-        margin-top: 30px;
-    }
-    #button_div div{
-        margin: 10px;
-    }
-
-    #button_div div input{
-        width: 100px;
-        background:#f4f3ff;
-    }
-    #date_div div{
+    #date_div div {
         display: flex;
         justify-content: flex-end;
         font-size: 13px;

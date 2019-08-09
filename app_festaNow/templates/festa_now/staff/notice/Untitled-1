@@ -1,43 +1,33 @@
-<!DOCTYPE html>
-<html lang="en">
+{% extends 'base.html' %}
+{% block content %}
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Document</title>
-</head>
+<h2><동행찾기 상세보기 페이지></h2>
+<p> 제목: {{accompany.title}}</p>
+<p> 지역: {{accompany.area}}</p>
+<p> 작성자: {{accompany.writer}}</p>
+<p> 내용: {{accompany.description}}</p>
+{% if accompany.image %}
+<img src="{{ accompany.image.url }}">
+{% endif %}
+<a href="{% url 'edit_accompany' festa.id accompany.pk %}" class="btn btn-primary">수정</a>
 
-<body>
-<center>
-    <h1>새 글을 작성해주세요</h1>
-    <a href="{% url 'now_now' festa.id %}" class="store">Festa now</a>
+<a href="{% url 'delete_accompany' festa.id accompany.pk %}" class="btn btn-primary">삭제</a>
+
+<h2>comments</h2>
+{% for commenta in commentas %}
+<p>작성자: {{commenta.writer}}</p>
+<p>내용: {{commenta.content}}</p>
+<a href="{% url 'delete_commenta' festa.id accompany.id commenta.pk %}" class="btn btn-primary">삭제</a>
+<hr>
+{% endfor%}
+
+<form action="{% url 'create_commenta' festa.id accompany.id %}" method="POST">
+    {% csrf_token %}
+    작성자 : <input name="writer" type="text">    
+    비밀번호: <input type="password" name="password"><br>
     <br>
-    <br>
-    <form action="{%url 'create_now' festa.id %}" method="POST">
-        {% csrf_token %}
-        [Title] : <input type="text" name='title' placeholder="제목을 입력해 주세요">
-        <br>
-        <br>
-        [Writer] : <input type="text" name='writer'>
-        <br>
-        <br>
-        [Post Type] : 
-        <select name="post_type">
-            <option name="now">now</option>
-            <option name="질문">질문</option>
-            <option name="나눔">나눔</option>
-        </select>
-        <br>
-        <br>
-        [Body]
-        <br>
-        <textarea name="body" id="" cols="30" rows="10" placeholder="내용을 입력해 주세요" style="padding:10px; margin:10px;"></textarea>
-        <br>
-        
-        <button type='submit'>게시글 작성</button>
-    </form>
-</center>
-</body>
+    내용 : <textarea name="content" id="" cols="30" rows="10"></textarea>
+    <input type="submit">
+</form>
 
-</html>
+{% endblock %}
