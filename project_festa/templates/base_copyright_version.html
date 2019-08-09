@@ -30,7 +30,7 @@
 <body>
 
     <!-- navbar시작 -->
-    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <nav class="navbar navbar-expand-lg navbar-light bg-light" id="nav_container">
         <div id="nav_div">
             <div class="logo">
                     <form action="{% url 'home' %}" method="GET">
@@ -52,22 +52,6 @@
 
             </div>
         </div>
-        <!-- <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
-            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-
-        <div class="collapse navbar-collapse" id="navbarSupportedContent">
-            <ul class="navbar-nav mr-auto">
-                <li class="nav-item">
-                    <a class="nav-link" href="{% url 'confirm_login' %}">등록 확인</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="{% url 'new' %}">페스타 등록하기</a>
-                </li>
-            </ul>
-
-        </div> -->
     </nav>
     <!-- navbar 끝 -->
 
@@ -97,21 +81,8 @@
 </html>
 
 <style>
-    /* #navbarSupportedContent a {
-        border: 1px solid #6357ff;
-        background-color: #6357ff;
-        color: white;
-        margin-left: 20px;
-        text-align: right;
-        display: inline-block;
-        height: 33px;
-        font-size: 18px;
-        padding-top: 3px;
-    } */
 
-    /* nav ul {
-        margin-left: 750px;
-    } */
+    /*네비게이션바*/
     #nav_div{
         display: flex;
         width: 100%;
@@ -169,6 +140,8 @@
         -moz-box-shadow: 0 8px 6px -6px rgba(0, 0, 0, 0.2);
         box-shadow: 0 8px 6px -6px rgba(0, 0, 0, 0.2);
     }
+
+    /*********************************/
 
     footer {
         width: 100%;
