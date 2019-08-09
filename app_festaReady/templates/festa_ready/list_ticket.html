@@ -20,20 +20,21 @@
                 <input id="write_bt_text" type="submit" value="글쓰기">
             </form>
         </div>
+        <br>
         
         <div id="table_div">
-            <table>
-                <tr>
-                    <td id="table_intro" colspan="5"> 티켓교환은 여기서 &nbsp;'티켓 교환'&nbsp; 게시판 입니다.</td>
-                </tr>
+            <table class="table">
+                <thead>
                 <tr id="kind_board">
-                    <td>구분</td>
-                    <td>제목</td>
-                    <td>작성자</td>
-                    <td>날짜</td>
-                    <td>시간</td>
+                    <th>구분</th>
+                    <th>제목</th>
+                    <th>작성자</th>
+                    <th>날짜</th>
+                    <th>시간</th>
                 </tr>
+                </thead>
                 <!-- 게시글 등록 -->
+                <tbody>
                 {% for ticket in posts %}
                 <tr class="notice_board">
                     <td>{{ticket.deal_type}}</td>
@@ -46,6 +47,7 @@
                     <td>{{ticket.pub_date|time:"H:i"}}</td>
                 </tr>
                 {% endfor %}
+                </tbody>
             </table>
         </div>
 
@@ -132,19 +134,19 @@
     }
 
     .notice_board {
-        border-bottom: 1px solid #6357ff;
-        color: #6357ff;
+        border-bottom: 1px solid black;
+        color: black;
     }
 
     /* board 안에 있는 a 태그 */
     .notice_board td a {
-        color: #6357ff;
+        color: black;
         text-decoration: none;
     }
 
     .notice_board td {
-        padding-top: 3px;
-        padding-bottom: 3px;
+        padding-top: 10px;
+        padding-bottom: 10px;
     }
 
     /* #content_board {
