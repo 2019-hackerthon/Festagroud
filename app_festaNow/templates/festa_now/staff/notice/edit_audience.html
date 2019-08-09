@@ -1,33 +1,111 @@
-<!DOCTYPE html>
-<html lang="en">
+{% extends 'base_copyright_version.html' %}
+{% block content %}
 
-<head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <meta http-equiv="X-UA-Compatible" content="ie=edge">
-        <title>Document</title>
-</head>
-
-<body>
-<center>
-        <h1>글을 수정중입니다.</h1>
-        <form action="{% url 'update_audience' festa.id audience.id %}" method="POST">
-                {% csrf_token %}
-                [Title] : <input type="text" name='title' value="{{audience.title}}">
-                <br>
-                <br>
-                [Wirter] : <input type="text" name='writer' value="{{audience.writer}}">
-                <br>
-                <br>
-                [Body]
-                <br>
-                <textarea name="body" id="" cols="30" rows="10"
-                        placeholder="write your content"style="padding:10px; margin:10px;" >{{audience.body}}</textarea>
-                <br>
-                <br>
-                <button type='submit'>수정하기</button>
+<div id="new_staff_container">
+    <div id="subtitle_text_wrapper">
+        공지사항 작성(to. AUDIENCE)
+    </div>
+    <div id="background_div">
+        <form name="cancle_or_save_form" method="POST">
+            {% csrf_token %}
+            <div>
+                <div id="festa_info">
+                    <div class="festa_content">
+                        <div>공지제목</div>
+                        <div><input type="text" name='title' placeholder="제목을 입력해주세요" value="{{audience.title}}"></div>
+                    </div>
+                    <div class="festa_content festa_content_second">
+                        <div>작성자</div>
+                        <div><input type="text" name='writer' placeholder="이름을 입력해주세요" value="{{audience.writer}}"></div>
+                    </div>
+                    <div class="festa_content festa_content_second">
+                        <div>내용</div>
+                        <div>
+                            <textarea name="body" cols="30" rows="10" placeholder="내용을 입력해주세요">{{audience.body}}</textarea>
+                        </div>
+                    </div>
+                </div>
+                <div id="button_div">
+                    <div>
+                        <input type="submit" value="취소" onClick='bt_function(0)'>
+                    </div>
+                    <div>
+                        <input type="submit" value="완료" onClick='bt_function(1)'>
+                    </div>
+                </div>
+            </div>
         </form>
-</center>
-</body>
+        
+        <script>
+            var submitForm = document.cancle_or_save_form;
 
-</html>
+            function bt_function(cSave){
+                if(cSave == 0){
+                    submitForm.action = "/festa_now/{{festa.id}}/staff/notice";
+                }
+                else{
+                    submitForm.action = "/festa_now/{{festa.id}}/staff/create_audience/";
+                }
+            }
+        </script>
+    </div>
+</div>
+
+<style>
+    /* 전체 컨테이너 */
+    #new_staff_container {
+        width: 100%;
+        height: 100%;
+        padding-top: 50px;
+        padding-left: 20%;
+        padding-right: 20%;
+        background: #f4f3ff;
+    }
+
+    /* 공지사항 타이틀 */
+    #subtitle_text_wrapper {
+        font-size: 20px;
+        font-weight: bold;
+    }
+
+    #background_div {
+        background: #ffffff;
+        margin-top: 10px;
+        padding-top: 10px;
+        padding-bottom: 30px;
+    }
+
+    .festa_content_second {
+        margin-top: 3%;
+    }
+
+    .festa_content div {
+        max-width: 100%;
+        width: 100%;
+        padding: 2px 10px;
+    }
+
+    .festa_content div input,
+    .festa_content div textarea {
+        border: 1px solid #747474;
+        /* margin: 10px;*/
+        padding: 10px;
+        width: 100%;
+        max-width: 100%;
+    }
+
+    #button_div{
+        display: flex;
+        justify-content: center;
+        margin-top: 30px;
+    }
+    #button_div div{
+        margin: 10px;
+    }
+
+    #button_div div input{
+        width: 100px;
+        background:#f4f3ff;
+    }
+</style>
+{% endblock %}
