@@ -14,7 +14,7 @@
             <form action="{% url 'confirm' %}" method="POST">
                 {% csrf_token %}
                 <div class="right_top">
-                    <h2>등록번호를 입력해주세요</h2><input class="btn " type="submit" value="완료">
+                    <h2>등록번호를 입력해주세요</h2><input class="btn " type="submit" value="확인">
                 </div>
                 <br>
                 <br>
@@ -23,7 +23,6 @@
                     <!-- <div class="oval"></div> -->
                     {{fail}}
                 </div>
-                
             </form>
         </div>
     </div>
