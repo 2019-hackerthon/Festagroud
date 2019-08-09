@@ -1,90 +1,286 @@
 {% extends 'base_copyright_version.html' %}
 {% block content %}
-<div class="container">
-    <h2>페스타 등록하기</h2>
-    <br>
+<div class="bg_wrapper">
     <div class="container">
-        <form action="{% url 'create' %}" method="POST" enctype="multipart/form-data">
-            {% csrf_token %}
-            <p>공연 제목</p>
-            <input type="text" name="name">
-            <p>공연 날짜</p>
-            <input type="date" name="schedule_start"> ~ <input type="date" name="schedule_end">
-            <p>공연 장소</p>
-            <input type="text" name="space">
-            <p>공식 티켓판매처 링크</p>
-            <input type="text" name="purchase_link">
-            <p>공연 주최/기획사</p>
-            <input type="text" name="host">
-            <p>고객 문의처</p>
-            <input type="text" name="contact">
-            <p>지도</p>
-            <input type="text" name="detail_map" id="sample5_address" placeholder="공연장소를 입력하세요">
-            <input type="button" onclick="sample5_execDaumPostcode()" value="주소 검색"><br>
-            <div id="map" style="width:300px;height:300px;margin-top:10px;"></div>
-            
-            <script src="http://dmaps.daum.net/map_js_init/postcode.v2.js"></script>
-            <script src="//dapi.kakao.com/v2/maps/sdk.js?appkey=3a6997107b687683607fb8587b9bb914&libraries=services"></script>
-            
-            <script>
-                var mapContainer = document.getElementById('map'), // 지도를 표시할 div
-                    mapOption = {
-                        center: new daum.maps.LatLng(37.537187, 127.005476), // 지도의 중심좌표
-                        level: 5 // 지도의 확대 레벨
-                    };
-            
-                //지도를 미리 생성
-                var map = new daum.maps.Map(mapContainer, mapOption);
-                //주소-좌표 변환 객체를 생성
-                var geocoder = new daum.maps.services.Geocoder();
-                //마커를 미리 생성
-                var marker = new daum.maps.Marker({
-                    position: new daum.maps.LatLng(37.537187, 127.005476),
-                    map: map
-                });
-            
-                function sample5_execDaumPostcode() {
-                    new daum.Postcode({
-                        oncomplete: function(data) {
-                            var addr = data.address; // 최종 주소 변수
-            
-                            // 주소 정보를 해당 필드에 넣는다.
-                            document.getElementById("sample5_address").value = addr;
-                            // 주소로 상세 정보를 검색
-                            geocoder.addressSearch(data.address, function(results, status) {
-                                // 정상적으로 검색이 완료됐으면
-                                if (status === daum.maps.services.Status.OK) {
-            
-                                    var result = results[0]; //첫번째 결과의 값을 활용
-            
-                                    // 해당 주소에 대한 좌표를 받아서
-                                    var coords = new daum.maps.LatLng(result.y, result.x);
-                                    // 지도를 보여준다.
-                                    mapContainer.style.display = "block";
-                                    map.relayout();
-                                    // 지도 중심을 변경한다.
-                                    map.setCenter(coords);
-                                    // 마커를 결과값으로 받은 위치로 옮긴다.
-                                    marker.setPosition(coords)
+        <div class="container_top">
+            <h2>페스타 등록하기</h2>
+        </div>
+        <div class="container_bottom">
+            <div class="container_bottom_wrapper">
+                <form action="{% url 'create' %}" method="POST" enctype="multipart/form-data">
+                    {% csrf_token %}
+                    <h2>1. 기본 정보 입력</h2>
+                    <p>공연 제목</p>
+                    <input type="text" name="name">
+                    <p>공연 날짜</p>
+                    <input id="date" type="date" name="schedule_start">부터 <input id="date" type="date"
+                        name="schedule_end">까지
+                    <p>공연 장소</p>
+                    <input type="text" name="space">
+
+                    <h2>2. 공식 주최사 정보</h2>
+                    <p>공식 티켓판매처 링크</p>
+                    <input type="text" name="purchase_link">
+                    <p>공연 주최/기획사</p>
+                    <input type="text" name="host">
+                    <p>고객 문의처</p>
+                    <input type="text" name="contact">
+
+                    <h2>3. 공연 상세정보</h2>
+                    <p>지도</p>
+                    <div class="map_wrapper">
+                        <div class="map_left">
+                            <div id="map"></div>
+
+                            <script src="http://dmaps.daum.net/map_js_init/postcode.v2.js"></script>
+                            <script
+                                src="//dapi.kakao.com/v2/maps/sdk.js?appkey=3a6997107b687683607fb8587b9bb914&libraries=services"></script>
+
+                            <script>
+                                var mapContainer = document.getElementById('map'), // 지도를 표시할 div
+                                    mapOption = {
+                                        center: new daum.maps.LatLng(37.537187, 127.005476), // 지도의 중심좌표
+                                        level: 5 // 지도의 확대 레벨
+                                    };
+
+                                //지도를 미리 생성
+                                var map = new daum.maps.Map(mapContainer, mapOption);
+                                //주소-좌표 변환 객체를 생성
+                                var geocoder = new daum.maps.services.Geocoder();
+                                //마커를 미리 생성
+                                var marker = new daum.maps.Marker({
+                                    position: new daum.maps.LatLng(37.537187, 127.005476),
+                                    map: map
+                                });
+
+                                function sample5_execDaumPostcode() {
+                                    new daum.Postcode({
+                                        oncomplete: function (data) {
+                                            var addr = data.address; // 최종 주소 변수
+
+                                            // 주소 정보를 해당 필드에 넣는다.
+                                            document.getElementById("sample5_address").value = addr;
+                                            // 주소로 상세 정보를 검색
+                                            geocoder.addressSearch(data.address, function (results, status) {
+                                                // 정상적으로 검색이 완료됐으면
+                                                if (status === daum.maps.services.Status.OK) {
+
+                                                    var result = results[0]; //첫번째 결과의 값을 활용
+
+                                                    // 해당 주소에 대한 좌표를 받아서
+                                                    var coords = new daum.maps.LatLng(result.y, result.x);
+                                                    // 지도를 보여준다.
+                                                    mapContainer.style.display = "block";
+                                                    map.relayout();
+                                                    // 지도 중심을 변경한다.
+                                                    map.setCenter(coords);
+                                                    // 마커를 결과값으로 받은 위치로 옮긴다.
+                                                    marker.setPosition(coords)
+                                                }
+                                            });
+                                        }
+                                    }).open();
                                 }
-                            });
-                        }
-                    }).open();
-                }
-            </script>
-            <br>
-            <p>이미지 첨부 이미지 내 공연 소개, 공연 출연진, 타임 테이블 정보 필수</p>
-            <input type="file" name="poster" vlaue="찾아보기">
-            <input class="btn btn-dark" type="submit" value="제출하기">
-        </form>
+                            </script>
+                        </div>
+                        <div class="map_right">
+                            <div class="text">
+                                <input id="text" type="text" name="detail_map" id="sample5_address">
+                            </div>
+                            <div class="button">
+                                <input id="button" type="button" onclick="sample5_execDaumPostcode()" value="주소 검색"><br>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="img_wrapper">
+                        <p id="main_img">이미지 첨부</p>
+                        <p id="sub_img">이미지 내 공연 소개, 공연 출연진, 타임 테이블 정보 필수</p>
+                    </div>
+                    <div class="img_wrapper_file">
+                        <div class="input-group mb-3">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text" id="inputGroupFileAddon01">이미지 첨부</span>
+                            </div>
+                            <div class="custom-file">
+                                <input type="file" name="poster" class="custom-file-input" id="inputGroupFile01"
+                                    aria-describedby="inputGroupFileAddon01">
+                                <label class="custom-file-label" for="inputGroupFile01"></label>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- <div class="img_wrapper_file">
+                        <div class="img_file_1">
+                            <p>이미지 첨부</p>
+                        </div>
+                        <div class="img_file_2"></div>
+                        <div class="img_file_3">
+                            <input type="file" name="poster" vlaue="파일찾기">
+                        </div> -->
+
+            </div>
+            <div class="last_submit">
+                <input type="submit" value="등록하기">
+            </div>
+            </form>
+        </div>
     </div>
+</div>
 </div>
 </body>
 
 <style>
+    /* 배경색 */
+    .bg_wrapper {
+        background-color: #f4f3ff;
+    }
+
+    .container_top {
+        padding-top: 60px;
+        background-color: #f4f3ff;
+        padding-bottom: 15px;
+    }
+
+    .container_top h2 {
+        font-family: NotoSansCJKkr;
+        font-size: 24px;
+        font-weight: bold;
+    }
+
+    /* 새 글 작성 칸 */
+    .container_bottom {
+        background-color: white;
+    }
+
+    .container_bottom_wrapper {
+        padding: 16px;
+    }
+
+    .container_bottom_wrapper h2 {
+        /* margin-top: 30px; */
+        margin-bottom: 30px;
+        padding-top: 30px;
+        padding-bottom: 10px;
+        width: 100%;
+        border-bottom: 1px solid #6357ff;
+        margin-top: 15px;
+        font-family: NotoSansCJKkr;
+        font-size: 20px;
+        font-weight: 500;
+        color: #6357ff;
+    }
+
+    .container_bottom_wrapper p {
+        font-family: NotoSansCJKkr;
+        font-size: 18px;
+        font-weight: bold;
+        margin-top: 12px;
+        margin-bottom: 4px;
+    }
+
+    .container_bottom_wrapper input {
+        width: 100%;
+        height: 40px;
+        border: 1px solid #9e9e9e;
+    }
+
+    .container_bottom_wrapper #date {
+        width: 150px;
+    }
+
+    /* 지도 */
+    .map_wrapper {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+
+    }
+
+    .map_left {
+        width: 100%;
+    }
+
     #map {
-        width: 400px;
         height: 300px;
+        margin-right: 20px;
+    }
+
+    .map_right {
+        display: grid;
+        grid-template-columns: 80% 20%;
+    }
+
+    .map_right input {
+        border: 1px solid #9e9e9e;
+    }
+
+    .map_right #button {
+        font-family: NotoSansCJKkr;
+        font-size: 14px;
+        font-weight: bold;
+        background-color: #f4f3ff;
+        border-left: 0;
+    }
+
+    .img_wrapper {
+        display: inline-flex;
+    }
+
+    #sub_img {
+        padding-top: 5px;
+        padding-left: 5px;
+        font-family: NotoSansCJKkr;
+        font-size: 14px;
+        font-weight: 500;
+        color: #9e9e9e;
+    }
+    .img_wrapper_file {
+        margin-top: 5px;
+    }
+
+    /* .img_wrapper_file {
+        display: grid;
+        grid-template-columns: 10% 80% 10%;
+
+    }
+
+    .img_file_1 {
+        border: 1px solid #9e9e9e;
+    }
+
+    .img_file_1 p {
+        color: #9e9e9e;
+        font-family: NotoSansCJKkr;
+        font-size: 14px;
+        font-weight: bold;
+        text-align: center;
+    }
+
+    .img_file_2 {
+        border: 1px solid #9e9e9e;
+    } */
+    .input-group-text {
+        background-color: #f4f3ff;
+        /* border: 1px solid #9e9e9e; */
+    }
+
+
+    .last_submit input {
+        background-color: #f4f3ff;
+        border: 1px solid #9e9e9e;
+        width: 101.25px;
+        height: 48.75px;
+        color: black;
+        font-family: NotoSansCJKkr;
+        font-size: 18px;
+        font-weight: 500;
+        text-align: center;
+        margin-top: 50px;
+        margin-bottom: 50px;
+        margin-left: 45%;
+    }
+
+
+    .last_submit {
+        width: 100%;
     }
 </style>
 {% endblock %}
