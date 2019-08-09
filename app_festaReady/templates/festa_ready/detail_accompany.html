@@ -21,7 +21,9 @@
                     </div>
                     <div class="festa_content festa_content_second festa_image">
                             <div>첨부 이미지</div>
+                            {% if accompany.image %}
                             <div><img src="{{ accompany.image.url }}" alt=""></div>
+                            {% endif %}
                         </div>
                     <div class="festa_content festa_content_second">
                         <div>내용</div>
