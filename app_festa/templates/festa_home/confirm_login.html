@@ -1,24 +1,113 @@
 {% extends 'base_copyright_version.html' %}
 {% block content %}
-<div class="container">
-    <h2>등록 확인</h2>
-    <br>
-    <div class="container">
-        <form action="{% url 'confirm' %}" method="POST">
-            {% csrf_token %}
-            <p>인증번호를 입력해주세요</p>
-            <input class="btn " type="submit" value="확인">
-            <p>등록번호 <input type="text" name="register_num"></p>
-            {{fail}}
-        </form>
+<div class="wrapper">
+    <div class="left_wrapper">
+        <h2>등록 확인</h2>
+        <div class="left_image">
+            <img src="/static/image/confirm_login.png">
+        </div>
+    </div>
+
+    <div class="right_wrapper">
+
+        <div class="login">
+            <form action="{% url 'confirm' %}" method="POST">
+                {% csrf_token %}
+                <div class="right_top">
+                    <h2>등록번호를 입력해주세요</h2>
+                    <input class="btn " type="submit" value="완료">
+                </div>
+                <div class="right_bottom">
+                    <p>등록번호</p> <input type="text" name="register_num" placeholder="">
+                    <div class="oval"></div>
+                    {{fail}}
+                </div>
+                
+            </form>
+        </div>
     </div>
 </div>
+
 </body>
 
 <style>
-    #map {
-        width: 400px;
-        height: 300px;
+    .wrapper {
+        background-color: #f4f3ff;
+        display: grid;
+        grid-template-columns: 1fr 1fr;
     }
+
+    /* left */
+    .left_wrapper {
+        width: 85%;
+    }
+
+    .left_image img {
+        width: 100%;
+        height: auto;
+        position: relative
+    }
+
+    .left_wrapper h2 {
+        z-index: 100;
+        position: absolute;
+        color: black;
+        font-size: 24px;
+        font-weight: bold;
+        left: 12%;
+        top: 15%;
+    }
+
+    /* right */
+    .login {
+        margin-top: 38%;
+    }
+
+    .login h2 {
+        font-family: NotoSansCJKkr;
+        font-size: 2vw;
+        font-weight: bold;
+        font-style: normal;
+        font-stretch: normal;
+    }
+
+    .login .right_top {
+        display: inline-flex;
+    }
+
+    .login .right_top input {
+        color: #9e9e9e;
+        font-family: NotoSansCJKkr;
+        font-size: 18px;
+        margin-left: 130px;
+        font-weight: bold;
+    }
+
+    .login .right_bottom {
+        display: inline-flex;
+        margin-top: 40px;
+    }
+
+    .login .right_bottom p {
+        font-size: 20px;
+        font-weight: 500;
+        padding-top: 5px;
+    }
+
+    .login .right_bottom input {
+        margin-left: 60px;
+        width: 402.75px;
+    }
+
+    .login .right_bottom .oval {
+        color: #9e9e9e;
+        width: 28px;
+        height: 28px;
+        border: solid 1px;
+        border-radius: 100%;
+    }
+    
+
 </style>
+
 {% endblock %}

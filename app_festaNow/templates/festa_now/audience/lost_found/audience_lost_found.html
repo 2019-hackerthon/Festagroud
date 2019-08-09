@@ -12,6 +12,10 @@
                 <input id="write_bt_text" type="submit" value="글쓰기">
             </form>
         </div>
+        <form action="" method="get">
+            <input type="text" name="search" value="{{ search }}">
+            <input type="submit" value="검색">
+        </form>
 
         <div id="table_div">
             <table>
@@ -26,11 +30,12 @@
                     <td>시간</td>
                 </tr>
                 <!-- 게시글 등록 -->
-                {% for lost_found in lostfounds_list %}
+                {% for lost_found in posts %}
                 <tr class="notice_board">
                     <td>{{lost_found.post_type}}</td>
                     <td class="title_td">
-                        <a href="{% url 's_detail_lost_found' festa.id lost_found.id %}"> <span>{{lost_found.title}}</span></a>
+                        <a href="{% url 's_detail_lost_found' festa.id lost_found.id %}">
+                            <span>{{lost_found.title}}</span></a>
                     </td>
                     <td>{{lost_found.writer}}</td>
                     <td>{{lost_found.pub_date|date:"Y/m/d"}}</td>

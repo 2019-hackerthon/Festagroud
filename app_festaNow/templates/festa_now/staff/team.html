@@ -5,6 +5,10 @@
     <div id="subtitle_text_wrapper">
         팀별 게시판
     </div>
+    <form action="" method="get">
+            <input type="text" name="search" value="{{ search }}">
+            <input type="submit" value="검색">
+    </form>
     <div id="table_bt_div">
         <div id="bt_write_div">
             <form action="{% url 'new_team' festa.id %}" method="GET">
@@ -27,7 +31,7 @@
                 </tr>
 
                 <!-- 내용등록 -->
-                {% for team in team_list %}
+                {% for team in posts %}
                 <tr class="content_board">
                     <td>{{team.post_type}}</td>
                     <td class="title_td">

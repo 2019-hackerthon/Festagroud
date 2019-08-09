@@ -12,7 +12,10 @@
                 <input id="write_bt_text" type="submit" value="글쓰기">
             </form>
         </div>
-
+        <form action="" method="get">
+            <input type="text" name="search" value="{{ search }}">
+            <input type="submit" value="검색">
+        </form>
         <div id="table_div">
             <table>
                 <tr>
@@ -26,7 +29,7 @@
                     <td>시간</td>
                 </tr>
                 <!-- 게시글 등록 -->
-                {% for home in home_list %}
+                {% for home in posts %}
                 <tr class="notice_board">
                     <td>{{home.region}}</td>
                     <td class="title_td">
