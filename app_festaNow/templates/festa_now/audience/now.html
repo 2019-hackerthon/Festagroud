@@ -2,8 +2,16 @@
 {% block content %}
 
 <div id="now_container">
-    <div id="subtitle_text_wrapper">
-        Festa Now
+    <div class="title_search">
+        <div id="subtitle_text_wrapper">
+            Festa Now
+        </div>
+        <div id="form_wrapper">
+            <form action="" method="GET">
+                <input id="editText" type="text" name="search" value="{{search}}">
+                <input id="searchBt" type="submit" value="&#xf002" class="fa-lg">
+            </form>
+        </div>
     </div>
     <div id="table_bt_div">
         <div id="bt_write_div">
@@ -12,10 +20,10 @@
                 <input id="write_bt_text" type="submit" value="글쓰기">
             </form>
         </div>
-        <form action="" method="get">
+        <!-- <form action="" method="get">
             <input type="text" name="search" value="{{ search }}">
             <input type="submit" value="검색">
-        </form>
+        </form> -->
 
         <div id="table_div">
             <table>
@@ -78,6 +86,7 @@
 
     /* 공지사항 타이틀 */
     #subtitle_text_wrapper {
+        width: 50%;
         font-size: 20px;
         font-weight: bold;
     }
@@ -207,6 +216,48 @@
     #pagination {
         width: 100%;
         text-align: center;
+    }
+
+    /* 검색버튼 */
+    
+    #form_wrapper {
+        width: 100%;
+        height: 100%;
+        align-self: flex-end;
+        display: flex;
+        /* padding-right: 10%; */
+        padding-left: 30%;
+    }
+
+    #form_wrapper form {
+        width: 100%;
+        align-self: center;
+        display: block;
+        border: 1px solid #EAEAEA;
+    }
+
+    #editText {
+        width: 90%;
+        text-overflow: ellipsis;
+    }
+
+    #searchBt {
+        width: 10%;
+        height: 26px;
+        padding: 1px;
+        background: #ff5543;
+        font-family: FontAwesome;
+        color: #ffffff;
+    }
+
+    #form_wrapper form input {
+        float: left;
+        border: 0px;
+    }
+
+    .title_search {
+        width: 100%;
+        display: inline-flex;
     }
 </style>
 {% endblock %}

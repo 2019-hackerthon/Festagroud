@@ -1,55 +1,81 @@
+{% extends 'base_copyright_version.html' %}
+{% block content %}
 
-<!DOCTYPE html>
-<html lang="en">
-
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Document</title>
+<div id="new_staff_container">
+    <div id="subtitle_text_wrapper">
+        공지사항(to. STAFF)
+    </div>
+    <div id="background_div">
+            <div>
+                <div id="festa_info">
+                    <div class="festa_content" id="date_div">
+                        <div>등록날짜 {{staff.pub_date|date:"o년 m월 j일 h:i"}}</div>
+                    </div>
+                    <div class="festa_content">
+                        <div>공지제목</div>
+                        <div><input type="text" name='title' value='{{staff.title}}' disabled></div>
+                    </div>
+                    <div class="festa_content festa_content_second">
+                        <div>작성자</div>
+                        <div><input type="text" name='writer' value='{{staff.writer}}' disabled></div>
+                    </div>
+                    <div class="festa_content festa_content_second">
+                        <div>내용</div>
+                        <div>
+                            <textarea name="body" cols="30" rows="10" disabled>{{staff.body}}</textarea>
+                        </div>
+                    </div>
+                </div>
+            </div>
+    </div>
+</div>
 
 <style>
-    .loginHeaderV3{
-        padding: 76px 0 60px 0;
-        height: 20px;
-        text-align:center;
+    /* 전체 컨테이너 */
+    #new_staff_container {
+        width: 100%;
+        height: 100%;
+        padding-top: 50px;
+        padding-left: 20%;
+        padding-right: 20%;
+        background: #f4f3ff;
     }
 
-    .loginHeaderV3 .var{
-        width: 10 px;
-        display: inline-block;
-        height: 20px;
-        vertical-align: top;
-        margin: 0 13.px 0 15px;
-        background: #d8d8d8;
+    /* 공지사항 타이틀 */
+    #subtitle_text_wrapper {
+        font-size: 20px;
+        font-weight: bold;
     }
 
+    #background_div {
+        background: #ffffff;
+        margin-top: 10px;
+        padding-top: 10px;
+        padding-bottom: 30px;
+    }
+
+    .festa_content_second {
+        margin-top: 3%;
+    }
+
+    .festa_content div {
+        max-width: 100%;
+        width: 100%;
+        padding: 2px 10px;
+    }
+
+    .festa_content div input,
+    .festa_content div textarea {
+        border: 1px solid #747474;
+        /* margin: 10px;*/
+        padding: 10px;
+        width: 100%;
+        max-width: 100%;
+    }
+    #date_div div {
+        display: flex;
+        justify-content: flex-end;
+        font-size: 13px;
+    }
 </style>
-
-
-</head>
-
-<body>
-    <center>
-        <h1>공지사항</h1>
-
-        <p>
-            <h2>[Title] : {{staff.title}}</h2>
-            <p>[Writer] : {{staff.writer}}</p>
-            <p>[Date of Issue] : {{staff.pub_date|date:"o년 m월 j일 h:i"}}</p>
-            <p>
-                [Body]
-                <br>
-                <textarea name="body"  readonly="readonly" id="" cols="30" rows="10"
-                    style="padding:10px; margin:10px;">{{staff.body}}</textarea>
-            </p>
-            <a href="{% url 'notice' festa.id %}" class="store">공지사항 게시판</a>
-            <span class="var"></span>
-            <a href="{% url 'edit_staff' festa.id staff.id%}" class="store">수정하기</a>
-            <span class="var"></span>
-            <a href="{%url 'delete_staff' festa.id staff.id %}" class="store">삭제하기</a>
-    
-        </div>
-
-    
-    </center>
+{% endblock %}

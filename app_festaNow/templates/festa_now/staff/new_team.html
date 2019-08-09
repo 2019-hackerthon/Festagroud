@@ -13,7 +13,7 @@
                     <div class="festa_content">
                         <div>제목</div>
                         <div id="selector_version">
-                                <div id="selector_div">
+                            <div id="selector_div">
                                 <select name="post_type">
                                     <option name="공지사항">공지사항</option>
                                     <option name="긴급공지">긴급공지</option>
@@ -59,10 +59,6 @@
         </script>
     </div>
 </div>
-
-<!-- 자바 스크립트 연결 -->
-{% load static %}
-<script type="text/javascript" src="/static/js/festa_ready_js.js?ver=3' %}"></script>
 
 <style>
     /* 전체 컨테이너 */
@@ -122,19 +118,22 @@
         background: #f4f3ff;
     }
 
-    #selector_version{
+    #selector_version {
         display: flex;
     }
-    #selector_div{
+
+    #selector_div {
         display: flex;
         width: 15%;
         justify-content: center;
         padding-left: 0px;
     }
-    #selector_div select{
+
+    #selector_div select {
         width: 100%;
     }
-    #title_div{
+
+    #title_div {
         width: 85%;
         padding-left: 0px;
         padding-right: 0px;

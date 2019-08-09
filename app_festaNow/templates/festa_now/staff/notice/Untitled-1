@@ -1,43 +1,82 @@
-<!DOCTYPE html>
-<html lang="en">
+{% extends 'base_copyright_version.html' %}
+{% block content %}
+ 
+    <div class="row"  style="height:500px;">
+        <div class="col-md-5">
+                <a href="{% url 'staff_main' festa.id %}">뒤로</a>
+                <h1>Staff 공지사항</h1>
+                
+                <a href="{% url 'new_staff' festa.id %}">글쓰기 </a>
+                
+                
+                <hr>
+                {% for staff in staff_list %}
+                <br>
+                <a href="{% url 'detail_staff' festa.id staff.id %}"> : {{staff.title}}</a> 
+                {{staff.writer}}
+                {{staff.pub_date| date:"Y m d"}}
+                <br>
+                <a href="{% url 'edit_staff' festa.id staff.id %}" class="card-link">수정하기</a>
+                <a href="{% url 'delete_staff' festa.id staff.id %}" class="card-link">삭제하기</a>
+                {% endfor %}
+                <div class="middle">
+                    {%if staff_list.has_previous%}
+                    <a href="?page=1">First</a>
+                    <a href="?page={{staff_list.previous_page_number}}">Previous</a>
+                    {%endif%}
+    
+                    <span>{{staff_list.number}}</span>
+                    <span>of</span>
+                    <span>{{staff_list.paginator.num_pages}}</span>
+    
+                    {%if staff_list.has_next%}
+                    <a href="?page={{staff_list.next_page_number}}">Next</a>
+                    <a href="?page={{staff_list.paginator.num_pages}}">Last</a>
+                    {%endif%}
+                </div>
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Document</title>
-</head>
 
-<body>
-<center>
-    <h1>새 글을 작성해주세요</h1>
-    <a href="{% url 'now_now' festa.id %}" class="store">Festa now</a>
-    <br>
-    <br>
-    <form action="{%url 'create_now' festa.id %}" method="POST">
-        {% csrf_token %}
-        [Title] : <input type="text" name='title' placeholder="제목을 입력해 주세요">
-        <br>
-        <br>
-        [Writer] : <input type="text" name='writer'>
-        <br>
-        <br>
-        [Post Type] : 
-        <select name="post_type">
-            <option name="now">now</option>
-            <option name="질문">질문</option>
-            <option name="나눔">나눔</option>
-        </select>
-        <br>
-        <br>
-        [Body]
-        <br>
-        <textarea name="body" id="" cols="30" rows="10" placeholder="내용을 입력해 주세요" style="padding:10px; margin:10px;"></textarea>
-        <br>
+        </div>
+
+        <div class="col-md-7" style="background-color:#EEE9F7; ">
+                <h1>Audience 공지사항</h1>
+                <a href="{% url 'new_audience' festa.id %}">글쓰기 </a>
+                
+                <hr>
+                {% for audience in audiences.all %}
+                <br>
+                <a href="{% url 'detail_audience' festa.id audience.id %}"> : {{audience.title}}</a> 
+                {{audience.writer}}
+                {{audience.pub_date}}
+                <br>
+                <a href="{% url 'edit_audience' festa.id audience.id %}" class="card-link">수정하기</a>
+                <a href="{% url 'delete_audience' festa.id audience.id %}" class="card-link">삭제하기</a>
+                {% endfor %}
+                <!-- <div class="middle">
+                    {%if audience_list.has_previous%}
+                    <a href="?page=1">First</a>
+                    <a href="?page={{audience_list.previous_page_number}}">Previous</a>
+                    {%endif%}
+    
+                    <span>{{audience_list.number}}</span>
+                    <span>of</span>
+                    <span>{{audience_list.paginator.num_pages}}</span>
+    
+                    {%if audience_list.has_next%}
+                    <a href="?page={{audience_list.next_page_number}}">Next</a>
+                    <a href="?page={{audience_list.paginator.num_pages}}">Last</a>
+                    {%endif%} -->
+
+
         
-        <button type='submit'>게시글 작성</button>
-    </form>
-</center>
-</body>
+        </div>
+                
+          
+       
 
-</html>
+
+    </div>
+
+    
+</body>
+{% endblock %}
