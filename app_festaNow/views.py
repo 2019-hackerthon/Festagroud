@@ -61,7 +61,16 @@ def staff_main(request, festa_id) :
         return render(request, 'festa_now/staff/staff_main.html', {'festa':festa, 'staffs':staffs, 'staff_list':staff_list})
     else :
         false = 0
+        # festa = get_object_or_404(Festa, pk = festa_id)
         return render(request, 'festa_now/staff/login.html', {'festa': festa, 'fail':false})
+
+def staff_main2(request, festa_id) :
+    festa = get_object_or_404(Festa, pk = festa_id)
+    staffs = Staff.objects.filter(festa = festa.id)
+    paginator = Paginator(staffs, 5)
+    page = request.GET.get('page')
+    staff_list = paginator.get_page(page)
+    return render(request, 'festa_now/staff/staff_main.html', {'festa':festa, 'staffs':staffs, 'staff_list':staff_list})
 
 ########## festa_now/audience/festnow게시판 ##########
 def now_now(request, festa_id):
