@@ -230,14 +230,4 @@ def incorrect_ticket(request, festa_id):
     return render(request, 'festa_ready/incorrect_ticket.html', {'festa':festa})
 
 
-def incorrect_commenta(request, festa_id, accompany_id):
-    festa = get_object_or_404(Festa, pk = festa_id)
-    accompany = get_object_or_404(Accompany, pk = accompany_id)
-    return render(request, 'festa_ready/incorrect_commenta.html', {'festa':festa, 'accompany':accompany})
-
-
-def incorrect_commenttic(request, festa_id, ticket_id):
-    festa = get_object_or_404(Festa, pk = festa_id)
-    ticket = get_object_or_404(Ticket, pk = ticket_id)
-    return render(request, 'festa_ready/incorrect_commenttic.html', {'festa':festa, 'ticket':ticket})
 
