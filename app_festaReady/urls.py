@@ -12,7 +12,8 @@ urlpatterns = [
     path('<int:festa_id>/edit_accompany/<int:accompany_id>/', views.edit_accompany, name="edit_accompany"),
     path('<int:festa_id>/update_accompany/<int:accompany_id>/', views.update_accompany, name="update_accompany"),
     path('<int:festa_id>/delete_accompany/<int:accompany_id>/', views.delete_accompany, name = "delete_accompany"),
-    path('<int:festa_id>/comment_accompany/<int:accompany_id>', views.comment_accompany, name="comment_accompany"),
+    path('<int:festa_id>/<int:accompany_id>/create_commenta/', views.create_commenta, name="create_commenta"),
+    path('<int:festa_id>/delete_commenta/<int:accompany_id>/<int:commenta_id>', views.delete_commenta, name="delete_commenta"),
 
     path('<int:festa_id>/ticket', views.ticket, name="ticket"),
     path('<int:festa_id>/ticket/create', views.create_ticket, name="create_ticket"),
@@ -25,5 +26,6 @@ urlpatterns = [
 
     path('<int:festa_id>/incorrect_accompany', views.incorrect_accompany, name="incorrect_accompany"),
     path('<int:festa_id>/incorrect_ticket', views.incorrect_ticket, name="incorrect_ticket"),
+    path('<int:festa_id>/<int:accompany_id>/incorrect_commenta', views.incorrect_commenta, name="incorrect_commenta"),
 
 ]+ static(settings.MEDIA_URL, document_root = settings.MEDIA_ROOT)

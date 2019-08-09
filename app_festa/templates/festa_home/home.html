@@ -34,8 +34,9 @@
         <div class="contents_box">
             <!-- 전체 아이템 타이틀 박스 -->
             <div id="festa_now_title_home">
-                <h5 class="main_text">Festa NOW</h5>
+                <h5 class="main_text">Festa now</h5>
                 <p class="sub_text">바로 오늘, 함께 즐겨봐요</p>
+                <a href="{% url 'all_festaNow' %}">전체보기</a>
             </div>
             <!-- 전체 아이템 리스트 박스 -->
             <div class="contents_list">
@@ -67,8 +68,13 @@
         <!-- 전체 아이템 컨텐츠 박스 -->
         <div class="contents_box">
             <div id="festa_ready_title_home">
-                <h5 class="main_text">Festa READY</h5>
+                <h5 class="main_text">Festa ready</h5>
                 <p class="sub_text">다가오는 행사를 200배 더 즐겁게 즐기려면?</p>
+                <div id="all">
+                    
+                        <a href="{% url 'all_festaReady' %}">전체보기</a>
+                    
+                </div>
             </div>
             <script>
                 let festa_ready_day_cal = 0;
@@ -119,6 +125,7 @@
 <script type="text/javascript" src="/static/js/home_js.js?ver=1"></script>
 
 <style>
+    
     /* 전체 컨테이너 셋팅 */
     .container_home {
         margin-left: 0%;
@@ -196,7 +203,8 @@
 
     /* 페스타 나우 배경색 지정 */
     #festa_now_home {
-        background: #D9E5FF;
+        background: rgb(255, 255, 255);
+        background: #ffffff;
     }
 
     /* 보여질 내용 사이즈 설정 */

@@ -66,6 +66,7 @@ urlpatterns = [
     path('<int:festa_id>/staff_login', views.staff_login, name="staff_login"),
 
     path('<int:festa_id>/staff/notice', views.notice, name="notice"),
+    # path('<int:festa_id>/staff/cannot_notice', views.cannot_notice, name="cannot_notice"),
     path('<int:festa_id>/staff/confirm_register', views.confirm_register, name="confirm_register"),
     path('<int:festa_id>/staff/confirm_login', views.confirm_login, name="confirm_login"),
 

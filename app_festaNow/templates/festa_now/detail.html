@@ -1,8 +1,8 @@
 {% extends 'base.html' %}
 {% block content %}
 
-<div id="select_box">
-    <div>어떤 역할로 참여하시나요?</div>
+<div id="detail_container">
+    <div id="explain_role_box">어떤 역할로 참여하시나요?</div>
     <div id="staff_or_audience_bt">
         <form id="staff_form" action="{% url 'staff_login' festa.id %}" method="GET">
             <input id="staffBt" type="submit" value="Staff">
@@ -17,29 +17,26 @@
 
 <!-- 자바 스크립트 연결 -->
 {% load static %}
-<script type="text/javascript" src="/static/js/detail_js.js?ver=2'"></script>
+<script type="text/javascript" src="/static/js/detail_js.js?ver=8'"></script>
 
 <style>
-    #select_box {
-        height: auto;
+    #detail_container {
         width: 100%;
-        align-self: center;
+        height: 100%;
         padding-left: 15%;
+        margin-top: 50px;
     }
 
-    #select_box div {
-        padding-bottom: 68px;
-        font-size: 36px;
+    #explain_role_box{
+        font-size: 3vw;
         font-weight: bold;
+        padding-top: 100px;
     }
 
     #staff_or_audience_bt {
         display: flex;
         width: 100%;
-    }
-
-    #staff_or_audience_bt form {
-        width: 28%;
+        margin-top: 70px;
     }
 
     #audience_form {

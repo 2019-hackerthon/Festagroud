@@ -4,13 +4,14 @@
     <h2>공지사항 등록하기</h2>
     <br>
     <div class="container">
-        <form action="{% url 'confirm_register' festa.id %}" method="POST">
-            {% csrf_token %}
-            <p>등록번호를 입력해주세요</p>
-            <input class="btn " type="submit" value="확인">
+
+        {{fail}}
+        <!-- <form action="{% url 'confirm_register' festa.id %}" method="POST">
+            {% csrf_token %} -->
+            <p>등록권한이 없습니다</p>
+            <!-- <input class="btn " type="submit" value="확인">
             <p>등록번호 <input type="text" name="register_num"></p>
-            {{fail}}
-        </form>
+        </form> -->
     </div>
 </div>
 </body>

@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+<!-- 기본 베이스 html 파일 -->
 
 <head>
     <meta charset="UTF-8">
@@ -11,59 +12,65 @@
         integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
         integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous">
-    </script>
+        </script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
         integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous">
-    </script>
+        </script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
         integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous">
-    </script>
-    <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet" />
+        </script>
+    <link rel="stylesheet" type="text/css"
+        href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
 </head>
 
 <body>
     <!-- navbar시작 -->
     <nav class="navbar navbar-expand-lg navbar-light bg-light" id="nav_container">
-        <a class="navbar-brand" href="{% url 'home' %}">FGD</a>
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
-            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-        </button>
+            <div id="nav_div">
+                <div class="logo">
+                        <form action="{% url 'home' %}" method="GET">
+                                <div><input id="bt_logo" type="image" src="/static/image/logo.png"></div>
+                            </form>
+                </div>
+    
+                <div id="nav_bt">
+                    <div id="bt_gotit">
+                        <form action="{% url 'confirm_login' %}" method="GET">
+                                <span><input class="left_bt" type="submit" value="등록확인"></span>
+                        </form>
+                    </div>
+                    <div id="bt_enroll">
+                        <form action="{% url 'new' %}" method="GET">
+                            <span><input class="left_bt" type="submit" value="페스타 등록"></span>
+                        </form>
+                    </div>
+    
+                </div>
+            </div>
+        </nav>
+        <!-- navbar 끝 -->
 
-        <div class="collapse navbar-collapse" id="navbarSupportedContent">
-            <ul class="navbar-nav mr-auto">
-                <li class="nav-item">
-                    <a class="nav-link" href="{% url 'confirm_login' %}">등록 확인</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="{% url 'new' %}">페스타 등록하기</a>
-                </li>
-            </ul>
-
-        </div>
-    </nav>
-    <!-- navbar 끝 -->
-
-    <div id="container_select_staff_audience">
-        <div id="festa_image">
+    <!-- 페이지 왼쪽에 위치한 공연정보 및 이미지, 메뉴 등 -->
+    <div id="contents_container">
+        <div id="left_container">
             <img id="detail_background_img" src="/static/image/detail_background.png" alt="detail">
-            <div id="detail_foreground_div">
+            <div id="background_foreground_combine">
                 <div id="foreground_content_div">
                     <div id="title_text_wrapper">
-                        <div>Festa Now</div>
+                        Festa Now
                     </div>
                     <div id="fore_img_wrapper">
-                        <img id="fore_img" src="{{festa.poster.url}}" style="height:500px">
+                        <img id="fore_img" src="{{festa.poster.url}}">
                     </div>
                     <div id="festa_info_wrapper">
                         <div id="festa_name">
-                            페스타 이름들어갈 거에요~
+                            {{festa.name}}
                         </div>
                         <div id="festa_date">
-                            날짜 들어갈 거에요~
+                            {{festa.schedule_start|date:"Y년 m월 d일"}} ~ {{festa.schedule_end|date:"Y년 m월 d일"}}
                         </div>
                     </div>
-                    <div id="now_menu_wrapper">
+                    <div id="now_staff_menu_wrapper">
                         <div>
                             <a id="notice_menu" href="{% url 'staff_main' festa.id %}">공지사항</a>
                         </div>
@@ -80,7 +87,24 @@
                         <div>
                             <a id="goHome_menu" href="{% url 'staff_home' festa.id %}">집가자</a>
                         </div>
+                    </div>
+                    <div id="now_audience_menu_wrapper">
+                        <div>
+                            <a id="notice_menu" href="{% url 'audience_main' festa.id %}">공지사항</a>
+                        </div>
+                        <div>
+                            <a id="teamBoard_menu" href="{% url 'now_now' festa.id %}">Festa now</a>
+                        </div>
+                        <div>
+                            <a id="map_menu" href="{% url 'audience_map' festa.id %}">지도</a>
+                        </div>
+                        <div>
+                            <a id="lookingFor_menu" href="{% url 'audience_lost_found' festa.id %}">찾아가라</a>
+                        </div>
 
+                        <div>
+                            <a id="goHome_menu" href="{% url 'audience_home' festa.id %}">집가자</a>
+                        </div>
                     </div>
                     <div id="ready_menu_wrapper">
                         <div>
@@ -97,7 +121,7 @@
 
             </div>
         </div>
-        <div id="festa_select_box">
+        <div id="right_container">
             <!-- 본문 시작 -->
             {% load staticfiles %}
 
@@ -117,11 +141,196 @@
 
 <!-- 자바 스크립트 연결 -->
 {% load static %}
-<script type="text/javascript" src="/static/js/base_js.js?ver=2"></script>
+<script type="text/javascript" src="/static/js/base_js.js?ver=10"></script>
 
 </html>
 
 <style>
+    
+    /*네비게이션바*/
+    #nav_div{
+        display: flex;
+        width: 100%;
+        height: 100%;
+    }
+
+    .navbar{
+        padding-top: 0px;
+        padding-bottom: 0px;
+    }
+
+    #bt_gotit{
+        margin-right: 10px;
+    }
+    #bt_enroll{
+        margin-right: 10%;
+    }
+    .logo{
+        width: 20%;
+        display: flex;
+        justify-content: center;
+    }
+
+    .logo form div{
+        width: 100%;
+        height: 100%;
+    }
+
+    #bt_logo{
+        width: 60px;
+        height: 100%;
+    }
+
+    #nav_bt{
+        width: 80%;
+        display: flex;
+        justify-content: flex-end;
+        align-self: center;
+    }
+
+    .logo form input{
+        width: 64px;
+        height: 32px;
+    }
+
+    .left_bt{
+        text-align: center;
+        background: #f4f3ff;
+    }
+    
+
+    nav {
+        height: 48.75px;
+        -webkit-box-shadow: 0 8px 6px -6px rgba(0, 0, 0, 0.2);
+        -moz-box-shadow: 0 8px 6px -6px rgba(0, 0, 0, 0.2);
+        box-shadow: 0 8px 6px -6px rgba(0, 0, 0, 0.2);
+    }
+
+    /*********************************/
+    /************************ center contents ***************/
+
+    /* nav와 footer 사이의 컨텐츠가 들어갈 컨테이너 */
+    #contents_container {
+        width: 100%;
+        height: 100%;
+        display: flex;
+        overflow: hidden;
+    }
+
+    /************************ Right Side ***************/
+
+    /* 오른쪽 변경될 content가 오는 컨테이너 */
+    #right_container {
+        position: relative;
+        width: 65%;
+        height: 100%;
+        background: #EEE9F7;
+    }
+
+    /************************ Left Side ***************/
+
+    /* 왼쪽 고정된 festa 정보가 오는 컨테이너 */
+    #left_container {
+        position: relative;
+        width: 35%;
+        height: 100%;
+        background: #ffffff;
+    }
+
+    /************************ Left Side contents ***************/
+
+    /* 왼쪽 사이드바 배경(background) & festa 정보(foreground) 겹치게 하는 css */
+    #background_foreground_combine {
+        position: absolute;
+        left: 0px;
+        top: 0px;
+        width: 100%;
+        height: 100%;
+    }
+
+    /* foreground(festa 정보가 보열 container),
+    참고 (background는 img id = detail_background_img)  */
+    #foreground_content_div {
+        width: 100%;
+        height: 100%;
+    }
+
+    /* 왼쪽 사이드바에 들어갈 components들의 컨테이너 */
+    #title_text_wrapper,
+    #fore_img_wrapper,
+    #festa_info_wrapper,
+    #now_staff_menu_wrapper,
+    #now_audience_menu_wrapper,
+    #ready_menu_wrapper {
+        width: 100%;
+        padding-left: 25%;
+        padding-right: 10%;
+        font-size: 3vw;
+    }
+
+    /* 왼쪽 사이드바 festa now 인지 festa ready 인지 표시 컨테이너 */
+    #title_text_wrapper {
+        font-weight: bold;
+        font-size: 3vw;
+        margin-top: 50px;
+    }
+
+    /* 왼쪽 사이드바 festa 이미지가 들어갈 컨테이너 */
+    #fore_img_wrapper {
+        margin-top: 20px;
+        height: auto;
+    }
+
+    /* fore_img_wrapper에 들어갈 이미지 */
+    #fore_img {
+        max-width: 100%;
+    }
+
+    /* 왼쪽 사이드바 festa 이름, 진행 날짜 정보가 들어가는 컨테이너 */
+    #festa_info_wrapper {
+        height: auto;
+        margin-top: 1%;
+    }
+
+    /* festa_info_wrapper 안에 있는 festa 이름 */
+    #festa_name {
+        font-weight: bold;
+    }
+
+    /* festa_infot_wrapper 안에 있는 festa 날짜 */
+    #festa_date {
+        font-size: 14px;
+        font-weight: 500;
+        opacity: 0.5;
+    }
+
+    /* 왼쪽 사이드바 메뉴 아이템(공연정보, 지도, 찾아가라 등) container css */
+    #now_staff_menu_wrapper,
+    #now_audience_menu_wrapper,
+    #ready_menu_wrapper {
+        display: none;
+        font-weight: bold;
+        margin-top: 6%;
+    }
+
+    /* menu_wrapper 안에 있는 아이템의 개별 div css */
+    #now_staff_menu_wrapper div,
+    #now_audience_menu_wrapper div,
+    #ready_menu_wrapper div {
+        margin-top: 0.2vw;
+    }
+
+    /* menu_wrapper 안에 있는, div 안에 있는 a 태그 css */
+    #now_staff_menu_wrapper div a,
+    #now_audience_menu_wrapper div a,
+    #ready_menu_wrapper div a {
+        color: #000000;
+        text-decoration: none;
+    }
+
+    /************************ footer ***************/
+
+    /* 푸터 css */
     #bt_footer_element {
         width: 100%;
         display: flex;
@@ -130,104 +339,16 @@
         padding-left: 8%;
     }
 
-    #bt_footer_element a {
-        color: #000000;
-        text-decoration: none;
-    }
-
-    #now_menu_wrapper div a, #ready_menu_wrapper div a{
-        color: #000000;
-        text-decoration: none;
-        font-size: 20px;
-    }
-
-    #now_menu_wrapper div, #ready_menu_wrapper div{
-        margin-top: 0.5rem;
-    }
-
+    /* 푸터(개인정보, 이용약관, 서비스 소개 등) 버튼 css */
     .footer_item_top {
         margin-left: 0.5%;
         margin-right: 0.5%;
         font-size: 14px;
     }
 
-    #container_select_staff_audience {
-        width: 100%;
-        height: 100%;
-        display: flex;
-        overflow: hidden;
-    }
-
-    #festa_image {
-        position: relative;
-        width: 40%;
-        height: 100%;
-        background: #ffffff;
-    }
-
-    #detail_foreground_div {
-        position: absolute;
-        left: 0px;
-        top: 0px;
-        width: 100%;
-        height: 100%;
-    }
-
-    #foreground_content_div {
-        width: 100%;
-        height: 100%;
-    }
-
-    #fore_img_wrapper,
-    #now_menu_wrapper,
-    #ready_menu_wrapper,
-    #title_text_wrapper,
-    #festa_info_wrapper {
-        margin-left: 32%;
-        margin-right: 15%;
-    }
-
-    #title_text_wrapper {
-        height: 10%;
-        font-size: 20px;
-        font-weight: bold;
-        display: flex;
-    }
-    #title_text_wrapper div{
-        height: auto;
-        align-self: center;
-    }
-
-    #fore_img_wrapper {
-        margin-top: 1rem;
-    }
-
-    #festa_info_wrapper {
-        height: 10%;
-        margin-top: 15px;
-    }
-
-    #festa_name {
-        font-size: 20px;
-        font-weight: bold;
-    }
-
-    #festa_date {
-        font-size: 14px;
-        font-weight: 500;
-        opacity: 0.5;
-    }
-
-    #now_menu_wrapper, #ready_menu_wrapper {
-        display: none;
-        margin-top: 40px;
-        font-weight: bold;
-        font-size: 20px;
-    }
-
-    #festa_select_box {
-        width: 60%;
-        background: #EEE9F7;
-        display: flex;
+    /* 푸터(개인정보, 이용약관, 서비스 소개 등) 버튼의 텍스트 css */
+    .footer_item_top a {
+        color: #000000;
+        text-decoration: none;
     }
 </style>

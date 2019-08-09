@@ -19,15 +19,5 @@ urlpatterns = [
     path('confirm/', views.confirm, name="confirm"),
     path('all_festaNow/', views.all_festaNow, name="all_festaNow"),
     path('all_festaReady/', views.all_festaReady, name="all_festaReady"),
-    
-    # path('staff_notice/', views.staff_notice, name="staff_notice"),
-    # path('staff_new/', views.staff_new, name="staff_new"),
-    # path('staff_edit/<int:staff_id>', views.staff_edit, name="staff_edit"),
-    # path('staff_update/<int:staff_id>', views.staff_update, name="staff_update"),
-    # path('staff_create/', views.staff_create, name="staff_create"),
-    # path('staff_delete/<int:staff_id>', views.staff_delete, name="staff_delete"),
-    # path('staff_detail/<int:staff_id>', views.staff_detail, name="staff_detail"),
-    
-
 
 ]+ static(settings.MEDIA_URL, document_root = settings.MEDIA_ROOT)

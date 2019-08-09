@@ -3,6 +3,8 @@ window.onload = function () {
     this.backgroundResize();
     this.imgSizeLimit();
     this.imgResize();
+    this.leftSidebarTextLimit();
+
     this.menuDisplay();
 }
 window.onresize = function () {
@@ -10,10 +12,12 @@ window.onresize = function () {
     this.backgroundResize();
     this.imgSizeLimit();
     this.imgResize();
+    this.leftSidebarTextLimit();
+    
     this.menuDisplay();
 }
 
 function menuDisplay(){
-    var readyMenuView = document.getElementById('ready_menu_wrapper');
-    readyMenuView.style.display = 'block';
+    var nowMenuView = document.getElementById('now_staff_menu_wrapper');
+    nowMenuView.style.display = 'block';
 }

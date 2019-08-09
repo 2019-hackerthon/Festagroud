@@ -490,14 +490,18 @@ def confirm_login(request, festa_id) :
     return render(request, 'festa_now/staff/notice/confirm_login.html', {'festa':festa})
 
 def confirm_register(request, festa_id) : 
-    if request.method == 'POST':
+    noConfirm = "AS"
+    if request.method == 'POST' :
         number = request.POST['register_num']
         festa = Festa.objects.get(id = festa_id)
         number_object = RegisterNum.objects.get(register_num = number)
         if (festa.number.register_num == number_object.register_num) :
-            return redirect('notice', festa.id)
+            return redirect('notice', festa_id)
         else :
-            return render(request, 'festa_now/staff/notice/confirm_login.html', {'festa':festa, 'false':false})
+            false=0
+            return render(request, 'festa_now/staff/notice/confirm_login.html',{'fail':false, 'festa':festa})
+    
+
 def notice(request, festa_id) :
     festa = get_object_or_404(Festa, pk = festa_id)
     staffs = Staff.objects.filter(festa = festa.id)
