@@ -14,42 +14,6 @@
         </div>
 
         <div id="table_div">
-<<<<<<< HEAD
-                <table>
-                    <tr>
-                        <td id="table_intro" colspan="5"> 2019 멋사 해커톤 대회에 대한 게시판 입니다.</td>
-                    </tr>
-                    <tr id="kind_board">
-                        <td id="title" class="headTd">구분</td>
-                        <td id="title" class="headTd">제목</td>
-                        <td id="title" class="headTd">작성자</td>
-                        <td id="title" class="headTd">날짜</td>
-                    </tr>
-                    <!-- 공지등록 -->
-                    <tr id="notice_board">
-                        <td>공지사항</td>
-                        <td class="title_td"><a href="#test">제목</a></td>
-                        <td>작성자</td>
-                        <td>날짜 시간</td>
-                    </tr>
-                    <!-- 내용등록 -->
-                    <tr id="content_board">
-                        <td>번호</td>
-                        <td class="title_td"><a href="test">(지역) 제목</a></td>
-                        <td>작성자</td>
-                        <td>날짜 시간</td>
-                    </tr>
-                </table>
-            </div>
-        {% for staff in staff_list %}
-        <br>
-        <a href="{% url 'detail_staff' festa.id staff.id %}"> : {{staff.title}}</a>
-        {{staff.writer}}
-        {{staff.pub_date|date:"Y/m/d"}}
-        {{staff.pub_date|time:"H:i"}}
-        <br>
-        {% endfor %}
-=======
             <table>
                 <tr>
                     <td id="table_intro" colspan="5"> 2019 멋사 해커톤 대회에 대한 게시판 입니다.</td>
@@ -76,7 +40,6 @@
             </table>
         </div>
 
->>>>>>> ade1b82f18934c8a2ee2358484aba94e99f1b6fd
         <div id="pagination">
             {%if staff_list.has_previous%}
             <a href="?page=1">First</a>
