@@ -49,6 +49,31 @@ def audience_main(request, festa_id) :
                 false = 0
                 return render(request, 'festa_now/audience/login.html', {'fail':false, 'festa':festa})
             
+# def staff_main(request, festa_id) :
+#     noConfirm="AS"
+#     if request.method == 'POST':
+#         first = request.POST['reservation_name']
+#         second = request.POST["reservation_num"]
+#         festa = get_object_or_404(Festa, pk = festa_id)
+#         reservationnum = ReservationNum.objects.all()
+#         staffs = Staff.objects.filter(festa = festa.id)
+#         paginator = Paginator(staffs, 5)
+#         page = request.GET.get('page')
+#         staff_list = paginator.get_page(page)
+#         num_object = ReservationNum.objects.get(reservation_num = second)
+#         name_object = ReservationNum.objects.get(reservation_name = first)
+#         search_reservation=[]
+#         for i in reservationnum.filter(festa = festa.id):
+#             search_reservation.append(i)
+#         for a in range(0, len(search_reservation)) : 
+#             if (search_reservation[a].reservation_name == name_object.reservation_name and search_reservation[a].reservation_num == num_object.reservation_num) : 
+#                 return render(request, 'festa_now/staff/staff_main.html', {'festa':festa, 'staffs':staffs, 'staff_list':staff_list})
+#             else:
+#                 continue
+#         return render(request, 'festa_now/staff/login.html', {'fail':fail, 'festa':festa})
+#     else :
+#         return render(request, 'festa_now/staff/staff_main.html', {'festa':festa, 'staffs':staffs, 'staff_list':staff_list})
+
 def staff_main(request, festa_id) :
     noConfirm="AS"
     if request.method == 'POST':
@@ -62,23 +87,19 @@ def staff_main(request, festa_id) :
         staff_list = paginator.get_page(page)
         num_object = ReservationNum.objects.get(reservation_num = second)
         name_object = ReservationNum.objects.get(reservation_name = first)
-        search_reservation=[]
-        for i in reservationnum.filter(festa = festa.id):
-            search_reservation.append(i)
-        for a in range(0, len(search_reservation)) : 
-            if (search_reservation[a].reservation_name == name_object.reservation_name and search_reservation[a].reservation_num == num_object.reservation_num) : 
-                return render(request, 'festa_now/staff/staff_main.html', {'festa':festa, 'staffs':staffs, 'staff_list':staff_list})
-            else :
-                false = 0
-                return render(request, 'festa_now/staff/login.html', {'fail':false, 'festa':festa})
+        temp = ReservationNum.objects.filter(reservation_name = first, reservation_num = second, festa=festa.id)
+        if temp is not None:
+            return render(request, 'festa_now/staff/staff_main.html', {'festa':festa, 'staffs':staffs, 'staff_list':staff_list})
+        else:
+            fail=0
+            return render(request, 'festa_now/staff/login.html', {'fail':fail, 'festa':festa})
+            
+        # if (name_object.reservation_name in reservation and num_object.reservation_num in i.reservation_num ) :
+        #     return render(request, 'festa_now/staff/staff_main.html', {'festa':festa, 'staffs':staffs, 'staff_list':staff_list})
+        # else:
+        #     fail=0
+        #     return render(request, 'festa_now/staff/login.html', {'fail':fail, 'festa':festa})
 
-            # else 
-            #     festa = get_object_or_404(Festa, pk = festa_id)
-            #     staffs = Staff.objects.filter(festa = festa.id)
-            #     paginator = Paginator(staffs, 5)
-            #     page = request.GET.get('page')
-            #     staff_list = paginator.get_page(page)
-            #     return render(request, 'festa_now/staff/login.html', {'festa':festa, 'staffs':staffs, 'staff_list':staff_list})
 
 ########## festa_now/audience/festnow게시판 ##########
 def now_now(request, festa_id):
