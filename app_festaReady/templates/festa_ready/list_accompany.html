@@ -23,20 +23,26 @@
                 <input id="write_bt_text" type="submit" value="글쓰기">
             </form>
         </div>
+        <br>
 
         <div id="table_div">
-            <table>
+            <table class="table">
+                <!--
                 <tr>
                     <td id="table_intro" colspan="5"> 동행 구하기 &nbsp;'집가자'&nbsp; 게시판 입니다.</td>
-                </tr>
+                </tr
+                -->
+                <thead>
                 <tr id="kind_board">
-                    <td>지역</td>
-                    <td>제목</td>
-                    <td>작성자</td>
-                    <td>날짜</td>
-                    <td>시간</td>
+                    <th>지역</th>
+                    <th>제목</th>
+                    <th>작성자</th>
+                    <th>날짜</th>
+                    <th>시간</th>
                 </tr>
+                </thead>
                 <!-- 게시글 등록 -->
+                <tbody>
                 {% for accompany in posts %}
                 <tr class="notice_board">
                     <td>{{accompany.area}}</td>
@@ -49,6 +55,7 @@
                     <td>{{accompany.created_at|time:"H:i"}}</td>
                 </tr>
                 {% endfor %}
+                </tbody>
             </table>
         </div>
 
@@ -135,19 +142,20 @@
     }
 
     .notice_board {
-        border-bottom: 1px solid #6357ff;
-        color: #6357ff;
+        border-bottom: 1px solid black;
+        color:black;
+        
     }
 
     /* board 안에 있는 a 태그 */
     .notice_board td a {
-        color: #6357ff;
+        color: black;
         text-decoration: none;
     }
 
     .notice_board td {
-        padding-top: 3px;
-        padding-bottom: 3px;
+        padding-top: 10px;
+        padding-bottom: 10px;
     }
 
     /* #content_board {
@@ -167,6 +175,7 @@
     /* table_div 안 모든 td 태그 */
     td {
         text-align: center;
+        margin-top: 1rem;
     }
 
     /* 제목이 들어가는 특정 td */
