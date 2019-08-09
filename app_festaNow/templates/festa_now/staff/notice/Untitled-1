@@ -1,0 +1,33 @@
+{% extends 'base.html' %}
+{% block content %}
+
+<h2><동행찾기 상세보기 페이지></h2>
+<p> 제목: {{accompany.title}}</p>
+<p> 지역: {{accompany.area}}</p>
+<p> 작성자: {{accompany.writer}}</p>
+<p> 내용: {{accompany.description}}</p>
+{% if accompany.image %}
+<img src="{{ accompany.image.url }}">
+{% endif %}
+<a href="{% url 'edit_accompany' festa.id accompany.pk %}" class="btn btn-primary">수정</a>
+
+<a href="{% url 'delete_accompany' festa.id accompany.pk %}" class="btn btn-primary">삭제</a>
+
+<h2>comments</h2>
+{% for commenta in commentas %}
+<p>작성자: {{commenta.writer}}</p>
+<p>내용: {{commenta.content}}</p>
+<a href="{% url 'delete_commenta' festa.id accompany.id commenta.pk %}" class="btn btn-primary">삭제</a>
+<hr>
+{% endfor%}
+
+<form action="{% url 'create_commenta' festa.id accompany.id %}" method="POST">
+    {% csrf_token %}
+    작성자 : <input name="writer" type="text">    
+    비밀번호: <input type="password" name="password"><br>
+    <br>
+    내용 : <textarea name="content" id="" cols="30" rows="10"></textarea>
+    <input type="submit">
+</form>
+
+{% endblock %}

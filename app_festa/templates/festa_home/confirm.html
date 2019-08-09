@@ -3,7 +3,7 @@
 <div class="container">
     <h2>등록 확인</h2>
     <br>
-    <h1>등록번호 : {{festa_object.number}}</h1>
+    <h1>등록번호 : {{festa.number}}</h1>
 
     <form action="{% url 'update' festa.id %}" method="POST" enctype="multipart/form-data">
         {% csrf_token %}

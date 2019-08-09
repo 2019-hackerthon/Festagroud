@@ -57,7 +57,11 @@ class Ticket(models.Model): #festa_ready의 티켓 양도 교환 게시판
 
 
 class Commenttic(models.Model):
-    writer_ticket = models.CharField(max_length=200)
-    content_ticket = models.TextField()
+    festa = models.ForeignKey(Festa, on_delete=models.CASCADE)
+    writer = models.CharField(max_length=200)
+    content = models.TextField()
     password = models.CharField(max_length=20)
     ticket = models.ForeignKey(Ticket, on_delete=models.CASCADE)
+
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)

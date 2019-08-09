@@ -2,8 +2,16 @@
 {% block content %}
 
 <div id="staff_lost_container">
-    <div id="subtitle_text_wrapper">
-        찾아가라
+    <div class="title_search">
+        <div id="subtitle_text_wrapper">
+            찾아가라
+        </div>
+        <div id="form_wrapper">
+            <form action="" method="GET">
+                <input id="editText" type="text" name="search" value="{{search}}">
+                <input id="searchBt" type="submit" value="&#xf002" class="fa-lg">
+            </form>
+        </div>
     </div>
     <div id="table_bt_div">
         <div id="bt_write_div">
@@ -12,6 +20,7 @@
                 <input id="write_bt_text" type="submit" value="글쓰기">
             </form>
         </div>
+        
 
         <div id="table_div">
             <table>
@@ -26,11 +35,12 @@
                     <td>시간</td>
                 </tr>
                 <!-- 게시글 등록 -->
-                {% for lost_found in lostfounds_list %}
+                {% for lost_found in posts %}
                 <tr class="notice_board">
                     <td>{{lost_found.post_type}}</td>
                     <td class="title_td">
-                        <a href="{% url 's_detail_lost_found' festa.id lost_found.id %}"> <span>{{lost_found.title}}</span></a>
+                        <a href="{% url 's_detail_lost_found' festa.id lost_found.id %}">
+                            <span>{{lost_found.title}}</span></a>
                     </td>
                     <td>{{lost_found.writer}}</td>
                     <td>{{lost_found.pub_date|date:"Y/m/d"}}</td>
@@ -39,17 +49,14 @@
                 {% endfor %}
             </table>
         </div>
-
         <div id="pagination">
             {%if lostfounds_list.has_previous%}
             <a href="?page=1">First</a>
             <a href="?page={{lostfounds_list.previous_page_number}}">Previous</a>
             {%endif%}
-
             <span>{{lostfounds_list.number}}</span>
             <span>of</span>
             <span>{{lostfounds_list.paginator.num_pages}}</span>
-
             {%if lostfounds_list.has_next%}
             <a href="?page={{lostfounds_list.next_page_number}}">Next</a>
             <a href="?page={{lostfounds_list.paginator.num_pages}}">Last</a>
@@ -57,11 +64,9 @@
         </div>
     </div>
 </div>
-
 <!-- 자바 스크립트 연결 -->
 {% load static %}
 <script type="text/javascript" src="/static/js/festa_now_staff_js.js?ver=3' %}"></script>
-
 <style>
     /* 전체 컨테이너 */
     #staff_lost_container {
@@ -74,6 +79,7 @@
 
     /* 공지사항 타이틀 */
     #subtitle_text_wrapper {
+        width: 50%;
         font-size: 20px;
         font-weight: bold;
     }
@@ -105,7 +111,6 @@
     }
 
     /* 카테고리 board, 실제 내용(공지사항) board -> 밑줄 긋는 css */
-
     #kind_board,
     .notice_board {
         width: 100%;
@@ -140,12 +145,10 @@
     /* #content_board {
         border-bottom: 1px solid #D5D5D5;
     }
-
     #content_board a {
         color: #000000;
         text-decoration: none;
     } */
-
     /* 테이블 태그 */
     table {
         width: 100%;
@@ -203,6 +206,47 @@
     #pagination {
         width: 100%;
         text-align: center;
+    }
+
+    /* 검색 버튼 */
+    #form_wrapper {
+        width: 100%;
+        height: 100%;
+        align-self: flex-end;
+        display: flex;
+        /* padding-right: 10%; */
+        padding-left: 30%;
+    }
+
+    #form_wrapper form {
+        width: 100%;
+        align-self: center;
+        display: block;
+        border: 1px solid #EAEAEA;
+    }
+
+    #editText {
+        width: 90%;
+        text-overflow: ellipsis;
+    }
+
+    #searchBt {
+        width: 10%;
+        height: 26px;
+        padding: 1px;
+        background: #ff5543;
+        font-family: FontAwesome;
+        color: #ffffff;
+    }
+
+    #form_wrapper form input {
+        float: left;
+        border: 0px;
+    }
+
+    .title_search {
+        width: 100%;
+        display: inline-flex;
     }
 </style>
 {% endblock %}

@@ -81,10 +81,14 @@ def confirm_login(request) :
     return render(request, 'festa_home/confirm_login.html')
 
 def confirm(request) :
-    number = request.POST['register_num']
-    number_object = RegisterNum.objects.get(register_num = number)
-    festa_object=number_object.festa
-    return render(request, 'festa_home/confirm.html', {'festa':festa_object})
+    false = 0
+    if request.method == 'POST' :
+        number = request.POST['register_num']
+        number_object = RegisterNum.objects.get(register_num = number) 
+        festa_object=number_object.festa
+        return render(request, 'festa_home/confirm.html', {'festa':festa_object})
+    return render(request, 'festa_home/confirm_login.html', {'fail': false})
+        
 
 def all_festaNow(request) :
     festas = Festa.objects
@@ -95,45 +99,4 @@ def all_festaReady(request) :
     festas = Festa.objects
     today = datetime.datetime.now()
     return render(request, 'festa_home/all_festaReady.html', {'festa':festas, 'today':today})
-
-##staff 공지사항
-# def staff_notice(request):
-#     staffs = Staff.objects
-#     return render(request, 'festa_home/staff_notice.html', {'staffs': staffs})
-
-# def staff_new(request):
-#     return render(request, 'festa_home/staff_new.html')
-
-# def staff_detail(request, staff_id):
-#     staff = Staff.objects.get(pk=staff_id)
-#     return render(request, 'festa_home/staff_detail.html', {'staff' : staff})    
-
-# def staff_delete(request, staff_id):
-#     staff_delete = get_object_or_404(Staff, pk=staff_id)
-#     staff_delete.delete()
-#     return redirect('staff_notice')
-
-# def staff_edit(request, staff_id):
-#     staff_edit = Staff.objects.get(pk=staff_id)
-#     return render(request, 'festa_home/staff_edit.html', {'staff': staff_edit})
-
-# def staff_update(request, staff_id):
-#         update_staff = Staff.objects.get(id = staff_id)
-#         update_staff.title = request.POST["title"]
-#         update_staff.writer = request.POST['writer']
-#         update_staff.body = request.POST['body']
-#         update_staff.save()
-#         return redirect('staff_notice')
-
-# def staff_create(request):
-#     if request.method=="POST":
-#         staff = Staff()
-#         staff.title = request.POST['title']
-#         staff.body = request.POST['body']
-#         staff.writer = request.POST['writer']
-#         staff.pub_date = timezone.datetime.now()
-#         staff.save()
-#         return redirect('staff_notice')
-#     return render(request, 'festa_home/staff_notice.html')
-
 
