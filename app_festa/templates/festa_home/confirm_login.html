@@ -1,5 +1,6 @@
 {% extends 'base_copyright_version.html' %}
 {% block content %}
+
 <div class="wrapper">
     <div class="left_wrapper">
         <h2>등록 확인</h2>
@@ -19,7 +20,8 @@
                 <br>
                 <br>
                 <div class="right_bottom" style="vertical-align: middle;">
-                    <p style="font-weight:bold; ">등록번호</p> <input type="text" name="register_num" placeholder="" style="width:500px;">
+                    <p style="font-weight:bold; ">등록번호</p> <input type="text" name="register_num" placeholder=""
+                        style="width:500px;">
                     <!-- <div class="oval"></div> -->
                     {{fail}}
                 </div>
@@ -28,10 +30,12 @@
     </div>
 </div>
 
+
 </body>
 
 <style>
     .wrapper {
+        
         background-color: #f4f3ff;
         display: grid;
         grid-template-columns: 1fr 1fr;
@@ -106,8 +110,6 @@
         border: solid 1px;
         border-radius: 100%;
     }
-    
-
 </style>
 
 {% endblock %}
