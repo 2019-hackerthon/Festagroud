@@ -1,91 +1,97 @@
 {% extends 'base_copyright_version.html' %}
 {% block content %}
-<div class="container">
-    <h2>등록 확인</h2>
-    <br>
-    <h1>등록번호 : {{festa.number}}</h1>
-
-    <form action="{% url 'update' festa.id %}" method="POST" enctype="multipart/form-data">
-        {% csrf_token %}
-        <h1>1. 기본 정보 입력</h1>
-        <p>공연 제목</p>
-        <input type="text" name="name" value={{festa.name}}>
-        <p>공연 날짜</p>
-        <input type="date" name="schedule_start" value="{{festa.schedule_start}}"> ~ <input type="date" name="schedu_end" value="{{festa.schedule_end}}">
-        <p>공연 장소</p>
-        <input type="text" name="space" value="{{festa.space}}">
-
-        <h1>2. 공연 운영 정보</h1>
-        <p>공식 티켓판매처 링크</p>
-        <input type="text" name="purchase_link" value="{{festa.purchase_link}}">
-        <p>공연 주최/기획사</p>
-        <input type="text" name="host" value="{{festa.host}}">
-        <p>고객 문의처</p>
-        <input type="text" name="contact" value="{{festa.contact}}">
-
-        <h1>3. 공연 상세정보</h1>
-        <p>지도</p>
-        <div id="map" style="width:100%;height:350px;"></div>
-
-        <script type="text/javascript"
-            src="//dapi.kakao.com/v2/maps/sdk.js?appkey=3a6997107b687683607fb8587b9bb914&libraries=services"></script>
-        <script>
-            var mapContainer = document.getElementById('map'), // 지도를 표시할 div 
-                mapOption = {
-                    center: new kakao.maps.LatLng(33.450701, 126.570667), // 지도의 중심좌표
-                    level: 3 // 지도의 확대 레벨
-                };
-
-            // 지도를 생성합니다    
-            var map = new kakao.maps.Map(mapContainer, mapOption);
-
-            // 주소-좌표 변환 객체를 생성합니다
-            var geocoder = new kakao.maps.services.Geocoder();
-
-            // 주소로 좌표를 검색합니다
-            geocoder.addressSearch('{{festa.detail_map}}', function (result, status) {
-
-                // 정상적으로 검색이 완료됐으면 
-                if (status === kakao.maps.services.Status.OK) {
-
-                    var coords = new kakao.maps.LatLng(result[0].y, result[0].x);
-
-                    // 결과값으로 받은 위치를 마커로 표시합니다
-                    var marker = new kakao.maps.Marker({
-                        map: map,
-                        position: coords
-                    });
-
-                    // 인포윈도우로 장소에 대한 설명을 표시합니다
-                    var infowindow = new kakao.maps.InfoWindow({
-                        content: '<div style="width:150px;text-align:center;padding:6px 0;">공연 장소:{{festa_object.space}}</div>'
-                    });
-                    infowindow.open(map, marker);
-
-                    // 지도의 중심을 결과값으로 받은 위치로 이동시킵니다
-                    map.setCenter(coords);
-                }
-            });    
-        </script>
-        <p>유의사항 게시글로 작성됩니다</p>
-        <textarea name="precautions" cols=70 rows=10>{{festa.precautions}}</textarea>
-        <p>공지사항 게시글로 작성됩니다</p>
-        <textarea name="notice" cols=70 rows=10>{{festa.notice}}</textarea>
+<div class="bg_wrapper">
+    <div class="container">
+        <h2>등록 확인</h2>
         <br>
-        <p>이미지 첨부 이미지 내 공연 쇅, 공연 출연진, 타임 테이블 정보 필수</p>
-        <p>현재 포스터</p>
-        <img src="{{ festa.poster.url }}">
-        <input type="file" name="poster" vlaue="찾아보기">
-        <br>
-        <input class="btn btn-dark" type="submit" value="수정완료">
-    </form>
+        <h1>등록번호 : {{festa.number}}</h1>
 
-    <a href="{% url 'home' %}">홈으로</a>
-    <a href=""></a>
+        <form action="{% url 'update' festa.id %}" method="POST" enctype="multipart/form-data">
+            {% csrf_token %}
+            <h1>1. 기본 정보 입력</h1>
+            <p>공연 제목</p>
+            <input type="text" name="name" value={{festa.name}}>
+            <p>공연 날짜</p>
+            <input type="date" name="schedule_start" value="{{festa.schedule_start}}"> ~ <input type="date"
+                name="schedu_end" value="{{festa.schedule_end}}">
+            <p>공연 장소</p>
+            <input type="text" name="space" value="{{festa.space}}">
+
+            <h1>2. 공연 운영 정보</h1>
+            <p>공식 티켓판매처 링크</p>
+            <input type="text" name="purchase_link" value="{{festa.purchase_link}}">
+            <p>공연 주최/기획사</p>
+            <input type="text" name="host" value="{{festa.host}}">
+            <p>고객 문의처</p>
+            <input type="text" name="contact" value="{{festa.contact}}">
+
+            <h1>3. 공연 상세정보</h1>
+            <p>지도</p>
+            <div id="map" style="width:100%;height:350px;"></div>
+
+            <script type="text/javascript"
+                src="//dapi.kakao.com/v2/maps/sdk.js?appkey=3a6997107b687683607fb8587b9bb914&libraries=services"></script>
+            <script>
+                var mapContainer = document.getElementById('map'), // 지도를 표시할 div 
+                    mapOption = {
+                        center: new kakao.maps.LatLng(33.450701, 126.570667), // 지도의 중심좌표
+                        level: 3 // 지도의 확대 레벨
+                    };
+
+                // 지도를 생성합니다    
+                var map = new kakao.maps.Map(mapContainer, mapOption);
+
+                // 주소-좌표 변환 객체를 생성합니다
+                var geocoder = new kakao.maps.services.Geocoder();
+
+                // 주소로 좌표를 검색합니다
+                geocoder.addressSearch('{{festa.detail_map}}', function (result, status) {
+
+                    // 정상적으로 검색이 완료됐으면 
+                    if (status === kakao.maps.services.Status.OK) {
+
+                        var coords = new kakao.maps.LatLng(result[0].y, result[0].x);
+
+                        // 결과값으로 받은 위치를 마커로 표시합니다
+                        var marker = new kakao.maps.Marker({
+                            map: map,
+                            position: coords
+                        });
+
+                        // 인포윈도우로 장소에 대한 설명을 표시합니다
+                        var infowindow = new kakao.maps.InfoWindow({
+                            content: '<div style="width:150px;text-align:center;padding:6px 0;">공연 장소:{{festa_object.space}}</div>'
+                        });
+                        infowindow.open(map, marker);
+
+                        // 지도의 중심을 결과값으로 받은 위치로 이동시킵니다
+                        map.setCenter(coords);
+                    }
+                });    
+            </script>
+            <p>유의사항 게시글로 작성됩니다</p>
+            <textarea name="precautions" cols=70 rows=10>{{festa.precautions}}</textarea>
+            <p>공지사항 게시글로 작성됩니다</p>
+            <textarea name="notice" cols=70 rows=10>{{festa.notice}}</textarea>
+            <br>
+            <p>이미지 첨부 이미지 내 공연 쇅, 공연 출연진, 타임 테이블 정보 필수</p>
+            <p>현재 포스터</p>
+            <img src="{{ festa.poster.url }}">
+            <input type="file" name="poster" vlaue="찾아보기">
+            <br>
+            <input class="btn btn-dark" type="submit" value="수정완료">
+        </form>
+
+        <a href="{% url 'home' %}">홈으로</a>
+        <a href=""></a>
+    </div>
 </div>
 </body>
 
 <style>
+    .bg_wrapper {
+        background-color: #f4f3ff;
+    }
     #map {
         width: 400px;
         height: 300px;
